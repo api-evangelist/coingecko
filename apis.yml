@@ -1,0 +1,96 @@
+aid: coingecko
+url: https://raw.githubusercontent.com/api-evangelist/coingecko/refs/heads/main/apis.yml
+modified: '2026-03-20'
+apis:
+  - aid: coingecko:crypto-market-data-api
+    name: CoinGecko Crypto Market Data API
+    tags:
+      - Cryptocurrency
+      - Market Data
+      - Prices
+      - Exchanges
+      - NFTs
+      - Blockchain
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.coingecko.com/api/v3
+    humanURL: https://docs.coingecko.com
+    properties:
+      - url: https://docs.coingecko.com
+        type: Documentation
+      - url: https://www.coingecko.com/en/api/pricing
+        type: Pricing
+      - url: https://www.coingecko.com/en/api
+        type: Landing Page
+      - type: OpenAPI
+        url: openapi/coingecko-crypto-market-data-api-openapi.yml
+    description: >-
+      The CoinGecko Crypto Market Data API provides comprehensive and reliable
+      cryptocurrency price and market data through RESTful JSON endpoints. It
+      offers over 70 endpoints covering real-time and historical prices, trading
+      volumes, market capitalization, OHLCV data, exchange information, NFT
+      metrics, derivatives data, and public treasury holdings for over 18,000
+      coins. The API is available through a free Demo plan with 30 calls per
+      minute and paid plans offering higher rate limits and additional features
+      such as extended historical data and faster data refresh intervals.
+  - aid: coingecko:pro-api
+    name: CoinGecko Pro API
+    tags:
+      - Cryptocurrency
+      - Market Data
+      - Prices
+      - Enterprise
+      - Commercial
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://pro-api.coingecko.com/api/v3
+    humanURL: https://docs.coingecko.com/reference/introduction
+    properties:
+      - url: https://docs.coingecko.com/reference/introduction
+        type: Documentation
+      - url: https://www.coingecko.com/en/api/pricing
+        type: Pricing
+      - type: OpenAPI
+        url: openapi/coingecko-pro-api-openapi.yml
+    description: >-
+      The CoinGecko Pro API provides the same comprehensive cryptocurrency
+      market data as the standard API but with enhanced performance, higher rate
+      limits of up to 1,000 calls per minute, and faster data updates with
+      prices cached every 30 seconds. It includes exclusive endpoints for
+      advanced analytics, detailed market data, and historical granularity that
+      are not available on the free Demo plan. The Pro API is designed for
+      commercial use cases and comes with dedicated support SLA and access to
+      over 2 million token data points.
+  - aid: coingecko:onchain-dex-api
+    name: CoinGecko Onchain DEX API
+    tags:
+      - Decentralized Exchanges
+      - DeFi
+      - Onchain Data
+      - Liquidity Pools
+      - Blockchain
+      - DEX
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.coingecko.com/api/v3/onchain
+    humanURL: https://www.coingecko.com/en/api/dex
+    properties:
+      - url: https://docs.coingecko.com/reference/endpoint-overview
+        type: Documentation
+      - url: https://www.coingecko.com/en/api/dex
+        type: Landing Page
+      - type: OpenAPI
+        url: openapi/coingecko-onchain-dex-api-openapi.yml
+    description: >-
+      The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access
+      to real-time decentralized exchange data across over 250 blockchain
+      networks, 1,800 DEXes, and 30 million tokens. It offers more than 20
+      endpoints for querying liquidity pools, token data by contract address,
+      OHLCV chart data, trending pools, and pool search functionality. This API
+      enables developers to build applications that track onchain trading
+      activity, monitor DeFi liquidity, and analyze decentralized market data
+      without needing to interact directly with individual blockchain networks.
+common:
+  - type: JSONSchema
+    url: json-schema/coingecko-coin-schema.json
+  - type: JSONSchema
+    url: json-schema/coingecko-pool-schema.json
+  - type: JSON-LD
+    url: json-ld/coingecko-context.jsonld

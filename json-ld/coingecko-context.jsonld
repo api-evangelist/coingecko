@@ -1,0 +1,169 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "cg": "https://api.coingecko.com/api/v3/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Coin": {
+      "@id": "cg:Coin",
+      "@context": {
+        "id": "cg:coinId",
+        "symbol": "cg:symbol",
+        "name": "schema:name",
+        "description": "schema:description",
+        "image": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "homepage": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "genesisDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:date"
+        },
+        "categories": {
+          "@id": "schema:category",
+          "@container": "@set"
+        },
+        "marketCapRank": {
+          "@id": "cg:marketCapRank",
+          "@type": "xsd:integer"
+        },
+        "lastUpdated": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "MarketData": {
+      "@id": "cg:MarketData",
+      "@context": {
+        "currentPrice": "cg:currentPrice",
+        "marketCap": "cg:marketCap",
+        "totalVolume": "cg:totalVolume",
+        "circulatingSupply": "cg:circulatingSupply",
+        "totalSupply": "cg:totalSupply",
+        "maxSupply": "cg:maxSupply",
+        "allTimeHigh": "cg:allTimeHigh",
+        "allTimeLow": "cg:allTimeLow",
+        "priceChange24h": "cg:priceChange24h",
+        "priceChangePercentage24h": "cg:priceChangePercentage24h",
+        "fullyDilutedValuation": "cg:fullyDilutedValuation"
+      }
+    },
+
+    "Exchange": {
+      "@id": "cg:Exchange",
+      "@context": {
+        "id": "cg:exchangeId",
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "country": "schema:addressCountry",
+        "yearEstablished": {
+          "@id": "schema:foundingDate",
+          "@type": "xsd:gYear"
+        },
+        "trustScore": "cg:trustScore",
+        "trustScoreRank": "cg:trustScoreRank",
+        "tradeVolume24hBtc": "cg:tradeVolume24hBtc",
+        "image": {
+          "@id": "schema:logo",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "NFTCollection": {
+      "@id": "cg:NFTCollection",
+      "@context": {
+        "id": "cg:nftId",
+        "contractAddress": "cg:contractAddress",
+        "name": "schema:name",
+        "description": "schema:description",
+        "symbol": "cg:symbol",
+        "floorPrice": "cg:floorPrice",
+        "marketCap": "cg:marketCap",
+        "volume24h": "cg:volume24h",
+        "totalSupply": "cg:totalSupply",
+        "numberOfUniqueAddresses": "cg:numberOfUniqueAddresses",
+        "nativeCurrency": "cg:nativeCurrency",
+        "assetPlatformId": "cg:assetPlatformId"
+      }
+    },
+
+    "LiquidityPool": {
+      "@id": "cg:LiquidityPool",
+      "@context": {
+        "address": "cg:contractAddress",
+        "name": "schema:name",
+        "baseTokenPriceUsd": "cg:baseTokenPriceUsd",
+        "quoteTokenPriceUsd": "cg:quoteTokenPriceUsd",
+        "reserveInUsd": "cg:reserveInUsd",
+        "fdvUsd": "cg:fullyDilutedValuation",
+        "poolCreatedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "baseToken": {
+          "@id": "cg:baseToken",
+          "@type": "@id"
+        },
+        "quoteToken": {
+          "@id": "cg:quoteToken",
+          "@type": "@id"
+        },
+        "dex": {
+          "@id": "cg:dex",
+          "@type": "@id"
+        },
+        "network": {
+          "@id": "cg:network",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "AssetPlatform": {
+      "@id": "cg:AssetPlatform",
+      "@context": {
+        "id": "cg:platformId",
+        "name": "schema:name",
+        "chainIdentifier": "cg:chainIdentifier",
+        "nativeCoinId": "cg:nativeCoinId",
+        "shortname": "schema:alternateName"
+      }
+    },
+
+    "DerivativeTicker": {
+      "@id": "cg:DerivativeTicker",
+      "@context": {
+        "market": "cg:market",
+        "symbol": "cg:symbol",
+        "price": "cg:price",
+        "contractType": "cg:contractType",
+        "openInterest": "cg:openInterest",
+        "volume24h": "cg:volume24h",
+        "fundingRate": "cg:fundingRate",
+        "basis": "cg:basis",
+        "spread": "cg:spread",
+        "lastTradedAt": {
+          "@id": "cg:lastTradedAt",
+          "@type": "xsd:dateTime"
+        },
+        "expiredAt": {
+          "@id": "cg:expiredAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

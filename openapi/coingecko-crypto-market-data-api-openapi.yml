@@ -1,0 +1,2291 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data API
+  description: >-
+    The CoinGecko Crypto Market Data API provides comprehensive and reliable
+    cryptocurrency price and market data through RESTful JSON endpoints. It
+    offers over 70 endpoints covering real-time and historical prices, trading
+    volumes, market capitalization, OHLCV data, exchange information, NFT
+    metrics, derivatives data, and public treasury holdings for over 18,000
+    coins. The Demo API plan provides free access with 30 calls per minute
+    to a subset of 30 publicly accessible endpoints.
+  version: '3.0.1'
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com
+servers:
+  - url: https://api.coingecko.com/api/v3
+    description: CoinGecko Demo API Server
+tags:
+  - name: Ping
+    description: Check API server status
+  - name: Simple
+    description: >-
+      Simple price and token price lookups without the overhead of full
+      coin data responses.
+  - name: Coins
+    description: >-
+      Comprehensive coin data including current prices, market data,
+      historical data, tickers, and OHLCV charts.
+  - name: Contract
+    description: >-
+      Query coin data by contract address on a specific asset platform.
+  - name: Asset Platforms
+    description: >-
+      List all asset platforms (blockchains) supported by CoinGecko.
+  - name: Categories
+    description: >-
+      List cryptocurrency categories and their market data.
+  - name: Exchanges
+    description: >-
+      Exchange data including volumes, tickers, and status updates.
+  - name: Derivatives
+    description: >-
+      Derivatives market data including tickers and exchange information.
+  - name: NFTs
+    description: >-
+      NFT collection data including floor prices and market information.
+  - name: Exchange Rates
+    description: >-
+      BTC exchange rates against other currencies.
+  - name: Search
+    description: >-
+      Search for coins, exchanges, and categories.
+  - name: Trending
+    description: >-
+      Trending coins, NFTs, and categories on CoinGecko.
+  - name: Global
+    description: >-
+      Global cryptocurrency and DeFi market data.
+  - name: Companies
+    description: >-
+      Public company cryptocurrency holdings data.
+security:
+  - demoApiKeyHeader: []
+  - demoApiKeyQuery: []
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: Check API server status
+      description: >-
+        Check the API server status. Returns a gecko_says message to confirm
+        the server is operational.
+      tags:
+        - Ping
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  gecko_says:
+                    type: string
+                    description: Status message from the API server
+  /simple/price:
+    get:
+      operationId: getSimplePrice
+      summary: Get coin price by IDs
+      description: >-
+        Query the prices of one or more coins by using their unique CoinGecko
+        coin IDs. Optionally include market cap, 24h volume, 24h change,
+        and last updated timestamp.
+      tags:
+        - Simple
+      parameters:
+        - $ref: '#/components/parameters/coinIds'
+        - $ref: '#/components/parameters/vsCurrencies'
+        - name: include_market_cap
+          in: query
+          description: Include market cap in the response
+          schema:
+            type: boolean
+            default: false
+        - name: include_24hr_vol
+          in: query
+          description: Include 24-hour trading volume in the response
+          schema:
+            type: boolean
+            default: false
+        - name: include_24hr_change
+          in: query
+          description: Include 24-hour price change percentage in the response
+          schema:
+            type: boolean
+            default: false
+        - name: include_last_updated_at
+          in: query
+          description: Include last updated timestamp in the response
+          schema:
+            type: boolean
+            default: false
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values (0-18)
+          schema:
+            type: string
+            enum: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', 'full']
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: number
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /simple/token_price/{id}:
+    get:
+      operationId: getSimpleTokenPrice
+      summary: Get token price by contract address
+      description: >-
+        Query the prices of one or more tokens by using their contract
+        addresses on a specific asset platform. This endpoint is useful
+        for looking up token prices when you have the contract address
+        rather than the CoinGecko coin ID.
+      tags:
+        - Simple
+      parameters:
+        - $ref: '#/components/parameters/assetPlatformId'
+        - name: contract_addresses
+          in: query
+          required: true
+          description: >-
+            Comma-separated list of token contract addresses on the specified
+            asset platform
+          schema:
+            type: string
+        - $ref: '#/components/parameters/vsCurrencies'
+        - name: include_market_cap
+          in: query
+          description: Include market cap in the response
+          schema:
+            type: boolean
+            default: false
+        - name: include_24hr_vol
+          in: query
+          description: Include 24-hour trading volume in the response
+          schema:
+            type: boolean
+            default: false
+        - name: include_24hr_change
+          in: query
+          description: Include 24-hour price change percentage in the response
+          schema:
+            type: boolean
+            default: false
+        - name: include_last_updated_at
+          in: query
+          description: Include last updated timestamp in the response
+          schema:
+            type: boolean
+            default: false
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values (0-18)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: number
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /simple/supported_vs_currencies:
+    get:
+      operationId: getSimpleSupportedVsCurrencies
+      summary: Get supported vs currencies
+      description: >-
+        Get the list of all supported vs currencies (fiat and crypto) that
+        can be used in price queries.
+      tags:
+        - Simple
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Currency identifier (e.g., usd, btc, eth)
+  /coins/list:
+    get:
+      operationId: getCoinsList
+      summary: List all supported coins
+      description: >-
+        Get the complete list of all supported coins with their IDs, symbols,
+        and names. Use this endpoint to obtain coin IDs for use in other
+        endpoints. This list is cached and updated periodically.
+      tags:
+        - Coins
+      parameters:
+        - name: include_platform
+          in: query
+          description: >-
+            Include platform contract addresses in the response (e.g.,
+            Ethereum, Solana contract addresses)
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoinListItem'
+  /coins/markets:
+    get:
+      operationId: getCoinsMarkets
+      summary: List coins with market data
+      description: >-
+        Get a paginated list of all supported coins with price, market cap,
+        volume, and other market-related data. Results are ordered by market
+        cap rank by default.
+      tags:
+        - Coins
+      parameters:
+        - name: vs_currency
+          in: query
+          required: true
+          description: The target currency of market data (e.g., usd, eur, btc)
+          schema:
+            type: string
+        - name: ids
+          in: query
+          description: Comma-separated list of coin IDs to filter results
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: Filter by coin category
+          schema:
+            type: string
+        - name: order
+          in: query
+          description: Sort order for results
+          schema:
+            type: string
+            enum:
+              - market_cap_asc
+              - market_cap_desc
+              - volume_asc
+              - volume_desc
+              - id_asc
+              - id_desc
+            default: market_cap_desc
+        - name: per_page
+          in: query
+          description: Number of results per page (1-250)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+            default: 100
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: sparkline
+          in: query
+          description: Include sparkline 7-day price data
+          schema:
+            type: boolean
+            default: false
+        - name: price_change_percentage
+          in: query
+          description: >-
+            Comma-separated list of price change percentage timeframes
+            (1h, 24h, 7d, 14d, 30d, 200d, 1y)
+          schema:
+            type: string
+        - name: locale
+          in: query
+          description: Language locale for descriptions
+          schema:
+            type: string
+            default: en
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoinMarket'
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /coins/{id}:
+    get:
+      operationId: getCoinById
+      summary: Get coin data by ID
+      description: >-
+        Get comprehensive data for a specific coin including current price,
+        market data, community data, developer data, and more. This is the
+        most detailed single-coin endpoint.
+      tags:
+        - Coins
+      parameters:
+        - $ref: '#/components/parameters/coinId'
+        - name: localization
+          in: query
+          description: Include all localized language descriptions
+          schema:
+            type: boolean
+            default: true
+        - name: tickers
+          in: query
+          description: Include exchange tickers data
+          schema:
+            type: boolean
+            default: true
+        - name: market_data
+          in: query
+          description: Include market data
+          schema:
+            type: boolean
+            default: true
+        - name: community_data
+          in: query
+          description: Include community data
+          schema:
+            type: boolean
+            default: true
+        - name: developer_data
+          in: query
+          description: Include developer data
+          schema:
+            type: boolean
+            default: true
+        - name: sparkline
+          in: query
+          description: Include sparkline 7-day price data
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoinData'
+        '404':
+          description: Coin not found
+  /coins/{id}/tickers:
+    get:
+      operationId: getCoinTickers
+      summary: Get coin tickers
+      description: >-
+        Get trading pair tickers for a specific coin across all exchanges.
+        Results include price, volume, spread, and trust score information.
+      tags:
+        - Coins
+      parameters:
+        - $ref: '#/components/parameters/coinId'
+        - name: exchange_ids
+          in: query
+          description: Filter tickers by exchange IDs (comma-separated)
+          schema:
+            type: string
+        - name: include_exchange_logo
+          in: query
+          description: Include exchange logo URL in the response
+          schema:
+            type: boolean
+            default: false
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: order
+          in: query
+          description: Sort order for tickers
+          schema:
+            type: string
+            enum:
+              - trust_score_desc
+              - trust_score_asc
+              - volume_desc
+              - volume_asc
+            default: trust_score_desc
+        - name: depth
+          in: query
+          description: Include order book depth (2% cost to move)
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Coin name
+                  tickers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ticker'
+        '404':
+          description: Coin not found
+  /coins/{id}/history:
+    get:
+      operationId: getCoinHistory
+      summary: Get historical coin data
+      description: >-
+        Get historical data for a specific coin at a given date. Includes
+        price, market cap, 24h volume, and community and developer data.
+      tags:
+        - Coins
+      parameters:
+        - $ref: '#/components/parameters/coinId'
+        - name: date
+          in: query
+          required: true
+          description: The date of data snapshot in dd-mm-yyyy format
+          schema:
+            type: string
+            pattern: '^\d{2}-\d{2}-\d{4}$'
+        - name: localization
+          in: query
+          description: Include all localized language descriptions
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoinData'
+        '404':
+          description: Coin not found
+  /coins/{id}/market_chart:
+    get:
+      operationId: getCoinMarketChart
+      summary: Get coin market chart data
+      description: >-
+        Get historical market data including price, market cap, and 24h
+        volume for a specific coin over a time range. Data granularity is
+        automatic based on the number of days requested.
+      tags:
+        - Coins
+      parameters:
+        - $ref: '#/components/parameters/coinId'
+        - name: vs_currency
+          in: query
+          required: true
+          description: The target currency for market data
+          schema:
+            type: string
+        - name: days
+          in: query
+          required: true
+          description: >-
+            Number of days of historical data (1, 7, 14, 30, 90, 180, 365,
+            or max for all available data)
+          schema:
+            type: string
+        - name: interval
+          in: query
+          description: Data interval (daily). Leave empty for automatic granularity.
+          schema:
+            type: string
+            enum:
+              - daily
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin not found
+  /coins/{id}/market_chart/range:
+    get:
+      operationId: getCoinMarketChartRange
+      summary: Get coin market chart data within date range
+      description: >-
+        Get historical market data including price, market cap, and 24h
+        volume for a specific coin within a custom date range specified by
+        UNIX timestamps.
+      tags:
+        - Coins
+      parameters:
+        - $ref: '#/components/parameters/coinId'
+        - name: vs_currency
+          in: query
+          required: true
+          description: The target currency for market data
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: true
+          description: Start date as UNIX timestamp
+          schema:
+            type: number
+        - name: to
+          in: query
+          required: true
+          description: End date as UNIX timestamp
+          schema:
+            type: number
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin not found
+  /coins/{id}/ohlc:
+    get:
+      operationId: getCoinOHLC
+      summary: Get coin OHLC chart data
+      description: >-
+        Get OHLC (Open, High, Low, Close) candlestick data for a specific
+        coin. Data granularity is automatic based on the number of days
+        requested. 1-2 days returns 30-minute candles, 3-30 days returns
+        4-hour candles, and 31+ days returns daily candles.
+      tags:
+        - Coins
+      parameters:
+        - $ref: '#/components/parameters/coinId'
+        - name: vs_currency
+          in: query
+          required: true
+          description: The target currency for OHLC data
+          schema:
+            type: string
+        - name: days
+          in: query
+          required: true
+          description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365)
+          schema:
+            type: string
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: >-
+                    OHLC data point as array of [timestamp, open, high, low, close]
+                  items:
+                    type: number
+                  minItems: 5
+                  maxItems: 5
+        '404':
+          description: Coin not found
+  /coins/{id}/contract/{contract_address}:
+    get:
+      operationId: getCoinByContractAddress
+      summary: Get coin data by contract address
+      description: >-
+        Get comprehensive coin data by querying a contract address on a
+        specific asset platform. Returns the same data as the /coins/{id}
+        endpoint.
+      tags:
+        - Contract
+      parameters:
+        - $ref: '#/components/parameters/assetPlatformId'
+        - $ref: '#/components/parameters/contractAddress'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoinData'
+        '404':
+          description: Coin or contract not found
+  /coins/{id}/contract/{contract_address}/market_chart:
+    get:
+      operationId: getCoinContractMarketChart
+      summary: Get coin market chart data by contract address
+      description: >-
+        Get historical market data including price, market cap, and 24h
+        volume by querying a contract address on a specific asset platform.
+      tags:
+        - Contract
+      parameters:
+        - $ref: '#/components/parameters/assetPlatformId'
+        - $ref: '#/components/parameters/contractAddress'
+        - name: vs_currency
+          in: query
+          required: true
+          description: The target currency for market data
+          schema:
+            type: string
+        - name: days
+          in: query
+          required: true
+          description: Number of days of historical data
+          schema:
+            type: string
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin or contract not found
+  /coins/{id}/contract/{contract_address}/market_chart/range:
+    get:
+      operationId: getCoinContractMarketChartRange
+      summary: Get coin market chart range data by contract address
+      description: >-
+        Get historical market data for a specific contract address within a
+        custom date range specified by UNIX timestamps.
+      tags:
+        - Contract
+      parameters:
+        - $ref: '#/components/parameters/assetPlatformId'
+        - $ref: '#/components/parameters/contractAddress'
+        - name: vs_currency
+          in: query
+          required: true
+          description: The target currency for market data
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: true
+          description: Start date as UNIX timestamp
+          schema:
+            type: number
+        - name: to
+          in: query
+          required: true
+          description: End date as UNIX timestamp
+          schema:
+            type: number
+        - name: precision
+          in: query
+          description: Decimal precision for currency price values
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin or contract not found
+  /asset_platforms:
+    get:
+      operationId: getAssetPlatforms
+      summary: List asset platforms
+      description: >-
+        Get the list of all asset platforms (blockchains) supported by
+        CoinGecko. Each platform includes its chain identifier and
+        native coin ID.
+      tags:
+        - Asset Platforms
+      parameters:
+        - name: filter
+          in: query
+          description: Filter by platform type (e.g., nft to get NFT-supported platforms)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssetPlatform'
+  /coins/categories/list:
+    get:
+      operationId: getCoinsCategoriesList
+      summary: List all categories (ID map)
+      description: >-
+        Get the complete list of all supported coin categories with their
+        IDs and names. Use this to obtain category IDs for filtering in
+        other endpoints.
+      tags:
+        - Categories
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    category_id:
+                      type: string
+                      description: Category identifier
+                    name:
+                      type: string
+                      description: Category display name
+  /coins/categories:
+    get:
+      operationId: getCoinsCategories
+      summary: List categories with market data
+      description: >-
+        Get the list of all coin categories with market data including
+        market cap, volume, and top coins in each category.
+      tags:
+        - Categories
+      parameters:
+        - name: order
+          in: query
+          description: Sort order for categories
+          schema:
+            type: string
+            enum:
+              - market_cap_desc
+              - market_cap_asc
+              - name_desc
+              - name_asc
+              - market_cap_change_24h_desc
+              - market_cap_change_24h_asc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+  /exchanges:
+    get:
+      operationId: getExchanges
+      summary: List all exchanges
+      description: >-
+        Get a paginated list of all supported exchanges with volume, trust
+        score, and other exchange-related data. Results are ordered by
+        trading volume by default.
+      tags:
+        - Exchanges
+      parameters:
+        - name: per_page
+          in: query
+          description: Number of results per page (1-250)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+            default: 100
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Exchange'
+  /exchanges/list:
+    get:
+      operationId: getExchangesList
+      summary: List all supported exchanges (ID map)
+      description: >-
+        Get the complete list of all supported exchange IDs and names.
+        Use this to obtain exchange IDs for use in other endpoints.
+      tags:
+        - Exchanges
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Exchange identifier
+                    name:
+                      type: string
+                      description: Exchange display name
+  /exchanges/{id}:
+    get:
+      operationId: getExchangeById
+      summary: Get exchange data by ID
+      description: >-
+        Get comprehensive data for a specific exchange including volume,
+        trust score, year established, country, and social links.
+      tags:
+        - Exchanges
+      parameters:
+        - $ref: '#/components/parameters/exchangeId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeData'
+        '404':
+          description: Exchange not found
+  /exchanges/{id}/tickers:
+    get:
+      operationId: getExchangeTickers
+      summary: Get exchange tickers
+      description: >-
+        Get paginated trading pair tickers for a specific exchange. Results
+        include price, volume, spread, and trust score data for each
+        trading pair.
+      tags:
+        - Exchanges
+      parameters:
+        - $ref: '#/components/parameters/exchangeId'
+        - name: coin_ids
+          in: query
+          description: Filter tickers by coin IDs (comma-separated)
+          schema:
+            type: string
+        - name: include_exchange_logo
+          in: query
+          description: Include exchange logo URL in the response
+          schema:
+            type: boolean
+            default: false
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: depth
+          in: query
+          description: Include order book depth (2% cost to move)
+          schema:
+            type: boolean
+            default: false
+        - name: order
+          in: query
+          description: Sort order for tickers
+          schema:
+            type: string
+            enum:
+              - trust_score_desc
+              - trust_score_asc
+              - volume_desc
+              - volume_asc
+            default: trust_score_desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Exchange name
+                  tickers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ticker'
+        '404':
+          description: Exchange not found
+  /exchanges/{id}/volume_chart:
+    get:
+      operationId: getExchangeVolumeChart
+      summary: Get exchange volume chart data
+      description: >-
+        Get historical volume chart data for a specific exchange over a
+        specified number of days.
+      tags:
+        - Exchanges
+      parameters:
+        - $ref: '#/components/parameters/exchangeId'
+        - name: days
+          in: query
+          required: true
+          description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365)
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Volume data point as [timestamp, volume_in_btc]
+                  items:
+                    type: string
+                  minItems: 2
+                  maxItems: 2
+        '404':
+          description: Exchange not found
+  /derivatives:
+    get:
+      operationId: getDerivatives
+      summary: List all derivative tickers
+      description: >-
+        Get the list of all derivative tickers across all exchanges including
+        price, index, basis, spread, and open interest data.
+      tags:
+        - Derivatives
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DerivativeTicker'
+  /derivatives/exchanges:
+    get:
+      operationId: getDerivativesExchanges
+      summary: List derivative exchanges
+      description: >-
+        Get the list of all derivative exchanges with data including open
+        interest, trade volume, and number of perpetual and futures pairs.
+      tags:
+        - Derivatives
+      parameters:
+        - name: order
+          in: query
+          description: Sort order for results
+          schema:
+            type: string
+            enum:
+              - name_asc
+              - name_desc
+              - open_interest_btc_asc
+              - open_interest_btc_desc
+              - trade_volume_24h_btc_asc
+              - trade_volume_24h_btc_desc
+        - name: per_page
+          in: query
+          description: Number of results per page
+          schema:
+            type: integer
+            default: 100
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DerivativeExchange'
+  /derivatives/exchanges/{id}:
+    get:
+      operationId: getDerivativeExchangeById
+      summary: Get derivative exchange data by ID
+      description: >-
+        Get detailed data for a specific derivative exchange including
+        tickers, open interest, and trade volume.
+      tags:
+        - Derivatives
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The derivative exchange ID
+          schema:
+            type: string
+        - name: include_tickers
+          in: query
+          description: Include derivative tickers data
+          schema:
+            type: string
+            enum:
+              - all
+              - unexpired
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DerivativeExchange'
+        '404':
+          description: Derivative exchange not found
+  /derivatives/exchanges/list:
+    get:
+      operationId: getDerivativeExchangesList
+      summary: List derivative exchanges (ID map)
+      description: >-
+        Get the complete list of all supported derivative exchange IDs and
+        names.
+      tags:
+        - Derivatives
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Derivative exchange identifier
+                    name:
+                      type: string
+                      description: Derivative exchange display name
+  /nfts/list:
+    get:
+      operationId: getNFTsList
+      summary: List supported NFT collections
+      description: >-
+        Get the list of all supported NFT collection IDs, contract addresses,
+        and names. Use this to obtain NFT IDs for use in other endpoints.
+      tags:
+        - NFTs
+      parameters:
+        - name: order
+          in: query
+          description: Sort order for results
+          schema:
+            type: string
+        - name: per_page
+          in: query
+          description: Number of results per page (1-250)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+            default: 100
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NFTListItem'
+  /nfts/{id}:
+    get:
+      operationId: getNFTById
+      summary: Get NFT collection data by ID
+      description: >-
+        Get comprehensive data for a specific NFT collection including floor
+        price, market cap, volume, and other collection metrics.
+      tags:
+        - NFTs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The NFT collection ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTData'
+        '404':
+          description: NFT collection not found
+  /nfts/{asset_platform_id}/contract/{contract_address}:
+    get:
+      operationId: getNFTByContractAddress
+      summary: Get NFT collection data by contract address
+      description: >-
+        Get comprehensive data for a specific NFT collection by querying
+        the contract address on a specific asset platform.
+      tags:
+        - NFTs
+      parameters:
+        - name: asset_platform_id
+          in: path
+          required: true
+          description: The asset platform ID (e.g., ethereum)
+          schema:
+            type: string
+        - name: contract_address
+          in: path
+          required: true
+          description: The NFT contract address
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTData'
+        '404':
+          description: NFT collection not found
+  /exchange_rates:
+    get:
+      operationId: getExchangeRates
+      summary: Get BTC exchange rates
+      description: >-
+        Get the current exchange rates for BTC against all supported
+        currencies. Includes fiat currencies, cryptocurrencies, and
+        precious metals.
+      tags:
+        - Exchange Rates
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rates:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/ExchangeRate'
+  /search:
+    get:
+      operationId: search
+      summary: Search for coins, exchanges, and categories
+      description: >-
+        Search for coins, exchanges, categories, and NFTs by keyword. Returns
+        matching results across all entity types.
+      tags:
+        - Search
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: Search query string
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coins:
+                    type: array
+                    description: Matching coins
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        api_symbol:
+                          type: string
+                        symbol:
+                          type: string
+                        market_cap_rank:
+                          type: integer
+                        thumb:
+                          type: string
+                        large:
+                          type: string
+                  exchanges:
+                    type: array
+                    description: Matching exchanges
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        market_type:
+                          type: string
+                        thumb:
+                          type: string
+                        large:
+                          type: string
+                  categories:
+                    type: array
+                    description: Matching categories
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                  nfts:
+                    type: array
+                    description: Matching NFT collections
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        symbol:
+                          type: string
+                        thumb:
+                          type: string
+  /search/trending:
+    get:
+      operationId: getTrending
+      summary: Get trending search list
+      description: >-
+        Get the top trending coins, NFTs, and categories on CoinGecko based
+        on search activity in the last 24 hours. Includes the top 7 trending
+        coins with market data.
+      tags:
+        - Trending
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coins:
+                    type: array
+                    description: Top trending coins
+                    items:
+                      type: object
+                      properties:
+                        item:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            coin_id:
+                              type: integer
+                            name:
+                              type: string
+                            symbol:
+                              type: string
+                            market_cap_rank:
+                              type: integer
+                            thumb:
+                              type: string
+                            small:
+                              type: string
+                            large:
+                              type: string
+                            slug:
+                              type: string
+                            price_btc:
+                              type: number
+                            score:
+                              type: integer
+                  nfts:
+                    type: array
+                    description: Top trending NFT collections
+                    items:
+                      type: object
+                  categories:
+                    type: array
+                    description: Top trending categories
+                    items:
+                      type: object
+  /global:
+    get:
+      operationId: getGlobal
+      summary: Get global cryptocurrency data
+      description: >-
+        Get aggregated global cryptocurrency market data including total
+        market cap, total volume, market cap percentage by coin, and
+        number of active cryptocurrencies and markets.
+      tags:
+        - Global
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/GlobalData'
+  /global/decentralized_finance_defi:
+    get:
+      operationId: getGlobalDeFi
+      summary: Get global DeFi market data
+      description: >-
+        Get aggregated global decentralized finance (DeFi) data including
+        DeFi market cap, trading volume, DeFi dominance, and top DeFi coin
+        information.
+      tags:
+        - Global
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/GlobalDeFiData'
+  /companies/public_treasury/{coin_id}:
+    get:
+      operationId: getCompaniesPublicTreasury
+      summary: Get public company crypto holdings
+      description: >-
+        Get the list of public companies that hold bitcoin or ethereum in
+        their treasury, including the amount held, total value, and
+        percentage of total supply.
+      tags:
+        - Companies
+      parameters:
+        - name: coin_id
+          in: path
+          required: true
+          description: The coin ID (bitcoin or ethereum)
+          schema:
+            type: string
+            enum:
+              - bitcoin
+              - ethereum
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_holdings:
+                    type: number
+                    description: Total amount of crypto held by all companies
+                  total_value_usd:
+                    type: number
+                    description: Total USD value of all holdings
+                  market_cap_dominance:
+                    type: number
+                    description: Percentage of total market cap held
+                  companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyHolding'
+components:
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: >-
+        CoinGecko Demo API key passed via request header. Obtain a free
+        key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: >-
+        CoinGecko Demo API key passed via query string parameter.
+  parameters:
+    coinId:
+      name: id
+      in: path
+      required: true
+      description: The CoinGecko coin ID (e.g., bitcoin, ethereum)
+      schema:
+        type: string
+    coinIds:
+      name: ids
+      in: query
+      required: true
+      description: >-
+        Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)
+      schema:
+        type: string
+    vsCurrencies:
+      name: vs_currencies
+      in: query
+      required: true
+      description: >-
+        Comma-separated list of target currencies (e.g., usd,eur,btc)
+      schema:
+        type: string
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      schema:
+        type: string
+    contractAddress:
+      name: contract_address
+      in: path
+      required: true
+      description: The token contract address on the asset platform
+      schema:
+        type: string
+    exchangeId:
+      name: id
+      in: path
+      required: true
+      description: The exchange ID (e.g., binance, coinbase-exchange)
+      schema:
+        type: string
+  schemas:
+    CoinListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+    CoinMarket:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        image:
+          type: string
+          format: uri
+          description: Coin logo image URL
+        current_price:
+          type: number
+          description: Current price in the target currency
+        market_cap:
+          type: number
+          description: Market capitalization in the target currency
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        fully_diluted_valuation:
+          type: number
+          description: Fully diluted valuation in the target currency
+        total_volume:
+          type: number
+          description: 24-hour trading volume in the target currency
+        high_24h:
+          type: number
+          description: 24-hour price high in the target currency
+        low_24h:
+          type: number
+          description: 24-hour price low in the target currency
+        price_change_24h:
+          type: number
+          description: 24-hour price change amount
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change amount
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply (null if unlimited)
+        ath:
+          type: number
+          description: All-time high price
+        ath_change_percentage:
+          type: number
+          description: Percentage change from all-time high
+        ath_date:
+          type: string
+          format: date-time
+          description: Date of all-time high
+        atl:
+          type: number
+          description: All-time low price
+        atl_change_percentage:
+          type: number
+          description: Percentage change from all-time low
+        atl_date:
+          type: string
+          format: date-time
+          description: Date of all-time low
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
+    CoinData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier if token
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+        block_time_in_minutes:
+          type: integer
+          description: Average block time in minutes
+        hashing_algorithm:
+          type: string
+          description: Mining or hashing algorithm
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories the coin belongs to
+        description:
+          type: object
+          description: Localized descriptions
+          additionalProperties:
+            type: string
+        links:
+          type: object
+          description: Related links (homepage, blockchain sites, forums, etc.)
+        image:
+          type: object
+          description: Coin logo images at various sizes
+          properties:
+            thumb:
+              type: string
+              format: uri
+            small:
+              type: string
+              format: uri
+            large:
+              type: string
+              format: uri
+        genesis_date:
+          type: string
+          format: date
+          description: Date the coin was created
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        market_data:
+          $ref: '#/components/schemas/MarketData'
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
+    MarketData:
+      type: object
+      properties:
+        current_price:
+          type: object
+          description: Current price in various currencies
+          additionalProperties:
+            type: number
+        total_value_locked:
+          type: number
+          description: Total value locked (for DeFi tokens)
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: 24h volume in various currencies
+          additionalProperties:
+            type: number
+        high_24h:
+          type: object
+          description: 24-hour high in various currencies
+          additionalProperties:
+            type: number
+        low_24h:
+          type: object
+          description: 24-hour low in various currencies
+          additionalProperties:
+            type: number
+        price_change_24h:
+          type: number
+          description: 24-hour price change
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply
+    MarketChart:
+      type: object
+      properties:
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+    Ticker:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency ticker
+        target:
+          type: string
+          description: Target currency ticker
+        market:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Exchange name
+            identifier:
+              type: string
+              description: Exchange identifier
+            has_trading_incentive:
+              type: boolean
+              description: Whether the exchange has trading incentives
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        converted_last:
+          type: object
+          description: Last price converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        converted_volume:
+          type: object
+          description: Volume converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        trust_score:
+          type: string
+          description: Trust score color (green, yellow, red)
+        bid_ask_spread_percentage:
+          type: number
+          description: Bid-ask spread percentage
+        timestamp:
+          type: string
+          format: date-time
+          description: Ticker data timestamp
+        last_traded_at:
+          type: string
+          format: date-time
+          description: Last trade timestamp
+        last_fetch_at:
+          type: string
+          format: date-time
+          description: Last data fetch timestamp
+        is_anomaly:
+          type: boolean
+          description: Whether the ticker is flagged as anomalous
+        is_stale:
+          type: boolean
+          description: Whether the ticker data is stale
+        trade_url:
+          type: string
+          format: uri
+          description: URL to trade this pair
+        coin_id:
+          type: string
+          description: CoinGecko coin ID of base currency
+        target_coin_id:
+          type: string
+          description: CoinGecko coin ID of target currency
+    AssetPlatform:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Asset platform identifier
+        chain_identifier:
+          type: integer
+          description: Blockchain chain ID
+        name:
+          type: string
+          description: Asset platform display name
+        shortname:
+          type: string
+          description: Short name abbreviation
+        native_coin_id:
+          type: string
+          description: CoinGecko ID of the native coin
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Category identifier
+        name:
+          type: string
+          description: Category display name
+        market_cap:
+          type: number
+          description: Total market cap of coins in this category
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        content:
+          type: string
+          description: Category description
+        top_3_coins:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: Image URLs of top 3 coins in the category
+        volume_24h:
+          type: number
+          description: 24-hour trading volume
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    Exchange:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Exchange identifier
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
+    ExchangeData:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        facebook_url:
+          type: string
+          format: uri
+          description: Exchange Facebook URL
+        reddit_url:
+          type: string
+          format: uri
+          description: Exchange Reddit URL
+        telegram_url:
+          type: string
+          format: uri
+          description: Exchange Telegram URL
+        slack_url:
+          type: string
+          format: uri
+          description: Exchange Slack URL
+        other_url_1:
+          type: string
+          format: uri
+          description: Other URL 1
+        other_url_2:
+          type: string
+          format: uri
+          description: Other URL 2
+        twitter_handle:
+          type: string
+          description: Exchange Twitter handle
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        centralized:
+          type: boolean
+          description: Whether the exchange is centralized
+        public_notice:
+          type: string
+          description: Public notices from the exchange
+        alert_notice:
+          type: string
+          description: Alert notices from the exchange
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
+        tickers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticker'
+    DerivativeTicker:
+      type: object
+      properties:
+        market:
+          type: string
+          description: Derivative exchange name
+        symbol:
+          type: string
+          description: Trading pair symbol
+        index_id:
+          type: string
+          description: Index identifier
+        price:
+          type: string
+          description: Current price
+        price_percentage_change_24h:
+          type: number
+          description: 24-hour price change percentage
+        contract_type:
+          type: string
+          description: Contract type (perpetual or dated)
+        index:
+          type: number
+          description: Index price
+        basis:
+          type: number
+          description: Basis (difference between futures and spot price)
+        spread:
+          type: number
+          description: Bid-ask spread percentage
+        funding_rate:
+          type: number
+          description: Funding rate for perpetual contracts
+        open_interest:
+          type: number
+          description: Open interest in USD
+        volume_24h:
+          type: number
+          description: 24-hour trading volume
+        last_traded_at:
+          type: string
+          format: date-time
+          description: Last trade timestamp
+        expired_at:
+          type: string
+          format: date-time
+          description: Contract expiration date (null for perpetual)
+    DerivativeExchange:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Exchange display name
+        id:
+          type: string
+          description: Exchange identifier
+        open_interest_btc:
+          type: number
+          description: Total open interest in BTC
+        trade_volume_24h_btc:
+          type: string
+          description: 24-hour trading volume in BTC
+        number_of_perpetual_pairs:
+          type: integer
+          description: Number of perpetual trading pairs
+        number_of_futures_pairs:
+          type: integer
+          description: Number of futures trading pairs
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+    NFTListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: NFT collection identifier
+        contract_address:
+          type: string
+          description: NFT contract address
+        name:
+          type: string
+          description: NFT collection name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier
+        symbol:
+          type: string
+          description: NFT collection symbol
+    NFTData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: NFT collection identifier
+        contract_address:
+          type: string
+          description: NFT contract address
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier
+        name:
+          type: string
+          description: NFT collection display name
+        symbol:
+          type: string
+          description: NFT collection symbol
+        image:
+          type: object
+          properties:
+            small:
+              type: string
+              format: uri
+              description: Small image URL
+        description:
+          type: string
+          description: NFT collection description
+        native_currency:
+          type: string
+          description: Native currency for the collection
+        native_currency_symbol:
+          type: string
+          description: Native currency symbol
+        floor_price:
+          type: object
+          description: Floor price in various currencies
+          properties:
+            native_currency:
+              type: number
+            usd:
+              type: number
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          properties:
+            native_currency:
+              type: number
+            usd:
+              type: number
+        volume_24h:
+          type: object
+          description: 24-hour volume in various currencies
+          properties:
+            native_currency:
+              type: number
+            usd:
+              type: number
+        floor_price_in_usd_24h_percentage_change:
+          type: number
+          description: 24-hour floor price change percentage in USD
+        number_of_unique_addresses:
+          type: integer
+          description: Number of unique holder addresses
+        number_of_unique_addresses_24h_percentage_change:
+          type: number
+          description: 24-hour change in unique addresses
+        total_supply:
+          type: number
+          description: Total supply of NFTs in the collection
+    ExchangeRate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Currency name
+        unit:
+          type: string
+          description: Currency unit symbol
+        value:
+          type: number
+          description: Exchange rate value relative to BTC
+        type:
+          type: string
+          description: Currency type (fiat, crypto, commodity)
+          enum:
+            - fiat
+            - crypto
+            - commodity
+    GlobalData:
+      type: object
+      properties:
+        active_cryptocurrencies:
+          type: integer
+          description: Number of active cryptocurrencies
+        upcoming_icos:
+          type: integer
+          description: Number of upcoming ICOs
+        ongoing_icos:
+          type: integer
+          description: Number of ongoing ICOs
+        ended_icos:
+          type: integer
+          description: Number of ended ICOs
+        markets:
+          type: integer
+          description: Number of active markets
+        total_market_cap:
+          type: object
+          description: Total market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: Total 24h volume in various currencies
+          additionalProperties:
+            type: number
+        market_cap_percentage:
+          type: object
+          description: Market cap percentage by coin
+          additionalProperties:
+            type: number
+        market_cap_change_percentage_24h_usd:
+          type: number
+          description: 24-hour market cap change percentage in USD
+        updated_at:
+          type: integer
+          description: Last update timestamp (UNIX)
+    GlobalDeFiData:
+      type: object
+      properties:
+        defi_market_cap:
+          type: string
+          description: Total DeFi market cap in USD
+        eth_market_cap:
+          type: string
+          description: Ethereum market cap in USD
+        defi_to_eth_ratio:
+          type: string
+          description: DeFi market cap as ratio of ETH market cap
+        trading_volume_24h:
+          type: string
+          description: 24-hour DeFi trading volume in USD
+        defi_dominance:
+          type: string
+          description: DeFi dominance percentage
+        top_coin_name:
+          type: string
+          description: Top DeFi coin by market cap
+        top_coin_defi_dominance:
+          type: number
+          description: Top DeFi coin market cap dominance
+    CompanyHolding:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Company name
+        symbol:
+          type: string
+          description: Stock ticker symbol
+        country:
+          type: string
+          description: Country of incorporation
+        total_holdings:
+          type: number
+          description: Total cryptocurrency holdings
+        total_entry_value_usd:
+          type: number
+          description: Total entry value in USD
+        total_current_value_usd:
+          type: number
+          description: Total current value in USD
+        percentage_of_total_supply:
+          type: number
+          description: Percentage of total cryptocurrency supply held

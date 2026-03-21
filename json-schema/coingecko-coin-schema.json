@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/coingecko/coin.json",
+  "title": "CoinGecko Coin",
+  "description": "A cryptocurrency coin as represented in the CoinGecko API, including market data, metadata, and platform contract addresses.",
+  "type": "object",
+  "required": ["id", "symbol", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique CoinGecko identifier for the coin (e.g., bitcoin, ethereum)"
+    },
+    "symbol": {
+      "type": "string",
+      "description": "Coin ticker symbol (e.g., btc, eth)",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the coin (e.g., Bitcoin, Ethereum)",
+      "minLength": 1
+    },
+    "asset_platform_id": {
+      "type": ["string", "null"],
+      "description": "Asset platform identifier if the coin is a token on another platform"
+    },
+    "platforms": {
+      "type": "object",
+      "description": "Map of platform names to contract addresses",
+      "additionalProperties": {
+        "type": "string",
+        "description": "Contract address on the platform"
+      }
+    },
+    "block_time_in_minutes": {
+      "type": "integer",
+      "description": "Average block time in minutes for the coin's blockchain",
+      "minimum": 0
+    },
+    "hashing_algorithm": {
+      "type": ["string", "null"],
+      "description": "Mining or consensus hashing algorithm used"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categories the coin belongs to (e.g., Cryptocurrency, Smart Contract Platform)"
+    },
+    "description": {
+      "type": "object",
+      "description": "Localized descriptions of the coin",
+      "properties": {
+        "en": {
+          "type": "string",
+          "description": "English language description"
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "links": {
+      "$ref": "#/$defs/CoinLinks"
+    },
+    "image": {
+      "$ref": "#/$defs/ImageSet"
+    },
+    "genesis_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date the coin was created or launched"
+    },
+    "market_cap_rank": {
+      "type": ["integer", "null"],
+      "description": "Current market capitalization ranking position",
+      "minimum": 1
+    },
+    "market_data": {
+      "$ref": "#/$defs/MarketData"
+    },
+    "community_data": {
+      "$ref": "#/$defs/CommunityData"
+    },
+    "developer_data": {
+      "$ref": "#/$defs/DeveloperData"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last data update"
+    }
+  },
+  "$defs": {
+    "CoinLinks": {
+      "type": "object",
+      "description": "Links to official and community resources for the coin",
+      "properties": {
+        "homepage": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "description": "Official homepage URLs"
+        },
+        "blockchain_site": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Blockchain explorer URLs"
+        },
+        "official_forum_url": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Official forum URLs"
+        },
+        "chat_url": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Chat platform URLs (Discord, Telegram, etc.)"
+        },
+        "announcement_url": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Announcement and blog URLs"
+        },
+        "twitter_screen_name": {
+          "type": "string",
+          "description": "Twitter/X handle"
+        },
+        "facebook_username": {
+          "type": "string",
+          "description": "Facebook page username"
+        },
+        "telegram_channel_identifier": {
+          "type": "string",
+          "description": "Telegram channel identifier"
+        },
+        "subreddit_url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Reddit subreddit URL"
+        },
+        "repos_url": {
+          "type": "object",
+          "properties": {
+            "github": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uri"
+              },
+              "description": "GitHub repository URLs"
+            },
+            "bitbucket": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uri"
+              },
+              "description": "Bitbucket repository URLs"
+            }
+          },
+          "description": "Source code repository URLs"
+        }
+      }
+    },
+    "ImageSet": {
+      "type": "object",
+      "description": "Coin logo images at various sizes",
+      "properties": {
+        "thumb": {
+          "type": "string",
+          "format": "uri",
+          "description": "Thumbnail image URL"
+        },
+        "small": {
+          "type": "string",
+          "format": "uri",
+          "description": "Small image URL"
+        },
+        "large": {
+          "type": "string",
+          "format": "uri",
+          "description": "Large image URL"
+        }
+      }
+    },
+    "MarketData": {
+      "type": "object",
+      "description": "Current market data for the coin across multiple currencies",
+      "properties": {
+        "current_price": {
+          "type": "object",
+          "description": "Current price in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "market_cap": {
+          "type": "object",
+          "description": "Market capitalization in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "total_volume": {
+          "type": "object",
+          "description": "24-hour trading volume in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "high_24h": {
+          "type": "object",
+          "description": "24-hour high price in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "low_24h": {
+          "type": "object",
+          "description": "24-hour low price in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "price_change_24h": {
+          "type": "number",
+          "description": "24-hour price change in USD"
+        },
+        "price_change_percentage_24h": {
+          "type": "number",
+          "description": "24-hour price change percentage"
+        },
+        "price_change_percentage_7d": {
+          "type": "number",
+          "description": "7-day price change percentage"
+        },
+        "price_change_percentage_14d": {
+          "type": "number",
+          "description": "14-day price change percentage"
+        },
+        "price_change_percentage_30d": {
+          "type": "number",
+          "description": "30-day price change percentage"
+        },
+        "price_change_percentage_60d": {
+          "type": "number",
+          "description": "60-day price change percentage"
+        },
+        "price_change_percentage_200d": {
+          "type": "number",
+          "description": "200-day price change percentage"
+        },
+        "price_change_percentage_1y": {
+          "type": "number",
+          "description": "1-year price change percentage"
+        },
+        "market_cap_change_24h": {
+          "type": "number",
+          "description": "24-hour market cap change in USD"
+        },
+        "market_cap_change_percentage_24h": {
+          "type": "number",
+          "description": "24-hour market cap change percentage"
+        },
+        "circulating_supply": {
+          "type": "number",
+          "description": "Current circulating supply"
+        },
+        "total_supply": {
+          "type": ["number", "null"],
+          "description": "Total supply (null if not applicable)"
+        },
+        "max_supply": {
+          "type": ["number", "null"],
+          "description": "Maximum supply (null if unlimited)"
+        },
+        "ath": {
+          "type": "object",
+          "description": "All-time high price in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "ath_change_percentage": {
+          "type": "object",
+          "description": "Percentage change from all-time high",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "ath_date": {
+          "type": "object",
+          "description": "Date of all-time high in various currencies",
+          "additionalProperties": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "atl": {
+          "type": "object",
+          "description": "All-time low price in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "atl_change_percentage": {
+          "type": "object",
+          "description": "Percentage change from all-time low",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "atl_date": {
+          "type": "object",
+          "description": "Date of all-time low in various currencies",
+          "additionalProperties": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "total_value_locked": {
+          "type": ["number", "null"],
+          "description": "Total value locked in DeFi protocols"
+        },
+        "fully_diluted_valuation": {
+          "type": "object",
+          "description": "Fully diluted valuation in various currencies",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last market data update"
+        }
+      }
+    },
+    "CommunityData": {
+      "type": "object",
+      "description": "Community engagement metrics for the coin",
+      "properties": {
+        "facebook_likes": {
+          "type": ["integer", "null"],
+          "description": "Number of Facebook page likes"
+        },
+        "twitter_followers": {
+          "type": ["integer", "null"],
+          "description": "Number of Twitter/X followers"
+        },
+        "reddit_average_posts_48h": {
+          "type": ["number", "null"],
+          "description": "Average Reddit posts in 48 hours"
+        },
+        "reddit_average_comments_48h": {
+          "type": ["number", "null"],
+          "description": "Average Reddit comments in 48 hours"
+        },
+        "reddit_subscribers": {
+          "type": ["integer", "null"],
+          "description": "Number of Reddit subscribers"
+        },
+        "reddit_accounts_active_48h": {
+          "type": ["integer", "null"],
+          "description": "Active Reddit accounts in 48 hours"
+        },
+        "telegram_channel_user_count": {
+          "type": ["integer", "null"],
+          "description": "Number of Telegram channel users"
+        }
+      }
+    },
+    "DeveloperData": {
+      "type": "object",
+      "description": "Developer activity metrics from source code repositories",
+      "properties": {
+        "forks": {
+          "type": ["integer", "null"],
+          "description": "Number of repository forks"
+        },
+        "stars": {
+          "type": ["integer", "null"],
+          "description": "Number of repository stars"
+        },
+        "subscribers": {
+          "type": ["integer", "null"],
+          "description": "Number of repository watchers"
+        },
+        "total_issues": {
+          "type": ["integer", "null"],
+          "description": "Total number of issues"
+        },
+        "closed_issues": {
+          "type": ["integer", "null"],
+          "description": "Number of closed issues"
+        },
+        "pull_requests_merged": {
+          "type": ["integer", "null"],
+          "description": "Number of merged pull requests"
+        },
+        "pull_request_contributors": {
+          "type": ["integer", "null"],
+          "description": "Number of pull request contributors"
+        },
+        "commit_count_4_weeks": {
+          "type": ["integer", "null"],
+          "description": "Number of commits in the last 4 weeks"
+        }
+      }
+    }
+  }
+}

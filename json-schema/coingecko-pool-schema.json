@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/coingecko/pool.json",
+  "title": "CoinGecko Onchain Liquidity Pool",
+  "description": "A decentralized exchange liquidity pool as represented in the CoinGecko Onchain DEX API, including trading pair information, price data, volume, and liquidity metrics.",
+  "type": "object",
+  "required": ["id", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Pool identifier in network_address format (e.g., eth_0x1234...)"
+    },
+    "type": {
+      "type": "string",
+      "const": "pool",
+      "description": "Resource type identifier"
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Pool attributes containing market and metadata",
+      "properties": {
+        "base_token_price_usd": {
+          "type": ["string", "null"],
+          "description": "Base token price in USD"
+        },
+        "base_token_price_native_currency": {
+          "type": ["string", "null"],
+          "description": "Base token price in the network native currency"
+        },
+        "quote_token_price_usd": {
+          "type": ["string", "null"],
+          "description": "Quote token price in USD"
+        },
+        "quote_token_price_native_currency": {
+          "type": ["string", "null"],
+          "description": "Quote token price in network native currency"
+        },
+        "base_token_price_quote_token": {
+          "type": ["string", "null"],
+          "description": "Base token price denominated in the quote token"
+        },
+        "quote_token_price_base_token": {
+          "type": ["string", "null"],
+          "description": "Quote token price denominated in the base token"
+        },
+        "address": {
+          "type": "string",
+          "description": "Pool smart contract address"
+        },
+        "name": {
+          "type": "string",
+          "description": "Pool name (typically BASE / QUOTE format)"
+        },
+        "pool_created_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "Timestamp when the pool was created"
+        },
+        "fdv_usd": {
+          "type": ["string", "null"],
+          "description": "Fully diluted valuation of the base token in USD"
+        },
+        "market_cap_usd": {
+          "type": ["string", "null"],
+          "description": "Market capitalization of the base token in USD"
+        },
+        "price_change_percentage": {
+          "type": "object",
+          "description": "Price change percentages over various timeframes",
+          "properties": {
+            "m5": {
+              "type": ["string", "null"],
+              "description": "5-minute price change percentage"
+            },
+            "h1": {
+              "type": ["string", "null"],
+              "description": "1-hour price change percentage"
+            },
+            "h6": {
+              "type": ["string", "null"],
+              "description": "6-hour price change percentage"
+            },
+            "h24": {
+              "type": ["string", "null"],
+              "description": "24-hour price change percentage"
+            }
+          }
+        },
+        "transactions": {
+          "type": "object",
+          "description": "Transaction counts grouped by timeframe",
+          "properties": {
+            "m5": { "$ref": "#/$defs/TransactionCount" },
+            "m15": { "$ref": "#/$defs/TransactionCount" },
+            "m30": { "$ref": "#/$defs/TransactionCount" },
+            "h1": { "$ref": "#/$defs/TransactionCount" },
+            "h24": { "$ref": "#/$defs/TransactionCount" }
+          }
+        },
+        "volume_usd": {
+          "type": "object",
+          "description": "Trading volume in USD over various timeframes",
+          "properties": {
+            "m5": {
+              "type": ["string", "null"],
+              "description": "5-minute volume in USD"
+            },
+            "h1": {
+              "type": ["string", "null"],
+              "description": "1-hour volume in USD"
+            },
+            "h6": {
+              "type": ["string", "null"],
+              "description": "6-hour volume in USD"
+            },
+            "h24": {
+              "type": ["string", "null"],
+              "description": "24-hour volume in USD"
+            }
+          }
+        },
+        "reserve_in_usd": {
+          "type": ["string", "null"],
+          "description": "Total liquidity reserve in the pool in USD"
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Related resource references",
+      "properties": {
+        "base_token": {
+          "$ref": "#/$defs/Relationship"
+        },
+        "quote_token": {
+          "$ref": "#/$defs/Relationship"
+        },
+        "dex": {
+          "$ref": "#/$defs/Relationship"
+        },
+        "network": {
+          "$ref": "#/$defs/Relationship"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "TransactionCount": {
+      "type": "object",
+      "description": "Transaction count breakdown for a timeframe",
+      "properties": {
+        "buys": {
+          "type": "integer",
+          "description": "Number of buy transactions",
+          "minimum": 0
+        },
+        "sells": {
+          "type": "integer",
+          "description": "Number of sell transactions",
+          "minimum": 0
+        },
+        "buyers": {
+          "type": "integer",
+          "description": "Number of unique buyer addresses",
+          "minimum": 0
+        },
+        "sellers": {
+          "type": "integer",
+          "description": "Number of unique seller addresses",
+          "minimum": 0
+        }
+      }
+    },
+    "Relationship": {
+      "type": "object",
+      "description": "JSON:API relationship reference to a related resource",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Related resource identifier"
+            },
+            "type": {
+              "type": "string",
+              "description": "Related resource type"
+            }
+          },
+          "required": ["id", "type"]
+        }
+      }
+    }
+  }
+}

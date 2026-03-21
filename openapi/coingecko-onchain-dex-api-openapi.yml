@@ -1,0 +1,1267 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Onchain DEX API
+  description: >-
+    The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access
+    to real-time decentralized exchange data across over 250 blockchain
+    networks, 1,800 DEXes, and 30 million tokens. It offers more than 20
+    endpoints for querying liquidity pools, token data by contract address,
+    OHLCV chart data, trending pools, and pool search functionality. This API
+    enables developers to build applications that track onchain trading
+    activity, monitor DeFi liquidity, and analyze decentralized market data
+    without needing to interact directly with individual blockchain networks.
+  version: '3.0.1'
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+externalDocs:
+  description: CoinGecko Onchain DEX API Documentation
+  url: https://docs.coingecko.com/reference/endpoint-overview
+servers:
+  - url: https://pro-api.coingecko.com/api/v3
+    description: CoinGecko Pro API Server (paid plans)
+  - url: https://api.coingecko.com/api/v3
+    description: CoinGecko Demo API Server (free tier, limited endpoints)
+tags:
+  - name: Simple
+    description: >-
+      Simple onchain token price queries by contract address and network.
+  - name: Networks
+    description: >-
+      List and query supported blockchain networks.
+  - name: DEXes
+    description: >-
+      List decentralized exchanges on specific networks.
+  - name: Trending Pools
+    description: >-
+      Discover trending liquidity pools across networks based on web
+      visits and onchain activity.
+  - name: Pools
+    description: >-
+      Query liquidity pool data including specific pools, top pools,
+      new pools, and multi-pool lookups.
+  - name: Tokens
+    description: >-
+      Query token data by contract address including price, volume,
+      top pools, and token information.
+  - name: OHLCV
+    description: >-
+      Open, High, Low, Close, Volume candlestick chart data for
+      liquidity pools.
+  - name: Trades
+    description: >-
+      Recent trade data for specific liquidity pools.
+  - name: Search
+    description: >-
+      Search for liquidity pools by keyword, token name, symbol, or
+      contract address.
+security:
+  - proApiKeyHeader: []
+  - proApiKeyQuery: []
+  - demoApiKeyHeader: []
+  - demoApiKeyQuery: []
+paths:
+  /onchain/simple/networks/{network}/token_price/{addresses}:
+    get:
+      operationId: getOnchainSimpleTokenPrice
+      summary: Get token prices by contract addresses
+      description: >-
+        Get the USD prices of multiple tokens on a specific network by
+        their contract addresses. Returns the latest price data for each
+        requested token.
+      tags:
+        - Simple
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: addresses
+          in: path
+          required: true
+          description: >-
+            Comma-separated list of token contract addresses (up to 30)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          token_prices:
+                            type: object
+                            additionalProperties:
+                              type: string
+                              description: USD price as string
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /onchain/networks:
+    get:
+      operationId: getOnchainNetworks
+      summary: List supported networks
+      description: >-
+        Get the list of all supported blockchain networks with their
+        identifiers. Use these network IDs in other onchain endpoints.
+      tags:
+        - Networks
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Network'
+  /onchain/networks/{network}/dexes:
+    get:
+      operationId: getOnchainNetworkDexes
+      summary: List DEXes on a network
+      description: >-
+        Get the list of all supported decentralized exchanges on a specific
+        blockchain network.
+      tags:
+        - DEXes
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DEX'
+        '404':
+          description: Network not found
+  /onchain/networks/trending_pools:
+    get:
+      operationId: getOnchainTrendingPools
+      summary: Get trending pools across all networks
+      description: >-
+        Get the list of trending liquidity pools across all supported
+        networks, ranked by web visits and onchain trading activity.
+      tags:
+        - Trending Pools
+      parameters:
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex,
+            network)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: duration
+          in: query
+          description: Trending duration filter
+          schema:
+            type: string
+            enum:
+              - '5m'
+              - '1h'
+              - '6h'
+              - '24h'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+  /onchain/networks/{network}/trending_pools:
+    get:
+      operationId: getOnchainNetworkTrendingPools
+      summary: Get trending pools on a network
+      description: >-
+        Get the list of trending liquidity pools on a specific blockchain
+        network, ranked by web visits and onchain trading activity.
+      tags:
+        - Trending Pools
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: duration
+          in: query
+          description: Trending duration filter
+          schema:
+            type: string
+            enum:
+              - '5m'
+              - '1h'
+              - '6h'
+              - '24h'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Network not found
+  /onchain/networks/{network}/pools/{address}:
+    get:
+      operationId: getOnchainPoolByAddress
+      summary: Get pool data by contract address
+      description: >-
+        Get detailed data for a specific liquidity pool by its contract
+        address on a given network. Includes price, volume, liquidity,
+        and token information.
+      tags:
+        - Pools
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: address
+          in: path
+          required: true
+          description: The pool contract address
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Pool'
+        '404':
+          description: Pool not found
+  /onchain/networks/{network}/pools/multi/{addresses}:
+    get:
+      operationId: getOnchainMultiplePools
+      summary: Get multiple pools by addresses
+      description: >-
+        Get data for multiple liquidity pools in a single request by
+        providing a comma-separated list of pool contract addresses on
+        a specific network.
+      tags:
+        - Pools
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: addresses
+          in: path
+          required: true
+          description: >-
+            Comma-separated list of pool contract addresses (up to 30)
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+  /onchain/networks/{network}/pools:
+    get:
+      operationId: getOnchainTopPoolsByNetwork
+      summary: Get top pools on a network
+      description: >-
+        Get the top liquidity pools on a specific blockchain network,
+        ordered by trading volume or liquidity.
+      tags:
+        - Pools
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: sort
+          in: query
+          description: Sort order
+          schema:
+            type: string
+            enum:
+              - h24_tx_count_desc
+              - h24_volume_usd_desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Network not found
+  /onchain/networks/{network}/dexes/{dex}/pools:
+    get:
+      operationId: getOnchainTopPoolsByDex
+      summary: Get top pools on a DEX
+      description: >-
+        Get the top liquidity pools for a specific decentralized exchange
+        on a given network.
+      tags:
+        - Pools
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: dex
+          in: path
+          required: true
+          description: The DEX identifier
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: sort
+          in: query
+          description: Sort order
+          schema:
+            type: string
+            enum:
+              - h24_tx_count_desc
+              - h24_volume_usd_desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Network or DEX not found
+  /onchain/networks/{network}/new_pools:
+    get:
+      operationId: getOnchainNewPoolsByNetwork
+      summary: Get new pools on a network
+      description: >-
+        Get the most recently created liquidity pools on a specific
+        blockchain network.
+      tags:
+        - Pools
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Network not found
+  /onchain/networks/new_pools:
+    get:
+      operationId: getOnchainNewPoolsAllNetworks
+      summary: Get new pools across all networks
+      description: >-
+        Get the most recently created liquidity pools across all supported
+        blockchain networks.
+      tags:
+        - Pools
+      parameters:
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex,
+            network)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+  /onchain/networks/{network}/tokens/{address}:
+    get:
+      operationId: getOnchainTokenByAddress
+      summary: Get token data by contract address
+      description: >-
+        Get detailed data for a specific token by its contract address on
+        a given network. Includes price, volume, market cap, and other
+        token metrics.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: address
+          in: path
+          required: true
+          description: The token contract address
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: Additional data to include (e.g., top_pools)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Token'
+        '404':
+          description: Token not found
+  /onchain/networks/{network}/tokens/multi/{addresses}:
+    get:
+      operationId: getOnchainMultipleTokens
+      summary: Get multiple tokens by addresses
+      description: >-
+        Get price and market data for multiple tokens in a single request
+        by providing a comma-separated list of token contract addresses on
+        a specific network.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: addresses
+          in: path
+          required: true
+          description: >-
+            Comma-separated list of token contract addresses (up to 30)
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: Additional data to include (e.g., top_pools)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Token'
+  /onchain/networks/{network}/tokens/{address}/pools:
+    get:
+      operationId: getOnchainTokenTopPools
+      summary: Get top pools for a token
+      description: >-
+        Get the top liquidity pools that include a specific token on a
+        given network, useful for finding trading venues for a token.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: address
+          in: path
+          required: true
+          description: The token contract address
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: sort
+          in: query
+          description: Sort order
+          schema:
+            type: string
+            enum:
+              - h24_tx_count_desc
+              - h24_volume_usd_desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Token not found
+  /onchain/networks/{network}/tokens/{address}/info:
+    get:
+      operationId: getOnchainTokenInfo
+      summary: Get token info by contract address
+      description: >-
+        Get metadata and descriptive information for a specific token by
+        its contract address on a given network. Includes name, symbol,
+        description, image, and website links.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: address
+          in: path
+          required: true
+          description: The token contract address
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TokenInfo'
+        '404':
+          description: Token not found
+  /onchain/networks/{network}/pools/{pool_address}/ohlcv/{timeframe}:
+    get:
+      operationId: getOnchainPoolOHLCV
+      summary: Get pool OHLCV chart data
+      description: >-
+        Get OHLCV (Open, High, Low, Close, Volume) candlestick chart data
+        for a specific liquidity pool. Supports daily, hourly, and minutely
+        timeframes with various aggregation periods.
+      tags:
+        - OHLCV
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: pool_address
+          in: path
+          required: true
+          description: The pool contract address
+          schema:
+            type: string
+        - name: timeframe
+          in: path
+          required: true
+          description: OHLCV timeframe granularity
+          schema:
+            type: string
+            enum:
+              - day
+              - hour
+              - minute
+        - name: aggregate
+          in: query
+          description: >-
+            Aggregation period. For day timeframe (1). For hour timeframe
+            (1, 4, 12). For minute timeframe (1, 5, 15).
+          schema:
+            type: integer
+        - name: before_timestamp
+          in: query
+          description: Return data before this UNIX timestamp
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Number of OHLCV data points to return (max 1000)
+          schema:
+            type: integer
+            maximum: 1000
+            default: 100
+        - name: currency
+          in: query
+          description: Price currency (usd or token)
+          schema:
+            type: string
+            enum:
+              - usd
+              - token
+            default: usd
+        - name: token
+          in: query
+          description: >-
+            Which token to use for price (base or quote). Only applicable
+            when currency is token.
+          schema:
+            type: string
+            enum:
+              - base
+              - quote
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          ohlcv_list:
+                            type: array
+                            description: >-
+                              OHLCV data as arrays of [timestamp, open, high,
+                              low, close, volume]
+                            items:
+                              type: array
+                              items:
+                                type: number
+                              minItems: 6
+                              maxItems: 6
+                  meta:
+                    type: object
+                    properties:
+                      base:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          coingecko_coin_id:
+                            type: string
+                      quote:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          coingecko_coin_id:
+                            type: string
+        '404':
+          description: Pool not found
+  /onchain/networks/{network}/pools/{pool_address}/trades:
+    get:
+      operationId: getOnchainPoolTrades
+      summary: Get recent trades for a pool
+      description: >-
+        Get the most recent trades for a specific liquidity pool on a given
+        network. Returns trade details including price, volume, and
+        transaction hashes.
+      tags:
+        - Trades
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: pool_address
+          in: path
+          required: true
+          description: The pool contract address
+          schema:
+            type: string
+        - name: trade_volume_in_usd_greater_than
+          in: query
+          description: Filter trades by minimum USD volume
+          schema:
+            type: number
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trade'
+        '404':
+          description: Pool not found
+  /onchain/search/pools:
+    get:
+      operationId: searchOnchainPools
+      summary: Search for pools
+      description: >-
+        Search for liquidity pools by keyword. Accepts token name, ticker
+        symbol, token contract address, or specific pool contract address
+        as search queries.
+      tags:
+        - Search
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: >-
+            Search query (token name, symbol, token address, or pool address)
+          schema:
+            type: string
+        - name: network
+          in: query
+          description: Filter results by network ID
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex,
+            network)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+  /onchain/networks/{network}/tokens/{token_address}/pools:
+    get:
+      operationId: getOnchainTokenPools
+      summary: Get pools for a specific token
+      description: >-
+        Get all liquidity pools that contain a specific token on a given
+        network. Results include pool metrics like volume, liquidity, and
+        price data.
+      tags:
+        - Tokens
+      parameters:
+        - $ref: '#/components/parameters/networkId'
+        - name: token_address
+          in: path
+          required: true
+          description: The token contract address
+          schema:
+            type: string
+        - name: include
+          in: query
+          description: >-
+            Additional data to include (e.g., base_token, quote_token, dex)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Token not found
+components:
+  securitySchemes:
+    proApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: >-
+        CoinGecko Pro API key passed via request header.
+    proApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: >-
+        CoinGecko Pro API key passed via query string parameter.
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: >-
+        CoinGecko Demo API key for free tier access to limited onchain
+        endpoints.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: >-
+        CoinGecko Demo API key passed via query string parameter.
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: >-
+        The blockchain network identifier (e.g., eth, bsc, polygon_pos,
+        solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+  schemas:
+    Network:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Network identifier used in API paths
+        type:
+          type: string
+          description: Resource type (network)
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Network display name
+            coingecko_asset_platform_id:
+              type: string
+              description: Corresponding CoinGecko asset platform ID
+    DEX:
+      type: object
+      properties:
+        id:
+          type: string
+          description: DEX identifier used in API paths
+        type:
+          type: string
+          description: Resource type (dex)
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: DEX display name
+    Pool:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pool identifier (network_address format)
+        type:
+          type: string
+          description: Resource type (pool)
+        attributes:
+          type: object
+          properties:
+            base_token_price_usd:
+              type: string
+              description: Base token price in USD
+            base_token_price_native_currency:
+              type: string
+              description: Base token price in network native currency
+            quote_token_price_usd:
+              type: string
+              description: Quote token price in USD
+            quote_token_price_native_currency:
+              type: string
+              description: Quote token price in network native currency
+            base_token_price_quote_token:
+              type: string
+              description: Base token price in quote token
+            quote_token_price_base_token:
+              type: string
+              description: Quote token price in base token
+            address:
+              type: string
+              description: Pool contract address
+            name:
+              type: string
+              description: Pool name (e.g., TOKEN_A / TOKEN_B)
+            pool_created_at:
+              type: string
+              format: date-time
+              description: Pool creation timestamp
+            fdv_usd:
+              type: string
+              description: Fully diluted valuation in USD
+            market_cap_usd:
+              type: string
+              description: Market cap in USD
+            price_change_percentage:
+              type: object
+              description: Price change percentages over various timeframes
+              properties:
+                m5:
+                  type: string
+                  description: 5-minute price change percentage
+                h1:
+                  type: string
+                  description: 1-hour price change percentage
+                h6:
+                  type: string
+                  description: 6-hour price change percentage
+                h24:
+                  type: string
+                  description: 24-hour price change percentage
+            transactions:
+              type: object
+              description: Transaction counts over various timeframes
+              properties:
+                m5:
+                  $ref: '#/components/schemas/TransactionCount'
+                m15:
+                  $ref: '#/components/schemas/TransactionCount'
+                m30:
+                  $ref: '#/components/schemas/TransactionCount'
+                h1:
+                  $ref: '#/components/schemas/TransactionCount'
+                h24:
+                  $ref: '#/components/schemas/TransactionCount'
+            volume_usd:
+              type: object
+              description: Volume in USD over various timeframes
+              properties:
+                m5:
+                  type: string
+                h1:
+                  type: string
+                h6:
+                  type: string
+                h24:
+                  type: string
+            reserve_in_usd:
+              type: string
+              description: Total liquidity reserve in USD
+        relationships:
+          type: object
+          description: Related resources (base_token, quote_token, dex, network)
+          properties:
+            base_token:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+            quote_token:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+            dex:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
+    Token:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Token identifier (network_address format)
+        type:
+          type: string
+          description: Resource type (token)
+        attributes:
+          type: object
+          properties:
+            address:
+              type: string
+              description: Token contract address
+            name:
+              type: string
+              description: Token name
+            symbol:
+              type: string
+              description: Token ticker symbol
+            decimals:
+              type: integer
+              description: Token decimal places
+            coingecko_coin_id:
+              type: string
+              description: Corresponding CoinGecko coin ID
+            price_usd:
+              type: string
+              description: Current price in USD
+            fdv_usd:
+              type: string
+              description: Fully diluted valuation in USD
+            total_reserve_in_usd:
+              type: string
+              description: Total reserve across all pools in USD
+            volume_usd:
+              type: object
+              description: Volume in USD over various timeframes
+              properties:
+                h24:
+                  type: string
+            market_cap_usd:
+              type: string
+              description: Market cap in USD
+    TokenInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Token identifier
+        type:
+          type: string
+          description: Resource type (token)
+        attributes:
+          type: object
+          properties:
+            address:
+              type: string
+              description: Token contract address
+            name:
+              type: string
+              description: Token name
+            symbol:
+              type: string
+              description: Token ticker symbol
+            coingecko_coin_id:
+              type: string
+              description: Corresponding CoinGecko coin ID
+            image_url:
+              type: string
+              format: uri
+              description: Token logo image URL
+            description:
+              type: string
+              description: Token description text
+            websites:
+              type: array
+              description: Official website URLs
+              items:
+                type: string
+                format: uri
+            gt_score:
+              type: number
+              description: GeckoTerminal trust score
+            discord_url:
+              type: string
+              format: uri
+              description: Discord community URL
+            telegram_handle:
+              type: string
+              description: Telegram handle
+            twitter_handle:
+              type: string
+              description: Twitter/X handle
+    Trade:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Trade identifier
+        type:
+          type: string
+          description: Resource type (trade)
+        attributes:
+          type: object
+          properties:
+            block_number:
+              type: integer
+              description: Block number of the trade
+            block_timestamp:
+              type: string
+              format: date-time
+              description: Timestamp of the block containing the trade
+            tx_hash:
+              type: string
+              description: Transaction hash
+            tx_from_address:
+              type: string
+              description: Address that initiated the transaction
+            from_token_amount:
+              type: string
+              description: Amount of the from token
+            to_token_amount:
+              type: string
+              description: Amount of the to token
+            price_from_in_currency_token:
+              type: string
+              description: Price of the from token in the currency token
+            price_to_in_currency_token:
+              type: string
+              description: Price of the to token in the currency token
+            price_from_in_usd:
+              type: string
+              description: Price of the from token in USD
+            price_to_in_usd:
+              type: string
+              description: Price of the to token in USD
+            kind:
+              type: string
+              description: Trade direction (buy or sell)
+              enum:
+                - buy
+                - sell
+            volume_in_usd:
+              type: string
+              description: Trade volume in USD
+            from_token_address:
+              type: string
+              description: Contract address of the from token
+            to_token_address:
+              type: string
+              description: Contract address of the to token
