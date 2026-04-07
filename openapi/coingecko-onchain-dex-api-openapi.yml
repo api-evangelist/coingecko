@@ -24,38 +24,38 @@ servers:
   - url: https://api.coingecko.com/api/v3
     description: CoinGecko Demo API Server (free tier, limited endpoints)
 tags:
-  - name: Simple
-    description: >-
-      Simple onchain token price queries by contract address and network.
-  - name: Networks
-    description: >-
-      List and query supported blockchain networks.
   - name: DEXes
     description: >-
       List decentralized exchanges on specific networks.
-  - name: Trending Pools
+  - name: Networks
     description: >-
-      Discover trending liquidity pools across networks based on web
-      visits and onchain activity.
-  - name: Pools
-    description: >-
-      Query liquidity pool data including specific pools, top pools,
-      new pools, and multi-pool lookups.
-  - name: Tokens
-    description: >-
-      Query token data by contract address including price, volume,
-      top pools, and token information.
+      List and query supported blockchain networks.
   - name: OHLCV
     description: >-
       Open, High, Low, Close, Volume candlestick chart data for
       liquidity pools.
-  - name: Trades
+  - name: Pools
     description: >-
-      Recent trade data for specific liquidity pools.
+      Query liquidity pool data including specific pools, top pools,
+      new pools, and multi-pool lookups.
   - name: Search
     description: >-
       Search for liquidity pools by keyword, token name, symbol, or
       contract address.
+  - name: Simple
+    description: >-
+      Simple onchain token price queries by contract address and network.
+  - name: Tokens
+    description: >-
+      Query token data by contract address including price, volume,
+      top pools, and token information.
+  - name: Trades
+    description: >-
+      Recent trade data for specific liquidity pools.
+  - name: Trending Pools
+    description: >-
+      Discover trending liquidity pools across networks based on web
+      visits and onchain activity.
 security:
   - proApiKeyHeader: []
   - proApiKeyQuery: []

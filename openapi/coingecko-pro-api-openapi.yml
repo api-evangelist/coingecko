@@ -28,22 +28,22 @@ tags:
       Exclusive coin data endpoints for paid plan subscribers including
       recently added coins, top gainers and losers, and circulating supply
       chart data.
-  - name: NFTs
-    description: >-
-      Exclusive NFT endpoints for paid plan subscribers including NFT
-      market data and historical chart data.
-  - name: Global
-    description: >-
-      Exclusive global market data endpoints for paid plan subscribers
-      including market cap chart data.
-  - name: Token Lists
-    description: >-
-      Token list endpoints for paid plan subscribers providing
-      standardized token lists by asset platform.
   - name: Exchanges
     description: >-
       Exclusive exchange endpoints for paid plan subscribers including
       extended volume chart data.
+  - name: Global
+    description: >-
+      Exclusive global market data endpoints for paid plan subscribers
+      including market cap chart data.
+  - name: NFTs
+    description: >-
+      Exclusive NFT endpoints for paid plan subscribers including NFT
+      market data and historical chart data.
+  - name: Token Lists
+    description: >-
+      Token list endpoints for paid plan subscribers providing
+      standardized token lists by asset platform.
 security:
   - proApiKeyHeader: []
   - proApiKeyQuery: []

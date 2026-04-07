@@ -21,49 +21,49 @@ servers:
   - url: https://api.coingecko.com/api/v3
     description: CoinGecko Demo API Server
 tags:
-  - name: Ping
-    description: Check API server status
-  - name: Simple
-    description: >-
-      Simple price and token price lookups without the overhead of full
-      coin data responses.
-  - name: Coins
-    description: >-
-      Comprehensive coin data including current prices, market data,
-      historical data, tickers, and OHLCV charts.
-  - name: Contract
-    description: >-
-      Query coin data by contract address on a specific asset platform.
   - name: Asset Platforms
     description: >-
       List all asset platforms (blockchains) supported by CoinGecko.
   - name: Categories
     description: >-
       List cryptocurrency categories and their market data.
-  - name: Exchanges
+  - name: Coins
     description: >-
-      Exchange data including volumes, tickers, and status updates.
-  - name: Derivatives
-    description: >-
-      Derivatives market data including tickers and exchange information.
-  - name: NFTs
-    description: >-
-      NFT collection data including floor prices and market information.
-  - name: Exchange Rates
-    description: >-
-      BTC exchange rates against other currencies.
-  - name: Search
-    description: >-
-      Search for coins, exchanges, and categories.
-  - name: Trending
-    description: >-
-      Trending coins, NFTs, and categories on CoinGecko.
-  - name: Global
-    description: >-
-      Global cryptocurrency and DeFi market data.
+      Comprehensive coin data including current prices, market data,
+      historical data, tickers, and OHLCV charts.
   - name: Companies
     description: >-
       Public company cryptocurrency holdings data.
+  - name: Contract
+    description: >-
+      Query coin data by contract address on a specific asset platform.
+  - name: Derivatives
+    description: >-
+      Derivatives market data including tickers and exchange information.
+  - name: Exchange Rates
+    description: >-
+      BTC exchange rates against other currencies.
+  - name: Exchanges
+    description: >-
+      Exchange data including volumes, tickers, and status updates.
+  - name: Global
+    description: >-
+      Global cryptocurrency and DeFi market data.
+  - name: NFTs
+    description: >-
+      NFT collection data including floor prices and market information.
+  - name: Ping
+    description: Check API server status
+  - name: Search
+    description: >-
+      Search for coins, exchanges, and categories.
+  - name: Simple
+    description: >-
+      Simple price and token price lookups without the overhead of full
+      coin data responses.
+  - name: Trending
+    description: >-
+      Trending coins, NFTs, and categories on CoinGecko.
 security:
   - demoApiKeyHeader: []
   - demoApiKeyQuery: []
