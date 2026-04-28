@@ -1,0 +1,226 @@
+# Naftiko capabilities profile for CoinGecko.
+# Capabilities cover the highest-leverage operations across the public
+# Crypto Market Data API, the commercial Pro API, and the Onchain DEX
+# API powered by GeckoTerminal.
+provider: coingecko
+name: CoinGecko
+description: >-
+  Cryptocurrency data aggregator providing market data, exchange info,
+  derivatives, NFT metrics, and decentralized exchange data. Capabilities
+  cover price lookups, historical OHLCV, exchange enumeration, on-chain
+  pool discovery, and token search.
+capabilities:
+  # Crypto Market Data API
+  - id: coingecko.market-data.simple-price
+    name: Get simple price
+    description: Look up current prices for one or many coins in one or many quote currencies.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - ids
+      - vs_currencies
+      - include_market_cap
+      - include_24hr_vol
+      - include_24hr_change
+    outputs:
+      - prices
+
+  - id: coingecko.market-data.token-price
+    name: Get token price by contract
+    description: Look up token prices by contract address on a given platform.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - id
+      - contract_addresses
+      - vs_currencies
+    outputs:
+      - prices
+
+  - id: coingecko.market-data.coins-list
+    name: List coins
+    description: List all supported coins with id, symbol, and name.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - include_platform
+    outputs:
+      - coins
+
+  - id: coingecko.market-data.coins-markets
+    name: List coin markets
+    description: Retrieve market cap, volume, and price for top coins.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - vs_currency
+      - ids
+      - category
+      - order
+      - per_page
+      - page
+    outputs:
+      - markets
+
+  - id: coingecko.market-data.coin-detail
+    name: Get coin detail
+    description: Retrieve detailed metadata, links, and market data for a coin.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - id
+      - localization
+      - tickers
+      - market_data
+      - community_data
+      - developer_data
+    outputs:
+      - coin
+
+  - id: coingecko.market-data.coin-ohlc
+    name: Get coin OHLC
+    description: Retrieve historical OHLC chart data for a coin.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - id
+      - vs_currency
+      - days
+      - precision
+    outputs:
+      - ohlc
+
+  - id: coingecko.market-data.coin-history
+    name: Get coin history
+    description: Retrieve historical snapshot data for a coin on a specific date.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - id
+      - date
+      - localization
+    outputs:
+      - history
+
+  - id: coingecko.market-data.exchanges-list
+    name: List exchanges
+    description: List all supported exchanges with metadata.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - per_page
+      - page
+    outputs:
+      - exchanges
+
+  - id: coingecko.market-data.global
+    name: Get global market data
+    description: Retrieve global cryptocurrency market summary statistics.
+    api: coingecko:crypto-market-data-api
+    inputs: []
+    outputs:
+      - active_cryptocurrencies
+      - total_market_cap
+      - total_volume
+
+  - id: coingecko.market-data.search
+    name: Search
+    description: Search for coins, exchanges, categories, or NFTs.
+    api: coingecko:crypto-market-data-api
+    inputs:
+      - query
+    outputs:
+      - coins
+      - exchanges
+      - categories
+      - nfts
+
+  # Pro API
+  - id: coingecko.pro.circulating-supply-chart
+    name: Get circulating supply chart
+    description: Retrieve historical circulating supply for a coin (Pro).
+    api: coingecko:pro-api
+    inputs:
+      - id
+      - days
+      - interval
+    outputs:
+      - chart
+
+  - id: coingecko.pro.token-price
+    name: Pro token price by contract
+    description: Pro version of token price lookup with higher rate limits.
+    api: coingecko:pro-api
+    inputs:
+      - id
+      - contract_addresses
+      - vs_currencies
+    outputs:
+      - prices
+
+  # Onchain DEX API (GeckoTerminal)
+  - id: coingecko.onchain.networks-list
+    name: List on-chain networks
+    description: List supported networks for the Onchain DEX API.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - page
+    outputs:
+      - networks
+
+  - id: coingecko.onchain.dexes-list
+    name: List DEXes on a network
+    description: List DEXes available on a given network.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - network
+      - page
+    outputs:
+      - dexes
+
+  - id: coingecko.onchain.trending-pools
+    name: List trending pools
+    description: Retrieve trending DEX liquidity pools globally.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - page
+      - duration
+    outputs:
+      - pools
+
+  - id: coingecko.onchain.pool-by-network
+    name: List pools on a network
+    description: List liquidity pools on a specific network.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - network
+      - page
+      - sort
+    outputs:
+      - pools
+
+  - id: coingecko.onchain.token-by-address
+    name: Get token by contract address
+    description: Look up an on-chain token by its contract address.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - network
+      - address
+    outputs:
+      - token
+
+  - id: coingecko.onchain.pool-ohlcv
+    name: Get pool OHLCV
+    description: Retrieve OHLCV chart data for a DEX pool.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - network
+      - pool_address
+      - timeframe
+      - aggregate
+      - before_timestamp
+    outputs:
+      - ohlcv_list
+
+  - id: coingecko.onchain.search-pools
+    name: Search pools
+    description: Search DEX pools by query string.
+    api: coingecko:onchain-dex-api
+    inputs:
+      - query
+      - network
+      - page
+    outputs:
+      - pools
