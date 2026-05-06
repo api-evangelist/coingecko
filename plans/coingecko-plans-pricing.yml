@@ -4,172 +4,244 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: CoinGecko
 providerId: coingecko
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Aggregator
-  - Blockchain
   - Cryptocurrency
-  - Decentralized Exchanges
-  - DeFi
-  - DEX
-  - Exchanges
-  - Liquidity Pools
   - Market Data
-  - NFTs
-  - Onchain Data
-  - Prices
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Blockchain
+description: CoinGecko offers a tiered API subscription model with a free Demo plan and paid Pro plans
+  (Basic, Analyst, Lite) plus custom Enterprise. Pricing is monthly or discounted annually; each tier
+  includes a monthly call credit cap and a per-minute rate limit. Overage charged at $250 per 500K calls
+  beyond the included allotment.
+sources:
+  - https://www.coingecko.com/en/api/pricing
 plans:
-  - id: coingecko-free
-    name: Free
+  - id: coingecko-demo
+    name: Demo
     type: freemium
-    description: Free entry tier for the CoinGecko API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Free plan for evaluation; requires public attribution.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Monthly call credits
+        name: demo_credits
         type: quota
-        metric: requests
-        limit: 1000
+        metric: request
+        limit: 10000
         timeFrame: month
         geo: global
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
+      - label: Rate limit
+        name: demo_rate
+        type: quota
         metric: requests_per_minute
-        limit: 10
+        limit: 30
         timeFrame: minute
         geo: global
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: CoinGecko Crypto Market Data API
-      - name: CoinGecko Pro API
-      - name: CoinGecko Onchain DEX API
-  - id: coingecko-pro
-    name: Professional
-    type: paid
-    description: Production tier for CoinGecko. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: Public CoinGecko API
+      - name: Required attribution
+  - id: coingecko-basic
+    name: Basic
+    type: subscription
+    description: $35/month or $29/month billed annually. Entry Pro plan with 100K monthly credits.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Monthly subscription
+        name: basic_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '35.00'
+        userMultiplied: false
+      - label: Annual subscription
+        name: basic_annual
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '29.00'
+        userMultiplied: false
+      - label: Monthly call credits
+        name: basic_credits
         type: quota
-        metric: requests
+        metric: request
         limit: 100000
         timeFrame: month
         geo: global
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
         unit: 1
-        price: TBD
+        price: included
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
+      - label: Rate limit
+        name: basic_rate
+        type: quota
         metric: requests_per_minute
-        limit: 100
+        limit: 250
         timeFrame: minute
         geo: global
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
         unit: 1
-        price: '0.00'
+        price: included
         userMultiplied: false
       - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+        name: basic_overage
         type: metered
-        metric: requests
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 500000
+        price: '250.00'
+        userMultiplied: false
+    elements:
+      - name: 50+ endpoints
+      - name: 2 years historical data
+  - id: coingecko-analyst
+    name: Analyst
+    type: subscription
+    description: $129/month or $103/month annual. 500K credits and exclusive endpoints.
+    entries:
+      - label: Monthly subscription
+        name: analyst_monthly
+        type: subscription
+        metric: month
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '129.00'
+        userMultiplied: false
+      - label: Annual subscription
+        name: analyst_annual
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '103.00'
+        userMultiplied: false
+      - label: Monthly call credits
+        name: analyst_credits
+        type: quota
+        metric: request
+        limit: 500000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Rate limit
+        name: analyst_rate
+        type: quota
+        metric: requests_per_minute
+        limit: 500
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Overage
+        name: analyst_overage
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 500000
+        price: '250.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: CoinGecko Crypto Market Data API
-      - name: CoinGecko Pro API
-      - name: CoinGecko Onchain DEX API
+      - name: 70+ endpoints
+      - name: 10 years historical data
+      - name: WebSocket / Webhook support
+      - name: Exclusive endpoints
+  - id: coingecko-lite
+    name: Lite
+    type: subscription
+    description: $499/month or $399/month annual. 2M credits.
+    entries:
+      - label: Monthly subscription
+        name: lite_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '499.00'
+        userMultiplied: false
+      - label: Annual subscription
+        name: lite_annual
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '399.00'
+        userMultiplied: false
+      - label: Monthly call credits
+        name: lite_credits
+        type: quota
+        metric: request
+        limit: 2000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Rate limit
+        name: lite_rate
+        type: quota
+        metric: requests_per_minute
+        limit: 500
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Overage
+        name: lite_overage
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 500000
+        price: '250.00'
+        userMultiplied: false
+    elements:
+      - name: 70+ endpoints
+      - name: 10 years historical data
+      - name: WebSocket / Webhook support
   - id: coingecko-enterprise
     name: Enterprise
     type: enterprise
-    description: Custom-negotiated tier for CoinGecko. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
+    description: Custom credits, custom rate limits, 80+ endpoints, priority support with 99.9% SLA.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Custom contract
+        name: enterprise_custom
+        type: subscription
+        metric: month
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.coingecko.com/api/v3
-          - https://pro-api.coingecko.com/api/v3
-          - https://api.coingecko.com/api/v3/onchain
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: CoinGecko Crypto Market Data API
-      - name: CoinGecko Pro API
-      - name: CoinGecko Onchain DEX API
+      - name: 80+ endpoints
+      - name: Custom rate limits
+      - name: 99.9% SLA
+      - name: Priority support
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

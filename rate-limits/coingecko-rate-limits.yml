@@ -4,103 +4,76 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: CoinGecko
 providerId: coingecko
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Aggregator
-  - Blockchain
-  - Cryptocurrency
-  - Decentralized Exchanges
-  - DeFi
-  - DEX
-  - Exchanges
-  - Liquidity Pools
-  - Market Data
-  - NFTs
-  - Onchain Data
-  - Prices
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the CoinGecko API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Cryptocurrency
+  - Market Data
+description: CoinGecko enforces both a per-minute rate limit and a monthly call-credit quota that vary
+  by subscription plan. Demo (public) is approximately 30 calls/minute and varies with traffic. Pro plans
+  define explicit per-minute ceilings and monthly credits. Every API request, success or failure, counts
+  against the quota.
+sources:
+  - https://www.coingecko.com/en/api/pricing
+  - https://docs.coingecko.com/v3.0.1/reference/common-errors-rate-limit
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
+  - name: Demo plan
+    scope: key
     metric: requests_per_minute
-    limit: 10
-    burst: 20
+    limit: 30
     timeFrame: minute
-    applies:
-      - CoinGecko Crypto Market Data API
-      - CoinGecko Pro API
-      - CoinGecko Onchain DEX API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
+    notes: Approximate; varies with overall traffic.
+  - name: Demo monthly credits
+    scope: key
     metric: requests_per_month
-    limit: 1000
+    limit: 10000
     timeFrame: month
-    applies:
-      - CoinGecko Crypto Market Data API
-      - CoinGecko Pro API
-      - CoinGecko Onchain DEX API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
+  - name: Basic plan
+    scope: key
     metric: requests_per_minute
-    limit: 100
-    burst: 200
+    limit: 250
     timeFrame: minute
-    applies:
-      - CoinGecko Crypto Market Data API
-      - CoinGecko Pro API
-      - CoinGecko Onchain DEX API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
+  - name: Basic monthly credits
+    scope: key
     metric: requests_per_month
     limit: 100000
     timeFrame: month
-    applies:
-      - CoinGecko Crypto Market Data API
-      - CoinGecko Pro API
-      - CoinGecko Onchain DEX API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
+  - name: Analyst plan
+    scope: key
     metric: requests_per_minute
-    limit: 1000
-    burst: 5000
+    limit: 500
     timeFrame: minute
-    applies:
-      - CoinGecko Crypto Market Data API
-      - CoinGecko Pro API
-      - CoinGecko Onchain DEX API
+  - name: Analyst monthly credits
+    scope: key
+    metric: requests_per_month
+    limit: 500000
+    timeFrame: month
+  - name: Lite plan
+    scope: key
+    metric: requests_per_minute
+    limit: 500
+    timeFrame: minute
+  - name: Lite monthly credits
+    scope: key
+    metric: requests_per_month
+    limit: 2000000
+    timeFrame: month
+  - name: Enterprise
+    scope: key
+    metric: varies
+    limit: custom (contact sales)
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: All requests count
+    description: All API requests count toward the per-minute and monthly limits, including responses
+      with non-2xx status codes.
+  - name: Backoff
+    description: On 429, reduce request rate or upgrade tier for higher ceilings.
+  - name: Demo vs Pro hosts
+    description: Demo plans use api.coingecko.com; Pro plans use pro-api.coingecko.com with x-cg-pro-api-key
+      header.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
