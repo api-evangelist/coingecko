@@ -15,7 +15,7 @@ tags:
   - Onchain Data
   - Prices
 type: Index
-x-type: company
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-03-20'
@@ -161,17 +161,17 @@ common:
     url: https://support.coingecko.com
   - type: Login
     url: https://www.coingecko.com/en/developers/dashboard
-  - type: Status
+  - type: StatusPage
     url: https://status.coingecko.com/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.coingecko.com/en/terms
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.coingecko.com/en/privacy
   - type: JSONSchema
     url: json-schema/coingecko-coin-schema.json
   - type: JSONSchema
     url: json-schema/coingecko-pool-schema.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/coingecko-context.jsonld
   - type: Spectral Ruleset
     url: rules/coingecko-rules.yml
