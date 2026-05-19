@@ -1,0 +1,189 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Contract
+  description: 'CoinGecko Crypto Market Data API — Contract. 3 operations. Lead operation: Get coin data by contract address.
+    Self-contained Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Contract
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-contract
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Contract business capability. Self-contained, no shared references.
+    resources:
+    - name: coins-id-contract-contract_address
+      path: /coins/{id}/contract/{contract_address}
+      operations:
+      - name: getcoinbycontractaddress
+        method: GET
+        description: Get coin data by contract address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: coins-id-contract-contract_address-market_chart
+      path: /coins/{id}/contract/{contract_address}/market_chart
+      operations:
+      - name: getcoincontractmarketchart
+        method: GET
+        description: Get coin market chart data by contract address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vs_currency
+          in: query
+          type: string
+          description: The target currency for market data
+          required: true
+        - name: days
+          in: query
+          type: string
+          description: Number of days of historical data
+          required: true
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values
+    - name: coins-id-contract-contract_address-market_chart-range
+      path: /coins/{id}/contract/{contract_address}/market_chart/range
+      operations:
+      - name: getcoincontractmarketchartrange
+        method: GET
+        description: Get coin market chart range data by contract address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vs_currency
+          in: query
+          type: string
+          description: The target currency for market data
+          required: true
+        - name: from
+          in: query
+          type: number
+          description: Start date as UNIX timestamp
+          required: true
+        - name: to
+          in: query
+          type: number
+          description: End date as UNIX timestamp
+          required: true
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-contract-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Contract. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/coins/{id}/contract/{contract-address}
+      name: coins-id-contract-contract-address
+      description: REST surface for coins-id-contract-contract_address.
+      operations:
+      - method: GET
+        name: getcoinbycontractaddress
+        description: Get coin data by contract address
+        call: crypto-market-data-contract.getcoinbycontractaddress
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/contract/{contract-address}/market-chart
+      name: coins-id-contract-contract-address-market-chart
+      description: REST surface for coins-id-contract-contract_address-market_chart.
+      operations:
+      - method: GET
+        name: getcoincontractmarketchart
+        description: Get coin market chart data by contract address
+        call: crypto-market-data-contract.getcoincontractmarketchart
+        with:
+          vs_currency: rest.vs_currency
+          days: rest.days
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/contract/{contract-address}/market-chart/range
+      name: coins-id-contract-contract-address-market-chart-range
+      description: REST surface for coins-id-contract-contract_address-market_chart-range.
+      operations:
+      - method: GET
+        name: getcoincontractmarketchartrange
+        description: Get coin market chart range data by contract address
+        call: crypto-market-data-contract.getcoincontractmarketchartrange
+        with:
+          vs_currency: rest.vs_currency
+          from: rest.from
+          to: rest.to
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-contract-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Contract. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-coin-data-contract-address
+      description: Get coin data by contract address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-contract.getcoinbycontractaddress
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-market-chart-data
+      description: Get coin market chart data by contract address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-contract.getcoincontractmarketchart
+      with:
+        vs_currency: tools.vs_currency
+        days: tools.days
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-market-chart-range
+      description: Get coin market chart range data by contract address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-contract.getcoincontractmarketchartrange
+      with:
+        vs_currency: tools.vs_currency
+        from: tools.from
+        to: tools.to
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.

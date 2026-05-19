@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Pro API — Token Lists
+  description: 'CoinGecko Pro API — Token Lists. 1 operations. Lead operation: Get token list by asset platform. Self-contained
+    Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Token Lists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pro-token-lists
+    baseUri: https://pro-api.coingecko.com/api/v3
+    description: CoinGecko Pro API — Token Lists business capability. Self-contained, no shared references.
+    resources:
+    - name: token_lists-asset_platform_id-all.json
+      path: /token_lists/{asset_platform_id}/all.json
+      operations:
+      - name: gettokenlist
+        method: GET
+        description: Get token list by asset platform
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: asset_platform_id
+          in: path
+          type: string
+          description: The asset platform ID (e.g., ethereum)
+          required: true
+    authentication:
+      type: apikey
+      key: x-cg-pro-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pro-token-lists-rest
+    port: 8080
+    description: REST adapter for CoinGecko Pro API — Token Lists. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/token-lists/{asset-platform-id}/all-json
+      name: token-lists-asset-platform-id-all-json
+      description: REST surface for token_lists-asset_platform_id-all.json.
+      operations:
+      - method: GET
+        name: gettokenlist
+        description: Get token list by asset platform
+        call: pro-token-lists.gettokenlist
+        with:
+          asset_platform_id: rest.asset_platform_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pro-token-lists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Pro API — Token Lists. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-token-list-asset-platform
+      description: Get token list by asset platform
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pro-token-lists.gettokenlist
+      with:
+        asset_platform_id: tools.asset_platform_id
+      outputParameters:
+      - type: object
+        mapping: $.

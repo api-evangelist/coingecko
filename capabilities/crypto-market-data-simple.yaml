@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Simple
+  description: 'CoinGecko Crypto Market Data API — Simple. 3 operations. Lead operation: Get coin price by IDs. Self-contained
+    Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Simple
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-simple
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Simple business capability. Self-contained, no shared references.
+    resources:
+    - name: simple-price
+      path: /simple/price
+      operations:
+      - name: getsimpleprice
+        method: GET
+        description: Get coin price by IDs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include_market_cap
+          in: query
+          type: boolean
+          description: Include market cap in the response
+        - name: include_24hr_vol
+          in: query
+          type: boolean
+          description: Include 24-hour trading volume in the response
+        - name: include_24hr_change
+          in: query
+          type: boolean
+          description: Include 24-hour price change percentage in the response
+        - name: include_last_updated_at
+          in: query
+          type: boolean
+          description: Include last updated timestamp in the response
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values (0-18)
+    - name: simple-supported_vs_currencies
+      path: /simple/supported_vs_currencies
+      operations:
+      - name: getsimplesupportedvscurrencies
+        method: GET
+        description: Get supported vs currencies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: simple-token_price-id
+      path: /simple/token_price/{id}
+      operations:
+      - name: getsimpletokenprice
+        method: GET
+        description: Get token price by contract address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contract_addresses
+          in: query
+          type: string
+          description: Comma-separated list of token contract addresses on the specified asset platform
+          required: true
+        - name: include_market_cap
+          in: query
+          type: boolean
+          description: Include market cap in the response
+        - name: include_24hr_vol
+          in: query
+          type: boolean
+          description: Include 24-hour trading volume in the response
+        - name: include_24hr_change
+          in: query
+          type: boolean
+          description: Include 24-hour price change percentage in the response
+        - name: include_last_updated_at
+          in: query
+          type: boolean
+          description: Include last updated timestamp in the response
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values (0-18)
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-simple-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Simple. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/simple/price
+      name: simple-price
+      description: REST surface for simple-price.
+      operations:
+      - method: GET
+        name: getsimpleprice
+        description: Get coin price by IDs
+        call: crypto-market-data-simple.getsimpleprice
+        with:
+          include_market_cap: rest.include_market_cap
+          include_24hr_vol: rest.include_24hr_vol
+          include_24hr_change: rest.include_24hr_change
+          include_last_updated_at: rest.include_last_updated_at
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/simple/supported-vs-currencies
+      name: simple-supported-vs-currencies
+      description: REST surface for simple-supported_vs_currencies.
+      operations:
+      - method: GET
+        name: getsimplesupportedvscurrencies
+        description: Get supported vs currencies
+        call: crypto-market-data-simple.getsimplesupportedvscurrencies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/simple/token-price/{id}
+      name: simple-token-price-id
+      description: REST surface for simple-token_price-id.
+      operations:
+      - method: GET
+        name: getsimpletokenprice
+        description: Get token price by contract address
+        call: crypto-market-data-simple.getsimpletokenprice
+        with:
+          contract_addresses: rest.contract_addresses
+          include_market_cap: rest.include_market_cap
+          include_24hr_vol: rest.include_24hr_vol
+          include_24hr_change: rest.include_24hr_change
+          include_last_updated_at: rest.include_last_updated_at
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-simple-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Simple. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-coin-price-ids
+      description: Get coin price by IDs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-simple.getsimpleprice
+      with:
+        include_market_cap: tools.include_market_cap
+        include_24hr_vol: tools.include_24hr_vol
+        include_24hr_change: tools.include_24hr_change
+        include_last_updated_at: tools.include_last_updated_at
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-supported-vs-currencies
+      description: Get supported vs currencies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-simple.getsimplesupportedvscurrencies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-token-price-contract-address
+      description: Get token price by contract address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-simple.getsimpletokenprice
+      with:
+        contract_addresses: tools.contract_addresses
+        include_market_cap: tools.include_market_cap
+        include_24hr_vol: tools.include_24hr_vol
+        include_24hr_change: tools.include_24hr_change
+        include_last_updated_at: tools.include_last_updated_at
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.

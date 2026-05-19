@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Ping
+  description: 'CoinGecko Crypto Market Data API — Ping. 1 operations. Lead operation: Check API server status. Self-contained
+    Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Ping
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-ping
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Ping business capability. Self-contained, no shared references.
+    resources:
+    - name: ping
+      path: /ping
+      operations:
+      - name: ping
+        method: GET
+        description: Check API server status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-ping-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Ping. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/ping
+      name: ping
+      description: REST surface for ping.
+      operations:
+      - method: GET
+        name: ping
+        description: Check API server status
+        call: crypto-market-data-ping.ping
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-ping-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Ping. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: check-api-server-status
+      description: Check API server status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-ping.ping
+      outputParameters:
+      - type: object
+        mapping: $.

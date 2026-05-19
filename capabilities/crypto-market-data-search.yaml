@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Search
+  description: 'CoinGecko Crypto Market Data API — Search. 1 operations. Lead operation: Search for coins, exchanges, and
+    categories. Self-contained Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-search
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: search
+      path: /search
+      operations:
+      - name: search
+        method: GET
+        description: Search for coins, exchanges, and categories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: Search query string
+          required: true
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-search-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Search. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/search
+      name: search
+      description: REST surface for search.
+      operations:
+      - method: GET
+        name: search
+        description: Search for coins, exchanges, and categories
+        call: crypto-market-data-search.search
+        with:
+          query: rest.query
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Search. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: search-coins-exchanges-and-categories
+      description: Search for coins, exchanges, and categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-search.search
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.

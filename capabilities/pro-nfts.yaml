@@ -1,0 +1,240 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Pro API — NFTs
+  description: 'CoinGecko Pro API — NFTs. 4 operations. Lead operation: List NFTs with market data. Self-contained Naftiko
+    capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - NFTs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pro-nfts
+    baseUri: https://pro-api.coingecko.com/api/v3
+    description: CoinGecko Pro API — NFTs business capability. Self-contained, no shared references.
+    resources:
+    - name: nfts-markets
+      path: /nfts/markets
+      operations:
+      - name: getnftsmarkets
+        method: GET
+        description: List NFTs with market data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order
+          in: query
+          type: string
+          description: Sort order for results
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of results per page (1-250)
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+    - name: nfts-asset_platform_id-contract-contract_address-market_chart
+      path: /nfts/{asset_platform_id}/contract/{contract_address}/market_chart
+      operations:
+      - name: getnftcontractmarketchart
+        method: GET
+        description: Get NFT market chart by contract address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: asset_platform_id
+          in: path
+          type: string
+          description: The asset platform ID
+          required: true
+        - name: contract_address
+          in: path
+          type: string
+          description: The NFT contract address
+          required: true
+        - name: days
+          in: query
+          type: string
+          description: Number of days of historical data
+          required: true
+    - name: nfts-id-market_chart
+      path: /nfts/{id}/market_chart
+      operations:
+      - name: getnftmarketchart
+        method: GET
+        description: Get NFT collection market chart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The NFT collection ID
+          required: true
+        - name: days
+          in: query
+          type: string
+          description: Number of days of historical data
+          required: true
+    - name: nfts-id-tickers
+      path: /nfts/{id}/tickers
+      operations:
+      - name: getnfttickers
+        method: GET
+        description: Get NFT collection tickers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The NFT collection ID
+          required: true
+    authentication:
+      type: apikey
+      key: x-cg-pro-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: pro-nfts-rest
+    port: 8080
+    description: REST adapter for CoinGecko Pro API — NFTs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/nfts/markets
+      name: nfts-markets
+      description: REST surface for nfts-markets.
+      operations:
+      - method: GET
+        name: getnftsmarkets
+        description: List NFTs with market data
+        call: pro-nfts.getnftsmarkets
+        with:
+          order: rest.order
+          per_page: rest.per_page
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nfts/{asset-platform-id}/contract/{contract-address}/market-chart
+      name: nfts-asset-platform-id-contract-contract-address-market-chart
+      description: REST surface for nfts-asset_platform_id-contract-contract_address-market_chart.
+      operations:
+      - method: GET
+        name: getnftcontractmarketchart
+        description: Get NFT market chart by contract address
+        call: pro-nfts.getnftcontractmarketchart
+        with:
+          asset_platform_id: rest.asset_platform_id
+          contract_address: rest.contract_address
+          days: rest.days
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nfts/{id}/market-chart
+      name: nfts-id-market-chart
+      description: REST surface for nfts-id-market_chart.
+      operations:
+      - method: GET
+        name: getnftmarketchart
+        description: Get NFT collection market chart
+        call: pro-nfts.getnftmarketchart
+        with:
+          id: rest.id
+          days: rest.days
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nfts/{id}/tickers
+      name: nfts-id-tickers
+      description: REST surface for nfts-id-tickers.
+      operations:
+      - method: GET
+        name: getnfttickers
+        description: Get NFT collection tickers
+        call: pro-nfts.getnfttickers
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pro-nfts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Pro API — NFTs. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-nfts-market-data
+      description: List NFTs with market data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pro-nfts.getnftsmarkets
+      with:
+        order: tools.order
+        per_page: tools.per_page
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nft-market-chart-contract
+      description: Get NFT market chart by contract address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pro-nfts.getnftcontractmarketchart
+      with:
+        asset_platform_id: tools.asset_platform_id
+        contract_address: tools.contract_address
+        days: tools.days
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nft-collection-market-chart
+      description: Get NFT collection market chart
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pro-nfts.getnftmarketchart
+      with:
+        id: tools.id
+        days: tools.days
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nft-collection-tickers
+      description: Get NFT collection tickers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pro-nfts.getnfttickers
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

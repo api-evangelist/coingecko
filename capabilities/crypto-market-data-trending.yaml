@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Trending
+  description: 'CoinGecko Crypto Market Data API — Trending. 1 operations. Lead operation: Get trending search list. Self-contained
+    Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Trending
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-trending
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Trending business capability. Self-contained, no shared references.
+    resources:
+    - name: search-trending
+      path: /search/trending
+      operations:
+      - name: gettrending
+        method: GET
+        description: Get trending search list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-trending-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Trending. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/search/trending
+      name: search-trending
+      description: REST surface for search-trending.
+      operations:
+      - method: GET
+        name: gettrending
+        description: Get trending search list
+        call: crypto-market-data-trending.gettrending
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-trending-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Trending. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-trending-search-list
+      description: Get trending search list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-trending.gettrending
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,539 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Coins
+  description: 'CoinGecko Crypto Market Data API — Coins. 8 operations. Lead operation: List all supported coins. Self-contained
+    Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Coins
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-coins
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Coins business capability. Self-contained, no shared references.
+    resources:
+    - name: coins-list
+      path: /coins/list
+      operations:
+      - name: getcoinslist
+        method: GET
+        description: List all supported coins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include_platform
+          in: query
+          type: boolean
+          description: Include platform contract addresses in the response (e.g., Ethereum, Solana contract addresses)
+    - name: coins-markets
+      path: /coins/markets
+      operations:
+      - name: getcoinsmarkets
+        method: GET
+        description: List coins with market data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vs_currency
+          in: query
+          type: string
+          description: The target currency of market data (e.g., usd, eur, btc)
+          required: true
+        - name: ids
+          in: query
+          type: string
+          description: Comma-separated list of coin IDs to filter results
+        - name: category
+          in: query
+          type: string
+          description: Filter by coin category
+        - name: order
+          in: query
+          type: string
+          description: Sort order for results
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of results per page (1-250)
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: sparkline
+          in: query
+          type: boolean
+          description: Include sparkline 7-day price data
+        - name: price_change_percentage
+          in: query
+          type: string
+          description: Comma-separated list of price change percentage timeframes (1h, 24h, 7d, 14d, 30d, 200d, 1y)
+        - name: locale
+          in: query
+          type: string
+          description: Language locale for descriptions
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values
+    - name: coins-id
+      path: /coins/{id}
+      operations:
+      - name: getcoinbyid
+        method: GET
+        description: Get coin data by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: localization
+          in: query
+          type: boolean
+          description: Include all localized language descriptions
+        - name: tickers
+          in: query
+          type: boolean
+          description: Include exchange tickers data
+        - name: market_data
+          in: query
+          type: boolean
+          description: Include market data
+        - name: community_data
+          in: query
+          type: boolean
+          description: Include community data
+        - name: developer_data
+          in: query
+          type: boolean
+          description: Include developer data
+        - name: sparkline
+          in: query
+          type: boolean
+          description: Include sparkline 7-day price data
+    - name: coins-id-history
+      path: /coins/{id}/history
+      operations:
+      - name: getcoinhistory
+        method: GET
+        description: Get historical coin data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: date
+          in: query
+          type: string
+          description: The date of data snapshot in dd-mm-yyyy format
+          required: true
+        - name: localization
+          in: query
+          type: boolean
+          description: Include all localized language descriptions
+    - name: coins-id-market_chart
+      path: /coins/{id}/market_chart
+      operations:
+      - name: getcoinmarketchart
+        method: GET
+        description: Get coin market chart data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vs_currency
+          in: query
+          type: string
+          description: The target currency for market data
+          required: true
+        - name: days
+          in: query
+          type: string
+          description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365, or max for all available data)
+          required: true
+        - name: interval
+          in: query
+          type: string
+          description: Data interval (daily). Leave empty for automatic granularity.
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values
+    - name: coins-id-market_chart-range
+      path: /coins/{id}/market_chart/range
+      operations:
+      - name: getcoinmarketchartrange
+        method: GET
+        description: Get coin market chart data within date range
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vs_currency
+          in: query
+          type: string
+          description: The target currency for market data
+          required: true
+        - name: from
+          in: query
+          type: number
+          description: Start date as UNIX timestamp
+          required: true
+        - name: to
+          in: query
+          type: number
+          description: End date as UNIX timestamp
+          required: true
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values
+    - name: coins-id-ohlc
+      path: /coins/{id}/ohlc
+      operations:
+      - name: getcoinohlc
+        method: GET
+        description: Get coin OHLC chart data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: vs_currency
+          in: query
+          type: string
+          description: The target currency for OHLC data
+          required: true
+        - name: days
+          in: query
+          type: string
+          description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365)
+          required: true
+        - name: precision
+          in: query
+          type: string
+          description: Decimal precision for currency price values
+    - name: coins-id-tickers
+      path: /coins/{id}/tickers
+      operations:
+      - name: getcointickers
+        method: GET
+        description: Get coin tickers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: exchange_ids
+          in: query
+          type: string
+          description: Filter tickers by exchange IDs (comma-separated)
+        - name: include_exchange_logo
+          in: query
+          type: boolean
+          description: Include exchange logo URL in the response
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: order
+          in: query
+          type: string
+          description: Sort order for tickers
+        - name: depth
+          in: query
+          type: boolean
+          description: Include order book depth (2% cost to move)
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-coins-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Coins. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/coins/list
+      name: coins-list
+      description: REST surface for coins-list.
+      operations:
+      - method: GET
+        name: getcoinslist
+        description: List all supported coins
+        call: crypto-market-data-coins.getcoinslist
+        with:
+          include_platform: rest.include_platform
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/markets
+      name: coins-markets
+      description: REST surface for coins-markets.
+      operations:
+      - method: GET
+        name: getcoinsmarkets
+        description: List coins with market data
+        call: crypto-market-data-coins.getcoinsmarkets
+        with:
+          vs_currency: rest.vs_currency
+          ids: rest.ids
+          category: rest.category
+          order: rest.order
+          per_page: rest.per_page
+          page: rest.page
+          sparkline: rest.sparkline
+          price_change_percentage: rest.price_change_percentage
+          locale: rest.locale
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}
+      name: coins-id
+      description: REST surface for coins-id.
+      operations:
+      - method: GET
+        name: getcoinbyid
+        description: Get coin data by ID
+        call: crypto-market-data-coins.getcoinbyid
+        with:
+          localization: rest.localization
+          tickers: rest.tickers
+          market_data: rest.market_data
+          community_data: rest.community_data
+          developer_data: rest.developer_data
+          sparkline: rest.sparkline
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/history
+      name: coins-id-history
+      description: REST surface for coins-id-history.
+      operations:
+      - method: GET
+        name: getcoinhistory
+        description: Get historical coin data
+        call: crypto-market-data-coins.getcoinhistory
+        with:
+          date: rest.date
+          localization: rest.localization
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/market-chart
+      name: coins-id-market-chart
+      description: REST surface for coins-id-market_chart.
+      operations:
+      - method: GET
+        name: getcoinmarketchart
+        description: Get coin market chart data
+        call: crypto-market-data-coins.getcoinmarketchart
+        with:
+          vs_currency: rest.vs_currency
+          days: rest.days
+          interval: rest.interval
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/market-chart/range
+      name: coins-id-market-chart-range
+      description: REST surface for coins-id-market_chart-range.
+      operations:
+      - method: GET
+        name: getcoinmarketchartrange
+        description: Get coin market chart data within date range
+        call: crypto-market-data-coins.getcoinmarketchartrange
+        with:
+          vs_currency: rest.vs_currency
+          from: rest.from
+          to: rest.to
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/ohlc
+      name: coins-id-ohlc
+      description: REST surface for coins-id-ohlc.
+      operations:
+      - method: GET
+        name: getcoinohlc
+        description: Get coin OHLC chart data
+        call: crypto-market-data-coins.getcoinohlc
+        with:
+          vs_currency: rest.vs_currency
+          days: rest.days
+          precision: rest.precision
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/coins/{id}/tickers
+      name: coins-id-tickers
+      description: REST surface for coins-id-tickers.
+      operations:
+      - method: GET
+        name: getcointickers
+        description: Get coin tickers
+        call: crypto-market-data-coins.getcointickers
+        with:
+          exchange_ids: rest.exchange_ids
+          include_exchange_logo: rest.include_exchange_logo
+          page: rest.page
+          order: rest.order
+          depth: rest.depth
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-coins-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Coins. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-all-supported-coins
+      description: List all supported coins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinslist
+      with:
+        include_platform: tools.include_platform
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-coins-market-data
+      description: List coins with market data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinsmarkets
+      with:
+        vs_currency: tools.vs_currency
+        ids: tools.ids
+        category: tools.category
+        order: tools.order
+        per_page: tools.per_page
+        page: tools.page
+        sparkline: tools.sparkline
+        price_change_percentage: tools.price_change_percentage
+        locale: tools.locale
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-data-id
+      description: Get coin data by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinbyid
+      with:
+        localization: tools.localization
+        tickers: tools.tickers
+        market_data: tools.market_data
+        community_data: tools.community_data
+        developer_data: tools.developer_data
+        sparkline: tools.sparkline
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-historical-coin-data
+      description: Get historical coin data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinhistory
+      with:
+        date: tools.date
+        localization: tools.localization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-market-chart-data
+      description: Get coin market chart data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinmarketchart
+      with:
+        vs_currency: tools.vs_currency
+        days: tools.days
+        interval: tools.interval
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-market-chart-data-2
+      description: Get coin market chart data within date range
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinmarketchartrange
+      with:
+        vs_currency: tools.vs_currency
+        from: tools.from
+        to: tools.to
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-ohlc-chart-data
+      description: Get coin OHLC chart data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcoinohlc
+      with:
+        vs_currency: tools.vs_currency
+        days: tools.days
+        precision: tools.precision
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-coin-tickers
+      description: Get coin tickers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-coins.getcointickers
+      with:
+        exchange_ids: tools.exchange_ids
+        include_exchange_logo: tools.include_exchange_logo
+        page: tools.page
+        order: tools.order
+        depth: tools.depth
+      outputParameters:
+      - type: object
+        mapping: $.

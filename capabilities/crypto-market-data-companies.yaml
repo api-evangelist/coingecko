@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Crypto Market Data API — Companies
+  description: 'CoinGecko Crypto Market Data API — Companies. 1 operations. Lead operation: Get public company crypto holdings.
+    Self-contained Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - Companies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: crypto-market-data-companies
+    baseUri: https://api.coingecko.com/api/v3
+    description: CoinGecko Crypto Market Data API — Companies business capability. Self-contained, no shared references.
+    resources:
+    - name: companies-public_treasury-coin_id
+      path: /companies/public_treasury/{coin_id}
+      operations:
+      - name: getcompaniespublictreasury
+        method: GET
+        description: Get public company crypto holdings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: coin_id
+          in: path
+          type: string
+          description: The coin ID (bitcoin or ethereum)
+          required: true
+    authentication:
+      type: apikey
+      key: x-cg-demo-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: crypto-market-data-companies-rest
+    port: 8080
+    description: REST adapter for CoinGecko Crypto Market Data API — Companies. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies/public-treasury/{coin-id}
+      name: companies-public-treasury-coin-id
+      description: REST surface for companies-public_treasury-coin_id.
+      operations:
+      - method: GET
+        name: getcompaniespublictreasury
+        description: Get public company crypto holdings
+        call: crypto-market-data-companies.getcompaniespublictreasury
+        with:
+          coin_id: rest.coin_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: crypto-market-data-companies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Crypto Market Data API — Companies. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-public-company-crypto-holdings
+      description: Get public company crypto holdings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: crypto-market-data-companies.getcompaniespublictreasury
+      with:
+        coin_id: tools.coin_id
+      outputParameters:
+      - type: object
+        mapping: $.

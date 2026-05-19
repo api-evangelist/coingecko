@@ -1,0 +1,120 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CoinGecko Onchain DEX API — OHLCV
+  description: 'CoinGecko Onchain DEX API — OHLCV. 1 operations. Lead operation: Get pool OHLCV chart data. Self-contained
+    Naftiko capability covering one Coingecko business surface.'
+  tags:
+  - Coingecko
+  - OHLCV
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COINGECKO_API_KEY: COINGECKO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: onchain-dex-ohlcv
+    baseUri: https://pro-api.coingecko.com/api/v3
+    description: CoinGecko Onchain DEX API — OHLCV business capability. Self-contained, no shared references.
+    resources:
+    - name: onchain-networks-network-pools-pool_address-ohlcv-timeframe
+      path: /onchain/networks/{network}/pools/{pool_address}/ohlcv/{timeframe}
+      operations:
+      - name: getonchainpoolohlcv
+        method: GET
+        description: Get pool OHLCV chart data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pool_address
+          in: path
+          type: string
+          description: The pool contract address
+          required: true
+        - name: timeframe
+          in: path
+          type: string
+          description: OHLCV timeframe granularity
+          required: true
+        - name: aggregate
+          in: query
+          type: integer
+          description: Aggregation period. For day timeframe (1). For hour timeframe (1, 4, 12). For minute timeframe (1,
+            5, 15).
+        - name: before_timestamp
+          in: query
+          type: integer
+          description: Return data before this UNIX timestamp
+        - name: limit
+          in: query
+          type: integer
+          description: Number of OHLCV data points to return (max 1000)
+        - name: currency
+          in: query
+          type: string
+          description: Price currency (usd or token)
+        - name: token
+          in: query
+          type: string
+          description: Which token to use for price (base or quote). Only applicable when currency is token.
+    authentication:
+      type: apikey
+      key: x-cg-pro-api-key
+      value: '{{env.COINGECKO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: onchain-dex-ohlcv-rest
+    port: 8080
+    description: REST adapter for CoinGecko Onchain DEX API — OHLCV. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/onchain/networks/{network}/pools/{pool-address}/ohlcv/{timeframe}
+      name: onchain-networks-network-pools-pool-address-ohlcv-timeframe
+      description: REST surface for onchain-networks-network-pools-pool_address-ohlcv-timeframe.
+      operations:
+      - method: GET
+        name: getonchainpoolohlcv
+        description: Get pool OHLCV chart data
+        call: onchain-dex-ohlcv.getonchainpoolohlcv
+        with:
+          pool_address: rest.pool_address
+          timeframe: rest.timeframe
+          aggregate: rest.aggregate
+          before_timestamp: rest.before_timestamp
+          limit: rest.limit
+          currency: rest.currency
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: onchain-dex-ohlcv-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CoinGecko Onchain DEX API — OHLCV. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-pool-ohlcv-chart-data
+      description: Get pool OHLCV chart data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: onchain-dex-ohlcv.getonchainpoolohlcv
+      with:
+        pool_address: tools.pool_address
+        timeframe: tools.timeframe
+        aggregate: tools.aggregate
+        before_timestamp: tools.before_timestamp
+        limit: tools.limit
+        currency: tools.currency
+        token: tools.token
+      outputParameters:
+      - type: object
+        mapping: $.
