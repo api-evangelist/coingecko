@@ -223,6 +223,8 @@ common:
     url: rules/coingecko-rules.yml
   - type: Naftiko Capabilities
     url: capabilities/coingecko-capabilities.yml
+  - type: LLMsTxt
+    url: https://docs.coingecko.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
