@@ -19,7 +19,7 @@ kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-03-20'
-modified: '2026-05-19'
+modified: '2026-05-29'
 position: Consumer
 description: 'CoinGecko is a cryptocurrency data aggregator providing market data, analytics, and information on thousands
   of crypto assets, exchanges, derivatives, NFTs, and on-chain decentralized markets worldwide. The CoinGecko Developer Platform
@@ -111,6 +111,8 @@ apis:
       type: Pricing
     - type: OpenAPI
       url: openapi/coingecko-pro-api-openapi.yml
+    - type: AsyncAPI
+      url: asyncapi/coingecko-asyncapi.yml
     - type: NaftikoCapability
       url: capabilities/pro-coins.yaml
     - type: NaftikoCapability

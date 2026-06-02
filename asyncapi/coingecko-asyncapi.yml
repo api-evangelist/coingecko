@@ -1,0 +1,542 @@
+asyncapi: 3.0.0
+info:
+  title: CoinGecko WebSocket API
+  version: 1.0.0
+  description: 'Real-time cryptocurrency price streaming via WebSocket.
+
+
+    ## Authentication Required
+
+    To use this WebSocket, you need a CoinGecko Pro API key.'
+servers:
+  production:
+    host: stream.coingecko.com
+    protocol: wss
+    pathname: /v1
+    description: Production WebSocket server
+    security:
+    - $ref: '#/components/securitySchemes/cgApiKey'
+channels:
+  cgsimpleprice:
+    address: /v1
+    messages:
+      subscribe:
+        $ref: '#/components/messages/CGSimplePriceSubscribe'
+      streamRequest:
+        $ref: '#/components/messages/CGSimplePriceStream'
+      priceUpdate:
+        $ref: '#/components/messages/CGSimplePriceUpdate'
+  onchainsimpletokenprice:
+    address: /v1
+    messages:
+      subscribe:
+        $ref: '#/components/messages/OnchainSimpleTokenPriceSubscribe'
+      streamRequest:
+        $ref: '#/components/messages/OnchainSimpleTokenPriceStream'
+      priceUpdate:
+        $ref: '#/components/messages/OnchainSimpleTokenPriceUpdate'
+  onchaintrade:
+    address: /v1
+    messages:
+      subscribe:
+        $ref: '#/components/messages/OnchainTradeSubscribe'
+      streamRequest:
+        $ref: '#/components/messages/OnchainTradeStream'
+      tradeUpdate:
+        $ref: '#/components/messages/OnchainTradeUpdate'
+  onchainohlcv:
+    address: /v1
+    messages:
+      subscribe:
+        $ref: '#/components/messages/OnchainOHLCVSubscribe'
+      streamRequest:
+        $ref: '#/components/messages/OnchainOHLCVStream'
+      ohlcvUpdate:
+        $ref: '#/components/messages/OnchainOHLCVUpdate'
+operations:
+  subscribeToCGSimplePrice:
+    action: receive
+    channel:
+      $ref: '#/channels/cgsimpleprice'
+    title: 'CGSimplePrice: Subscribe'
+    summary: Subscribe to CGSimplePrice channel
+    messages:
+    - $ref: '#/channels/cgsimpleprice/messages/subscribe'
+  streamCGSimplePrice:
+    action: receive
+    channel:
+      $ref: '#/channels/cgsimpleprice'
+    title: 'CGSimplePrice: Stream Data'
+    summary: Request price streaming for coins
+    messages:
+    - $ref: '#/channels/cgsimpleprice/messages/streamRequest'
+  receiveCGSimplePriceUpdates:
+    action: send
+    channel:
+      $ref: '#/channels/cgsimpleprice'
+    title: 'CGSimplePrice: Receive Updates'
+    summary: Receive real-time price updates
+    messages:
+    - $ref: '#/channels/cgsimpleprice/messages/priceUpdate'
+  subscribeToOnchainSimpleTokenPrice:
+    action: receive
+    channel:
+      $ref: '#/channels/onchainsimpletokenprice'
+    title: 'OnchainSimpleTokenPrice: Subscribe'
+    summary: Subscribe to OnchainSimpleTokenPrice channel
+    messages:
+    - $ref: '#/channels/onchainsimpletokenprice/messages/subscribe'
+  streamOnchainSimpleTokenPrice:
+    action: receive
+    channel:
+      $ref: '#/channels/onchainsimpletokenprice'
+    title: 'OnchainSimpleTokenPrice: Stream Data'
+    summary: Request token price streaming
+    messages:
+    - $ref: '#/channels/onchainsimpletokenprice/messages/streamRequest'
+  receiveOnchainSimpleTokenPriceUpdates:
+    action: send
+    channel:
+      $ref: '#/channels/onchainsimpletokenprice'
+    title: 'OnchainSimpleTokenPrice: Receive Updates'
+    summary: Receive real-time token price updates
+    messages:
+    - $ref: '#/channels/onchainsimpletokenprice/messages/priceUpdate'
+  subscribeToOnchainTrade:
+    action: receive
+    channel:
+      $ref: '#/channels/onchaintrade'
+    title: 'OnchainTrade: Subscribe'
+    summary: Subscribe to OnchainTrade channel
+    messages:
+    - $ref: '#/channels/onchaintrade/messages/subscribe'
+  streamOnchainTrade:
+    action: receive
+    channel:
+      $ref: '#/channels/onchaintrade'
+    title: 'OnchainTrade: Stream Data'
+    summary: Request trade streaming for pools
+    messages:
+    - $ref: '#/channels/onchaintrade/messages/streamRequest'
+  receiveOnchainTradeUpdates:
+    action: send
+    channel:
+      $ref: '#/channels/onchaintrade'
+    title: 'OnchainTrade: Receive Updates'
+    summary: Receive real-time trade updates
+    messages:
+    - $ref: '#/channels/onchaintrade/messages/tradeUpdate'
+  subscribeToOnchainOHLCV:
+    action: receive
+    channel:
+      $ref: '#/channels/onchainohlcv'
+    title: 'OnchainOHLCV: Subscribe'
+    summary: Subscribe to OnchainOHLCV channel
+    messages:
+    - $ref: '#/channels/onchainohlcv/messages/subscribe'
+  streamOnchainOHLCV:
+    action: receive
+    channel:
+      $ref: '#/channels/onchainohlcv'
+    title: 'OnchainOHLCV: Stream Data'
+    summary: Request OHLCV streaming for pools
+    messages:
+    - $ref: '#/channels/onchainohlcv/messages/streamRequest'
+  receiveOnchainOHLCVUpdates:
+    action: send
+    channel:
+      $ref: '#/channels/onchainohlcv'
+    title: 'OnchainOHLCV: Receive Updates'
+    summary: Receive real-time OHLCV updates
+    messages:
+    - $ref: '#/channels/onchainohlcv/messages/ohlcvUpdate'
+components:
+  securitySchemes:
+    cgApiKey:
+      type: httpApiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: Insert CoinGecko Pro API key to establish WebSocket connection
+  messages:
+    CGSimplePriceSubscribe:
+      name: CGSimplePriceSubscribe
+      title: Subscribe to CGSimplePrice
+      summary: Subscribe to the CGSimplePrice channel
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - subscribe
+            default: subscribe
+            example: subscribe
+            description: Command to subscribe to a channel
+          identifier:
+            type: string
+            default: '{"channel":"CGSimplePrice"}'
+            example: '{"channel":"CGSimplePrice"}'
+            description: JSON string containing channel information
+        required:
+        - command
+        - identifier
+    CGSimplePriceStream:
+      name: CGSimplePriceStream
+      title: Stream CGSimplePrice Data
+      summary: Set coins to receive price updates
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - message
+            default: message
+            example: message
+            description: Command to send a message
+          identifier:
+            type: string
+            default: '{"channel":"CGSimplePrice"}'
+            example: '{"channel":"CGSimplePrice"}'
+            description: JSON string containing channel information
+          data:
+            type: string
+            default: '{"coin_id":["bitcoin"],"vs_currencies":["usd"],"action":"set_tokens"}'
+            example: '{"coin_id":["bitcoin"],"vs_currencies":["usd"],"action":"set_tokens"}'
+            description: 'You may edit the coin_id and vs_currencies arrays. vs_currencies is optional and defaults to ["usd"].
+              Examples: ["bitcoin"] or ["bitcoin","ethereum"]. vs_currencies: ["usd"] or ["usd","eur"]'
+        required:
+        - command
+        - identifier
+        - data
+    CGSimplePriceUpdate:
+      name: CGSimplePriceUpdate
+      title: CGSimplePrice Update
+      summary: Real-time price update
+      payload:
+        type: object
+        properties:
+          c:
+            type: string
+            example: C1
+            description: Channel identifier
+          i:
+            type: string
+            example: ethereum
+            description: Coin identifier
+          vs:
+            type: string
+            example: usd
+            description: Target currency for price data, defaults to usd
+          m:
+            type: number
+            example: 312938652962.8005
+            description: Market cap in the specified vs_currency
+          p:
+            type: number
+            example: 2591.08
+            description: Current price in the specified vs_currency
+          pp:
+            type: number
+            example: 1.38
+            description: Price change percentage (24h)
+          t:
+            type: number
+            example: 1747808150.269
+            description: Timestamp (UNIX with milliseconds)
+          v:
+            type: number
+            example: 20460612214.8
+            description: 24-hour trading volume in the specified vs_currency
+    OnchainSimpleTokenPriceSubscribe:
+      name: OnchainSimpleTokenPriceSubscribe
+      title: Subscribe to OnchainSimpleTokenPrice
+      summary: Subscribe to the OnchainSimpleTokenPrice channel
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - subscribe
+            default: subscribe
+            example: subscribe
+            description: Command to subscribe to a channel
+          identifier:
+            type: string
+            default: '{"channel":"OnchainSimpleTokenPrice"}'
+            example: '{"channel":"OnchainSimpleTokenPrice"}'
+            description: JSON string containing channel information
+        required:
+        - command
+        - identifier
+    OnchainSimpleTokenPriceStream:
+      name: OnchainSimpleTokenPriceStream
+      title: Stream OnchainSimpleTokenPrice Data
+      summary: Set tokens to receive price updates
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - message
+            default: message
+            example: message
+            description: Command to send a message
+          identifier:
+            type: string
+            default: '{"channel":"OnchainSimpleTokenPrice"}'
+            example: '{"channel":"OnchainSimpleTokenPrice"}'
+            description: JSON string containing channel information
+          data:
+            type: string
+            default: '{"network_id:token_addresses":["bsc:0x55d398326f99059ff775485246999027b3197955"],"action":"set_tokens"}'
+            example: '{"network_id:token_addresses":["bsc:0x55d398326f99059ff775485246999027b3197955"],"action":"set_tokens"}'
+            description: 'You may edit this. Format is network_id:token_address. Examples: ["bsc:0x55d39..."] or ["eth:0xc02aa...","bsc:0x55d39..."]'
+        required:
+        - command
+        - identifier
+        - data
+    OnchainSimpleTokenPriceUpdate:
+      name: OnchainSimpleTokenPriceUpdate
+      title: OnchainSimpleTokenPrice Update
+      summary: Real-time token price update
+      payload:
+        type: object
+        properties:
+          c:
+            type: string
+            example: G1
+            description: Channel type
+          n:
+            type: string
+            example: bsc
+            description: Network identifier
+          ta:
+            type: string
+            example: '0x55d398326f99059ff775485246999027b3197955'
+            description: Token contract address
+          p:
+            type: number
+            example: 0.999457718373347
+            description: Current token price in USD
+          pp:
+            type: number
+            example: -0.009028866490825653
+            description: Price change percentage (24h)
+          m:
+            type: number
+            example: 1317802988326.25
+            description: Market cap in USD
+          v:
+            type: number
+            example: 1476864199.38384
+            description: 24-hour trading volume in USD
+          t:
+            type: integer
+            example: 1737427063
+            description: Timestamp (UNIX)
+    OnchainTradeSubscribe:
+      name: OnchainTradeSubscribe
+      title: Subscribe to OnchainTrade
+      summary: Subscribe to the OnchainTrade channel
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - subscribe
+            default: subscribe
+            example: subscribe
+            description: Command to subscribe to a channel
+          identifier:
+            type: string
+            default: '{"channel":"OnchainTrade"}'
+            example: '{"channel":"OnchainTrade"}'
+            description: JSON string containing channel information
+        required:
+        - command
+        - identifier
+    OnchainTradeStream:
+      name: OnchainTradeStream
+      title: Stream OnchainTrade Data
+      summary: Set pools to receive trade updates
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - message
+            default: message
+            example: message
+            description: Command to send a message
+          identifier:
+            type: string
+            default: '{"channel":"OnchainTrade"}'
+            example: '{"channel":"OnchainTrade"}'
+            description: JSON string containing channel information
+          data:
+            type: string
+            default: '{"network_id:pool_addresses":["bsc:0x172fcd41e0913e95784454622d1c3724f546f849"],"action":"set_pools"}'
+            example: '{"network_id:pool_addresses":["bsc:0x172fcd41e0913e95784454622d1c3724f546f849"],"action":"set_pools"}'
+            description: 'You may edit this. Format is network_id:pool_address. Examples: ["bsc:0x172fc..."] or ["eth:0x88e6a...","bsc:0x172fc..."]'
+        required:
+        - command
+        - identifier
+        - data
+    OnchainTradeUpdate:
+      name: OnchainTradeUpdate
+      title: OnchainTrade Update
+      summary: Real-time trade update
+      payload:
+        type: object
+        properties:
+          c:
+            type: string
+            example: G2
+            description: Channel type
+          n:
+            type: string
+            example: bsc
+            description: Network identifier
+          pa:
+            type: string
+            example: '0x172fcd41e0913e95784454622d1c3724f546f849'
+            description: Pool contract address
+          tx:
+            type: string
+            example: '0x743b271e594882b41e85d528d1e20b7697c9b80ce6f8148856915779b5adf698'
+            description: Transaction hash
+          ty:
+            type: string
+            example: b
+            description: Transaction type (b=buy, s=sell)
+          to:
+            type: number
+            example: 48.2880181130493
+            description: Token amount transacted
+          toq:
+            type: number
+            example: 0.0730427737086457
+            description: Quote token amount transacted
+          vo:
+            type: number
+            example: 48.2104219309174
+            description: Transaction volume in USD
+          pc:
+            type: number
+            example: 0.00151264799349689
+            description: Price in token currency
+          pu:
+            type: number
+            example: 0.998393055147755
+            description: Price in USD
+          t:
+            type: integer
+            example: 1779419060000
+            description: Timestamp (UNIX with milliseconds)
+    OnchainOHLCVSubscribe:
+      name: OnchainOHLCVSubscribe
+      title: Subscribe to OnchainOHLCV
+      summary: Subscribe to the OnchainOHLCV channel
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - subscribe
+            default: subscribe
+            example: subscribe
+            description: Command to subscribe to a channel
+          identifier:
+            type: string
+            default: '{"channel":"OnchainOHLCV"}'
+            example: '{"channel":"OnchainOHLCV"}'
+            description: JSON string containing channel information
+        required:
+        - command
+        - identifier
+    OnchainOHLCVStream:
+      name: OnchainOHLCVStream
+      title: Stream OnchainOHLCV Data
+      summary: Set pools to receive OHLCV updates
+      payload:
+        type: object
+        properties:
+          command:
+            type: string
+            enum:
+            - message
+            default: message
+            example: message
+            description: Command to send a message
+          identifier:
+            type: string
+            default: '{"channel":"OnchainOHLCV"}'
+            example: '{"channel":"OnchainOHLCV"}'
+            description: JSON string containing channel information
+          data:
+            type: string
+            default: '{"network_id:pool_addresses":["bsc:0x172fcd41e0913e95784454622d1c3724f546f849"],"interval":"1m","token":"base","action":"set_pools"}'
+            example: '{"network_id:pool_addresses":["bsc:0x172fcd41e0913e95784454622d1c3724f546f849"],"interval":"1m","token":"base","action":"set_pools"}'
+            description: 'You may edit this. Format is network_id:pool_address. Interval options: 1s/1m/5m/15m/1h/2h/4h/8h/12h/1d.
+              Token: base or quote'
+        required:
+        - command
+        - identifier
+        - data
+    OnchainOHLCVUpdate:
+      name: OnchainOHLCVUpdate
+      title: OnchainOHLCV Update
+      summary: Real-time OHLCV update
+      payload:
+        type: object
+        properties:
+          ch:
+            type: string
+            example: G3
+            description: Channel type
+          n:
+            type: string
+            example: bsc
+            description: Network identifier
+          pa:
+            type: string
+            example: '0x172fcd41e0913e95784454622d1c3724f546f849'
+            description: Pool contract address
+          to:
+            type: string
+            example: base
+            description: Token (base or quote)
+          i:
+            type: string
+            example: 1m
+            description: Interval (1s/1m/5m/15m/1h/2h/4h/8h/12h/1d)
+          o:
+            type: number
+            example: 0.998495273635877
+            description: Open price in USD
+          h:
+            type: number
+            example: 0.998724016937111
+            description: High price in USD
+          l:
+            type: number
+            example: 0.998203640993973
+            description: Low price in USD
+          c:
+            type: number
+            example: 0.99867074703649
+            description: Close price in USD
+          v:
+            type: number
+            example: 33033.48464966615
+            description: Volume in USD
+          t:
+            type: integer
+            example: 1779418680
+            description: Opening timestamp of candle interval (UNIX)
