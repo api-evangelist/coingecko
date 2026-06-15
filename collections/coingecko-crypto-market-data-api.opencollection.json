@@ -1,0 +1,1148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check API server status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/ping"
+          },
+          "docs": "Check the API server status. Returns a gecko_says message to confirm the server is operational."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Simple",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get coin price by IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/simple/price",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)"
+              },
+              {
+                "name": "vs_currencies",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of target currencies (e.g., usd,eur,btc)"
+              },
+              {
+                "name": "include_market_cap",
+                "value": "",
+                "type": "query",
+                "description": "Include market cap in the response"
+              },
+              {
+                "name": "include_24hr_vol",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour trading volume in the response"
+              },
+              {
+                "name": "include_24hr_change",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour price change percentage in the response"
+              },
+              {
+                "name": "include_last_updated_at",
+                "value": "",
+                "type": "query",
+                "description": "Include last updated timestamp in the response"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values (0-18)"
+              }
+            ]
+          },
+          "docs": "Query the prices of one or more coins by using their unique CoinGecko coin IDs. Optionally include market cap, 24h volume, 24h change, and last updated timestamp."
+        },
+        {
+          "info": {
+            "name": "Get token price by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/simple/token_price/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_addresses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of token contract addresses on the specified asset platform"
+              },
+              {
+                "name": "vs_currencies",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of target currencies (e.g., usd,eur,btc)"
+              },
+              {
+                "name": "include_market_cap",
+                "value": "",
+                "type": "query",
+                "description": "Include market cap in the response"
+              },
+              {
+                "name": "include_24hr_vol",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour trading volume in the response"
+              },
+              {
+                "name": "include_24hr_change",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour price change percentage in the response"
+              },
+              {
+                "name": "include_last_updated_at",
+                "value": "",
+                "type": "query",
+                "description": "Include last updated timestamp in the response"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values (0-18)"
+              }
+            ]
+          },
+          "docs": "Query the prices of one or more tokens by using their contract addresses on a specific asset platform. This endpoint is useful for looking up token prices when you have the contract address rather than the CoinGecko coin ID."
+        },
+        {
+          "info": {
+            "name": "Get supported vs currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
+          },
+          "docs": "Get the list of all supported vs currencies (fiat and crypto) that can be used in price queries."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Coins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all supported coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/list",
+            "params": [
+              {
+                "name": "include_platform",
+                "value": "",
+                "type": "query",
+                "description": "Include platform contract addresses in the response (e.g., Ethereum, Solana contract addresses)"
+              }
+            ]
+          },
+          "docs": "Get the complete list of all supported coins with their IDs, symbols, and names. Use this endpoint to obtain coin IDs for use in other endpoints. This list is cached and updated periodically."
+        },
+        {
+          "info": {
+            "name": "List coins with market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/markets",
+            "params": [
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency of market data (e.g., usd, eur, btc)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of coin IDs to filter results"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by coin category"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "sparkline",
+                "value": "",
+                "type": "query",
+                "description": "Include sparkline 7-day price data"
+              },
+              {
+                "name": "price_change_percentage",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of price change percentage timeframes (1h, 24h, 7d, 14d, 30d, 200d, 1y)"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Language locale for descriptions"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of all supported coins with price, market cap, volume, and other market-related data. Results are ordered by market cap rank by default."
+        },
+        {
+          "info": {
+            "name": "Get coin data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "localization",
+                "value": "",
+                "type": "query",
+                "description": "Include all localized language descriptions"
+              },
+              {
+                "name": "tickers",
+                "value": "",
+                "type": "query",
+                "description": "Include exchange tickers data"
+              },
+              {
+                "name": "market_data",
+                "value": "",
+                "type": "query",
+                "description": "Include market data"
+              },
+              {
+                "name": "community_data",
+                "value": "",
+                "type": "query",
+                "description": "Include community data"
+              },
+              {
+                "name": "developer_data",
+                "value": "",
+                "type": "query",
+                "description": "Include developer data"
+              },
+              {
+                "name": "sparkline",
+                "value": "",
+                "type": "query",
+                "description": "Include sparkline 7-day price data"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific coin including current price, market data, community data, developer data, and more. This is the most detailed single-coin endpoint."
+        },
+        {
+          "info": {
+            "name": "Get coin tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/tickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "exchange_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter tickers by exchange IDs (comma-separated)"
+              },
+              {
+                "name": "include_exchange_logo",
+                "value": "",
+                "type": "query",
+                "description": "Include exchange logo URL in the response"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for tickers"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Include order book depth (2% cost to move)"
+              }
+            ]
+          },
+          "docs": "Get trading pair tickers for a specific coin across all exchanges. Results include price, volume, spread, and trust score information."
+        },
+        {
+          "info": {
+            "name": "Get historical coin data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date of data snapshot in dd-mm-yyyy format"
+              },
+              {
+                "name": "localization",
+                "value": "",
+                "type": "query",
+                "description": "Include all localized language descriptions"
+              }
+            ]
+          },
+          "docs": "Get historical data for a specific coin at a given date. Includes price, market cap, 24h volume, and community and developer data."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/market_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data (1, 7, 14, 30, 90, 180, 365, or max for all available data)"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Data interval (daily). Leave empty for automatic granularity."
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data including price, market cap, and 24h volume for a specific coin over a time range. Data granularity is automatic based on the number of days requested."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart data within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/market_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data including price, market cap, and 24h volume for a specific coin within a custom date range specified by UNIX timestamps."
+        },
+        {
+          "info": {
+            "name": "Get coin OHLC chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/ohlc",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for OHLC data"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data (1, 7, 14, 30, 90, 180, 365)"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get OHLC (Open, High, Low, Close) candlestick data for a specific coin. Data granularity is automatic based on the number of days requested. 1-2 days returns 30-minute candles, 3-30 days returns 4-hour candles, and 31+ days returns daily candles."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contract",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get coin data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/contract/:contract_address",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address on the asset platform"
+              }
+            ]
+          },
+          "docs": "Get comprehensive coin data by querying a contract address on a specific asset platform. Returns the same data as the /coins/{id} endpoint."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/contract/:contract_address/market_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address on the asset platform"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data including price, market cap, and 24h volume by querying a contract address on a specific asset platform."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart range data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/contract/:contract_address/market_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address on the asset platform"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data for a specific contract address within a custom date range specified by UNIX timestamps."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Asset Platforms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List asset platforms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/asset_platforms",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter by platform type (e.g., nft to get NFT-supported platforms)"
+              }
+            ]
+          },
+          "docs": "Get the list of all asset platforms (blockchains) supported by CoinGecko. Each platform includes its chain identifier and native coin ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all categories (ID map)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/categories/list"
+          },
+          "docs": "Get the complete list of all supported coin categories with their IDs and names. Use this to obtain category IDs for filtering in other endpoints."
+        },
+        {
+          "info": {
+            "name": "List categories with market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/categories",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for categories"
+              }
+            ]
+          },
+          "docs": "Get the list of all coin categories with market data including market cap, volume, and top coins in each category."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exchanges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all exchanges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/exchanges",
+            "params": [
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of all supported exchanges with volume, trust score, and other exchange-related data. Results are ordered by trading volume by default."
+        },
+        {
+          "info": {
+            "name": "List all supported exchanges (ID map)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/exchanges/list"
+          },
+          "docs": "Get the complete list of all supported exchange IDs and names. Use this to obtain exchange IDs for use in other endpoints."
+        },
+        {
+          "info": {
+            "name": "Get exchange data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/exchanges/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The exchange ID (e.g., binance, coinbase-exchange)"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific exchange including volume, trust score, year established, country, and social links."
+        },
+        {
+          "info": {
+            "name": "Get exchange tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/exchanges/:id/tickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The exchange ID (e.g., binance, coinbase-exchange)"
+              },
+              {
+                "name": "coin_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter tickers by coin IDs (comma-separated)"
+              },
+              {
+                "name": "include_exchange_logo",
+                "value": "",
+                "type": "query",
+                "description": "Include exchange logo URL in the response"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Include order book depth (2% cost to move)"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for tickers"
+              }
+            ]
+          },
+          "docs": "Get paginated trading pair tickers for a specific exchange. Results include price, volume, spread, and trust score data for each trading pair."
+        },
+        {
+          "info": {
+            "name": "Get exchange volume chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/exchanges/:id/volume_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The exchange ID (e.g., binance, coinbase-exchange)"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data (1, 7, 14, 30, 90, 180, 365)"
+              }
+            ]
+          },
+          "docs": "Get historical volume chart data for a specific exchange over a specified number of days."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Derivatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all derivative tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives"
+          },
+          "docs": "Get the list of all derivative tickers across all exchanges including price, index, basis, spread, and open interest data."
+        },
+        {
+          "info": {
+            "name": "List derivative exchanges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives/exchanges",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the list of all derivative exchanges with data including open interest, trade volume, and number of perpetual and futures pairs."
+        },
+        {
+          "info": {
+            "name": "Get derivative exchange data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives/exchanges/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The derivative exchange ID"
+              },
+              {
+                "name": "include_tickers",
+                "value": "",
+                "type": "query",
+                "description": "Include derivative tickers data"
+              }
+            ]
+          },
+          "docs": "Get detailed data for a specific derivative exchange including tickers, open interest, and trade volume."
+        },
+        {
+          "info": {
+            "name": "List derivative exchanges (ID map)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives/exchanges/list"
+          },
+          "docs": "Get the complete list of all supported derivative exchange IDs and names."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NFTs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported NFT collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/list",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the list of all supported NFT collection IDs, contract addresses, and names. Use this to obtain NFT IDs for use in other endpoints."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The NFT collection ID"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific NFT collection including floor price, market cap, volume, and other collection metrics."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:asset_platform_id/contract/:contract_address",
+            "params": [
+              {
+                "name": "asset_platform_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The NFT contract address"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific NFT collection by querying the contract address on a specific asset platform."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exchange Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get BTC exchange rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/exchange_rates"
+          },
+          "docs": "Get the current exchange rates for BTC against all supported currencies. Includes fiat currencies, cryptocurrencies, and precious metals."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for coins, exchanges, and categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              }
+            ]
+          },
+          "docs": "Search for coins, exchanges, categories, and NFTs by keyword. Returns matching results across all entity types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Trending",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get trending search list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/search/trending"
+          },
+          "docs": "Get the top trending coins, NFTs, and categories on CoinGecko based on search activity in the last 24 hours. Includes the top 7 trending coins with market data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Global",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get global cryptocurrency data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/global"
+          },
+          "docs": "Get aggregated global cryptocurrency market data including total market cap, total volume, market cap percentage by coin, and number of active cryptocurrencies and markets."
+        },
+        {
+          "info": {
+            "name": "Get global DeFi market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/global/decentralized_finance_defi"
+          },
+          "docs": "Get aggregated global decentralized finance (DeFi) data including DeFi market cap, trading volume, DeFi dominance, and top DeFi coin information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get public company crypto holdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/companies/public_treasury/:coin_id",
+            "params": [
+              {
+                "name": "coin_id",
+                "value": "",
+                "type": "path",
+                "description": "The coin ID (bitcoin or ethereum)"
+              }
+            ]
+          },
+          "docs": "Get the list of public companies that hold bitcoin or ethereum in their treasury, including the amount held, total value, and percentage of total supply."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

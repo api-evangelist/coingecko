@@ -1,0 +1,2949 @@
+{
+  "item": [
+    {
+      "id": "28d1905f-df76-4df4-9d2d-c473e2280815",
+      "name": "Coins",
+      "description": {
+        "content": "Exclusive coin data endpoints for paid plan subscribers including recently added coins, top gainers and losers, and circulating supply chart data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3866f1a8-1b63-409e-b250-f2e0290e5d5e",
+          "name": "Get recently added coins",
+          "request": {
+            "name": "Get recently added coins",
+            "description": {
+              "content": "Get the list of the latest 200 coins that have been recently added to CoinGecko. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "list",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59d564ce-8e3f-4999-8722-71e9a57c88bb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"activated_at\": 6484\n  },\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"activated_at\": 5607\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "360b6499-1d7e-42bd-a7a8-fabda98ec38d",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b1999db-b8a3-4c86-a347-a7d8b777660d",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0064a78b-1b99-4a77-8c32-94a355e23795",
+          "name": "Get top gainers and losers",
+          "request": {
+            "name": "Get top gainers and losers",
+            "description": {
+              "content": "Get the top 30 coins with the largest price gain and the top 30 coins with the largest price loss over a specified time duration. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "top_gainers_losers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "usd",
+                  "description": "(Required) The target currency for price data (e.g., usd)"
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "24h",
+                  "description": "Time duration for price change calculation"
+                },
+                {
+                  "disabled": false,
+                  "key": "top_coins",
+                  "value": "<string>",
+                  "description": "Filter by top N coins by market cap (e.g., 300 to only consider the top 300 coins)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffae9f6c-23be-40d6-a900-5ec549fc79fd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "top_gainers_losers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "24h"
+                    },
+                    {
+                      "key": "top_coins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"top_gainers\": [\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"https://QmgJyLEAaAqRqUQclddEQLHvnnUjvC.eehzL9F\",\n      \"market_cap_rank\": 5827,\n      \"usd\": 72.63075349688842,\n      \"usd_24h_vol\": 3140.0742555354445,\n      \"usd_24h_change\": 422.1421806579706\n    },\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"https://AHUniuTpDajgkBSgXpgLNlZFuCFSrieVV.yeOKor,iU4cz6FZB3xfLqZN9k5R1TAvfPBn3GvKcjToyoHMlQ7vnT6xQt7gOlXDntg6lY2Ugm0qUQBa\",\n      \"market_cap_rank\": 4936,\n      \"usd\": 6241.19087745029,\n      \"usd_24h_vol\": 8084.221270052667,\n      \"usd_24h_change\": 2426.429020377464\n    }\n  ],\n  \"top_losers\": [\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"http://FniguwdLIyOSDmGlUQriqfhgK.zwrJjn5\",\n      \"market_cap_rank\": 911,\n      \"usd\": 2628.8386763884996,\n      \"usd_24h_vol\": 7483.645743751397,\n      \"usd_24h_change\": 7014.486854050242\n    },\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"http://IcZCZfTxGrOvuRZefapqjTjsiX.kjujV\",\n      \"market_cap_rank\": 2158,\n      \"usd\": 4443.925547619704,\n      \"usd_24h_vol\": 4958.110230280195,\n      \"usd_24h_change\": 43.06343753398001\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3850ada7-2d63-4b91-b414-721dbfb1c66c",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "top_gainers_losers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "24h"
+                    },
+                    {
+                      "key": "top_coins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62e457f1-06e5-43cd-814f-99e7981db82f",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "top_gainers_losers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "24h"
+                    },
+                    {
+                      "key": "top_coins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00ec1c00-c669-472a-a546-32e268f3593b",
+          "name": "Get coin circulating supply chart",
+          "request": {
+            "name": "Get coin circulating supply chart",
+            "description": {
+              "content": "Get historical circulating supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "circulating_supply_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Data interval (daily)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d026bb6-fdc3-456e-8f51-e47f01594f89",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    4421.3479549073045,\n    7641.457616070934\n  ],\n  [\n    8646.738004457016,\n    1612.1487592070716\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "128b7776-d27b-4346-b7b4-bbf9b5f06b4b",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4fae128-032b-4335-b96f-bb249a0d93b2",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "317fdbeb-b5d6-4ec7-9eac-c4e2bacb084f",
+          "name": "Get coin circulating supply chart within date range",
+          "request": {
+            "name": "Get coin circulating supply chart within date range",
+            "description": {
+              "content": "Get historical circulating supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "circulating_supply_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24810e98-3d48-41d1-8069-f97b90804290",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    4421.3479549073045,\n    7641.457616070934\n  ],\n  [\n    8646.738004457016,\n    1612.1487592070716\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ad214b7-d019-4f8d-94a3-d940b5ed3b17",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a7f5e00-5dea-4dd7-b8c5-97db198221e7",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22442c3a-192b-42ae-8047-3b1b1360fda1",
+          "name": "Get coin total supply chart",
+          "request": {
+            "name": "Get coin total supply chart",
+            "description": {
+              "content": "Get historical total supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "total_supply_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Data interval (daily)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b320ab7-469a-49dc-94cf-4a8c5a20fd3b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    2808.827947796091,\n    1020.3260537804259\n  ],\n  [\n    6731.070173725495,\n    5395.833812572174\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e1cd663-49ee-4463-85fe-ed7efc783981",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae7c7e7f-5b37-45ab-bebc-097863a56814",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e429c34-2d2d-446d-a484-d81da9bcd3f9",
+          "name": "Get coin total supply chart within date range",
+          "request": {
+            "name": "Get coin total supply chart within date range",
+            "description": {
+              "content": "Get historical total supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "total_supply_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a9eacee-5993-42dc-8158-57b28498e006",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    2808.827947796091,\n    1020.3260537804259\n  ],\n  [\n    6731.070173725495,\n    5395.833812572174\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10cce3a4-fe1f-4f4c-8687-50625f424d9d",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42ec2103-6d42-41c0-bfd3-0d7fa921feba",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "10f51358-5c65-48a3-9fd4-36a45a0d2908",
+      "name": "Exchanges",
+      "description": {
+        "content": "Exclusive exchange endpoints for paid plan subscribers including extended volume chart data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2fa0172d-aff1-42ae-859d-684f20405403",
+          "name": "Get exchange volume chart within date range",
+          "request": {
+            "name": "Get exchange volume chart within date range",
+            "description": {
+              "content": "Get historical volume chart data for a specific exchange within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges",
+                ":id",
+                "volume_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The exchange ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7df6c0da-252f-4ef7-825c-b234cb2d0ba9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc5db06a-d8aa-422c-8d61-c85fcc7f83e7",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebb26b8e-6344-4887-9d3d-4b8ec051a1d8",
+              "name": "Exchange not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fb3d07be-54ae-41eb-b829-302bc6ad406d",
+      "name": "Global",
+      "description": {
+        "content": "Exclusive global market data endpoints for paid plan subscribers including market cap chart data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d793787-105d-4a1f-9fdd-e1718ad87f36",
+          "name": "Get global market cap chart",
+          "request": {
+            "name": "Get global market cap chart",
+            "description": {
+              "content": "Get historical global market capitalization and volume chart data. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global",
+                "market_cap_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "usd",
+                  "description": "The target currency for market cap data"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c7d4a64-8c8e-4027-9ad7-21300fee91ed",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_cap_chart\": {\n    \"market_cap\": [\n      [\n        53.4651307062417,\n        1554.5027594473404\n      ],\n      [\n        798.761555126729,\n        549.3285725977292\n      ]\n    ],\n    \"volume\": [\n      [\n        8958.925675671037,\n        4347.517333019898\n      ],\n      [\n        9018.935406241297,\n        7914.445319761341\n      ]\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98004100-c615-4eb0-8ada-64934875d276",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "519ad470-42f4-4417-a687-f144cddc0db0",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0c89ecf5-fc7f-4007-8e93-7e63c906afd5",
+      "name": "NFTs",
+      "description": {
+        "content": "Exclusive NFT endpoints for paid plan subscribers including NFT market data and historical chart data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b89af617-1803-40c2-a156-5d271ff4e520",
+          "name": "List NFTs with market data",
+          "request": {
+            "name": "List NFTs with market data",
+            "description": {
+              "content": "Get the list of all supported NFT collections with floor price, market cap, volume, and market-related data. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                "markets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order for results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page (1-250)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d735cc4-9eb0-4d24-9c84-24edd283a57a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"contract_address\": \"string\",\n    \"asset_platform_id\": \"string\",\n    \"name\": \"string\",\n    \"image\": {\n      \"small\": \"https://LeWNbCNKJSFNkMq.bhavjzAGft+tMbCmScsngZTlkyGQkXYwXxoV9JP2rdxgxe0xGOrps955g4Ee8\"\n    },\n    \"description\": \"string\",\n    \"native_currency\": \"string\",\n    \"floor_price\": {\n      \"native_currency\": 2140.0834062317963,\n      \"usd\": 6527.858423852576\n    },\n    \"market_cap\": {\n      \"native_currency\": 7692.936774224063,\n      \"usd\": 4719.3241116448025\n    },\n    \"volume_24h\": {\n      \"native_currency\": 4706.330958924859,\n      \"usd\": 6042.745389850958\n    },\n    \"floor_price_24h_percentage_change\": {\n      \"native_currency\": 9533.018156476339,\n      \"usd\": 26.567686217107145\n    },\n    \"number_of_unique_addresses\": 7694,\n    \"total_supply\": 5433.779747430844\n  },\n  {\n    \"id\": \"string\",\n    \"contract_address\": \"string\",\n    \"asset_platform_id\": \"string\",\n    \"name\": \"string\",\n    \"image\": {\n      \"small\": \"http://UDurQxcUwgtNEuYkFqHpQZZ.ptyDhq-MeUe8XmlceXh2Mrt.D-93sIEaswUjvyaeNY8Ft4+9zye.zWkTHJM8Mj1NPfP96\"\n    },\n    \"description\": \"string\",\n    \"native_currency\": \"string\",\n    \"floor_price\": {\n      \"native_currency\": 5363.448808511669,\n      \"usd\": 3408.0845554480843\n    },\n    \"market_cap\": {\n      \"native_currency\": 6153.739232922858,\n      \"usd\": 6662.224005478354\n    },\n    \"volume_24h\": {\n      \"native_currency\": 9497.451005785031,\n      \"usd\": 7490.052000438873\n    },\n    \"floor_price_24h_percentage_change\": {\n      \"native_currency\": 1428.7769333658218,\n      \"usd\": 6214.61591382438\n    },\n    \"number_of_unique_addresses\": 8270,\n    \"total_supply\": 3443.573511893052\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd0ccf73-2b91-42d3-82e7-cbfb59d507d5",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ba1e3dc-4fc3-4dde-a5c5-2d8509447a08",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "917b3084-a18b-44bc-b2a1-24a26833a5c8",
+          "name": "Get NFT collection market chart",
+          "request": {
+            "name": "Get NFT collection market chart",
+            "description": {
+              "content": "Get historical market chart data for a specific NFT collection including floor price, market cap, and volume data. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":id",
+                "market_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The NFT collection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3eeb9e8-312e-429f-99ee-16f3a1567199",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"floor_price_usd\": [\n    [\n      3761.7098960245144,\n      3393.037040191639\n    ],\n    [\n      4918.09535571382,\n      7726.462689540422\n    ]\n  ],\n  \"floor_price_native\": [\n    [\n      9119.755087015166,\n      4901.829854952212\n    ],\n    [\n      3812.9575937085638,\n      4294.568760812507\n    ]\n  ],\n  \"market_cap_usd\": [\n    [\n      9736.706886642862,\n      3425.209098516616\n    ],\n    [\n      8985.835624056699,\n      9838.0555006111\n    ]\n  ],\n  \"h24_volume_usd\": [\n    [\n      6320.408014473532,\n      4505.368940467055\n    ],\n    [\n      6131.61252876642,\n      940.5403893359077\n    ]\n  ],\n  \"h24_volume_native\": [\n    [\n      1310.7426711286041,\n      4459.399150378769\n    ],\n    [\n      9248.65538568387,\n      2424.1039822231946\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96f7679a-c609-4e30-8cd7-057ef955e783",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5941a3e3-eab2-44fe-be46-bdd91b8c72d6",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7d36b91-39fb-42e0-b708-a1ca1c12f24b",
+          "name": "Get NFT market chart by contract address",
+          "request": {
+            "name": "Get NFT market chart by contract address",
+            "description": {
+              "content": "Get historical market chart data for a specific NFT collection by contract address. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":asset_platform_id",
+                "contract",
+                ":contract_address",
+                "market_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_platform_id",
+                  "description": "(Required) The asset platform ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_address",
+                  "description": "(Required) The NFT contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ccc74554-8096-4964-8cb0-885067e68f4e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"floor_price_usd\": [\n    [\n      2973.09321525283,\n      4527.9454498443365\n    ],\n    [\n      8636.832809924716,\n      1534.800624515693\n    ]\n  ],\n  \"floor_price_native\": [\n    [\n      2583.5972679940655,\n      5692.443341937575\n    ],\n    [\n      2270.5962026802695,\n      763.3751420931112\n    ]\n  ],\n  \"market_cap_usd\": [\n    [\n      3928.3798611682096,\n      9066.036953547311\n    ],\n    [\n      5604.6552226570575,\n      1192.696757594439\n    ]\n  ],\n  \"h24_volume_usd\": [\n    [\n      4880.123029319451,\n      6137.032719533861\n    ],\n    [\n      6741.6777615122855,\n      3526.172461850853\n    ]\n  ],\n  \"h24_volume_native\": [\n    [\n      1032.4460507382616,\n      1464.6075415001724\n    ],\n    [\n      7597.712247166939,\n      2571.8036147103694\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91061920-a6b6-45a3-95b5-20ee160507b5",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfe2c135-b005-4d20-9169-a88cccbb09f6",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a12e72e2-7033-4843-a9a8-31c89afc56ca",
+          "name": "Get NFT collection tickers",
+          "request": {
+            "name": "Get NFT collection tickers",
+            "description": {
+              "content": "Get the latest floor price and 24h volume tickers for a specific NFT collection across different marketplaces. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":id",
+                "tickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The NFT collection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc9ebff2-8827-4801-a96f-e6e262ed1587",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tickers\": [\n    {\n      \"floor_price_in_native_currency\": 1872.5951055701296,\n      \"h24_volume_in_native_currency\": 6602.2713356214435,\n      \"native_currency\": \"string\",\n      \"native_currency_symbol\": \"string\",\n      \"updated_at\": \"1950-12-29T00:29:22.497Z\",\n      \"nft_marketplace_id\": \"string\"\n    },\n    {\n      \"floor_price_in_native_currency\": 6746.000750517585,\n      \"h24_volume_in_native_currency\": 2404.5609369721055,\n      \"native_currency\": \"string\",\n      \"native_currency_symbol\": \"string\",\n      \"updated_at\": \"2022-07-15T11:31:16.236Z\",\n      \"nft_marketplace_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a7017e5-8518-4eaf-94aa-ce333bd7e05a",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8878772b-5c7c-4708-b90b-a1d6d71aa595",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4c963d53-270a-4a2f-b40c-2e718f67ad5f",
+      "name": "Token Lists",
+      "description": {
+        "content": "Token list endpoints for paid plan subscribers providing standardized token lists by asset platform.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84b49400-42d2-4411-928e-36ba36faea98",
+          "name": "Get token list by asset platform",
+          "request": {
+            "name": "Get token list by asset platform",
+            "description": {
+              "content": "Get a standardized token list for a specific asset platform in the Uniswap token list format. Includes token name, symbol, decimals, and contract address. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token_lists",
+                ":asset_platform_id",
+                "all.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_platform_id",
+                  "description": "(Required) The asset platform ID (e.g., ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22614b6e-b8dc-4629-a291-7a5f428bc4cd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token_lists",
+                    ":asset_platform_id",
+                    "all.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"logoURI\": \"https://rqTSMwZRSGlDBOMmhVdJJTbMBdg.pzzH.dPDdrN3\",\n  \"keywords\": [\n    \"string\",\n    \"string\"\n  ],\n  \"timestamp\": \"2001-06-30T16:56:14.530Z\",\n  \"tokens\": [\n    {\n      \"chainId\": 9078,\n      \"address\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"decimals\": 4300,\n      \"logoURI\": \"http://jQbSiOYXyLYMTgfnzZkXWK.kbzci,MPHKPMQxlkOOA-RVZt\"\n    },\n    {\n      \"chainId\": 6489,\n      \"address\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"decimals\": 5285,\n      \"logoURI\": \"http://qlGBTsCAzUMZiefNqoqARMEhRazPsH.sxlv35KfJ,mAeCTaP7mD33utWKMf-YShxZKgHtUZKlyNdpeCyuGU0H5OW1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40b0e021-4c85-4243-8ac1-ebd149d60677",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token_lists",
+                    ":asset_platform_id",
+                    "all.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e34f47f1-a735-45fc-a87e-d73fb64100c0",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token_lists",
+                    ":asset_platform_id",
+                    "all.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-pro-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pro-api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-pro-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd56b7ad-ccf5-4d4f-b4fa-90fb5d39b807",
+    "name": "CoinGecko Pro API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Pro API provides the same comprehensive cryptocurrency market data as the standard Demo API but with enhanced performance, higher rate limits of up to 1,000 calls per minute, and faster data updates with prices cached every 30 seconds. It includes exclusive endpoints for advanced analytics, detailed market data, and historical granularity that are not available on the free Demo plan. The Pro API is designed for commercial use cases and comes with dedicated support SLA and access to over 2 million token data points. This spec covers the exclusive endpoints available only to paid plan subscribers.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

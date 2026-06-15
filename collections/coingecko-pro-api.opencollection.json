@@ -1,0 +1,405 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Pro API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-pro-api-key",
+      "value": "{{x-cg-pro-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recently added coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/coins/list/new"
+          },
+          "docs": "Get the list of the latest 200 coins that have been recently added to CoinGecko. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get top gainers and losers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/coins/top_gainers_losers",
+            "params": [
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for price data (e.g., usd)"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query",
+                "description": "Time duration for price change calculation"
+              },
+              {
+                "name": "top_coins",
+                "value": "",
+                "type": "query",
+                "description": "Filter by top N coins by market cap (e.g., 300 to only consider the top 300 coins)"
+              }
+            ]
+          },
+          "docs": "Get the top 30 coins with the largest price gain and the top 30 coins with the largest price loss over a specified time duration. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin circulating supply chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/coins/:id/circulating_supply_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Data interval (daily)"
+              }
+            ]
+          },
+          "docs": "Get historical circulating supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin circulating supply chart within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/coins/:id/circulating_supply_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              }
+            ]
+          },
+          "docs": "Get historical circulating supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin total supply chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/coins/:id/total_supply_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Data interval (daily)"
+              }
+            ]
+          },
+          "docs": "Get historical total supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin total supply chart within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/coins/:id/total_supply_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              }
+            ]
+          },
+          "docs": "Get historical total supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NFTs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFTs with market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/nfts/markets",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the list of all supported NFT collections with floor price, market cap, volume, and market-related data. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection market chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/nfts/:id/market_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The NFT collection ID"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              }
+            ]
+          },
+          "docs": "Get historical market chart data for a specific NFT collection including floor price, market cap, and volume data. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get NFT market chart by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/nfts/:asset_platform_id/contract/:contract_address/market_chart",
+            "params": [
+              {
+                "name": "asset_platform_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The NFT contract address"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              }
+            ]
+          },
+          "docs": "Get historical market chart data for a specific NFT collection by contract address. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/nfts/:id/tickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The NFT collection ID"
+              }
+            ]
+          },
+          "docs": "Get the latest floor price and 24h volume tickers for a specific NFT collection across different marketplaces. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Global",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get global market cap chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/global/market_cap_chart",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market cap data"
+              }
+            ]
+          },
+          "docs": "Get historical global market capitalization and volume chart data. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Token Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get token list by asset platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/token_lists/:asset_platform_id/all.json",
+            "params": [
+              {
+                "name": "asset_platform_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum)"
+              }
+            ]
+          },
+          "docs": "Get a standardized token list for a specific asset platform in the Uniswap token list format. Includes token name, symbol, decimals, and contract address. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exchanges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get exchange volume chart within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pro-api.coingecko.com/api/v3/exchanges/:id/volume_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The exchange ID"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              }
+            ]
+          },
+          "docs": "Get historical volume chart data for a specific exchange within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
