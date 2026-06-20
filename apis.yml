@@ -16,7 +16,7 @@ tags:
   - Prices
 type: Index
 kind: company
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-03-20'
 modified: '2026-05-29'
@@ -38,7 +38,7 @@ apis:
       - Market Data
       - NFTs
       - Prices
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.coingecko.com/api/v3
     humanURL: https://docs.coingecko.com
     properties:
@@ -75,7 +75,7 @@ apis:
       - Enterprise
       - Market Data
       - Prices
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://pro-api.coingecko.com/api/v3
     humanURL: https://docs.coingecko.com/reference/introduction
     properties:
@@ -113,7 +113,7 @@ apis:
       - DEX
       - Liquidity Pools
       - Onchain Data
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.coingecko.com/api/v3/onchain
     humanURL: https://www.coingecko.com/en/api/dex
     properties:
