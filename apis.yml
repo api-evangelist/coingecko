@@ -172,7 +172,7 @@ common:
     url: json-ld/coingecko-context.jsonld
   - type: Spectral Ruleset
     url: rules/coingecko-rules.yml
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.coingecko.com/llms.txt
 maintainers:
   - FN: Kin Lane

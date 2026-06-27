@@ -2,17 +2,20 @@
   "repo": "coingecko",
   "feeds": [
     {
-      "source": "https://www.coingecko.com/learn",
+      "source": "https://www.coingecko.com/learn.atom",
       "feed_url": "https://www.coingecko.com/learn.atom",
       "title": "",
-      "saved": 3,
-      "method": "discovered"
+      "saved": 4,
+      "method": "feed"
     },
     {
       "source": "https://www.coingecko.com",
-      "error": "HTTPError"
+      "feed_url": "https://www.coingecko.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
-  "post_count": 7
+  "fetched": "2026-06-27T12:03:07Z",
+  "post_count": 15
 }
