@@ -140,6 +140,10 @@ apis:
       - Analyze liquidity and volume across networks
       - Monitor wallet exposure to DeFi pools
 common:
+  - type: DomainSecurity
+    url: security/coingecko-domain-security.yml
+  - type: Authentication
+    url: authentication/coingecko-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/coingecko
   - type: LinkedIn

@@ -1,0 +1,44 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/coingecko-crypto-market-data-api-openapi.yml, openapi/coingecko-onchain-dex-api-openapi.yml,
+  openapi/coingecko-pro-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: demoApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: x-cg-demo-api-key
+  description: CoinGecko Demo API key passed via request header. Obtain a free key from the
+    CoinGecko developer dashboard.
+  sources:
+  - openapi/coingecko-crypto-market-data-api-openapi.yml
+  - openapi/coingecko-onchain-dex-api-openapi.yml
+- name: demoApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: x_cg_demo_api_key
+  description: CoinGecko Demo API key passed via query string parameter.
+  sources:
+  - openapi/coingecko-crypto-market-data-api-openapi.yml
+  - openapi/coingecko-onchain-dex-api-openapi.yml
+- name: proApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: x-cg-pro-api-key
+  description: CoinGecko Pro API key passed via request header.
+  sources:
+  - openapi/coingecko-onchain-dex-api-openapi.yml
+  - openapi/coingecko-pro-api-openapi.yml
+- name: proApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: x_cg_pro_api_key
+  description: CoinGecko Pro API key passed via query string parameter.
+  sources:
+  - openapi/coingecko-onchain-dex-api-openapi.yml
+  - openapi/coingecko-pro-api-openapi.yml
