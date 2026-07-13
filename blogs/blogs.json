@@ -5,7 +5,14 @@
       "source": "https://www.coingecko.com/learn.atom",
       "feed_url": "https://www.coingecko.com/learn.atom",
       "title": "",
-      "saved": 4,
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.coingecko.com/feed/",
+      "feed_url": "https://www.coingecko.com/feed/",
+      "title": "",
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -16,6 +23,6 @@
       "method": "discovered"
     }
   ],
-  "fetched": "2026-06-27T12:03:07Z",
-  "post_count": 15
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 33
 }
