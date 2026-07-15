@@ -140,6 +140,8 @@ apis:
       - Analyze liquidity and volume across networks
       - Monitor wallet exposure to DeFi pools
 common:
+  - type: AgenticAccess
+    url: agentic-access/coingecko-agentic-access.yml
   - type: DomainSecurity
     url: security/coingecko-domain-security.yml
   - type: Authentication
