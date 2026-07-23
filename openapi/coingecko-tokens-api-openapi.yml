@@ -1,0 +1,457 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Tokens API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Tokens
+  description: Query token data by contract address including price, volume, top pools, and token information.
+paths:
+  /onchain/networks/{network}/tokens/{address}:
+    get:
+      operationId: getOnchainTokenByAddress
+      summary: Get token data by contract address
+      description: Get detailed data for a specific token by its contract address on a given network. Includes price, volume, market cap, and other token metrics.
+      tags:
+      - Tokens
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: address
+        in: path
+        required: true
+        description: The token contract address
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: Additional data to include (e.g., top_pools)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Token'
+        '404':
+          description: Token not found
+  /onchain/networks/{network}/tokens/multi/{addresses}:
+    get:
+      operationId: getOnchainMultipleTokens
+      summary: Get multiple tokens by addresses
+      description: Get price and market data for multiple tokens in a single request by providing a comma-separated list of token contract addresses on a specific network.
+      tags:
+      - Tokens
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: addresses
+        in: path
+        required: true
+        description: Comma-separated list of token contract addresses (up to 30)
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: Additional data to include (e.g., top_pools)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Token'
+  /onchain/networks/{network}/tokens/{address}/pools:
+    get:
+      operationId: getOnchainTokenTopPools
+      summary: Get top pools for a token
+      description: Get the top liquidity pools that include a specific token on a given network, useful for finding trading venues for a token.
+      tags:
+      - Tokens
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: address
+        in: path
+        required: true
+        description: The token contract address
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: Additional data to include (e.g., base_token, quote_token, dex)
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      - name: sort
+        in: query
+        description: Sort order
+        schema:
+          type: string
+          enum:
+          - h24_tx_count_desc
+          - h24_volume_usd_desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Token not found
+  /onchain/networks/{network}/tokens/{address}/info:
+    get:
+      operationId: getOnchainTokenInfo
+      summary: Get token info by contract address
+      description: Get metadata and descriptive information for a specific token by its contract address on a given network. Includes name, symbol, description, image, and website links.
+      tags:
+      - Tokens
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: address
+        in: path
+        required: true
+        description: The token contract address
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TokenInfo'
+        '404':
+          description: Token not found
+  /onchain/networks/{network}/tokens/{token_address}/pools:
+    get:
+      operationId: getOnchainTokenPools
+      summary: Get pools for a specific token
+      description: Get all liquidity pools that contain a specific token on a given network. Results include pool metrics like volume, liquidity, and price data.
+      tags:
+      - Tokens
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: token_address
+        in: path
+        required: true
+        description: The token contract address
+        schema:
+          type: string
+      - name: include
+        in: query
+        description: Additional data to include (e.g., base_token, quote_token, dex)
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Token not found
+components:
+  schemas:
+    Token:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Token identifier (network_address format)
+        type:
+          type: string
+          description: Resource type (token)
+        attributes:
+          type: object
+          properties:
+            address:
+              type: string
+              description: Token contract address
+            name:
+              type: string
+              description: Token name
+            symbol:
+              type: string
+              description: Token ticker symbol
+            decimals:
+              type: integer
+              description: Token decimal places
+            coingecko_coin_id:
+              type: string
+              description: Corresponding CoinGecko coin ID
+            price_usd:
+              type: string
+              description: Current price in USD
+            fdv_usd:
+              type: string
+              description: Fully diluted valuation in USD
+            total_reserve_in_usd:
+              type: string
+              description: Total reserve across all pools in USD
+            volume_usd:
+              type: object
+              description: Volume in USD over various timeframes
+              properties:
+                h24:
+                  type: string
+            market_cap_usd:
+              type: string
+              description: Market cap in USD
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
+    Pool:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pool identifier (network_address format)
+        type:
+          type: string
+          description: Resource type (pool)
+        attributes:
+          type: object
+          properties:
+            base_token_price_usd:
+              type: string
+              description: Base token price in USD
+            base_token_price_native_currency:
+              type: string
+              description: Base token price in network native currency
+            quote_token_price_usd:
+              type: string
+              description: Quote token price in USD
+            quote_token_price_native_currency:
+              type: string
+              description: Quote token price in network native currency
+            base_token_price_quote_token:
+              type: string
+              description: Base token price in quote token
+            quote_token_price_base_token:
+              type: string
+              description: Quote token price in base token
+            address:
+              type: string
+              description: Pool contract address
+            name:
+              type: string
+              description: Pool name (e.g., TOKEN_A / TOKEN_B)
+            pool_created_at:
+              type: string
+              format: date-time
+              description: Pool creation timestamp
+            fdv_usd:
+              type: string
+              description: Fully diluted valuation in USD
+            market_cap_usd:
+              type: string
+              description: Market cap in USD
+            price_change_percentage:
+              type: object
+              description: Price change percentages over various timeframes
+              properties:
+                m5:
+                  type: string
+                  description: 5-minute price change percentage
+                h1:
+                  type: string
+                  description: 1-hour price change percentage
+                h6:
+                  type: string
+                  description: 6-hour price change percentage
+                h24:
+                  type: string
+                  description: 24-hour price change percentage
+            transactions:
+              type: object
+              description: Transaction counts over various timeframes
+              properties:
+                m5:
+                  $ref: '#/components/schemas/TransactionCount'
+                m15:
+                  $ref: '#/components/schemas/TransactionCount'
+                m30:
+                  $ref: '#/components/schemas/TransactionCount'
+                h1:
+                  $ref: '#/components/schemas/TransactionCount'
+                h24:
+                  $ref: '#/components/schemas/TransactionCount'
+            volume_usd:
+              type: object
+              description: Volume in USD over various timeframes
+              properties:
+                m5:
+                  type: string
+                h1:
+                  type: string
+                h6:
+                  type: string
+                h24:
+                  type: string
+            reserve_in_usd:
+              type: string
+              description: Total liquidity reserve in USD
+        relationships:
+          type: object
+          description: Related resources (base_token, quote_token, dex, network)
+          properties:
+            base_token:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+            quote_token:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+            dex:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+    TokenInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Token identifier
+        type:
+          type: string
+          description: Resource type (token)
+        attributes:
+          type: object
+          properties:
+            address:
+              type: string
+              description: Token contract address
+            name:
+              type: string
+              description: Token name
+            symbol:
+              type: string
+              description: Token ticker symbol
+            coingecko_coin_id:
+              type: string
+              description: Corresponding CoinGecko coin ID
+            image_url:
+              type: string
+              format: uri
+              description: Token logo image URL
+            description:
+              type: string
+              description: Token description text
+            websites:
+              type: array
+              description: Official website URLs
+              items:
+                type: string
+                format: uri
+            gt_score:
+              type: number
+              description: GeckoTerminal trust score
+            discord_url:
+              type: string
+              format: uri
+              description: Discord community URL
+            telegram_handle:
+              type: string
+              description: Telegram handle
+            twitter_handle:
+              type: string
+              description: Twitter/X handle
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

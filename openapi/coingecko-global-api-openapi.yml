@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Global API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Global
+  description: Global cryptocurrency and DeFi market data.
+paths:
+  /global:
+    get:
+      operationId: getGlobal
+      summary: Get global cryptocurrency data
+      description: Get aggregated global cryptocurrency market data including total market cap, total volume, market cap percentage by coin, and number of active cryptocurrencies and markets.
+      tags:
+      - Global
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/GlobalData'
+  /global/decentralized_finance_defi:
+    get:
+      operationId: getGlobalDeFi
+      summary: Get global DeFi market data
+      description: Get aggregated global decentralized finance (DeFi) data including DeFi market cap, trading volume, DeFi dominance, and top DeFi coin information.
+      tags:
+      - Global
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/GlobalDeFiData'
+  /global/market_cap_chart:
+    get:
+      operationId: getGlobalMarketCapChart
+      summary: Get global market cap chart
+      description: Get historical global market capitalization and volume chart data. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Global
+      parameters:
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data
+        schema:
+          type: string
+      - name: vs_currency
+        in: query
+        description: The target currency for market cap data
+        schema:
+          type: string
+          default: usd
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  market_cap_chart:
+                    type: object
+                    properties:
+                      market_cap:
+                        type: array
+                        description: Market cap data points as [timestamp, value]
+                        items:
+                          type: array
+                          items:
+                            type: number
+                      volume:
+                        type: array
+                        description: Volume data points as [timestamp, value]
+                        items:
+                          type: array
+                          items:
+                            type: number
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '403':
+          description: Forbidden - endpoint not available on current plan
+components:
+  schemas:
+    GlobalDeFiData:
+      type: object
+      properties:
+        defi_market_cap:
+          type: string
+          description: Total DeFi market cap in USD
+        eth_market_cap:
+          type: string
+          description: Ethereum market cap in USD
+        defi_to_eth_ratio:
+          type: string
+          description: DeFi market cap as ratio of ETH market cap
+        trading_volume_24h:
+          type: string
+          description: 24-hour DeFi trading volume in USD
+        defi_dominance:
+          type: string
+          description: DeFi dominance percentage
+        top_coin_name:
+          type: string
+          description: Top DeFi coin by market cap
+        top_coin_defi_dominance:
+          type: number
+          description: Top DeFi coin market cap dominance
+    GlobalData:
+      type: object
+      properties:
+        active_cryptocurrencies:
+          type: integer
+          description: Number of active cryptocurrencies
+        upcoming_icos:
+          type: integer
+          description: Number of upcoming ICOs
+        ongoing_icos:
+          type: integer
+          description: Number of ongoing ICOs
+        ended_icos:
+          type: integer
+          description: Number of ended ICOs
+        markets:
+          type: integer
+          description: Number of active markets
+        total_market_cap:
+          type: object
+          description: Total market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: Total 24h volume in various currencies
+          additionalProperties:
+            type: number
+        market_cap_percentage:
+          type: object
+          description: Market cap percentage by coin
+          additionalProperties:
+            type: number
+        market_cap_change_percentage_24h_usd:
+          type: number
+          description: 24-hour market cap change percentage in USD
+        updated_at:
+          type: integer
+          description: Last update timestamp (UNIX)
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Ping API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Ping
+  description: Check API server status
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: Check API server status
+      description: Check the API server status. Returns a gecko_says message to confirm the server is operational.
+      tags:
+      - Ping
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  gecko_says:
+                    type: string
+                    description: Status message from the API server
+components:
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

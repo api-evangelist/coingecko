@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Companies API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Companies
+  description: Public company cryptocurrency holdings data.
+paths:
+  /companies/public_treasury/{coin_id}:
+    get:
+      operationId: getCompaniesPublicTreasury
+      summary: Get public company crypto holdings
+      description: Get the list of public companies that hold bitcoin or ethereum in their treasury, including the amount held, total value, and percentage of total supply.
+      tags:
+      - Companies
+      parameters:
+      - name: coin_id
+        in: path
+        required: true
+        description: The coin ID (bitcoin or ethereum)
+        schema:
+          type: string
+          enum:
+          - bitcoin
+          - ethereum
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_holdings:
+                    type: number
+                    description: Total amount of crypto held by all companies
+                  total_value_usd:
+                    type: number
+                    description: Total USD value of all holdings
+                  market_cap_dominance:
+                    type: number
+                    description: Percentage of total market cap held
+                  companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CompanyHolding'
+components:
+  schemas:
+    CompanyHolding:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Company name
+        symbol:
+          type: string
+          description: Stock ticker symbol
+        country:
+          type: string
+          description: Country of incorporation
+        total_holdings:
+          type: number
+          description: Total cryptocurrency holdings
+        total_entry_value_usd:
+          type: number
+          description: Total entry value in USD
+        total_current_value_usd:
+          type: number
+          description: Total current value in USD
+        percentage_of_total_supply:
+          type: number
+          description: Percentage of total cryptocurrency supply held
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

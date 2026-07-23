@@ -1,0 +1,87 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms DEXes API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: DEXes
+  description: List decentralized exchanges on specific networks.
+paths:
+  /onchain/networks/{network}/dexes:
+    get:
+      operationId: getOnchainNetworkDexes
+      summary: List DEXes on a network
+      description: Get the list of all supported decentralized exchanges on a specific blockchain network.
+      tags:
+      - DEXes
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DEX'
+        '404':
+          description: Network not found
+components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+  schemas:
+    DEX:
+      type: object
+      properties:
+        id:
+          type: string
+          description: DEX identifier used in API paths
+        type:
+          type: string
+          description: Resource type (dex)
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: DEX display name
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

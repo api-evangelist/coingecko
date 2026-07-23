@@ -1,0 +1,1041 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Coins API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Coins
+  description: Comprehensive coin data including current prices, market data, historical data, tickers, and OHLCV charts.
+paths:
+  /coins/list:
+    get:
+      operationId: getCoinsList
+      summary: List all supported coins
+      description: Get the complete list of all supported coins with their IDs, symbols, and names. Use this endpoint to obtain coin IDs for use in other endpoints. This list is cached and updated periodically.
+      tags:
+      - Coins
+      parameters:
+      - name: include_platform
+        in: query
+        description: Include platform contract addresses in the response (e.g., Ethereum, Solana contract addresses)
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoinListItem'
+  /coins/markets:
+    get:
+      operationId: getCoinsMarkets
+      summary: List coins with market data
+      description: Get a paginated list of all supported coins with price, market cap, volume, and other market-related data. Results are ordered by market cap rank by default.
+      tags:
+      - Coins
+      parameters:
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency of market data (e.g., usd, eur, btc)
+        schema:
+          type: string
+      - name: ids
+        in: query
+        description: Comma-separated list of coin IDs to filter results
+        schema:
+          type: string
+      - name: category
+        in: query
+        description: Filter by coin category
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: Sort order for results
+        schema:
+          type: string
+          enum:
+          - market_cap_asc
+          - market_cap_desc
+          - volume_asc
+          - volume_desc
+          - id_asc
+          - id_desc
+          default: market_cap_desc
+      - name: per_page
+        in: query
+        description: Number of results per page (1-250)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 100
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: sparkline
+        in: query
+        description: Include sparkline 7-day price data
+        schema:
+          type: boolean
+          default: false
+      - name: price_change_percentage
+        in: query
+        description: Comma-separated list of price change percentage timeframes (1h, 24h, 7d, 14d, 30d, 200d, 1y)
+        schema:
+          type: string
+      - name: locale
+        in: query
+        description: Language locale for descriptions
+        schema:
+          type: string
+          default: en
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoinMarket'
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /coins/{id}:
+    get:
+      operationId: getCoinById
+      summary: Get coin data by ID
+      description: Get comprehensive data for a specific coin including current price, market data, community data, developer data, and more. This is the most detailed single-coin endpoint.
+      tags:
+      - Coins
+      parameters:
+      - $ref: '#/components/parameters/coinId'
+      - name: localization
+        in: query
+        description: Include all localized language descriptions
+        schema:
+          type: boolean
+          default: true
+      - name: tickers
+        in: query
+        description: Include exchange tickers data
+        schema:
+          type: boolean
+          default: true
+      - name: market_data
+        in: query
+        description: Include market data
+        schema:
+          type: boolean
+          default: true
+      - name: community_data
+        in: query
+        description: Include community data
+        schema:
+          type: boolean
+          default: true
+      - name: developer_data
+        in: query
+        description: Include developer data
+        schema:
+          type: boolean
+          default: true
+      - name: sparkline
+        in: query
+        description: Include sparkline 7-day price data
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoinData'
+        '404':
+          description: Coin not found
+  /coins/{id}/tickers:
+    get:
+      operationId: getCoinTickers
+      summary: Get coin tickers
+      description: Get trading pair tickers for a specific coin across all exchanges. Results include price, volume, spread, and trust score information.
+      tags:
+      - Coins
+      parameters:
+      - $ref: '#/components/parameters/coinId'
+      - name: exchange_ids
+        in: query
+        description: Filter tickers by exchange IDs (comma-separated)
+        schema:
+          type: string
+      - name: include_exchange_logo
+        in: query
+        description: Include exchange logo URL in the response
+        schema:
+          type: boolean
+          default: false
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: order
+        in: query
+        description: Sort order for tickers
+        schema:
+          type: string
+          enum:
+          - trust_score_desc
+          - trust_score_asc
+          - volume_desc
+          - volume_asc
+          default: trust_score_desc
+      - name: depth
+        in: query
+        description: Include order book depth (2% cost to move)
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Coin name
+                  tickers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ticker'
+        '404':
+          description: Coin not found
+  /coins/{id}/history:
+    get:
+      operationId: getCoinHistory
+      summary: Get historical coin data
+      description: Get historical data for a specific coin at a given date. Includes price, market cap, 24h volume, and community and developer data.
+      tags:
+      - Coins
+      parameters:
+      - $ref: '#/components/parameters/coinId'
+      - name: date
+        in: query
+        required: true
+        description: The date of data snapshot in dd-mm-yyyy format
+        schema:
+          type: string
+          pattern: ^\d{2}-\d{2}-\d{4}$
+      - name: localization
+        in: query
+        description: Include all localized language descriptions
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoinData'
+        '404':
+          description: Coin not found
+  /coins/{id}/market_chart:
+    get:
+      operationId: getCoinMarketChart
+      summary: Get coin market chart data
+      description: Get historical market data including price, market cap, and 24h volume for a specific coin over a time range. Data granularity is automatic based on the number of days requested.
+      tags:
+      - Coins
+      parameters:
+      - $ref: '#/components/parameters/coinId'
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency for market data
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365, or max for all available data)
+        schema:
+          type: string
+      - name: interval
+        in: query
+        description: Data interval (daily). Leave empty for automatic granularity.
+        schema:
+          type: string
+          enum:
+          - daily
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin not found
+  /coins/{id}/market_chart/range:
+    get:
+      operationId: getCoinMarketChartRange
+      summary: Get coin market chart data within date range
+      description: Get historical market data including price, market cap, and 24h volume for a specific coin within a custom date range specified by UNIX timestamps.
+      tags:
+      - Coins
+      parameters:
+      - $ref: '#/components/parameters/coinId'
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency for market data
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: true
+        description: Start date as UNIX timestamp
+        schema:
+          type: number
+      - name: to
+        in: query
+        required: true
+        description: End date as UNIX timestamp
+        schema:
+          type: number
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin not found
+  /coins/{id}/ohlc:
+    get:
+      operationId: getCoinOHLC
+      summary: Get coin OHLC chart data
+      description: Get OHLC (Open, High, Low, Close) candlestick data for a specific coin. Data granularity is automatic based on the number of days requested. 1-2 days returns 30-minute candles, 3-30 days returns 4-hour candles, and 31+ days returns daily candles.
+      tags:
+      - Coins
+      parameters:
+      - $ref: '#/components/parameters/coinId'
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency for OHLC data
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365)
+        schema:
+          type: string
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: OHLC data point as array of [timestamp, open, high, low, close]
+                  items:
+                    type: number
+                  minItems: 5
+                  maxItems: 5
+        '404':
+          description: Coin not found
+  /coins/list/new:
+    get:
+      operationId: getNewlyAddedCoins
+      summary: Get recently added coins
+      description: Get the list of the latest 200 coins that have been recently added to CoinGecko. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Coins
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: CoinGecko coin identifier
+                    symbol:
+                      type: string
+                      description: Coin ticker symbol
+                    name:
+                      type: string
+                      description: Coin display name
+                    activated_at:
+                      type: integer
+                      description: UNIX timestamp when the coin was added
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '403':
+          description: Forbidden - endpoint not available on current plan
+  /coins/top_gainers_losers:
+    get:
+      operationId: getTopGainersLosers
+      summary: Get top gainers and losers
+      description: Get the top 30 coins with the largest price gain and the top 30 coins with the largest price loss over a specified time duration. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Coins
+      parameters:
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency for price data (e.g., usd)
+        schema:
+          type: string
+          default: usd
+      - name: duration
+        in: query
+        description: Time duration for price change calculation
+        schema:
+          type: string
+          enum:
+          - 1h
+          - 24h
+          - 7d
+          - 14d
+          - 30d
+          - 60d
+          - 1y
+          default: 24h
+      - name: top_coins
+        in: query
+        description: Filter by top N coins by market cap (e.g., 300 to only consider the top 300 coins)
+        schema:
+          type: string
+          enum:
+          - '300'
+          - '500'
+          - '1000'
+          - all
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  top_gainers:
+                    type: array
+                    description: Top coins by price increase
+                    items:
+                      $ref: '#/components/schemas/GainerLoser'
+                  top_losers:
+                    type: array
+                    description: Top coins by price decrease
+                    items:
+                      $ref: '#/components/schemas/GainerLoser'
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '403':
+          description: Forbidden - endpoint not available on current plan
+  /coins/{id}/circulating_supply_chart:
+    get:
+      operationId: getCoinCirculatingSupplyChart
+      summary: Get coin circulating supply chart
+      description: Get historical circulating supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Coins
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The CoinGecko coin ID
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data
+        schema:
+          type: string
+      - name: interval
+        in: query
+        description: Data interval (daily)
+        schema:
+          type: string
+          enum:
+          - daily
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Data point as [timestamp, circulating_supply]
+                  items:
+                    type: number
+                  minItems: 2
+                  maxItems: 2
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: Coin not found
+  /coins/{id}/circulating_supply_chart/range:
+    get:
+      operationId: getCoinCirculatingSupplyChartRange
+      summary: Get coin circulating supply chart within date range
+      description: Get historical circulating supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Coins
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The CoinGecko coin ID
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: true
+        description: Start date as UNIX timestamp
+        schema:
+          type: number
+      - name: to
+        in: query
+        required: true
+        description: End date as UNIX timestamp
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Data point as [timestamp, circulating_supply]
+                  items:
+                    type: number
+                  minItems: 2
+                  maxItems: 2
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: Coin not found
+  /coins/{id}/total_supply_chart:
+    get:
+      operationId: getCoinTotalSupplyChart
+      summary: Get coin total supply chart
+      description: Get historical total supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Coins
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The CoinGecko coin ID
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data
+        schema:
+          type: string
+      - name: interval
+        in: query
+        description: Data interval (daily)
+        schema:
+          type: string
+          enum:
+          - daily
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Data point as [timestamp, total_supply]
+                  items:
+                    type: number
+                  minItems: 2
+                  maxItems: 2
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: Coin not found
+  /coins/{id}/total_supply_chart/range:
+    get:
+      operationId: getCoinTotalSupplyChartRange
+      summary: Get coin total supply chart within date range
+      description: Get historical total supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Coins
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The CoinGecko coin ID
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: true
+        description: Start date as UNIX timestamp
+        schema:
+          type: number
+      - name: to
+        in: query
+        required: true
+        description: End date as UNIX timestamp
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Data point as [timestamp, total_supply]
+                  items:
+                    type: number
+                  minItems: 2
+                  maxItems: 2
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: Coin not found
+components:
+  schemas:
+    CoinListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+    CoinMarket:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        image:
+          type: string
+          format: uri
+          description: Coin logo image URL
+        current_price:
+          type: number
+          description: Current price in the target currency
+        market_cap:
+          type: number
+          description: Market capitalization in the target currency
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        fully_diluted_valuation:
+          type: number
+          description: Fully diluted valuation in the target currency
+        total_volume:
+          type: number
+          description: 24-hour trading volume in the target currency
+        high_24h:
+          type: number
+          description: 24-hour price high in the target currency
+        low_24h:
+          type: number
+          description: 24-hour price low in the target currency
+        price_change_24h:
+          type: number
+          description: 24-hour price change amount
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change amount
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply (null if unlimited)
+        ath:
+          type: number
+          description: All-time high price
+        ath_change_percentage:
+          type: number
+          description: Percentage change from all-time high
+        ath_date:
+          type: string
+          format: date-time
+          description: Date of all-time high
+        atl:
+          type: number
+          description: All-time low price
+        atl_change_percentage:
+          type: number
+          description: Percentage change from all-time low
+        atl_date:
+          type: string
+          format: date-time
+          description: Date of all-time low
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
+    GainerLoser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        image:
+          type: string
+          format: uri
+          description: Coin logo URL
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking
+        usd:
+          type: number
+          description: Current price in USD
+        usd_24h_vol:
+          type: number
+          description: 24-hour trading volume in USD
+        usd_24h_change:
+          type: number
+          description: 24-hour price change percentage
+    Ticker:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency ticker
+        target:
+          type: string
+          description: Target currency ticker
+        market:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Exchange name
+            identifier:
+              type: string
+              description: Exchange identifier
+            has_trading_incentive:
+              type: boolean
+              description: Whether the exchange has trading incentives
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        converted_last:
+          type: object
+          description: Last price converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        converted_volume:
+          type: object
+          description: Volume converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        trust_score:
+          type: string
+          description: Trust score color (green, yellow, red)
+        bid_ask_spread_percentage:
+          type: number
+          description: Bid-ask spread percentage
+        timestamp:
+          type: string
+          format: date-time
+          description: Ticker data timestamp
+        last_traded_at:
+          type: string
+          format: date-time
+          description: Last trade timestamp
+        last_fetch_at:
+          type: string
+          format: date-time
+          description: Last data fetch timestamp
+        is_anomaly:
+          type: boolean
+          description: Whether the ticker is flagged as anomalous
+        is_stale:
+          type: boolean
+          description: Whether the ticker data is stale
+        trade_url:
+          type: string
+          format: uri
+          description: URL to trade this pair
+        coin_id:
+          type: string
+          description: CoinGecko coin ID of base currency
+        target_coin_id:
+          type: string
+          description: CoinGecko coin ID of target currency
+    MarketChart:
+      type: object
+      properties:
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+    MarketData:
+      type: object
+      properties:
+        current_price:
+          type: object
+          description: Current price in various currencies
+          additionalProperties:
+            type: number
+        total_value_locked:
+          type: number
+          description: Total value locked (for DeFi tokens)
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: 24h volume in various currencies
+          additionalProperties:
+            type: number
+        high_24h:
+          type: object
+          description: 24-hour high in various currencies
+          additionalProperties:
+            type: number
+        low_24h:
+          type: object
+          description: 24-hour low in various currencies
+          additionalProperties:
+            type: number
+        price_change_24h:
+          type: number
+          description: 24-hour price change
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply
+    CoinData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier if token
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+        block_time_in_minutes:
+          type: integer
+          description: Average block time in minutes
+        hashing_algorithm:
+          type: string
+          description: Mining or hashing algorithm
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories the coin belongs to
+        description:
+          type: object
+          description: Localized descriptions
+          additionalProperties:
+            type: string
+        links:
+          type: object
+          description: Related links (homepage, blockchain sites, forums, etc.)
+        image:
+          type: object
+          description: Coin logo images at various sizes
+          properties:
+            thumb:
+              type: string
+              format: uri
+            small:
+              type: string
+              format: uri
+            large:
+              type: string
+              format: uri
+        genesis_date:
+          type: string
+          format: date
+          description: Date the coin was created
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        market_data:
+          $ref: '#/components/schemas/MarketData'
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
+  parameters:
+    coinId:
+      name: id
+      in: path
+      required: true
+      description: The CoinGecko coin ID (e.g., bitcoin, ethereum)
+      schema:
+        type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

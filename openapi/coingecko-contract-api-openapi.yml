@@ -1,0 +1,294 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Contract API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Contract
+  description: Query coin data by contract address on a specific asset platform.
+paths:
+  /coins/{id}/contract/{contract_address}:
+    get:
+      operationId: getCoinByContractAddress
+      summary: Get coin data by contract address
+      description: Get comprehensive coin data by querying a contract address on a specific asset platform. Returns the same data as the /coins/{id} endpoint.
+      tags:
+      - Contract
+      parameters:
+      - $ref: '#/components/parameters/assetPlatformId'
+      - $ref: '#/components/parameters/contractAddress'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoinData'
+        '404':
+          description: Coin or contract not found
+  /coins/{id}/contract/{contract_address}/market_chart:
+    get:
+      operationId: getCoinContractMarketChart
+      summary: Get coin market chart data by contract address
+      description: Get historical market data including price, market cap, and 24h volume by querying a contract address on a specific asset platform.
+      tags:
+      - Contract
+      parameters:
+      - $ref: '#/components/parameters/assetPlatformId'
+      - $ref: '#/components/parameters/contractAddress'
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency for market data
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data
+        schema:
+          type: string
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin or contract not found
+  /coins/{id}/contract/{contract_address}/market_chart/range:
+    get:
+      operationId: getCoinContractMarketChartRange
+      summary: Get coin market chart range data by contract address
+      description: Get historical market data for a specific contract address within a custom date range specified by UNIX timestamps.
+      tags:
+      - Contract
+      parameters:
+      - $ref: '#/components/parameters/assetPlatformId'
+      - $ref: '#/components/parameters/contractAddress'
+      - name: vs_currency
+        in: query
+        required: true
+        description: The target currency for market data
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: true
+        description: Start date as UNIX timestamp
+        schema:
+          type: number
+      - name: to
+        in: query
+        required: true
+        description: End date as UNIX timestamp
+        schema:
+          type: number
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketChart'
+        '404':
+          description: Coin or contract not found
+components:
+  schemas:
+    MarketChart:
+      type: object
+      properties:
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+    MarketData:
+      type: object
+      properties:
+        current_price:
+          type: object
+          description: Current price in various currencies
+          additionalProperties:
+            type: number
+        total_value_locked:
+          type: number
+          description: Total value locked (for DeFi tokens)
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: 24h volume in various currencies
+          additionalProperties:
+            type: number
+        high_24h:
+          type: object
+          description: 24-hour high in various currencies
+          additionalProperties:
+            type: number
+        low_24h:
+          type: object
+          description: 24-hour low in various currencies
+          additionalProperties:
+            type: number
+        price_change_24h:
+          type: number
+          description: 24-hour price change
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply
+    CoinData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier if token
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+        block_time_in_minutes:
+          type: integer
+          description: Average block time in minutes
+        hashing_algorithm:
+          type: string
+          description: Mining or hashing algorithm
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories the coin belongs to
+        description:
+          type: object
+          description: Localized descriptions
+          additionalProperties:
+            type: string
+        links:
+          type: object
+          description: Related links (homepage, blockchain sites, forums, etc.)
+        image:
+          type: object
+          description: Coin logo images at various sizes
+          properties:
+            thumb:
+              type: string
+              format: uri
+            small:
+              type: string
+              format: uri
+            large:
+              type: string
+              format: uri
+        genesis_date:
+          type: string
+          format: date
+          description: Date the coin was created
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        market_data:
+          $ref: '#/components/schemas/MarketData'
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
+  parameters:
+    contractAddress:
+      name: contract_address
+      in: path
+      required: true
+      description: The token contract address on the asset platform
+      schema:
+        type: string
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      schema:
+        type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

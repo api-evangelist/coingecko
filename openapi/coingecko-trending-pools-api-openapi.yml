@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Trending Pools API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Trending Pools
+  description: Discover trending liquidity pools across networks based on web visits and onchain activity.
+paths:
+  /onchain/networks/trending_pools:
+    get:
+      operationId: getOnchainTrendingPools
+      summary: Get trending pools across all networks
+      description: Get the list of trending liquidity pools across all supported networks, ranked by web visits and onchain trading activity.
+      tags:
+      - Trending Pools
+      parameters:
+      - name: include
+        in: query
+        description: Additional data to include (e.g., base_token, quote_token, dex, network)
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      - name: duration
+        in: query
+        description: Trending duration filter
+        schema:
+          type: string
+          enum:
+          - 5m
+          - 1h
+          - 6h
+          - 24h
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+  /onchain/networks/{network}/trending_pools:
+    get:
+      operationId: getOnchainNetworkTrendingPools
+      summary: Get trending pools on a network
+      description: Get the list of trending liquidity pools on a specific blockchain network, ranked by web visits and onchain trading activity.
+      tags:
+      - Trending Pools
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: include
+        in: query
+        description: Additional data to include (e.g., base_token, quote_token, dex)
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      - name: duration
+        in: query
+        description: Trending duration filter
+        schema:
+          type: string
+          enum:
+          - 5m
+          - 1h
+          - 6h
+          - 24h
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pool'
+        '404':
+          description: Network not found
+components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+  schemas:
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
+    Pool:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Pool identifier (network_address format)
+        type:
+          type: string
+          description: Resource type (pool)
+        attributes:
+          type: object
+          properties:
+            base_token_price_usd:
+              type: string
+              description: Base token price in USD
+            base_token_price_native_currency:
+              type: string
+              description: Base token price in network native currency
+            quote_token_price_usd:
+              type: string
+              description: Quote token price in USD
+            quote_token_price_native_currency:
+              type: string
+              description: Quote token price in network native currency
+            base_token_price_quote_token:
+              type: string
+              description: Base token price in quote token
+            quote_token_price_base_token:
+              type: string
+              description: Quote token price in base token
+            address:
+              type: string
+              description: Pool contract address
+            name:
+              type: string
+              description: Pool name (e.g., TOKEN_A / TOKEN_B)
+            pool_created_at:
+              type: string
+              format: date-time
+              description: Pool creation timestamp
+            fdv_usd:
+              type: string
+              description: Fully diluted valuation in USD
+            market_cap_usd:
+              type: string
+              description: Market cap in USD
+            price_change_percentage:
+              type: object
+              description: Price change percentages over various timeframes
+              properties:
+                m5:
+                  type: string
+                  description: 5-minute price change percentage
+                h1:
+                  type: string
+                  description: 1-hour price change percentage
+                h6:
+                  type: string
+                  description: 6-hour price change percentage
+                h24:
+                  type: string
+                  description: 24-hour price change percentage
+            transactions:
+              type: object
+              description: Transaction counts over various timeframes
+              properties:
+                m5:
+                  $ref: '#/components/schemas/TransactionCount'
+                m15:
+                  $ref: '#/components/schemas/TransactionCount'
+                m30:
+                  $ref: '#/components/schemas/TransactionCount'
+                h1:
+                  $ref: '#/components/schemas/TransactionCount'
+                h24:
+                  $ref: '#/components/schemas/TransactionCount'
+            volume_usd:
+              type: object
+              description: Volume in USD over various timeframes
+              properties:
+                m5:
+                  type: string
+                h1:
+                  type: string
+                h6:
+                  type: string
+                h24:
+                  type: string
+            reserve_in_usd:
+              type: string
+              description: Total liquidity reserve in USD
+        relationships:
+          type: object
+          description: Related resources (base_token, quote_token, dex, network)
+          properties:
+            base_token:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+            quote_token:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+            dex:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

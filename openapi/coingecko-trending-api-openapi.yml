@@ -1,0 +1,90 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Trending API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Trending
+  description: Trending coins, NFTs, and categories on CoinGecko.
+paths:
+  /search/trending:
+    get:
+      operationId: getTrending
+      summary: Get trending search list
+      description: Get the top trending coins, NFTs, and categories on CoinGecko based on search activity in the last 24 hours. Includes the top 7 trending coins with market data.
+      tags:
+      - Trending
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coins:
+                    type: array
+                    description: Top trending coins
+                    items:
+                      type: object
+                      properties:
+                        item:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            coin_id:
+                              type: integer
+                            name:
+                              type: string
+                            symbol:
+                              type: string
+                            market_cap_rank:
+                              type: integer
+                            thumb:
+                              type: string
+                            small:
+                              type: string
+                            large:
+                              type: string
+                            slug:
+                              type: string
+                            price_btc:
+                              type: number
+                            score:
+                              type: integer
+                  nfts:
+                    type: array
+                    description: Top trending NFT collections
+                    items:
+                      type: object
+                  categories:
+                    type: array
+                    description: Top trending categories
+                    items:
+                      type: object
+components:
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms OHLCV API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: OHLCV
+  description: Open, High, Low, Close, Volume candlestick chart data for liquidity pools.
+paths:
+  /onchain/networks/{network}/pools/{pool_address}/ohlcv/{timeframe}:
+    get:
+      operationId: getOnchainPoolOHLCV
+      summary: Get pool OHLCV chart data
+      description: Get OHLCV (Open, High, Low, Close, Volume) candlestick chart data for a specific liquidity pool. Supports daily, hourly, and minutely timeframes with various aggregation periods.
+      tags:
+      - OHLCV
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: pool_address
+        in: path
+        required: true
+        description: The pool contract address
+        schema:
+          type: string
+      - name: timeframe
+        in: path
+        required: true
+        description: OHLCV timeframe granularity
+        schema:
+          type: string
+          enum:
+          - day
+          - hour
+          - minute
+      - name: aggregate
+        in: query
+        description: Aggregation period. For day timeframe (1). For hour timeframe (1, 4, 12). For minute timeframe (1, 5, 15).
+        schema:
+          type: integer
+      - name: before_timestamp
+        in: query
+        description: Return data before this UNIX timestamp
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Number of OHLCV data points to return (max 1000)
+        schema:
+          type: integer
+          maximum: 1000
+          default: 100
+      - name: currency
+        in: query
+        description: Price currency (usd or token)
+        schema:
+          type: string
+          enum:
+          - usd
+          - token
+          default: usd
+      - name: token
+        in: query
+        description: Which token to use for price (base or quote). Only applicable when currency is token.
+        schema:
+          type: string
+          enum:
+          - base
+          - quote
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          ohlcv_list:
+                            type: array
+                            description: OHLCV data as arrays of [timestamp, open, high, low, close, volume]
+                            items:
+                              type: array
+                              items:
+                                type: number
+                              minItems: 6
+                              maxItems: 6
+                  meta:
+                    type: object
+                    properties:
+                      base:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          coingecko_coin_id:
+                            type: string
+                      quote:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          coingecko_coin_id:
+                            type: string
+        '404':
+          description: Pool not found
+components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

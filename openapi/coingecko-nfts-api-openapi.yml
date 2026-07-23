@@ -1,0 +1,506 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms NFTs API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: NFTs
+  description: NFT collection data including floor prices and market information.
+paths:
+  /nfts/list:
+    get:
+      operationId: getNFTsList
+      summary: List supported NFT collections
+      description: Get the list of all supported NFT collection IDs, contract addresses, and names. Use this to obtain NFT IDs for use in other endpoints.
+      tags:
+      - NFTs
+      parameters:
+      - name: order
+        in: query
+        description: Sort order for results
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        description: Number of results per page (1-250)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 100
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NFTListItem'
+  /nfts/{id}:
+    get:
+      operationId: getNFTById
+      summary: Get NFT collection data by ID
+      description: Get comprehensive data for a specific NFT collection including floor price, market cap, volume, and other collection metrics.
+      tags:
+      - NFTs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The NFT collection ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTData'
+        '404':
+          description: NFT collection not found
+  /nfts/{asset_platform_id}/contract/{contract_address}:
+    get:
+      operationId: getNFTByContractAddress
+      summary: Get NFT collection data by contract address
+      description: Get comprehensive data for a specific NFT collection by querying the contract address on a specific asset platform.
+      tags:
+      - NFTs
+      parameters:
+      - name: asset_platform_id
+        in: path
+        required: true
+        description: The asset platform ID (e.g., ethereum)
+        schema:
+          type: string
+      - name: contract_address
+        in: path
+        required: true
+        description: The NFT contract address
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NFTData'
+        '404':
+          description: NFT collection not found
+  /nfts/markets:
+    get:
+      operationId: getNFTsMarkets
+      summary: List NFTs with market data
+      description: Get the list of all supported NFT collections with floor price, market cap, volume, and market-related data. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - NFTs
+      parameters:
+      - name: order
+        in: query
+        description: Sort order for results
+        schema:
+          type: string
+          enum:
+          - h24_volume_usd_asc
+          - h24_volume_usd_desc
+          - h24_volume_native_asc
+          - h24_volume_native_desc
+          - floor_price_native_asc
+          - floor_price_native_desc
+          - market_cap_native_asc
+          - market_cap_native_desc
+          - market_cap_usd_asc
+          - market_cap_usd_desc
+      - name: per_page
+        in: query
+        description: Number of results per page (1-250)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 100
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: NFT collection identifier
+                    contract_address:
+                      type: string
+                      description: Contract address
+                    asset_platform_id:
+                      type: string
+                      description: Asset platform identifier
+                    name:
+                      type: string
+                      description: Collection name
+                    image:
+                      type: object
+                      properties:
+                        small:
+                          type: string
+                          format: uri
+                    description:
+                      type: string
+                      description: Collection description
+                    native_currency:
+                      type: string
+                      description: Native currency
+                    floor_price:
+                      type: object
+                      properties:
+                        native_currency:
+                          type: number
+                        usd:
+                          type: number
+                    market_cap:
+                      type: object
+                      properties:
+                        native_currency:
+                          type: number
+                        usd:
+                          type: number
+                    volume_24h:
+                      type: object
+                      properties:
+                        native_currency:
+                          type: number
+                        usd:
+                          type: number
+                    floor_price_24h_percentage_change:
+                      type: object
+                      properties:
+                        native_currency:
+                          type: number
+                        usd:
+                          type: number
+                    number_of_unique_addresses:
+                      type: integer
+                      description: Number of unique holder addresses
+                    total_supply:
+                      type: number
+                      description: Total supply of NFTs
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '403':
+          description: Forbidden - endpoint not available on current plan
+  /nfts/{id}/market_chart:
+    get:
+      operationId: getNFTMarketChart
+      summary: Get NFT collection market chart
+      description: Get historical market chart data for a specific NFT collection including floor price, market cap, and volume data. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - NFTs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The NFT collection ID
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  floor_price_usd:
+                    type: array
+                    description: Floor price data points
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  floor_price_native:
+                    type: array
+                    description: Floor price in native currency data points
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  market_cap_usd:
+                    type: array
+                    description: Market cap data points
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  h24_volume_usd:
+                    type: array
+                    description: 24h volume data points
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  h24_volume_native:
+                    type: array
+                    description: 24h volume in native currency data points
+                    items:
+                      type: array
+                      items:
+                        type: number
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: NFT collection not found
+  /nfts/{asset_platform_id}/contract/{contract_address}/market_chart:
+    get:
+      operationId: getNFTContractMarketChart
+      summary: Get NFT market chart by contract address
+      description: Get historical market chart data for a specific NFT collection by contract address. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - NFTs
+      parameters:
+      - name: asset_platform_id
+        in: path
+        required: true
+        description: The asset platform ID
+        schema:
+          type: string
+      - name: contract_address
+        in: path
+        required: true
+        description: The NFT contract address
+        schema:
+          type: string
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  floor_price_usd:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  floor_price_native:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  market_cap_usd:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  h24_volume_usd:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  h24_volume_native:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: NFT collection not found
+  /nfts/{id}/tickers:
+    get:
+      operationId: getNFTTickers
+      summary: Get NFT collection tickers
+      description: Get the latest floor price and 24h volume tickers for a specific NFT collection across different marketplaces. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - NFTs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The NFT collection ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tickers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        floor_price_in_native_currency:
+                          type: number
+                          description: Floor price in native currency
+                        h24_volume_in_native_currency:
+                          type: number
+                          description: 24h volume in native currency
+                        native_currency:
+                          type: string
+                          description: Native currency symbol
+                        native_currency_symbol:
+                          type: string
+                          description: Native currency display symbol
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Last update timestamp
+                        nft_marketplace_id:
+                          type: string
+                          description: NFT marketplace identifier
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: NFT collection not found
+components:
+  schemas:
+    NFTData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: NFT collection identifier
+        contract_address:
+          type: string
+          description: NFT contract address
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier
+        name:
+          type: string
+          description: NFT collection display name
+        symbol:
+          type: string
+          description: NFT collection symbol
+        image:
+          type: object
+          properties:
+            small:
+              type: string
+              format: uri
+              description: Small image URL
+        description:
+          type: string
+          description: NFT collection description
+        native_currency:
+          type: string
+          description: Native currency for the collection
+        native_currency_symbol:
+          type: string
+          description: Native currency symbol
+        floor_price:
+          type: object
+          description: Floor price in various currencies
+          properties:
+            native_currency:
+              type: number
+            usd:
+              type: number
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          properties:
+            native_currency:
+              type: number
+            usd:
+              type: number
+        volume_24h:
+          type: object
+          description: 24-hour volume in various currencies
+          properties:
+            native_currency:
+              type: number
+            usd:
+              type: number
+        floor_price_in_usd_24h_percentage_change:
+          type: number
+          description: 24-hour floor price change percentage in USD
+        number_of_unique_addresses:
+          type: integer
+          description: Number of unique holder addresses
+        number_of_unique_addresses_24h_percentage_change:
+          type: number
+          description: 24-hour change in unique addresses
+        total_supply:
+          type: number
+          description: Total supply of NFTs in the collection
+    NFTListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: NFT collection identifier
+        contract_address:
+          type: string
+          description: NFT contract address
+        name:
+          type: string
+          description: NFT collection name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier
+        symbol:
+          type: string
+          description: NFT collection symbol
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

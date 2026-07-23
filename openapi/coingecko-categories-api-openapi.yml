@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Categories API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Categories
+  description: List cryptocurrency categories and their market data.
+paths:
+  /coins/categories/list:
+    get:
+      operationId: getCoinsCategoriesList
+      summary: List all categories (ID map)
+      description: Get the complete list of all supported coin categories with their IDs and names. Use this to obtain category IDs for filtering in other endpoints.
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    category_id:
+                      type: string
+                      description: Category identifier
+                    name:
+                      type: string
+                      description: Category display name
+  /coins/categories:
+    get:
+      operationId: getCoinsCategories
+      summary: List categories with market data
+      description: Get the list of all coin categories with market data including market cap, volume, and top coins in each category.
+      tags:
+      - Categories
+      parameters:
+      - name: order
+        in: query
+        description: Sort order for categories
+        schema:
+          type: string
+          enum:
+          - market_cap_desc
+          - market_cap_asc
+          - name_desc
+          - name_asc
+          - market_cap_change_24h_desc
+          - market_cap_change_24h_asc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Category identifier
+        name:
+          type: string
+          description: Category display name
+        market_cap:
+          type: number
+          description: Total market cap of coins in this category
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        content:
+          type: string
+          description: Category description
+        top_3_coins:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: Image URLs of top 3 coins in the category
+        volume_24h:
+          type: number
+          description: 24-hour trading volume
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

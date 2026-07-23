@@ -1,0 +1,259 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Simple API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Simple
+  description: Simple price and token price lookups without the overhead of full coin data responses.
+paths:
+  /simple/price:
+    get:
+      operationId: getSimplePrice
+      summary: Get coin price by IDs
+      description: Query the prices of one or more coins by using their unique CoinGecko coin IDs. Optionally include market cap, 24h volume, 24h change, and last updated timestamp.
+      tags:
+      - Simple
+      parameters:
+      - $ref: '#/components/parameters/coinIds'
+      - $ref: '#/components/parameters/vsCurrencies'
+      - name: include_market_cap
+        in: query
+        description: Include market cap in the response
+        schema:
+          type: boolean
+          default: false
+      - name: include_24hr_vol
+        in: query
+        description: Include 24-hour trading volume in the response
+        schema:
+          type: boolean
+          default: false
+      - name: include_24hr_change
+        in: query
+        description: Include 24-hour price change percentage in the response
+        schema:
+          type: boolean
+          default: false
+      - name: include_last_updated_at
+        in: query
+        description: Include last updated timestamp in the response
+        schema:
+          type: boolean
+          default: false
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values (0-18)
+        schema:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '17'
+          - '18'
+          - full
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: number
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /simple/token_price/{id}:
+    get:
+      operationId: getSimpleTokenPrice
+      summary: Get token price by contract address
+      description: Query the prices of one or more tokens by using their contract addresses on a specific asset platform. This endpoint is useful for looking up token prices when you have the contract address rather than the CoinGecko coin ID.
+      tags:
+      - Simple
+      parameters:
+      - $ref: '#/components/parameters/assetPlatformId'
+      - name: contract_addresses
+        in: query
+        required: true
+        description: Comma-separated list of token contract addresses on the specified asset platform
+        schema:
+          type: string
+      - $ref: '#/components/parameters/vsCurrencies'
+      - name: include_market_cap
+        in: query
+        description: Include market cap in the response
+        schema:
+          type: boolean
+          default: false
+      - name: include_24hr_vol
+        in: query
+        description: Include 24-hour trading volume in the response
+        schema:
+          type: boolean
+          default: false
+      - name: include_24hr_change
+        in: query
+        description: Include 24-hour price change percentage in the response
+        schema:
+          type: boolean
+          default: false
+      - name: include_last_updated_at
+        in: query
+        description: Include last updated timestamp in the response
+        schema:
+          type: boolean
+          default: false
+      - name: precision
+        in: query
+        description: Decimal precision for currency price values (0-18)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: number
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+  /simple/supported_vs_currencies:
+    get:
+      operationId: getSimpleSupportedVsCurrencies
+      summary: Get supported vs currencies
+      description: Get the list of all supported vs currencies (fiat and crypto) that can be used in price queries.
+      tags:
+      - Simple
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Currency identifier (e.g., usd, btc, eth)
+  /onchain/simple/networks/{network}/token_price/{addresses}:
+    get:
+      operationId: getOnchainSimpleTokenPrice
+      summary: Get token prices by contract addresses
+      description: Get the USD prices of multiple tokens on a specific network by their contract addresses. Returns the latest price data for each requested token.
+      tags:
+      - Simple
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: addresses
+        in: path
+        required: true
+        description: Comma-separated list of token contract addresses (up to 30)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          token_prices:
+                            type: object
+                            additionalProperties:
+                              type: string
+                              description: USD price as string
+        '400':
+          description: Bad request - invalid parameters
+        '401':
+          description: Unauthorized - invalid or missing API key
+components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+    coinIds:
+      name: ids
+      in: query
+      required: true
+      description: Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)
+      schema:
+        type: string
+    vsCurrencies:
+      name: vs_currencies
+      in: query
+      required: true
+      description: Comma-separated list of target currencies (e.g., usd,eur,btc)
+      schema:
+        type: string
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      schema:
+        type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

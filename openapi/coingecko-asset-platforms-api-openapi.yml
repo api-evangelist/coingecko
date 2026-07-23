@@ -1,0 +1,75 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Asset Platforms
+  description: List all asset platforms (blockchains) supported by CoinGecko.
+paths:
+  /asset_platforms:
+    get:
+      operationId: getAssetPlatforms
+      summary: List asset platforms
+      description: Get the list of all asset platforms (blockchains) supported by CoinGecko. Each platform includes its chain identifier and native coin ID.
+      tags:
+      - Asset Platforms
+      parameters:
+      - name: filter
+        in: query
+        description: Filter by platform type (e.g., nft to get NFT-supported platforms)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssetPlatform'
+components:
+  schemas:
+    AssetPlatform:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Asset platform identifier
+        chain_identifier:
+          type: integer
+          description: Blockchain chain ID
+        name:
+          type: string
+          description: Asset platform display name
+        shortname:
+          type: string
+          description: Short name abbreviation
+        native_coin_id:
+          type: string
+          description: CoinGecko ID of the native coin
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

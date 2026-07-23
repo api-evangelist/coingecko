@@ -1,0 +1,440 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Exchanges API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Exchanges
+  description: Exchange data including volumes, tickers, and status updates.
+paths:
+  /exchanges:
+    get:
+      operationId: getExchanges
+      summary: List all exchanges
+      description: Get a paginated list of all supported exchanges with volume, trust score, and other exchange-related data. Results are ordered by trading volume by default.
+      tags:
+      - Exchanges
+      parameters:
+      - name: per_page
+        in: query
+        description: Number of results per page (1-250)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 100
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Exchange'
+  /exchanges/list:
+    get:
+      operationId: getExchangesList
+      summary: List all supported exchanges (ID map)
+      description: Get the complete list of all supported exchange IDs and names. Use this to obtain exchange IDs for use in other endpoints.
+      tags:
+      - Exchanges
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Exchange identifier
+                    name:
+                      type: string
+                      description: Exchange display name
+  /exchanges/{id}:
+    get:
+      operationId: getExchangeById
+      summary: Get exchange data by ID
+      description: Get comprehensive data for a specific exchange including volume, trust score, year established, country, and social links.
+      tags:
+      - Exchanges
+      parameters:
+      - $ref: '#/components/parameters/exchangeId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeData'
+        '404':
+          description: Exchange not found
+  /exchanges/{id}/tickers:
+    get:
+      operationId: getExchangeTickers
+      summary: Get exchange tickers
+      description: Get paginated trading pair tickers for a specific exchange. Results include price, volume, spread, and trust score data for each trading pair.
+      tags:
+      - Exchanges
+      parameters:
+      - $ref: '#/components/parameters/exchangeId'
+      - name: coin_ids
+        in: query
+        description: Filter tickers by coin IDs (comma-separated)
+        schema:
+          type: string
+      - name: include_exchange_logo
+        in: query
+        description: Include exchange logo URL in the response
+        schema:
+          type: boolean
+          default: false
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      - name: depth
+        in: query
+        description: Include order book depth (2% cost to move)
+        schema:
+          type: boolean
+          default: false
+      - name: order
+        in: query
+        description: Sort order for tickers
+        schema:
+          type: string
+          enum:
+          - trust_score_desc
+          - trust_score_asc
+          - volume_desc
+          - volume_asc
+          default: trust_score_desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Exchange name
+                  tickers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ticker'
+        '404':
+          description: Exchange not found
+  /exchanges/{id}/volume_chart:
+    get:
+      operationId: getExchangeVolumeChart
+      summary: Get exchange volume chart data
+      description: Get historical volume chart data for a specific exchange over a specified number of days.
+      tags:
+      - Exchanges
+      parameters:
+      - $ref: '#/components/parameters/exchangeId'
+      - name: days
+        in: query
+        required: true
+        description: Number of days of historical data (1, 7, 14, 30, 90, 180, 365)
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Volume data point as [timestamp, volume_in_btc]
+                  items:
+                    type: string
+                  minItems: 2
+                  maxItems: 2
+        '404':
+          description: Exchange not found
+  /exchanges/{id}/volume_chart/range:
+    get:
+      operationId: getExchangeVolumeChartRange
+      summary: Get exchange volume chart within date range
+      description: Get historical volume chart data for a specific exchange within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.
+      tags:
+      - Exchanges
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The exchange ID
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: true
+        description: Start date as UNIX timestamp
+        schema:
+          type: number
+      - name: to
+        in: query
+        required: true
+        description: End date as UNIX timestamp
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  description: Volume data point as [timestamp, volume_in_btc]
+                  items:
+                    type: string
+                  minItems: 2
+                  maxItems: 2
+        '401':
+          description: Unauthorized - invalid or missing Pro API key
+        '404':
+          description: Exchange not found
+components:
+  schemas:
+    Ticker:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency ticker
+        target:
+          type: string
+          description: Target currency ticker
+        market:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Exchange name
+            identifier:
+              type: string
+              description: Exchange identifier
+            has_trading_incentive:
+              type: boolean
+              description: Whether the exchange has trading incentives
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        converted_last:
+          type: object
+          description: Last price converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        converted_volume:
+          type: object
+          description: Volume converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        trust_score:
+          type: string
+          description: Trust score color (green, yellow, red)
+        bid_ask_spread_percentage:
+          type: number
+          description: Bid-ask spread percentage
+        timestamp:
+          type: string
+          format: date-time
+          description: Ticker data timestamp
+        last_traded_at:
+          type: string
+          format: date-time
+          description: Last trade timestamp
+        last_fetch_at:
+          type: string
+          format: date-time
+          description: Last data fetch timestamp
+        is_anomaly:
+          type: boolean
+          description: Whether the ticker is flagged as anomalous
+        is_stale:
+          type: boolean
+          description: Whether the ticker data is stale
+        trade_url:
+          type: string
+          format: uri
+          description: URL to trade this pair
+        coin_id:
+          type: string
+          description: CoinGecko coin ID of base currency
+        target_coin_id:
+          type: string
+          description: CoinGecko coin ID of target currency
+    Exchange:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Exchange identifier
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
+    ExchangeData:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        facebook_url:
+          type: string
+          format: uri
+          description: Exchange Facebook URL
+        reddit_url:
+          type: string
+          format: uri
+          description: Exchange Reddit URL
+        telegram_url:
+          type: string
+          format: uri
+          description: Exchange Telegram URL
+        slack_url:
+          type: string
+          format: uri
+          description: Exchange Slack URL
+        other_url_1:
+          type: string
+          format: uri
+          description: Other URL 1
+        other_url_2:
+          type: string
+          format: uri
+          description: Other URL 2
+        twitter_handle:
+          type: string
+          description: Exchange Twitter handle
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        centralized:
+          type: boolean
+          description: Whether the exchange is centralized
+        public_notice:
+          type: string
+          description: Public notices from the exchange
+        alert_notice:
+          type: string
+          description: Alert notices from the exchange
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
+        tickers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticker'
+  parameters:
+    exchangeId:
+      name: id
+      in: path
+      required: true
+      description: The exchange ID (e.g., binance, coinbase-exchange)
+      schema:
+        type: string
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

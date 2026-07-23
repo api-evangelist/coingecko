@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Exchange Rates API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Exchange Rates
+  description: BTC exchange rates against other currencies.
+paths:
+  /exchange_rates:
+    get:
+      operationId: getExchangeRates
+      summary: Get BTC exchange rates
+      description: Get the current exchange rates for BTC against all supported currencies. Includes fiat currencies, cryptocurrencies, and precious metals.
+      tags:
+      - Exchange Rates
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rates:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/ExchangeRate'
+components:
+  schemas:
+    ExchangeRate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Currency name
+        unit:
+          type: string
+          description: Currency unit symbol
+        value:
+          type: number
+          description: Exchange rate value relative to BTC
+        type:
+          type: string
+          description: Currency type (fiat, crypto, commodity)
+          enum:
+          - fiat
+          - crypto
+          - commodity
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com

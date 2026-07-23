@@ -1,0 +1,141 @@
+openapi: 3.1.0
+info:
+  title: CoinGecko Crypto Market Data Asset Platforms Trades API
+  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  version: 3.0.1
+  contact:
+    name: CoinGecko Support
+    url: https://support.coingecko.com
+  termsOfService: https://www.coingecko.com/en/terms
+servers:
+- url: https://api.coingecko.com/api/v3
+  description: CoinGecko Demo API Server
+security:
+- demoApiKeyHeader: []
+- demoApiKeyQuery: []
+tags:
+- name: Trades
+  description: Recent trade data for specific liquidity pools.
+paths:
+  /onchain/networks/{network}/pools/{pool_address}/trades:
+    get:
+      operationId: getOnchainPoolTrades
+      summary: Get recent trades for a pool
+      description: Get the most recent trades for a specific liquidity pool on a given network. Returns trade details including price, volume, and transaction hashes.
+      tags:
+      - Trades
+      parameters:
+      - $ref: '#/components/parameters/networkId'
+      - name: pool_address
+        in: path
+        required: true
+        description: The pool contract address
+        schema:
+          type: string
+      - name: trade_volume_in_usd_greater_than
+        in: query
+        description: Filter trades by minimum USD volume
+        schema:
+          type: number
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trade'
+        '404':
+          description: Pool not found
+components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
+  schemas:
+    Trade:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Trade identifier
+        type:
+          type: string
+          description: Resource type (trade)
+        attributes:
+          type: object
+          properties:
+            block_number:
+              type: integer
+              description: Block number of the trade
+            block_timestamp:
+              type: string
+              format: date-time
+              description: Timestamp of the block containing the trade
+            tx_hash:
+              type: string
+              description: Transaction hash
+            tx_from_address:
+              type: string
+              description: Address that initiated the transaction
+            from_token_amount:
+              type: string
+              description: Amount of the from token
+            to_token_amount:
+              type: string
+              description: Amount of the to token
+            price_from_in_currency_token:
+              type: string
+              description: Price of the from token in the currency token
+            price_to_in_currency_token:
+              type: string
+              description: Price of the to token in the currency token
+            price_from_in_usd:
+              type: string
+              description: Price of the from token in USD
+            price_to_in_usd:
+              type: string
+              description: Price of the to token in USD
+            kind:
+              type: string
+              description: Trade direction (buy or sell)
+              enum:
+              - buy
+              - sell
+            volume_in_usd:
+              type: string
+              description: Trade volume in USD
+            from_token_address:
+              type: string
+              description: Contract address of the from token
+            to_token_address:
+              type: string
+              description: Contract address of the to token
+  securitySchemes:
+    demoApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-demo-api-key
+      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+    demoApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_demo_api_key
+      description: CoinGecko Demo API key passed via query string parameter.
+externalDocs:
+  description: CoinGecko API Documentation
+  url: https://docs.coingecko.com
