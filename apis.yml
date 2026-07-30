@@ -16,7 +16,20 @@ tags:
   - Prices
 type: Index
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/coingecko.png
 access: 3rd-Party
 created: '2026-03-20'
 modified: '2026-05-29'
@@ -29,117 +42,543 @@ description: >-
   exchange data across 250+ networks. Authentication uses x-cg-demo-api-key (Demo) or x-cg-pro-api-key (Pro) headers,
   with rate limits ranging from 30 calls per minute on Demo to 1,000 calls per minute on top Pro tiers.
 apis:
-  - aid: coingecko:crypto-market-data-api
-    name: CoinGecko Crypto Market Data API
-    tags:
-      - Blockchain
-      - Cryptocurrency
-      - Exchanges
-      - Market Data
-      - NFTs
-      - Prices
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.coingecko.com/api/v3
-    humanURL: https://docs.coingecko.com
-    properties:
-      - url: https://docs.coingecko.com
-        type: Documentation
-      - url: https://www.coingecko.com/en/api/pricing
-        type: Pricing
-      - url: https://www.coingecko.com/en/api
-        type: Landing Page
-      - type: OpenAPI
-        url: openapi/coingecko-crypto-market-data-api-openapi.yml
-    description: >-
-      The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data
-      through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading
-      volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public
-      treasury holdings for over 18,000 coins.
-    x-features:
-      - 70+ REST endpoints in a single normalized API
-      - Real-time and historical price feeds
-      - OHLCV chart data for charting and analysis
-      - Exchange, derivatives, and NFT metrics
-      - Public company treasury holdings
-      - Demo plan free tier with x-cg-demo-api-key auth
-    x-use-cases:
-      - Power crypto pricing widgets and tickers
-      - Backtest strategies against historical OHLCV
-      - Display NFT collection floor prices
-      - Compute portfolio valuations across many assets
-  - aid: coingecko:pro-api
-    name: CoinGecko Pro API
-    tags:
-      - Commercial
-      - Cryptocurrency
-      - Enterprise
-      - Market Data
-      - Prices
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://pro-api.coingecko.com/api/v3
-    humanURL: https://docs.coingecko.com/reference/introduction
-    properties:
-      - url: https://docs.coingecko.com/reference/introduction
-        type: Documentation
-      - url: https://www.coingecko.com/en/api/pricing
-        type: Pricing
-      - type: OpenAPI
-        url: openapi/coingecko-pro-api-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/coingecko-asyncapi.yml
-    description: >-
-      The CoinGecko Pro API provides the same comprehensive cryptocurrency market data as the standard API but with
-      enhanced performance, higher rate limits of up to 1,000 calls per minute, and faster data updates with prices
-      cached every 30 seconds. It includes exclusive endpoints for advanced analytics, detailed market data, and
-      historical granularity that are not available on the free Demo plan.
-    x-features:
-      - Up to 1,000 calls per minute (top Pro tier)
-      - 30-second price cache for fresher data
-      - Exclusive endpoints (e.g., circulating supply chart, hourly OHLC)
-      - Higher historical depth than Demo
-      - Authenticated via x-cg-pro-api-key
-      - Commercial usage allowed under Pro license
-    x-use-cases:
-      - Run commercial pricing engines and trading services
-      - Power exchange and brokerage dashboards
-      - Stream high-frequency analytics into BI tools
-      - Operate research products with full historical depth
-  - aid: coingecko:onchain-dex-api
-    name: CoinGecko Onchain DEX API
-    tags:
-      - Blockchain
-      - Decentralized Exchanges
-      - DeFi
-      - DEX
-      - Liquidity Pools
-      - Onchain Data
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.coingecko.com/api/v3/onchain
-    humanURL: https://www.coingecko.com/en/api/dex
-    properties:
-      - url: https://docs.coingecko.com/reference/endpoint-overview
-        type: Documentation
-      - url: https://www.coingecko.com/en/api/dex
-        type: Landing Page
-      - type: OpenAPI
-        url: openapi/coingecko-onchain-dex-api-openapi.yml
-    description: >-
-      The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access to real-time decentralized exchange data
-      across over 250 blockchain networks, 1,800 DEXes, and 30 million tokens. It offers more than 20 endpoints for
-      querying liquidity pools, token data by contract address, OHLCV chart data, trending pools, and pool search
-      functionality.
-    x-features:
-      - 250+ blockchain networks supported
-      - 1,800+ DEXes and 30M+ tokens
-      - Lookup tokens by contract address
-      - Trending and search endpoints for discovery
-      - Pool-level OHLCV chart data
-    x-use-cases:
-      - Track new and trending DEX pools
-      - Display on-chain prices for long-tail tokens
-      - Analyze liquidity and volume across networks
-      - Monitor wallet exposure to DeFi pools
+- aid: coingecko:coingecko-asset-platforms-api
+  name: CoinGecko Asset Platforms API
+  description: List all asset platforms (blockchains) supported by CoinGecko.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Asset Platforms
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-asset-platforms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-categories-api
+  name: CoinGecko Categories API
+  description: List cryptocurrency categories and their market data.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-categories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-coins-api
+  name: CoinGecko Coins API
+  description: >-
+    Comprehensive coin data including current prices, market data, historical data, tickers, and OHLCV
+    charts.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Coins
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-coins-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-companies-api
+  name: CoinGecko Companies API
+  description: Public company cryptocurrency holdings data.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-companies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-contract-api
+  name: CoinGecko Contract API
+  description: Query coin data by contract address on a specific asset platform.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Contract
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-contract-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-derivatives-api
+  name: CoinGecko Derivatives API
+  description: Derivatives market data including tickers and exchange information.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Derivatives
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-derivatives-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-dexes-api
+  name: CoinGecko DEXes API
+  description: List decentralized exchanges on specific networks.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - DEXes
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-dexes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-exchange-rates-api
+  name: CoinGecko Exchange Rates API
+  description: BTC exchange rates against other currencies.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Exchange Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-exchange-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-exchanges-api
+  name: CoinGecko Exchanges API
+  description: Exchange data including volumes, tickers, and status updates.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Exchanges
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-exchanges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-global-api
+  name: CoinGecko Global API
+  description: Global cryptocurrency and DeFi market data.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Global
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-global-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-networks-api
+  name: CoinGecko Networks API
+  description: List and query supported blockchain networks.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-networks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-nfts-api
+  name: CoinGecko NFTs API
+  description: NFT collection data including floor prices and market information.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - NFTs
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-nfts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-ohlcv-api
+  name: CoinGecko OHLCV API
+  description: Open, High, Low, Close, Volume candlestick chart data for liquidity pools.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - OHLCV
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-ohlcv-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-ping-api
+  name: CoinGecko Ping API
+  description: Check API server status
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-ping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-pools-api
+  name: CoinGecko Pools API
+  description: >-
+    Query liquidity pool data including specific pools, top pools, new pools, and multi-pool lookups.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-pools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-search-api
+  name: CoinGecko Search API
+  description: Search for coins, exchanges, and categories.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-simple-api
+  name: CoinGecko Simple API
+  description: Simple price and token price lookups without the overhead of full coin data responses.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Simple
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-simple-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-token-lists-api
+  name: CoinGecko Token Lists API
+  description: >-
+    Token list endpoints for paid plan subscribers providing standardized token lists by asset platform.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Token Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-token-lists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-tokens-api
+  name: CoinGecko Tokens API
+  description: >-
+    Query token data by contract address including price, volume, top pools, and token information.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-trades-api
+  name: CoinGecko Trades API
+  description: Recent trade data for specific liquidity pools.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Trades
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-trades-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-trending-api
+  name: CoinGecko Trending API
+  description: Trending coins, NFTs, and categories on CoinGecko.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Trending
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-trending-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-trending-pools-api
+  name: CoinGecko Trending Pools API
+  description: >-
+    Discover trending liquidity pools across networks based on web visits and onchain activity.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - Trending Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-trending-pools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/coingecko/overview
   - type: AgenticAccess
     url: agentic-access/coingecko-agentic-access.yml
   - type: DomainSecurity
