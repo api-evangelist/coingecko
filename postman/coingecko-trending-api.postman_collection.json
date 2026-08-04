@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "e0b1577e-91ad-4f9d-b8bf-12933370ab57",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Trending API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:25:05.000Z",
+    "updatedAt": "2026-07-28T01:25:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e0b1577e-91ad-4f9d-b8bf-12933370ab57"
+  },
+  "item": [
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "trending",
+          "item": [
+            {
+              "name": "Get trending search list",
+              "id": "a5841f83-51e5-4e2f-b3d1-77795c6f56de",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/search/trending",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search",
+                    "trending"
+                  ]
+                },
+                "description": "Get the top trending coins, NFTs, and categories on CoinGecko based on search activity in the last 24 hours. Includes the top 7 trending coins with market data."
+              },
+              "response": [
+                {
+                  "id": "758a0e73-7b92-4443-95d2-7659cc517036",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/search/trending",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "search",
+                        "trending"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"coins\": [\n    {\n      \"item\": {\n        \"id\": \"<string>\",\n        \"coin_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\",\n        \"market_cap_rank\": \"<integer>\",\n        \"thumb\": \"<string>\",\n        \"small\": \"<string>\",\n        \"large\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"price_btc\": \"<number>\",\n        \"score\": \"<integer>\"\n      }\n    },\n    {\n      \"item\": {\n        \"id\": \"<string>\",\n        \"coin_id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\",\n        \"market_cap_rank\": \"<integer>\",\n        \"thumb\": \"<string>\",\n        \"small\": \"<string>\",\n        \"large\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"price_btc\": \"<number>\",\n        \"score\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:25:06.000Z",
+                  "updatedAt": "2026-07-28T01:25:06.000Z",
+                  "uid": "35240-758a0e73-7b92-4443-95d2-7659cc517036"
+                }
+              ],
+              "createdAt": "2026-07-28T01:25:06.000Z",
+              "updatedAt": "2026-07-28T01:25:06.000Z",
+              "uid": "35240-a5841f83-51e5-4e2f-b3d1-77795c6f56de"
+            }
+          ],
+          "id": "590ceb8d-c23e-451d-89c6-a4676449e670",
+          "createdAt": "2026-07-28T01:25:06.000Z",
+          "updatedAt": "2026-07-28T01:25:06.000Z",
+          "uid": "35240-590ceb8d-c23e-451d-89c6-a4676449e670"
+        }
+      ],
+      "id": "afbd6a39-7fb8-43a9-8531-e3e222c25dfd",
+      "createdAt": "2026-07-28T01:25:06.000Z",
+      "updatedAt": "2026-07-28T01:25:06.000Z",
+      "uid": "35240-afbd6a39-7fb8-43a9-8531-e3e222c25dfd"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

@@ -1,0 +1,1091 @@
+{
+  "info": {
+    "_postman_id": "5c7a5f8d-7f4f-497f-b87e-a206c5a52991",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Simple API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:25:01.000Z",
+    "updatedAt": "2026-07-28T01:25:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5c7a5f8d-7f4f-497f-b87e-a206c5a52991"
+  },
+  "item": [
+    {
+      "name": "simple",
+      "item": [
+        {
+          "name": "price",
+          "item": [
+            {
+              "name": "Get coin price by IDs",
+              "id": "d7c0e9a7-dbd1-4393-8438-cf5366b4ad3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/simple/price?ids=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "simple",
+                    "price"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                      "key": "vs_currencies",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include market cap in the response",
+                      "key": "include_market_cap",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Include 24-hour trading volume in the response",
+                      "key": "include_24hr_vol",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Include 24-hour price change percentage in the response",
+                      "key": "include_24hr_change",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Include last updated timestamp in the response",
+                      "key": "include_last_updated_at",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Decimal precision for currency price values (0-18)",
+                      "key": "precision",
+                      "value": "9"
+                    }
+                  ]
+                },
+                "description": "Query the prices of one or more coins by using their unique CoinGecko coin IDs. Optionally include market cap, 24h volume, 24h change, and last updated timestamp."
+              },
+              "response": [
+                {
+                  "id": "d39de400-9093-414b-adf0-21ecc89cd5f3",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/simple/price?ids=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=9",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "simple",
+                        "price"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                          "key": "vs_currencies",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include market cap in the response",
+                          "key": "include_market_cap",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour trading volume in the response",
+                          "key": "include_24hr_vol",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour price change percentage in the response",
+                          "key": "include_24hr_change",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include last updated timestamp in the response",
+                          "key": "include_last_updated_at",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Decimal precision for currency price values (0-18)",
+                          "key": "precision",
+                          "value": "9"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"nisi6\": {\n    \"quieb\": \"<number>\",\n    \"culpa016\": \"<number>\",\n    \"cillum_08c\": \"<number>\"\n  },\n  \"est_3\": {\n    \"quis_b\": \"<number>\"\n  },\n  \"velit1\": {\n    \"cillum__\": \"<number>\",\n    \"incididunt_e\": \"<number>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-d39de400-9093-414b-adf0-21ecc89cd5f3"
+                },
+                {
+                  "id": "5c9b5026-4050-4fef-8198-8adad63cf40b",
+                  "name": "Bad request - invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/simple/price?ids=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=9",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "simple",
+                        "price"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                          "key": "vs_currencies",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include market cap in the response",
+                          "key": "include_market_cap",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour trading volume in the response",
+                          "key": "include_24hr_vol",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour price change percentage in the response",
+                          "key": "include_24hr_change",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include last updated timestamp in the response",
+                          "key": "include_last_updated_at",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Decimal precision for currency price values (0-18)",
+                          "key": "precision",
+                          "value": "9"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-5c9b5026-4050-4fef-8198-8adad63cf40b"
+                },
+                {
+                  "id": "495111ad-4a40-4f20-bebb-6adbeb43121b",
+                  "name": "Unauthorized - invalid or missing API key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/simple/price?ids=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=9",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "simple",
+                        "price"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                          "key": "vs_currencies",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include market cap in the response",
+                          "key": "include_market_cap",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour trading volume in the response",
+                          "key": "include_24hr_vol",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour price change percentage in the response",
+                          "key": "include_24hr_change",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include last updated timestamp in the response",
+                          "key": "include_last_updated_at",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Decimal precision for currency price values (0-18)",
+                          "key": "precision",
+                          "value": "9"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-495111ad-4a40-4f20-bebb-6adbeb43121b"
+                },
+                {
+                  "id": "78278d6f-b823-460b-9e6c-deeb3bfdfee4",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/simple/price?ids=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=9",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "simple",
+                        "price"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)",
+                          "key": "ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                          "key": "vs_currencies",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include market cap in the response",
+                          "key": "include_market_cap",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour trading volume in the response",
+                          "key": "include_24hr_vol",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour price change percentage in the response",
+                          "key": "include_24hr_change",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include last updated timestamp in the response",
+                          "key": "include_last_updated_at",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Decimal precision for currency price values (0-18)",
+                          "key": "precision",
+                          "value": "9"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-78278d6f-b823-460b-9e6c-deeb3bfdfee4"
+                }
+              ],
+              "createdAt": "2026-07-28T01:25:02.000Z",
+              "updatedAt": "2026-07-28T01:25:02.000Z",
+              "uid": "35240-d7c0e9a7-dbd1-4393-8438-cf5366b4ad3e"
+            }
+          ],
+          "id": "7b9c12e8-240f-4b43-88fa-388bc743978f",
+          "createdAt": "2026-07-28T01:25:02.000Z",
+          "updatedAt": "2026-07-28T01:25:02.000Z",
+          "uid": "35240-7b9c12e8-240f-4b43-88fa-388bc743978f"
+        },
+        {
+          "name": "token_price",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get token price by contract address",
+                  "id": "1b625a40-6c23-41a4-bb06-a1c6b60844e2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/simple/token_price/:id?contract_addresses=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "simple",
+                        "token_price",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma-separated list of token contract addresses on the specified asset platform",
+                          "key": "contract_addresses",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                          "key": "vs_currencies",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include market cap in the response",
+                          "key": "include_market_cap",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour trading volume in the response",
+                          "key": "include_24hr_vol",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include 24-hour price change percentage in the response",
+                          "key": "include_24hr_change",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Include last updated timestamp in the response",
+                          "key": "include_last_updated_at",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Decimal precision for currency price values (0-18)",
+                          "key": "precision",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "84c7358d-df03-44ab-8308-db8516c32e9c",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                        }
+                      ]
+                    },
+                    "description": "Query the prices of one or more tokens by using their contract addresses on a specific asset platform. This endpoint is useful for looking up token prices when you have the contract address rather than the CoinGecko coin ID."
+                  },
+                  "response": [
+                    {
+                      "id": "0df2ea1a-17d3-481a-b87a-3b69879d5c93",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/simple/token_price/:id?contract_addresses=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "simple",
+                            "token_price",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Comma-separated list of token contract addresses on the specified asset platform",
+                              "key": "contract_addresses",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                              "key": "vs_currencies",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Include market cap in the response",
+                              "key": "include_market_cap",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include 24-hour trading volume in the response",
+                              "key": "include_24hr_vol",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include 24-hour price change percentage in the response",
+                              "key": "include_24hr_change",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include last updated timestamp in the response",
+                              "key": "include_last_updated_at",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Decimal precision for currency price values (0-18)",
+                              "key": "precision",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"nisi6\": {\n    \"quieb\": \"<number>\",\n    \"culpa016\": \"<number>\",\n    \"cillum_08c\": \"<number>\"\n  },\n  \"est_3\": {\n    \"quis_b\": \"<number>\"\n  },\n  \"velit1\": {\n    \"cillum__\": \"<number>\",\n    \"incididunt_e\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:25:02.000Z",
+                      "updatedAt": "2026-07-28T01:25:02.000Z",
+                      "uid": "35240-0df2ea1a-17d3-481a-b87a-3b69879d5c93"
+                    },
+                    {
+                      "id": "7860c28b-f9f3-4e63-8505-4ce54e953ca3",
+                      "name": "Bad request - invalid parameters",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/simple/token_price/:id?contract_addresses=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "simple",
+                            "token_price",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Comma-separated list of token contract addresses on the specified asset platform",
+                              "key": "contract_addresses",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                              "key": "vs_currencies",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Include market cap in the response",
+                              "key": "include_market_cap",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include 24-hour trading volume in the response",
+                              "key": "include_24hr_vol",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include 24-hour price change percentage in the response",
+                              "key": "include_24hr_change",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include last updated timestamp in the response",
+                              "key": "include_last_updated_at",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Decimal precision for currency price values (0-18)",
+                              "key": "precision",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:25:02.000Z",
+                      "updatedAt": "2026-07-28T01:25:02.000Z",
+                      "uid": "35240-7860c28b-f9f3-4e63-8505-4ce54e953ca3"
+                    },
+                    {
+                      "id": "24cddf17-b4f7-45f2-afdc-6dedd42dc45f",
+                      "name": "Unauthorized - invalid or missing API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/simple/token_price/:id?contract_addresses=<string>&vs_currencies=<string>&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "simple",
+                            "token_price",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Comma-separated list of token contract addresses on the specified asset platform",
+                              "key": "contract_addresses",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Comma-separated list of target currencies (e.g., usd,eur,btc)",
+                              "key": "vs_currencies",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Include market cap in the response",
+                              "key": "include_market_cap",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include 24-hour trading volume in the response",
+                              "key": "include_24hr_vol",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include 24-hour price change percentage in the response",
+                              "key": "include_24hr_change",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Include last updated timestamp in the response",
+                              "key": "include_last_updated_at",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Decimal precision for currency price values (0-18)",
+                              "key": "precision",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:25:02.000Z",
+                      "updatedAt": "2026-07-28T01:25:02.000Z",
+                      "uid": "35240-24cddf17-b4f7-45f2-afdc-6dedd42dc45f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-1b625a40-6c23-41a4-bb06-a1c6b60844e2"
+                }
+              ],
+              "id": "491db686-ac9e-4eed-b713-5083cdf44ac9",
+              "createdAt": "2026-07-28T01:25:02.000Z",
+              "updatedAt": "2026-07-28T01:25:02.000Z",
+              "uid": "35240-491db686-ac9e-4eed-b713-5083cdf44ac9"
+            }
+          ],
+          "id": "ab4d3c0e-73ba-4f91-848b-a4bd3f123681",
+          "createdAt": "2026-07-28T01:25:02.000Z",
+          "updatedAt": "2026-07-28T01:25:02.000Z",
+          "uid": "35240-ab4d3c0e-73ba-4f91-848b-a4bd3f123681"
+        },
+        {
+          "name": "supported_vs_currencies",
+          "item": [
+            {
+              "name": "Get supported vs currencies",
+              "id": "9292611b-8936-4f8b-ac63-7a4b1eb7fe76",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/simple/supported_vs_currencies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "simple",
+                    "supported_vs_currencies"
+                  ]
+                },
+                "description": "Get the list of all supported vs currencies (fiat and crypto) that can be used in price queries."
+              },
+              "response": [
+                {
+                  "id": "1f94bb10-ead0-45ac-92d1-5bb28c15ce33",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/simple/supported_vs_currencies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "simple",
+                        "supported_vs_currencies"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-1f94bb10-ead0-45ac-92d1-5bb28c15ce33"
+                }
+              ],
+              "createdAt": "2026-07-28T01:25:02.000Z",
+              "updatedAt": "2026-07-28T01:25:02.000Z",
+              "uid": "35240-9292611b-8936-4f8b-ac63-7a4b1eb7fe76"
+            }
+          ],
+          "id": "be3a560e-77ea-467f-be32-1c069aa4e2c5",
+          "createdAt": "2026-07-28T01:25:02.000Z",
+          "updatedAt": "2026-07-28T01:25:02.000Z",
+          "uid": "35240-be3a560e-77ea-467f-be32-1c069aa4e2c5"
+        }
+      ],
+      "id": "227df20f-90e8-4dfb-b40d-5475857b7d4a",
+      "createdAt": "2026-07-28T01:25:02.000Z",
+      "updatedAt": "2026-07-28T01:25:02.000Z",
+      "uid": "35240-227df20f-90e8-4dfb-b40d-5475857b7d4a"
+    },
+    {
+      "name": "onchain",
+      "item": [
+        {
+          "name": "simple",
+          "item": [
+            {
+              "name": "networks",
+              "item": [
+                {
+                  "name": "{network}",
+                  "item": [
+                    {
+                      "name": "token_price",
+                      "item": [
+                        {
+                          "name": "{addresses}",
+                          "item": [
+                            {
+                              "name": "Get token prices by contract addresses",
+                              "id": "f9ec007a-bbe5-4d61-b461-ef4845ecfc65",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/onchain/simple/networks/:network/token_price/:addresses",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "onchain",
+                                    "simple",
+                                    "networks",
+                                    ":network",
+                                    "token_price",
+                                    ":addresses"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0e6f2cd1-bfc5-4cea-8e10-44528b82b946",
+                                      "key": "network",
+                                      "value": "<string>",
+                                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                                    },
+                                    {
+                                      "id": "b04f4be6-d9f5-4266-8b66-e69a65bae8ab",
+                                      "key": "addresses",
+                                      "value": "<string>",
+                                      "description": "(Required) Comma-separated list of token contract addresses (up to 30)"
+                                    }
+                                  ]
+                                },
+                                "description": "Get the USD prices of multiple tokens on a specific network by their contract addresses. Returns the latest price data for each requested token."
+                              },
+                              "response": [
+                                {
+                                  "id": "fafef9dc-fc4c-4902-8a33-5848619b390f",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/simple/networks/:network/token_price/:addresses",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "simple",
+                                        "networks",
+                                        ":network",
+                                        "token_price",
+                                        ":addresses"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "addresses"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"token_prices\": {\n        \"irure_3b\": \"<string>\",\n        \"adipisicing_ec3\": \"<string>\"\n      }\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T01:25:02.000Z",
+                                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                                  "uid": "35240-fafef9dc-fc4c-4902-8a33-5848619b390f"
+                                },
+                                {
+                                  "id": "b2a1febc-726e-4035-89ab-89bf17ab710e",
+                                  "name": "Bad request - invalid parameters",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/simple/networks/:network/token_price/:addresses",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "simple",
+                                        "networks",
+                                        ":network",
+                                        "token_price",
+                                        ":addresses"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "addresses"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T01:25:02.000Z",
+                                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                                  "uid": "35240-b2a1febc-726e-4035-89ab-89bf17ab710e"
+                                },
+                                {
+                                  "id": "b6717a34-37aa-409d-a175-4a20e716e528",
+                                  "name": "Unauthorized - invalid or missing API key",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/simple/networks/:network/token_price/:addresses",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "simple",
+                                        "networks",
+                                        ":network",
+                                        "token_price",
+                                        ":addresses"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "addresses"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T01:25:02.000Z",
+                                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                                  "uid": "35240-b6717a34-37aa-409d-a175-4a20e716e528"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:25:02.000Z",
+                              "updatedAt": "2026-07-28T01:25:02.000Z",
+                              "uid": "35240-f9ec007a-bbe5-4d61-b461-ef4845ecfc65"
+                            }
+                          ],
+                          "id": "6a9f8d66-b359-4cae-852c-53538ba9ca2a",
+                          "createdAt": "2026-07-28T01:25:02.000Z",
+                          "updatedAt": "2026-07-28T01:25:02.000Z",
+                          "uid": "35240-6a9f8d66-b359-4cae-852c-53538ba9ca2a"
+                        }
+                      ],
+                      "id": "29d12038-6dbd-4fc4-a670-d93e8823ca1f",
+                      "createdAt": "2026-07-28T01:25:02.000Z",
+                      "updatedAt": "2026-07-28T01:25:02.000Z",
+                      "uid": "35240-29d12038-6dbd-4fc4-a670-d93e8823ca1f"
+                    }
+                  ],
+                  "id": "682f1973-64d7-41a2-80f2-fface6eb5719",
+                  "createdAt": "2026-07-28T01:25:02.000Z",
+                  "updatedAt": "2026-07-28T01:25:02.000Z",
+                  "uid": "35240-682f1973-64d7-41a2-80f2-fface6eb5719"
+                }
+              ],
+              "id": "e0b46051-1297-4098-920e-9e21fa0a5ba0",
+              "createdAt": "2026-07-28T01:25:02.000Z",
+              "updatedAt": "2026-07-28T01:25:02.000Z",
+              "uid": "35240-e0b46051-1297-4098-920e-9e21fa0a5ba0"
+            }
+          ],
+          "id": "e7402069-6b48-4ce5-9730-ee33268cdced",
+          "createdAt": "2026-07-28T01:25:02.000Z",
+          "updatedAt": "2026-07-28T01:25:02.000Z",
+          "uid": "35240-e7402069-6b48-4ce5-9730-ee33268cdced"
+        }
+      ],
+      "id": "0862843a-d189-4193-9170-cacd79445685",
+      "createdAt": "2026-07-28T01:25:02.000Z",
+      "updatedAt": "2026-07-28T01:25:02.000Z",
+      "uid": "35240-0862843a-d189-4193-9170-cacd79445685"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

@@ -1,0 +1,1092 @@
+{
+  "info": {
+    "_postman_id": "177569a4-eb41-4227-87f0-38d280cf8f9e",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Pools API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:24:49.000Z",
+    "updatedAt": "2026-07-28T01:24:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-177569a4-eb41-4227-87f0-38d280cf8f9e"
+  },
+  "item": [
+    {
+      "name": "onchain",
+      "item": [
+        {
+          "name": "networks",
+          "item": [
+            {
+              "name": "{network}",
+              "item": [
+                {
+                  "name": "pools",
+                  "item": [
+                    {
+                      "name": "{address}",
+                      "item": [
+                        {
+                          "name": "Get pool data by contract address",
+                          "id": "61aa2e4f-cbe3-4f8b-b76a-3c5910516f5b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/pools/:address?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "pools",
+                                ":address"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e69d59a6-698c-4517-9d7b-68171f32bb0b",
+                                  "key": "network",
+                                  "value": "<string>",
+                                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                                },
+                                {
+                                  "id": "3d780e3b-9fac-4424-a0f1-b7f05cf69229",
+                                  "key": "address",
+                                  "value": "<string>",
+                                  "description": "(Required) The pool contract address"
+                                }
+                              ]
+                            },
+                            "description": "Get detailed data for a specific liquidity pool by its contract address on a given network. Includes price, volume, liquidity, and token information."
+                          },
+                          "response": [
+                            {
+                              "id": "31bb9b41-13e9-41f9-b387-fe27c0052a7e",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-cg-demo-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/onchain/networks/:network/pools/:address?include=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "onchain",
+                                    "networks",
+                                    ":network",
+                                    "pools",
+                                    ":address"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                      "key": "include",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "network"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"base_token_price_usd\": \"<string>\",\n      \"base_token_price_native_currency\": \"<string>\",\n      \"quote_token_price_usd\": \"<string>\",\n      \"quote_token_price_native_currency\": \"<string>\",\n      \"base_token_price_quote_token\": \"<string>\",\n      \"quote_token_price_base_token\": \"<string>\",\n      \"address\": \"<string>\",\n      \"name\": \"<string>\",\n      \"pool_created_at\": \"<dateTime>\",\n      \"fdv_usd\": \"<string>\",\n      \"market_cap_usd\": \"<string>\",\n      \"price_change_percentage\": {\n        \"m5\": \"<string>\",\n        \"h1\": \"<string>\",\n        \"h6\": \"<string>\",\n        \"h24\": \"<string>\"\n      },\n      \"transactions\": {\n        \"m5\": {\n          \"buys\": \"<integer>\",\n          \"sells\": \"<integer>\",\n          \"buyers\": \"<integer>\",\n          \"sellers\": \"<integer>\"\n        },\n        \"m15\": {\n          \"buys\": \"<integer>\",\n          \"sells\": \"<integer>\",\n          \"buyers\": \"<integer>\",\n          \"sellers\": \"<integer>\"\n        },\n        \"m30\": {\n          \"buys\": \"<integer>\",\n          \"sells\": \"<integer>\",\n          \"buyers\": \"<integer>\",\n          \"sellers\": \"<integer>\"\n        },\n        \"h1\": {\n          \"buys\": \"<integer>\",\n          \"sells\": \"<integer>\",\n          \"buyers\": \"<integer>\",\n          \"sellers\": \"<integer>\"\n        },\n        \"h24\": {\n          \"buys\": \"<integer>\",\n          \"sells\": \"<integer>\",\n          \"buyers\": \"<integer>\",\n          \"sellers\": \"<integer>\"\n        }\n      },\n      \"volume_usd\": {\n        \"m5\": \"<string>\",\n        \"h1\": \"<string>\",\n        \"h6\": \"<string>\",\n        \"h24\": \"<string>\"\n      },\n      \"reserve_in_usd\": \"<string>\"\n    },\n    \"relationships\": {\n      \"base_token\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      },\n      \"quote_token\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      },\n      \"dex\": {\n        \"data\": {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T01:24:50.000Z",
+                              "updatedAt": "2026-07-28T01:24:50.000Z",
+                              "uid": "35240-31bb9b41-13e9-41f9-b387-fe27c0052a7e"
+                            },
+                            {
+                              "id": "bf1988ab-7eb9-4437-9cd2-9784b32a27f3",
+                              "name": "Pool not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-cg-demo-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/onchain/networks/:network/pools/:address?include=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "onchain",
+                                    "networks",
+                                    ":network",
+                                    "pools",
+                                    ":address"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                      "key": "include",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "network"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:24:50.000Z",
+                              "updatedAt": "2026-07-28T01:24:50.000Z",
+                              "uid": "35240-bf1988ab-7eb9-4437-9cd2-9784b32a27f3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-61aa2e4f-cbe3-4f8b-b76a-3c5910516f5b"
+                        }
+                      ],
+                      "id": "daffeb71-4149-430b-aa48-459ac0eb41ed",
+                      "createdAt": "2026-07-28T01:24:50.000Z",
+                      "updatedAt": "2026-07-28T01:24:50.000Z",
+                      "uid": "35240-daffeb71-4149-430b-aa48-459ac0eb41ed"
+                    },
+                    {
+                      "name": "multi",
+                      "item": [
+                        {
+                          "name": "{addresses}",
+                          "item": [
+                            {
+                              "name": "Get multiple pools by addresses",
+                              "id": "edb4300f-29e1-4ccd-8fdc-54fdc5d75f50",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/onchain/networks/:network/pools/multi/:addresses?include=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "onchain",
+                                    "networks",
+                                    ":network",
+                                    "pools",
+                                    "multi",
+                                    ":addresses"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                      "key": "include",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "55d156b3-1034-4f92-b7e3-d3ce9c2f0ecf",
+                                      "key": "network",
+                                      "value": "<string>",
+                                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                                    },
+                                    {
+                                      "id": "2815a09d-f753-4816-8463-3feca472c7a4",
+                                      "key": "addresses",
+                                      "value": "<string>",
+                                      "description": "(Required) Comma-separated list of pool contract addresses (up to 30)"
+                                    }
+                                  ]
+                                },
+                                "description": "Get data for multiple liquidity pools in a single request by providing a comma-separated list of pool contract addresses on a specific network."
+                              },
+                              "response": [
+                                {
+                                  "id": "a9ca2c0e-b400-438e-b6bb-c953165a2064",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/networks/:network/pools/multi/:addresses?include=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "networks",
+                                        ":network",
+                                        "pools",
+                                        "multi",
+                                        ":addresses"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                          "key": "include",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "addresses"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:24:50.000Z",
+                                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                                  "uid": "35240-a9ca2c0e-b400-438e-b6bb-c953165a2064"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:24:50.000Z",
+                              "updatedAt": "2026-07-28T01:24:50.000Z",
+                              "uid": "35240-edb4300f-29e1-4ccd-8fdc-54fdc5d75f50"
+                            }
+                          ],
+                          "id": "e1eb51fa-635d-48f1-b392-b5bc3f405cab",
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-e1eb51fa-635d-48f1-b392-b5bc3f405cab"
+                        }
+                      ],
+                      "id": "86bafec8-b9df-47cc-8812-a42023beac19",
+                      "createdAt": "2026-07-28T01:24:50.000Z",
+                      "updatedAt": "2026-07-28T01:24:50.000Z",
+                      "uid": "35240-86bafec8-b9df-47cc-8812-a42023beac19"
+                    },
+                    {
+                      "name": "Get top pools on a network",
+                      "id": "c8483103-ea7a-4ed9-980d-e81e44924263",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/onchain/networks/:network/pools?include=<string>&page=1&sort=h24_tx_count_desc",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "onchain",
+                            "networks",
+                            ":network",
+                            "pools"
+                          ],
+                          "query": [
+                            {
+                              "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                              "key": "include",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Sort order",
+                              "key": "sort",
+                              "value": "h24_tx_count_desc"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "48b73298-3732-4792-90a1-a4720de46b69",
+                              "key": "network",
+                              "value": "<string>",
+                              "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                            }
+                          ]
+                        },
+                        "description": "Get the top liquidity pools on a specific blockchain network, ordered by trading volume or liquidity."
+                      },
+                      "response": [
+                        {
+                          "id": "6a1c9b74-4a98-4fa4-874c-068e40fa6350",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/pools?include=<string>&page=1&sort=h24_tx_count_desc",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "pools"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number for pagination",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Sort order",
+                                  "key": "sort",
+                                  "value": "h24_tx_count_desc"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "network"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-6a1c9b74-4a98-4fa4-874c-068e40fa6350"
+                        },
+                        {
+                          "id": "dfc7f899-c55e-435f-bf28-ba4bcbd87ffa",
+                          "name": "Network not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/pools?include=<string>&page=1&sort=h24_tx_count_desc",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "pools"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number for pagination",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Sort order",
+                                  "key": "sort",
+                                  "value": "h24_tx_count_desc"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "network"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-dfc7f899-c55e-435f-bf28-ba4bcbd87ffa"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:24:50.000Z",
+                      "updatedAt": "2026-07-28T01:24:50.000Z",
+                      "uid": "35240-c8483103-ea7a-4ed9-980d-e81e44924263"
+                    }
+                  ],
+                  "id": "395c1888-dbc3-4478-a2a0-41dce5f008ed",
+                  "createdAt": "2026-07-28T01:24:50.000Z",
+                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                  "uid": "35240-395c1888-dbc3-4478-a2a0-41dce5f008ed"
+                },
+                {
+                  "name": "dexes",
+                  "item": [
+                    {
+                      "name": "{dex}",
+                      "item": [
+                        {
+                          "name": "pools",
+                          "item": [
+                            {
+                              "name": "Get top pools on a DEX",
+                              "id": "4edeb0ce-df36-44e3-8039-be5106fb1f6a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/onchain/networks/:network/dexes/:dex/pools?include=<string>&page=1&sort=h24_tx_count_desc",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "onchain",
+                                    "networks",
+                                    ":network",
+                                    "dexes",
+                                    ":dex",
+                                    "pools"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Additional data to include (e.g., base_token, quote_token)",
+                                      "key": "include",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Page number for pagination",
+                                      "key": "page",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "description": "Sort order",
+                                      "key": "sort",
+                                      "value": "h24_tx_count_desc"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "fca52200-5cfa-49c2-9e7e-8d9e263e383a",
+                                      "key": "network",
+                                      "value": "<string>",
+                                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                                    },
+                                    {
+                                      "id": "d5d31f0c-f2d3-498a-9f09-b99f7c664efa",
+                                      "key": "dex",
+                                      "value": "<string>",
+                                      "description": "(Required) The DEX identifier"
+                                    }
+                                  ]
+                                },
+                                "description": "Get the top liquidity pools for a specific decentralized exchange on a given network."
+                              },
+                              "response": [
+                                {
+                                  "id": "31b64446-92f2-4f8c-91a0-4168202bb191",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/networks/:network/dexes/:dex/pools?include=<string>&page=1&sort=h24_tx_count_desc",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "networks",
+                                        ":network",
+                                        "dexes",
+                                        ":dex",
+                                        "pools"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Additional data to include (e.g., base_token, quote_token)",
+                                          "key": "include",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Page number for pagination",
+                                          "key": "page",
+                                          "value": "1"
+                                        },
+                                        {
+                                          "description": "Sort order",
+                                          "key": "sort",
+                                          "value": "h24_tx_count_desc"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "dex"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:24:50.000Z",
+                                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                                  "uid": "35240-31b64446-92f2-4f8c-91a0-4168202bb191"
+                                },
+                                {
+                                  "id": "54998bd9-8c66-42be-b22c-29953af67aaa",
+                                  "name": "Network or DEX not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/networks/:network/dexes/:dex/pools?include=<string>&page=1&sort=h24_tx_count_desc",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "networks",
+                                        ":network",
+                                        "dexes",
+                                        ":dex",
+                                        "pools"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Additional data to include (e.g., base_token, quote_token)",
+                                          "key": "include",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Page number for pagination",
+                                          "key": "page",
+                                          "value": "1"
+                                        },
+                                        {
+                                          "description": "Sort order",
+                                          "key": "sort",
+                                          "value": "h24_tx_count_desc"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "dex"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T01:24:50.000Z",
+                                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                                  "uid": "35240-54998bd9-8c66-42be-b22c-29953af67aaa"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:24:50.000Z",
+                              "updatedAt": "2026-07-28T01:24:50.000Z",
+                              "uid": "35240-4edeb0ce-df36-44e3-8039-be5106fb1f6a"
+                            }
+                          ],
+                          "id": "d4771f55-370e-4378-92f8-786e67a5c7f7",
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-d4771f55-370e-4378-92f8-786e67a5c7f7"
+                        }
+                      ],
+                      "id": "5a4fe9c6-3a41-497a-b073-db9c01ff5e9c",
+                      "createdAt": "2026-07-28T01:24:50.000Z",
+                      "updatedAt": "2026-07-28T01:24:50.000Z",
+                      "uid": "35240-5a4fe9c6-3a41-497a-b073-db9c01ff5e9c"
+                    }
+                  ],
+                  "id": "e47fa0a3-179a-4076-8fc1-b73ae85af55a",
+                  "createdAt": "2026-07-28T01:24:50.000Z",
+                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                  "uid": "35240-e47fa0a3-179a-4076-8fc1-b73ae85af55a"
+                },
+                {
+                  "name": "new_pools",
+                  "item": [
+                    {
+                      "name": "Get new pools on a network",
+                      "id": "5481e67f-10c0-4372-a8c6-4803117ea4c2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/onchain/networks/:network/new_pools?include=<string>&page=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "onchain",
+                            "networks",
+                            ":network",
+                            "new_pools"
+                          ],
+                          "query": [
+                            {
+                              "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                              "key": "include",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "816fbed5-a0af-4823-8a64-f41820040df8",
+                              "key": "network",
+                              "value": "<string>",
+                              "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                            }
+                          ]
+                        },
+                        "description": "Get the most recently created liquidity pools on a specific blockchain network."
+                      },
+                      "response": [
+                        {
+                          "id": "e988a7ce-ae2e-4ed3-821a-c37235ff8b51",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/new_pools?include=<string>&page=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "new_pools"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number for pagination",
+                                  "key": "page",
+                                  "value": "1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "network"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-e988a7ce-ae2e-4ed3-821a-c37235ff8b51"
+                        },
+                        {
+                          "id": "a4c22779-eca4-4241-ba87-a0ced3606b02",
+                          "name": "Network not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/new_pools?include=<string>&page=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "new_pools"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Additional data to include (e.g., base_token, quote_token, dex)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Page number for pagination",
+                                  "key": "page",
+                                  "value": "1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "network"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:24:50.000Z",
+                          "updatedAt": "2026-07-28T01:24:50.000Z",
+                          "uid": "35240-a4c22779-eca4-4241-ba87-a0ced3606b02"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:24:50.000Z",
+                      "updatedAt": "2026-07-28T01:24:50.000Z",
+                      "uid": "35240-5481e67f-10c0-4372-a8c6-4803117ea4c2"
+                    }
+                  ],
+                  "id": "8d9c6154-6bb9-460d-8e20-7f0da0379c77",
+                  "createdAt": "2026-07-28T01:24:50.000Z",
+                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                  "uid": "35240-8d9c6154-6bb9-460d-8e20-7f0da0379c77"
+                }
+              ],
+              "id": "0c2406f6-35e7-48a8-8047-09ee7f56b1b5",
+              "createdAt": "2026-07-28T01:24:50.000Z",
+              "updatedAt": "2026-07-28T01:24:50.000Z",
+              "uid": "35240-0c2406f6-35e7-48a8-8047-09ee7f56b1b5"
+            },
+            {
+              "name": "new_pools",
+              "item": [
+                {
+                  "name": "Get new pools across all networks",
+                  "id": "c4b9e8ff-6d60-42f6-903b-195d32f0fcff",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/onchain/networks/new_pools?include=<string>&page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "onchain",
+                        "networks",
+                        "new_pools"
+                      ],
+                      "query": [
+                        {
+                          "description": "Additional data to include (e.g., base_token, quote_token, dex, network)",
+                          "key": "include",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page number for pagination",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    },
+                    "description": "Get the most recently created liquidity pools across all supported blockchain networks."
+                  },
+                  "response": [
+                    {
+                      "id": "f98c74f7-3d6f-449f-96f9-20b569b14fca",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/onchain/networks/new_pools?include=<string>&page=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "onchain",
+                            "networks",
+                            "new_pools"
+                          ],
+                          "query": [
+                            {
+                              "description": "Additional data to include (e.g., base_token, quote_token, dex, network)",
+                              "key": "include",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"<string>\",\n        \"base_token_price_native_currency\": \"<string>\",\n        \"quote_token_price_usd\": \"<string>\",\n        \"quote_token_price_native_currency\": \"<string>\",\n        \"base_token_price_quote_token\": \"<string>\",\n        \"quote_token_price_base_token\": \"<string>\",\n        \"address\": \"<string>\",\n        \"name\": \"<string>\",\n        \"pool_created_at\": \"<dateTime>\",\n        \"fdv_usd\": \"<string>\",\n        \"market_cap_usd\": \"<string>\",\n        \"price_change_percentage\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m15\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"m30\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h1\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          },\n          \"h24\": {\n            \"buys\": \"<integer>\",\n            \"sells\": \"<integer>\",\n            \"buyers\": \"<integer>\",\n            \"sellers\": \"<integer>\"\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"<string>\",\n          \"h1\": \"<string>\",\n          \"h6\": \"<string>\",\n          \"h24\": \"<string>\"\n        },\n        \"reserve_in_usd\": \"<string>\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:24:50.000Z",
+                      "updatedAt": "2026-07-28T01:24:50.000Z",
+                      "uid": "35240-f98c74f7-3d6f-449f-96f9-20b569b14fca"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:24:50.000Z",
+                  "updatedAt": "2026-07-28T01:24:50.000Z",
+                  "uid": "35240-c4b9e8ff-6d60-42f6-903b-195d32f0fcff"
+                }
+              ],
+              "id": "dd7a6603-e13d-41d0-ab31-bc7fc6ef8d57",
+              "createdAt": "2026-07-28T01:24:50.000Z",
+              "updatedAt": "2026-07-28T01:24:50.000Z",
+              "uid": "35240-dd7a6603-e13d-41d0-ab31-bc7fc6ef8d57"
+            }
+          ],
+          "id": "29af782a-c57a-42df-af87-5932fc761393",
+          "createdAt": "2026-07-28T01:24:50.000Z",
+          "updatedAt": "2026-07-28T01:24:50.000Z",
+          "uid": "35240-29af782a-c57a-42df-af87-5932fc761393"
+        }
+      ],
+      "id": "c0e49ee4-8cdf-4179-9125-671022591940",
+      "createdAt": "2026-07-28T01:24:50.000Z",
+      "updatedAt": "2026-07-28T01:24:50.000Z",
+      "uid": "35240-c0e49ee4-8cdf-4179-9125-671022591940"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

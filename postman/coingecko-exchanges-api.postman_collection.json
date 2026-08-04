@@ -1,0 +1,977 @@
+{
+  "info": {
+    "_postman_id": "ae78bca7-a3c8-4628-9629-965fa16525e0",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Exchanges API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:24:43.000Z",
+    "updatedAt": "2026-07-28T01:24:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ae78bca7-a3c8-4628-9629-965fa16525e0"
+  },
+  "item": [
+    {
+      "name": "exchanges",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "List all supported exchanges (ID map)",
+              "id": "97728ce7-049c-41de-8cd7-a1fe8b321dd7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exchanges/list",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exchanges",
+                    "list"
+                  ]
+                },
+                "description": "Get the complete list of all supported exchange IDs and names. Use this to obtain exchange IDs for use in other endpoints."
+              },
+              "response": [
+                {
+                  "id": "c5353eaa-2dc1-4d47-a486-86d6ddea424b",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/exchanges/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "exchanges",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T01:24:44.000Z",
+                  "updatedAt": "2026-07-28T01:24:44.000Z",
+                  "uid": "35240-c5353eaa-2dc1-4d47-a486-86d6ddea424b"
+                }
+              ],
+              "createdAt": "2026-07-28T01:24:44.000Z",
+              "updatedAt": "2026-07-28T01:24:44.000Z",
+              "uid": "35240-97728ce7-049c-41de-8cd7-a1fe8b321dd7"
+            }
+          ],
+          "id": "0b85c3fd-fac2-4bb4-a56a-1fb7fbda99a8",
+          "createdAt": "2026-07-28T01:24:44.000Z",
+          "updatedAt": "2026-07-28T01:24:44.000Z",
+          "uid": "35240-0b85c3fd-fac2-4bb4-a56a-1fb7fbda99a8"
+        },
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "tickers",
+              "item": [
+                {
+                  "name": "Get exchange tickers",
+                  "id": "edde3af3-b68c-4ebc-bb9b-a6e437d841b2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/exchanges/:id/tickers?coin_ids=<string>&include_exchange_logo=false&page=1&depth=false&order=trust_score_desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "exchanges",
+                        ":id",
+                        "tickers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter tickers by coin IDs (comma-separated)",
+                          "key": "coin_ids",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Include exchange logo URL in the response",
+                          "key": "include_exchange_logo",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Page number for pagination",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Include order book depth (2% cost to move)",
+                          "key": "depth",
+                          "value": "false"
+                        },
+                        {
+                          "description": "Sort order for tickers",
+                          "key": "order",
+                          "value": "trust_score_desc"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "659b064c-4221-4e41-b60c-17ecd469bade",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                        }
+                      ]
+                    },
+                    "description": "Get paginated trading pair tickers for a specific exchange. Results include price, volume, spread, and trust score data for each trading pair."
+                  },
+                  "response": [
+                    {
+                      "id": "8e995364-70bb-427e-8f98-a57872c9838d",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/exchanges/:id/tickers?coin_ids=<string>&include_exchange_logo=false&page=1&depth=false&order=trust_score_desc",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "exchanges",
+                            ":id",
+                            "tickers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter tickers by coin IDs (comma-separated)",
+                              "key": "coin_ids",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Include exchange logo URL in the response",
+                              "key": "include_exchange_logo",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Include order book depth (2% cost to move)",
+                              "key": "depth",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Sort order for tickers",
+                              "key": "order",
+                              "value": "trust_score_desc"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"tickers\": [\n    {\n      \"base\": \"<string>\",\n      \"target\": \"<string>\",\n      \"market\": {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"has_trading_incentive\": \"<boolean>\"\n      },\n      \"last\": \"<number>\",\n      \"volume\": \"<number>\",\n      \"converted_last\": {\n        \"magna_8b_\": \"<number>\",\n        \"minim_b_\": \"<number>\"\n      },\n      \"converted_volume\": {\n        \"essea\": \"<number>\"\n      },\n      \"trust_score\": \"<string>\",\n      \"bid_ask_spread_percentage\": \"<number>\",\n      \"timestamp\": \"<dateTime>\",\n      \"last_traded_at\": \"<dateTime>\",\n      \"last_fetch_at\": \"<dateTime>\",\n      \"is_anomaly\": \"<boolean>\",\n      \"is_stale\": \"<boolean>\",\n      \"trade_url\": \"<uri>\",\n      \"coin_id\": \"<string>\",\n      \"target_coin_id\": \"<string>\"\n    },\n    {\n      \"base\": \"<string>\",\n      \"target\": \"<string>\",\n      \"market\": {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"has_trading_incentive\": \"<boolean>\"\n      },\n      \"last\": \"<number>\",\n      \"volume\": \"<number>\",\n      \"converted_last\": {\n        \"labore9e\": \"<number>\",\n        \"esse1a\": \"<number>\"\n      },\n      \"converted_volume\": {\n        \"dolor24\": \"<number>\"\n      },\n      \"trust_score\": \"<string>\",\n      \"bid_ask_spread_percentage\": \"<number>\",\n      \"timestamp\": \"<dateTime>\",\n      \"last_traded_at\": \"<dateTime>\",\n      \"last_fetch_at\": \"<dateTime>\",\n      \"is_anomaly\": \"<boolean>\",\n      \"is_stale\": \"<boolean>\",\n      \"trade_url\": \"<uri>\",\n      \"coin_id\": \"<string>\",\n      \"target_coin_id\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:24:44.000Z",
+                      "updatedAt": "2026-07-28T01:24:44.000Z",
+                      "uid": "35240-8e995364-70bb-427e-8f98-a57872c9838d"
+                    },
+                    {
+                      "id": "29b93b2b-aeef-4a7a-914e-b63e2b8a4b24",
+                      "name": "Exchange not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/exchanges/:id/tickers?coin_ids=<string>&include_exchange_logo=false&page=1&depth=false&order=trust_score_desc",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "exchanges",
+                            ":id",
+                            "tickers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter tickers by coin IDs (comma-separated)",
+                              "key": "coin_ids",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Include exchange logo URL in the response",
+                              "key": "include_exchange_logo",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Include order book depth (2% cost to move)",
+                              "key": "depth",
+                              "value": "false"
+                            },
+                            {
+                              "description": "Sort order for tickers",
+                              "key": "order",
+                              "value": "trust_score_desc"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:24:44.000Z",
+                      "updatedAt": "2026-07-28T01:24:44.000Z",
+                      "uid": "35240-29b93b2b-aeef-4a7a-914e-b63e2b8a4b24"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:24:44.000Z",
+                  "updatedAt": "2026-07-28T01:24:44.000Z",
+                  "uid": "35240-edde3af3-b68c-4ebc-bb9b-a6e437d841b2"
+                }
+              ],
+              "id": "d86c972f-87dc-49c7-aaac-7eb0da5d503b",
+              "createdAt": "2026-07-28T01:24:44.000Z",
+              "updatedAt": "2026-07-28T01:24:44.000Z",
+              "uid": "35240-d86c972f-87dc-49c7-aaac-7eb0da5d503b"
+            },
+            {
+              "name": "volume_chart",
+              "item": [
+                {
+                  "name": "range",
+                  "item": [
+                    {
+                      "name": "Get exchange volume chart within date range",
+                      "id": "bd07eb51-2664-47fd-9085-f91162703092",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/exchanges/:id/volume_chart/range?from=<number>&to=<number>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "exchanges",
+                            ":id",
+                            "volume_chart",
+                            "range"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Start date as UNIX timestamp",
+                              "key": "from",
+                              "value": "<number>"
+                            },
+                            {
+                              "description": "(Required) End date as UNIX timestamp",
+                              "key": "to",
+                              "value": "<number>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5df10976-84ac-446d-b7f4-d9bf2502c6e6",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The exchange ID"
+                            }
+                          ]
+                        },
+                        "description": "Get historical volume chart data for a specific exchange within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers."
+                      },
+                      "response": [
+                        {
+                          "id": "c28430a3-aad3-42f6-a89a-3c75edb45b87",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:id/volume_chart/range?from=<number>&to=<number>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":id",
+                                "volume_chart",
+                                "range"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Start date as UNIX timestamp",
+                                  "key": "from",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "description": "(Required) End date as UNIX timestamp",
+                                  "key": "to",
+                                  "value": "<number>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  [\n    \"<string>\",\n    \"<string>\"\n  ],\n  [\n    \"<string>\",\n    \"<string>\"\n  ]\n]",
+                          "createdAt": "2026-07-28T01:24:44.000Z",
+                          "updatedAt": "2026-07-28T01:24:44.000Z",
+                          "uid": "35240-c28430a3-aad3-42f6-a89a-3c75edb45b87"
+                        },
+                        {
+                          "id": "52cd0c92-a927-48c3-9140-4d3a226e1bb5",
+                          "name": "Unauthorized - invalid or missing Pro API key",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:id/volume_chart/range?from=<number>&to=<number>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":id",
+                                "volume_chart",
+                                "range"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Start date as UNIX timestamp",
+                                  "key": "from",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "description": "(Required) End date as UNIX timestamp",
+                                  "key": "to",
+                                  "value": "<number>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:24:44.000Z",
+                          "updatedAt": "2026-07-28T01:24:44.000Z",
+                          "uid": "35240-52cd0c92-a927-48c3-9140-4d3a226e1bb5"
+                        },
+                        {
+                          "id": "63f84726-5d9f-4bb5-ad36-6b0baedac8f6",
+                          "name": "Exchange not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:id/volume_chart/range?from=<number>&to=<number>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":id",
+                                "volume_chart",
+                                "range"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Start date as UNIX timestamp",
+                                  "key": "from",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "description": "(Required) End date as UNIX timestamp",
+                                  "key": "to",
+                                  "value": "<number>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:24:44.000Z",
+                          "updatedAt": "2026-07-28T01:24:44.000Z",
+                          "uid": "35240-63f84726-5d9f-4bb5-ad36-6b0baedac8f6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:24:44.000Z",
+                      "updatedAt": "2026-07-28T01:24:44.000Z",
+                      "uid": "35240-bd07eb51-2664-47fd-9085-f91162703092"
+                    }
+                  ],
+                  "id": "4ab9a14a-841e-44d8-9387-1c7f1e87fe8c",
+                  "createdAt": "2026-07-28T01:24:44.000Z",
+                  "updatedAt": "2026-07-28T01:24:44.000Z",
+                  "uid": "35240-4ab9a14a-841e-44d8-9387-1c7f1e87fe8c"
+                },
+                {
+                  "name": "Get exchange volume chart data",
+                  "id": "69272119-d3ce-4273-a5a3-d2a4c256155d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/exchanges/:id/volume_chart?days=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "exchanges",
+                        ":id",
+                        "volume_chart"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Number of days of historical data (1, 7, 14, 30, 90, 180, 365)",
+                          "key": "days",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "a6f93b56-75f2-4acd-a53c-cce4837a65eb",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                        }
+                      ]
+                    },
+                    "description": "Get historical volume chart data for a specific exchange over a specified number of days."
+                  },
+                  "response": [
+                    {
+                      "id": "d8f32860-d2ba-40d1-b359-a45a47f79191",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/exchanges/:id/volume_chart?days=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "exchanges",
+                            ":id",
+                            "volume_chart"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Number of days of historical data (1, 7, 14, 30, 90, 180, 365)",
+                              "key": "days",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  [\n    \"<string>\",\n    \"<string>\"\n  ],\n  [\n    \"<string>\",\n    \"<string>\"\n  ]\n]",
+                      "createdAt": "2026-07-28T01:24:44.000Z",
+                      "updatedAt": "2026-07-28T01:24:44.000Z",
+                      "uid": "35240-d8f32860-d2ba-40d1-b359-a45a47f79191"
+                    },
+                    {
+                      "id": "ab1a79ee-ccb8-40c4-90b3-1071c0ad62fe",
+                      "name": "Exchange not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/exchanges/:id/volume_chart?days=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "exchanges",
+                            ":id",
+                            "volume_chart"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Number of days of historical data (1, 7, 14, 30, 90, 180, 365)",
+                              "key": "days",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:24:44.000Z",
+                      "updatedAt": "2026-07-28T01:24:44.000Z",
+                      "uid": "35240-ab1a79ee-ccb8-40c4-90b3-1071c0ad62fe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:24:44.000Z",
+                  "updatedAt": "2026-07-28T01:24:44.000Z",
+                  "uid": "35240-69272119-d3ce-4273-a5a3-d2a4c256155d"
+                }
+              ],
+              "id": "1fcaf6ec-385c-4f4b-b374-e67c15dbf7ae",
+              "createdAt": "2026-07-28T01:24:44.000Z",
+              "updatedAt": "2026-07-28T01:24:44.000Z",
+              "uid": "35240-1fcaf6ec-385c-4f4b-b374-e67c15dbf7ae"
+            },
+            {
+              "name": "Get exchange data by ID",
+              "id": "17eb4117-b0d1-4b21-aca9-2ec4cf7d029d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exchanges/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exchanges",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "83a522e6-b066-493d-9092-5c169371c389",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "description": "Get comprehensive data for a specific exchange including volume, trust score, year established, country, and social links."
+              },
+              "response": [
+                {
+                  "id": "05896d99-6015-4783-b788-5f70da551949",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/exchanges/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "exchanges",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"year_established\": \"<integer>\",\n  \"country\": \"<string>\",\n  \"description\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"image\": \"<uri>\",\n  \"facebook_url\": \"<uri>\",\n  \"reddit_url\": \"<uri>\",\n  \"telegram_url\": \"<uri>\",\n  \"slack_url\": \"<uri>\",\n  \"other_url_1\": \"<uri>\",\n  \"other_url_2\": \"<uri>\",\n  \"twitter_handle\": \"<string>\",\n  \"has_trading_incentive\": \"<boolean>\",\n  \"centralized\": \"<boolean>\",\n  \"public_notice\": \"<string>\",\n  \"alert_notice\": \"<string>\",\n  \"trust_score\": \"<integer>\",\n  \"trust_score_rank\": \"<integer>\",\n  \"trade_volume_24h_btc\": \"<number>\",\n  \"trade_volume_24h_btc_normalized\": \"<number>\",\n  \"tickers\": [\n    {\n      \"base\": \"<string>\",\n      \"target\": \"<string>\",\n      \"market\": {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"has_trading_incentive\": \"<boolean>\"\n      },\n      \"last\": \"<number>\",\n      \"volume\": \"<number>\",\n      \"converted_last\": {\n        \"anim_f\": \"<number>\",\n        \"voluptate6b_\": \"<number>\",\n        \"aute_bd1\": \"<number>\"\n      },\n      \"converted_volume\": {\n        \"deserunt_0\": \"<number>\",\n        \"dolore_4\": \"<number>\",\n        \"ut_6\": \"<number>\"\n      },\n      \"trust_score\": \"<string>\",\n      \"bid_ask_spread_percentage\": \"<number>\",\n      \"timestamp\": \"<dateTime>\",\n      \"last_traded_at\": \"<dateTime>\",\n      \"last_fetch_at\": \"<dateTime>\",\n      \"is_anomaly\": \"<boolean>\",\n      \"is_stale\": \"<boolean>\",\n      \"trade_url\": \"<uri>\",\n      \"coin_id\": \"<string>\",\n      \"target_coin_id\": \"<string>\"\n    },\n    {\n      \"base\": \"<string>\",\n      \"target\": \"<string>\",\n      \"market\": {\n        \"name\": \"<string>\",\n        \"identifier\": \"<string>\",\n        \"has_trading_incentive\": \"<boolean>\"\n      },\n      \"last\": \"<number>\",\n      \"volume\": \"<number>\",\n      \"converted_last\": {\n        \"adipisicing_1e\": \"<number>\"\n      },\n      \"converted_volume\": {\n        \"ipsum5fb\": \"<number>\",\n        \"commodo_081\": \"<number>\",\n        \"sunt_e_\": \"<number>\"\n      },\n      \"trust_score\": \"<string>\",\n      \"bid_ask_spread_percentage\": \"<number>\",\n      \"timestamp\": \"<dateTime>\",\n      \"last_traded_at\": \"<dateTime>\",\n      \"last_fetch_at\": \"<dateTime>\",\n      \"is_anomaly\": \"<boolean>\",\n      \"is_stale\": \"<boolean>\",\n      \"trade_url\": \"<uri>\",\n      \"coin_id\": \"<string>\",\n      \"target_coin_id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:24:44.000Z",
+                  "updatedAt": "2026-07-28T01:24:44.000Z",
+                  "uid": "35240-05896d99-6015-4783-b788-5f70da551949"
+                },
+                {
+                  "id": "96444611-17cb-452e-bf32-1b48e0d28a71",
+                  "name": "Exchange not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/exchanges/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "exchanges",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:24:44.000Z",
+                  "updatedAt": "2026-07-28T01:24:44.000Z",
+                  "uid": "35240-96444611-17cb-452e-bf32-1b48e0d28a71"
+                }
+              ],
+              "createdAt": "2026-07-28T01:24:44.000Z",
+              "updatedAt": "2026-07-28T01:24:44.000Z",
+              "uid": "35240-17eb4117-b0d1-4b21-aca9-2ec4cf7d029d"
+            }
+          ],
+          "id": "16e5fb5e-0798-47ae-8219-bdf9b2f9c03a",
+          "createdAt": "2026-07-28T01:24:44.000Z",
+          "updatedAt": "2026-07-28T01:24:44.000Z",
+          "uid": "35240-16e5fb5e-0798-47ae-8219-bdf9b2f9c03a"
+        },
+        {
+          "name": "List all exchanges",
+          "id": "20e5aca8-86bc-4e9d-8562-018daacee8e6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exchanges?per_page=100&page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "exchanges"
+              ],
+              "query": [
+                {
+                  "description": "Number of results per page (1-250)",
+                  "key": "per_page",
+                  "value": "100"
+                },
+                {
+                  "description": "Page number for pagination",
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Get a paginated list of all supported exchanges with volume, trust score, and other exchange-related data. Results are ordered by trading volume by default."
+          },
+          "response": [
+            {
+              "id": "c97a760b-92de-4b4b-81b5-4dae242ec7af",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exchanges?per_page=100&page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exchanges"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of results per page (1-250)",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Page number for pagination",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"year_established\": \"<integer>\",\n    \"country\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"image\": \"<uri>\",\n    \"has_trading_incentive\": \"<boolean>\",\n    \"trust_score\": \"<integer>\",\n    \"trust_score_rank\": \"<integer>\",\n    \"trade_volume_24h_btc\": \"<number>\",\n    \"trade_volume_24h_btc_normalized\": \"<number>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"year_established\": \"<integer>\",\n    \"country\": \"<string>\",\n    \"description\": \"<string>\",\n    \"url\": \"<uri>\",\n    \"image\": \"<uri>\",\n    \"has_trading_incentive\": \"<boolean>\",\n    \"trust_score\": \"<integer>\",\n    \"trust_score_rank\": \"<integer>\",\n    \"trade_volume_24h_btc\": \"<number>\",\n    \"trade_volume_24h_btc_normalized\": \"<number>\"\n  }\n]",
+              "createdAt": "2026-07-28T01:24:44.000Z",
+              "updatedAt": "2026-07-28T01:24:44.000Z",
+              "uid": "35240-c97a760b-92de-4b4b-81b5-4dae242ec7af"
+            }
+          ],
+          "createdAt": "2026-07-28T01:24:44.000Z",
+          "updatedAt": "2026-07-28T01:24:44.000Z",
+          "uid": "35240-20e5aca8-86bc-4e9d-8562-018daacee8e6"
+        }
+      ],
+      "id": "771185cc-973c-4e59-8151-899dd4b7726e",
+      "createdAt": "2026-07-28T01:24:44.000Z",
+      "updatedAt": "2026-07-28T01:24:44.000Z",
+      "uid": "35240-771185cc-973c-4e59-8151-899dd4b7726e"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

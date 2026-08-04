@@ -1,0 +1,157 @@
+{
+  "info": {
+    "_postman_id": "f945a5e7-8292-42fa-a324-305962e50733",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Companies API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:24:38.000Z",
+    "updatedAt": "2026-07-28T01:24:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f945a5e7-8292-42fa-a324-305962e50733"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "public_treasury",
+          "item": [
+            {
+              "name": "{coin_id}",
+              "item": [
+                {
+                  "name": "Get public company crypto holdings",
+                  "id": "8cd397e1-d8c1-4bd9-b881-407c4770b5d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/public_treasury/:coin_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        "public_treasury",
+                        ":coin_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9e4ba8cb-d46f-423e-b8bc-e05c0c8a955d",
+                          "key": "coin_id",
+                          "value": "bitcoin",
+                          "description": "(Required) The coin ID (bitcoin or ethereum)"
+                        }
+                      ]
+                    },
+                    "description": "Get the list of public companies that hold bitcoin or ethereum in their treasury, including the amount held, total value, and percentage of total supply."
+                  },
+                  "response": [
+                    {
+                      "id": "94517fdc-e421-4c27-b454-1a3f8a2681b8",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-cg-demo-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/public_treasury/:coin_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            "public_treasury",
+                            ":coin_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "coin_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"total_holdings\": \"<number>\",\n  \"total_value_usd\": \"<number>\",\n  \"market_cap_dominance\": \"<number>\",\n  \"companies\": [\n    {\n      \"name\": \"<string>\",\n      \"symbol\": \"<string>\",\n      \"country\": \"<string>\",\n      \"total_holdings\": \"<number>\",\n      \"total_entry_value_usd\": \"<number>\",\n      \"total_current_value_usd\": \"<number>\",\n      \"percentage_of_total_supply\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"symbol\": \"<string>\",\n      \"country\": \"<string>\",\n      \"total_holdings\": \"<number>\",\n      \"total_entry_value_usd\": \"<number>\",\n      \"total_current_value_usd\": \"<number>\",\n      \"percentage_of_total_supply\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:24:39.000Z",
+                      "updatedAt": "2026-07-28T01:24:39.000Z",
+                      "uid": "35240-94517fdc-e421-4c27-b454-1a3f8a2681b8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:24:39.000Z",
+                  "updatedAt": "2026-07-28T01:24:39.000Z",
+                  "uid": "35240-8cd397e1-d8c1-4bd9-b881-407c4770b5d0"
+                }
+              ],
+              "id": "453497c4-a134-4f0c-87e4-3c13d79a4efd",
+              "createdAt": "2026-07-28T01:24:39.000Z",
+              "updatedAt": "2026-07-28T01:24:39.000Z",
+              "uid": "35240-453497c4-a134-4f0c-87e4-3c13d79a4efd"
+            }
+          ],
+          "id": "86aa3355-5cc5-4922-af87-3afeca99c3dc",
+          "createdAt": "2026-07-28T01:24:39.000Z",
+          "updatedAt": "2026-07-28T01:24:39.000Z",
+          "uid": "35240-86aa3355-5cc5-4922-af87-3afeca99c3dc"
+        }
+      ],
+      "id": "4d0c8b96-ddae-4790-aa92-13364e6ec836",
+      "createdAt": "2026-07-28T01:24:39.000Z",
+      "updatedAt": "2026-07-28T01:24:39.000Z",
+      "uid": "35240-4d0c8b96-ddae-4790-aa92-13364e6ec836"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

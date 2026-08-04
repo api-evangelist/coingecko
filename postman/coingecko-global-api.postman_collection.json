@@ -1,0 +1,406 @@
+{
+  "info": {
+    "_postman_id": "2e9dd17b-aeee-4582-8d67-ad665294f3b8",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Global API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:24:44.000Z",
+    "updatedAt": "2026-07-28T01:24:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2e9dd17b-aeee-4582-8d67-ad665294f3b8"
+  },
+  "item": [
+    {
+      "name": "global",
+      "item": [
+        {
+          "name": "decentralized_finance_defi",
+          "item": [
+            {
+              "name": "Get global DeFi market data",
+              "id": "6a1294b5-0957-4fb9-8eac-bc1ef4061157",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/global/decentralized_finance_defi",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global",
+                    "decentralized_finance_defi"
+                  ]
+                },
+                "description": "Get aggregated global decentralized finance (DeFi) data including DeFi market cap, trading volume, DeFi dominance, and top DeFi coin information."
+              },
+              "response": [
+                {
+                  "id": "bc452730-5ad2-449b-ba7d-224730e0dd7c",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/global/decentralized_finance_defi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "global",
+                        "decentralized_finance_defi"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"defi_market_cap\": \"<string>\",\n    \"eth_market_cap\": \"<string>\",\n    \"defi_to_eth_ratio\": \"<string>\",\n    \"trading_volume_24h\": \"<string>\",\n    \"defi_dominance\": \"<string>\",\n    \"top_coin_name\": \"<string>\",\n    \"top_coin_defi_dominance\": \"<number>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:24:45.000Z",
+                  "updatedAt": "2026-07-28T01:24:45.000Z",
+                  "uid": "35240-bc452730-5ad2-449b-ba7d-224730e0dd7c"
+                }
+              ],
+              "createdAt": "2026-07-28T01:24:45.000Z",
+              "updatedAt": "2026-07-28T01:24:45.000Z",
+              "uid": "35240-6a1294b5-0957-4fb9-8eac-bc1ef4061157"
+            }
+          ],
+          "id": "f7cb0e5b-74a5-4f63-90ac-abeddf84c933",
+          "createdAt": "2026-07-28T01:24:44.000Z",
+          "updatedAt": "2026-07-28T01:24:44.000Z",
+          "uid": "35240-f7cb0e5b-74a5-4f63-90ac-abeddf84c933"
+        },
+        {
+          "name": "market_cap_chart",
+          "item": [
+            {
+              "name": "Get global market cap chart",
+              "id": "4d7d720f-9df9-4e38-90ff-b09b60d7969f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/global/market_cap_chart?days=<string>&vs_currency=usd",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Number of days of historical data",
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The target currency for market cap data",
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ]
+                },
+                "description": "Get historical global market capitalization and volume chart data. This endpoint is exclusive to paid plan subscribers."
+              },
+              "response": [
+                {
+                  "id": "3cc7a07e-17d4-4367-bb07-36202823a67a",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/global/market_cap_chart?days=<string>&vs_currency=usd",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "global",
+                        "market_cap_chart"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Number of days of historical data",
+                          "key": "days",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The target currency for market cap data",
+                          "key": "vs_currency",
+                          "value": "usd"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"market_cap_chart\": {\n    \"market_cap\": [\n      [\n        \"<number>\",\n        \"<number>\"\n      ],\n      [\n        \"<number>\",\n        \"<number>\"\n      ]\n    ],\n    \"volume\": [\n      [\n        \"<number>\",\n        \"<number>\"\n      ],\n      [\n        \"<number>\",\n        \"<number>\"\n      ]\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T01:24:45.000Z",
+                  "updatedAt": "2026-07-28T01:24:45.000Z",
+                  "uid": "35240-3cc7a07e-17d4-4367-bb07-36202823a67a"
+                },
+                {
+                  "id": "da3e0438-2265-4833-b12b-9743d7b2a45e",
+                  "name": "Unauthorized - invalid or missing Pro API key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/global/market_cap_chart?days=<string>&vs_currency=usd",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "global",
+                        "market_cap_chart"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Number of days of historical data",
+                          "key": "days",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The target currency for market cap data",
+                          "key": "vs_currency",
+                          "value": "usd"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:24:45.000Z",
+                  "updatedAt": "2026-07-28T01:24:45.000Z",
+                  "uid": "35240-da3e0438-2265-4833-b12b-9743d7b2a45e"
+                },
+                {
+                  "id": "cc0192b2-7876-4a24-a4a9-1bdf2615135c",
+                  "name": "Forbidden - endpoint not available on current plan",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-cg-demo-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/global/market_cap_chart?days=<string>&vs_currency=usd",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "global",
+                        "market_cap_chart"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Number of days of historical data",
+                          "key": "days",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The target currency for market cap data",
+                          "key": "vs_currency",
+                          "value": "usd"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:24:45.000Z",
+                  "updatedAt": "2026-07-28T01:24:45.000Z",
+                  "uid": "35240-cc0192b2-7876-4a24-a4a9-1bdf2615135c"
+                }
+              ],
+              "createdAt": "2026-07-28T01:24:45.000Z",
+              "updatedAt": "2026-07-28T01:24:45.000Z",
+              "uid": "35240-4d7d720f-9df9-4e38-90ff-b09b60d7969f"
+            }
+          ],
+          "id": "cfa640dd-8a8e-45f9-8292-d5bac1646bc3",
+          "createdAt": "2026-07-28T01:24:44.000Z",
+          "updatedAt": "2026-07-28T01:24:44.000Z",
+          "uid": "35240-cfa640dd-8a8e-45f9-8292-d5bac1646bc3"
+        },
+        {
+          "name": "Get global cryptocurrency data",
+          "id": "6d91eed4-5af2-4155-8dbe-281fd515b41d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/global",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "global"
+              ]
+            },
+            "description": "Get aggregated global cryptocurrency market data including total market cap, total volume, market cap percentage by coin, and number of active cryptocurrencies and markets."
+          },
+          "response": [
+            {
+              "id": "0b95253b-2768-43ea-a12d-94822bce827a",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/global",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"active_cryptocurrencies\": \"<integer>\",\n    \"upcoming_icos\": \"<integer>\",\n    \"ongoing_icos\": \"<integer>\",\n    \"ended_icos\": \"<integer>\",\n    \"markets\": \"<integer>\",\n    \"total_market_cap\": {\n      \"ex8c\": \"<number>\"\n    },\n    \"total_volume\": {\n      \"in_c\": \"<number>\",\n      \"nostrud_b\": \"<number>\",\n      \"Excepteur_15b\": \"<number>\"\n    },\n    \"market_cap_percentage\": {\n      \"nulla_e\": \"<number>\"\n    },\n    \"market_cap_change_percentage_24h_usd\": \"<number>\",\n    \"updated_at\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-07-28T01:24:45.000Z",
+              "updatedAt": "2026-07-28T01:24:45.000Z",
+              "uid": "35240-0b95253b-2768-43ea-a12d-94822bce827a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:24:45.000Z",
+          "updatedAt": "2026-07-28T01:24:45.000Z",
+          "uid": "35240-6d91eed4-5af2-4155-8dbe-281fd515b41d"
+        }
+      ],
+      "id": "f07b43e6-eddf-4cbc-996c-168edf534073",
+      "createdAt": "2026-07-28T01:24:44.000Z",
+      "updatedAt": "2026-07-28T01:24:44.000Z",
+      "uid": "35240-f07b43e6-eddf-4cbc-996c-168edf534073"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

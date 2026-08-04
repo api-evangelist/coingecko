@@ -1,0 +1,230 @@
+{
+  "info": {
+    "_postman_id": "16b3f26f-e69a-45f6-8be3-4fe7fdad82cb",
+    "name": "CoinGecko Crypto Market Data Asset Platforms DEXes API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:24:41.000Z",
+    "updatedAt": "2026-07-28T01:24:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-16b3f26f-e69a-45f6-8be3-4fe7fdad82cb"
+  },
+  "item": [
+    {
+      "name": "onchain",
+      "item": [
+        {
+          "name": "networks",
+          "item": [
+            {
+              "name": "{network}",
+              "item": [
+                {
+                  "name": "dexes",
+                  "item": [
+                    {
+                      "name": "List DEXes on a network",
+                      "id": "50cd214f-7e1f-4664-8b37-180283430816",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/onchain/networks/:network/dexes?page=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "onchain",
+                            "networks",
+                            ":network",
+                            "dexes"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "95610a43-d54f-430b-b30d-c4d4cbba492d",
+                              "key": "network",
+                              "value": "<string>",
+                              "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                            }
+                          ]
+                        },
+                        "description": "Get the list of all supported decentralized exchanges on a specific blockchain network."
+                      },
+                      "response": [
+                        {
+                          "id": "8cee7a46-a33b-4d11-a384-1c8ef0443e22",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/dexes?page=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "dexes"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination",
+                                  "key": "page",
+                                  "value": "1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "network"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"name\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:24:42.000Z",
+                          "updatedAt": "2026-07-28T01:24:42.000Z",
+                          "uid": "35240-8cee7a46-a33b-4d11-a384-1c8ef0443e22"
+                        },
+                        {
+                          "id": "7d193c70-5f4d-4c0c-a43e-6509488d4a03",
+                          "name": "Network not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-cg-demo-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/onchain/networks/:network/dexes?page=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "onchain",
+                                "networks",
+                                ":network",
+                                "dexes"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination",
+                                  "key": "page",
+                                  "value": "1"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "network"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:24:42.000Z",
+                          "updatedAt": "2026-07-28T01:24:42.000Z",
+                          "uid": "35240-7d193c70-5f4d-4c0c-a43e-6509488d4a03"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:24:42.000Z",
+                      "updatedAt": "2026-07-28T01:24:42.000Z",
+                      "uid": "35240-50cd214f-7e1f-4664-8b37-180283430816"
+                    }
+                  ],
+                  "id": "c75629ac-8e50-4e94-a8b4-66ba8613f216",
+                  "createdAt": "2026-07-28T01:24:42.000Z",
+                  "updatedAt": "2026-07-28T01:24:42.000Z",
+                  "uid": "35240-c75629ac-8e50-4e94-a8b4-66ba8613f216"
+                }
+              ],
+              "id": "70a0de45-38e4-4899-98f8-f700993e0524",
+              "createdAt": "2026-07-28T01:24:42.000Z",
+              "updatedAt": "2026-07-28T01:24:42.000Z",
+              "uid": "35240-70a0de45-38e4-4899-98f8-f700993e0524"
+            }
+          ],
+          "id": "8f31fc60-89ea-40c4-82e2-f8d01b42251a",
+          "createdAt": "2026-07-28T01:24:42.000Z",
+          "updatedAt": "2026-07-28T01:24:42.000Z",
+          "uid": "35240-8f31fc60-89ea-40c4-82e2-f8d01b42251a"
+        }
+      ],
+      "id": "ae719ca1-0684-41c8-95fc-6f6d86515b4b",
+      "createdAt": "2026-07-28T01:24:42.000Z",
+      "updatedAt": "2026-07-28T01:24:42.000Z",
+      "uid": "35240-ae719ca1-0684-41c8-95fc-6f6d86515b4b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}

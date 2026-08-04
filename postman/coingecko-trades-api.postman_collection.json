@@ -1,0 +1,281 @@
+{
+  "info": {
+    "_postman_id": "74796c0c-e6cc-481c-ace7-318947e667c4",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Trades API",
+    "description": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:25:04.000Z",
+    "updatedAt": "2026-07-28T01:25:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74796c0c-e6cc-481c-ace7-318947e667c4"
+  },
+  "item": [
+    {
+      "name": "onchain",
+      "item": [
+        {
+          "name": "networks",
+          "item": [
+            {
+              "name": "{network}",
+              "item": [
+                {
+                  "name": "pools",
+                  "item": [
+                    {
+                      "name": "{pool_address}",
+                      "item": [
+                        {
+                          "name": "trades",
+                          "item": [
+                            {
+                              "name": "Get recent trades for a pool",
+                              "id": "7eaf81e5-aafe-489c-9627-929dec5e3d10",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/onchain/networks/:network/pools/:pool_address/trades?trade_volume_in_usd_greater_than=<number>&page=1",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "onchain",
+                                    "networks",
+                                    ":network",
+                                    "pools",
+                                    ":pool_address",
+                                    "trades"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter trades by minimum USD volume",
+                                      "key": "trade_volume_in_usd_greater_than",
+                                      "value": "<number>"
+                                    },
+                                    {
+                                      "description": "Page number for pagination",
+                                      "key": "page",
+                                      "value": "1"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "e861de7a-d768-4a93-b681-1dcd2384aeb3",
+                                      "key": "network",
+                                      "value": "<string>",
+                                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                                    },
+                                    {
+                                      "id": "5c9869d8-7052-4725-b456-8985c62e87e2",
+                                      "key": "pool_address",
+                                      "value": "<string>",
+                                      "description": "(Required) The pool contract address"
+                                    }
+                                  ]
+                                },
+                                "description": "Get the most recent trades for a specific liquidity pool on a given network. Returns trade details including price, volume, and transaction hashes."
+                              },
+                              "response": [
+                                {
+                                  "id": "e0412024-83d6-4c53-bc0a-63ff09d517ca",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/networks/:network/pools/:pool_address/trades?trade_volume_in_usd_greater_than=<number>&page=1",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "networks",
+                                        ":network",
+                                        "pools",
+                                        ":pool_address",
+                                        "trades"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Filter trades by minimum USD volume",
+                                          "key": "trade_volume_in_usd_greater_than",
+                                          "value": "<number>"
+                                        },
+                                        {
+                                          "description": "Page number for pagination",
+                                          "key": "page",
+                                          "value": "1"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "pool_address"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"block_number\": \"<integer>\",\n        \"block_timestamp\": \"<dateTime>\",\n        \"tx_hash\": \"<string>\",\n        \"tx_from_address\": \"<string>\",\n        \"from_token_amount\": \"<string>\",\n        \"to_token_amount\": \"<string>\",\n        \"price_from_in_currency_token\": \"<string>\",\n        \"price_to_in_currency_token\": \"<string>\",\n        \"price_from_in_usd\": \"<string>\",\n        \"price_to_in_usd\": \"<string>\",\n        \"kind\": \"buy\",\n        \"volume_in_usd\": \"<string>\",\n        \"from_token_address\": \"<string>\",\n        \"to_token_address\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"block_number\": \"<integer>\",\n        \"block_timestamp\": \"<dateTime>\",\n        \"tx_hash\": \"<string>\",\n        \"tx_from_address\": \"<string>\",\n        \"from_token_amount\": \"<string>\",\n        \"to_token_amount\": \"<string>\",\n        \"price_from_in_currency_token\": \"<string>\",\n        \"price_to_in_currency_token\": \"<string>\",\n        \"price_from_in_usd\": \"<string>\",\n        \"price_to_in_usd\": \"<string>\",\n        \"kind\": \"sell\",\n        \"volume_in_usd\": \"<string>\",\n        \"from_token_address\": \"<string>\",\n        \"to_token_address\": \"<string>\"\n      }\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:25:05.000Z",
+                                  "updatedAt": "2026-07-28T01:25:05.000Z",
+                                  "uid": "35240-e0412024-83d6-4c53-bc0a-63ff09d517ca"
+                                },
+                                {
+                                  "id": "ee3c610b-7e49-4d25-87e4-8fa416e6ba9e",
+                                  "name": "Pool not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-cg-demo-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/onchain/networks/:network/pools/:pool_address/trades?trade_volume_in_usd_greater_than=<number>&page=1",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "onchain",
+                                        "networks",
+                                        ":network",
+                                        "pools",
+                                        ":pool_address",
+                                        "trades"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Filter trades by minimum USD volume",
+                                          "key": "trade_volume_in_usd_greater_than",
+                                          "value": "<number>"
+                                        },
+                                        {
+                                          "description": "Page number for pagination",
+                                          "key": "page",
+                                          "value": "1"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "network"
+                                        },
+                                        {
+                                          "key": "pool_address"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T01:25:05.000Z",
+                                  "updatedAt": "2026-07-28T01:25:05.000Z",
+                                  "uid": "35240-ee3c610b-7e49-4d25-87e4-8fa416e6ba9e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:25:05.000Z",
+                              "updatedAt": "2026-07-28T01:25:05.000Z",
+                              "uid": "35240-7eaf81e5-aafe-489c-9627-929dec5e3d10"
+                            }
+                          ],
+                          "id": "8258522c-0b92-4e1c-a374-685a15fba75b",
+                          "createdAt": "2026-07-28T01:25:05.000Z",
+                          "updatedAt": "2026-07-28T01:25:05.000Z",
+                          "uid": "35240-8258522c-0b92-4e1c-a374-685a15fba75b"
+                        }
+                      ],
+                      "id": "ee8f9b73-f09c-49bc-aabc-e299a046e8b2",
+                      "createdAt": "2026-07-28T01:25:05.000Z",
+                      "updatedAt": "2026-07-28T01:25:05.000Z",
+                      "uid": "35240-ee8f9b73-f09c-49bc-aabc-e299a046e8b2"
+                    }
+                  ],
+                  "id": "4b3e1754-874b-421c-8ae1-177cdf72093e",
+                  "createdAt": "2026-07-28T01:25:05.000Z",
+                  "updatedAt": "2026-07-28T01:25:05.000Z",
+                  "uid": "35240-4b3e1754-874b-421c-8ae1-177cdf72093e"
+                }
+              ],
+              "id": "5ef56e9d-20fd-4c41-b3c4-0e4d9dc13b69",
+              "createdAt": "2026-07-28T01:25:05.000Z",
+              "updatedAt": "2026-07-28T01:25:05.000Z",
+              "uid": "35240-5ef56e9d-20fd-4c41-b3c4-0e4d9dc13b69"
+            }
+          ],
+          "id": "c9d754f7-82bb-4be4-aaff-bceabc5ff609",
+          "createdAt": "2026-07-28T01:25:05.000Z",
+          "updatedAt": "2026-07-28T01:25:05.000Z",
+          "uid": "35240-c9d754f7-82bb-4be4-aaff-bceabc5ff609"
+        }
+      ],
+      "id": "7cdda3e5-7960-4281-b0a4-0434122266ff",
+      "createdAt": "2026-07-28T01:25:05.000Z",
+      "updatedAt": "2026-07-28T01:25:05.000Z",
+      "uid": "35240-7cdda3e5-7960-4281-b0a4-0434122266ff"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.coingecko.com/api/v3"
+    }
+  ]
+}
