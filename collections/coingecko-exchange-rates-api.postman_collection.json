@@ -1,0 +1,127 @@
+{
+  "item": [
+    {
+      "id": "1bacd637-03b7-41cc-80ca-438743fb4d44",
+      "name": "Exchange Rates",
+      "description": {
+        "content": "BTC exchange rates against other currencies.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4567509b-8cd5-43dd-8801-b51f2c3ee0bf",
+          "name": "Get BTC exchange rates",
+          "request": {
+            "name": "Get BTC exchange rates",
+            "description": {
+              "content": "Get the current exchange rates for BTC against all supported currencies. Includes fiat currencies, cryptocurrencies, and precious metals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchange_rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f19a8753-987e-4a7f-83c0-38ec7bda2795",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchange_rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rates\": {\n    \"key_0\": {\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"value\": 1383.2010055802757,\n      \"type\": \"fiat\"\n    },\n    \"key_1\": {\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"value\": 8859.991781052746,\n      \"type\": \"crypto\"\n    },\n    \"key_2\": {\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"value\": 485.31726399424934,\n      \"type\": \"commodity\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d714bb09-549f-4f40-8ea2-894c9991f31c",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Exchange Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Contract API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contract",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get coin data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/contract/:contract_address",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address on the asset platform"
+              }
+            ]
+          },
+          "docs": "Get comprehensive coin data by querying a contract address on a specific asset platform. Returns the same data as the /coins/{id} endpoint."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/contract/:contract_address/market_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address on the asset platform"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data including price, market cap, and 24h volume by querying a contract address on a specific asset platform."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart range data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/contract/:contract_address/market_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address on the asset platform"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data for a specific contract address within a custom date range specified by UNIX timestamps."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

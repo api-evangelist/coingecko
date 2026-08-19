@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Search API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for coins, exchanges, and categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              }
+            ]
+          },
+          "docs": "Search for coins, exchanges, categories, and NFTs by keyword. Returns matching results across all entity types."
+        },
+        {
+          "info": {
+            "name": "Search for pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/search/pools",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query (token name, symbol, token address, or pool address)"
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by network ID"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex, network)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Search for liquidity pools by keyword. Accepts token name, ticker symbol, token contract address, or specific pool contract address as search queries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

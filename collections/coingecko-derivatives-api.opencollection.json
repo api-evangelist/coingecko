@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Derivatives API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Derivatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all derivative tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives"
+          },
+          "docs": "Get the list of all derivative tickers across all exchanges including price, index, basis, spread, and open interest data."
+        },
+        {
+          "info": {
+            "name": "List derivative exchanges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives/exchanges",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the list of all derivative exchanges with data including open interest, trade volume, and number of perpetual and futures pairs."
+        },
+        {
+          "info": {
+            "name": "Get derivative exchange data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives/exchanges/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The derivative exchange ID"
+              },
+              {
+                "name": "include_tickers",
+                "value": "",
+                "type": "query",
+                "description": "Include derivative tickers data"
+              }
+            ]
+          },
+          "docs": "Get detailed data for a specific derivative exchange including tickers, open interest, and trade volume."
+        },
+        {
+          "info": {
+            "name": "List derivative exchanges (ID map)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/derivatives/exchanges/list"
+          },
+          "docs": "Get the complete list of all supported derivative exchange IDs and names."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

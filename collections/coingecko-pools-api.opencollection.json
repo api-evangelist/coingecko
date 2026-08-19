@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Pools API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get pool data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/pools/:address",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The pool contract address"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              }
+            ]
+          },
+          "docs": "Get detailed data for a specific liquidity pool by its contract address on a given network. Includes price, volume, liquidity, and token information."
+        },
+        {
+          "info": {
+            "name": "Get multiple pools by addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/pools/multi/:addresses",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "addresses",
+                "value": "",
+                "type": "path",
+                "description": "Comma-separated list of pool contract addresses (up to 30)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              }
+            ]
+          },
+          "docs": "Get data for multiple liquidity pools in a single request by providing a comma-separated list of pool contract addresses on a specific network."
+        },
+        {
+          "info": {
+            "name": "Get top pools on a network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/pools",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              }
+            ]
+          },
+          "docs": "Get the top liquidity pools on a specific blockchain network, ordered by trading volume or liquidity."
+        },
+        {
+          "info": {
+            "name": "Get top pools on a DEX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/dexes/:dex/pools",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "dex",
+                "value": "",
+                "type": "path",
+                "description": "The DEX identifier"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              }
+            ]
+          },
+          "docs": "Get the top liquidity pools for a specific decentralized exchange on a given network."
+        },
+        {
+          "info": {
+            "name": "Get new pools on a network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/new_pools",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the most recently created liquidity pools on a specific blockchain network."
+        },
+        {
+          "info": {
+            "name": "Get new pools across all networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/new_pools",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex, network)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the most recently created liquidity pools across all supported blockchain networks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

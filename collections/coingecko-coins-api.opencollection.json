@@ -1,0 +1,542 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Coins API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all supported coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/list",
+            "params": [
+              {
+                "name": "include_platform",
+                "value": "",
+                "type": "query",
+                "description": "Include platform contract addresses in the response (e.g., Ethereum, Solana contract addresses)"
+              }
+            ]
+          },
+          "docs": "Get the complete list of all supported coins with their IDs, symbols, and names. Use this endpoint to obtain coin IDs for use in other endpoints. This list is cached and updated periodically."
+        },
+        {
+          "info": {
+            "name": "List coins with market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/markets",
+            "params": [
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency of market data (e.g., usd, eur, btc)"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of coin IDs to filter results"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by coin category"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "sparkline",
+                "value": "",
+                "type": "query",
+                "description": "Include sparkline 7-day price data"
+              },
+              {
+                "name": "price_change_percentage",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of price change percentage timeframes (1h, 24h, 7d, 14d, 30d, 200d, 1y)"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Language locale for descriptions"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of all supported coins with price, market cap, volume, and other market-related data. Results are ordered by market cap rank by default."
+        },
+        {
+          "info": {
+            "name": "Get coin data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "localization",
+                "value": "",
+                "type": "query",
+                "description": "Include all localized language descriptions"
+              },
+              {
+                "name": "tickers",
+                "value": "",
+                "type": "query",
+                "description": "Include exchange tickers data"
+              },
+              {
+                "name": "market_data",
+                "value": "",
+                "type": "query",
+                "description": "Include market data"
+              },
+              {
+                "name": "community_data",
+                "value": "",
+                "type": "query",
+                "description": "Include community data"
+              },
+              {
+                "name": "developer_data",
+                "value": "",
+                "type": "query",
+                "description": "Include developer data"
+              },
+              {
+                "name": "sparkline",
+                "value": "",
+                "type": "query",
+                "description": "Include sparkline 7-day price data"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific coin including current price, market data, community data, developer data, and more. This is the most detailed single-coin endpoint."
+        },
+        {
+          "info": {
+            "name": "Get coin tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/tickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "exchange_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter tickers by exchange IDs (comma-separated)"
+              },
+              {
+                "name": "include_exchange_logo",
+                "value": "",
+                "type": "query",
+                "description": "Include exchange logo URL in the response"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for tickers"
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Include order book depth (2% cost to move)"
+              }
+            ]
+          },
+          "docs": "Get trading pair tickers for a specific coin across all exchanges. Results include price, volume, spread, and trust score information."
+        },
+        {
+          "info": {
+            "name": "Get historical coin data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "The date of data snapshot in dd-mm-yyyy format"
+              },
+              {
+                "name": "localization",
+                "value": "",
+                "type": "query",
+                "description": "Include all localized language descriptions"
+              }
+            ]
+          },
+          "docs": "Get historical data for a specific coin at a given date. Includes price, market cap, 24h volume, and community and developer data."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/market_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data (1, 7, 14, 30, 90, 180, 365, or max for all available data)"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Data interval (daily). Leave empty for automatic granularity."
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data including price, market cap, and 24h volume for a specific coin over a time range. Data granularity is automatic based on the number of days requested."
+        },
+        {
+          "info": {
+            "name": "Get coin market chart data within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/market_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market data"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get historical market data including price, market cap, and 24h volume for a specific coin within a custom date range specified by UNIX timestamps."
+        },
+        {
+          "info": {
+            "name": "Get coin OHLC chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/ohlc",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for OHLC data"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data (1, 7, 14, 30, 90, 180, 365)"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values"
+              }
+            ]
+          },
+          "docs": "Get OHLC (Open, High, Low, Close) candlestick data for a specific coin. Data granularity is automatic based on the number of days requested. 1-2 days returns 30-minute candles, 3-30 days returns 4-hour candles, and 31+ days returns daily candles."
+        },
+        {
+          "info": {
+            "name": "Get recently added coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/list/new"
+          },
+          "docs": "Get the list of the latest 200 coins that have been recently added to CoinGecko. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get top gainers and losers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/top_gainers_losers",
+            "params": [
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for price data (e.g., usd)"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query",
+                "description": "Time duration for price change calculation"
+              },
+              {
+                "name": "top_coins",
+                "value": "",
+                "type": "query",
+                "description": "Filter by top N coins by market cap (e.g., 300 to only consider the top 300 coins)"
+              }
+            ]
+          },
+          "docs": "Get the top 30 coins with the largest price gain and the top 30 coins with the largest price loss over a specified time duration. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin circulating supply chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/circulating_supply_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Data interval (daily)"
+              }
+            ]
+          },
+          "docs": "Get historical circulating supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin circulating supply chart within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/circulating_supply_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              }
+            ]
+          },
+          "docs": "Get historical circulating supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin total supply chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/total_supply_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Data interval (daily)"
+              }
+            ]
+          },
+          "docs": "Get historical total supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get coin total supply chart within date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/:id/total_supply_chart/range",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The CoinGecko coin ID"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date as UNIX timestamp"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date as UNIX timestamp"
+              }
+            ]
+          },
+          "docs": "Get historical total supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

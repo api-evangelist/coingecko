@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Tokens API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get token data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/tokens/:address",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., top_pools)"
+              }
+            ]
+          },
+          "docs": "Get detailed data for a specific token by its contract address on a given network. Includes price, volume, market cap, and other token metrics."
+        },
+        {
+          "info": {
+            "name": "Get multiple tokens by addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/tokens/multi/:addresses",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "addresses",
+                "value": "",
+                "type": "path",
+                "description": "Comma-separated list of token contract addresses (up to 30)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., top_pools)"
+              }
+            ]
+          },
+          "docs": "Get price and market data for multiple tokens in a single request by providing a comma-separated list of token contract addresses on a specific network."
+        },
+        {
+          "info": {
+            "name": "Get top pools for a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/tokens/:address/pools",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              }
+            ]
+          },
+          "docs": "Get the top liquidity pools that include a specific token on a given network, useful for finding trading venues for a token."
+        },
+        {
+          "info": {
+            "name": "Get token info by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/tokens/:address/info",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address"
+              }
+            ]
+          },
+          "docs": "Get metadata and descriptive information for a specific token by its contract address on a given network. Includes name, symbol, description, image, and website links."
+        },
+        {
+          "info": {
+            "name": "Get pools for a specific token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/tokens/:token_address/pools",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "token_address",
+                "value": "",
+                "type": "path",
+                "description": "The token contract address"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get all liquidity pools that contain a specific token on a given network. Results include pool metrics like volume, liquidity, and price data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

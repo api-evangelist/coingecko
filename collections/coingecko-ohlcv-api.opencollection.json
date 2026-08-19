@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms OHLCV API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OHLCV",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get pool OHLCV chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/pools/:pool_address/ohlcv/:timeframe",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "pool_address",
+                "value": "",
+                "type": "path",
+                "description": "The pool contract address"
+              },
+              {
+                "name": "timeframe",
+                "value": "",
+                "type": "path",
+                "description": "OHLCV timeframe granularity"
+              },
+              {
+                "name": "aggregate",
+                "value": "",
+                "type": "query",
+                "description": "Aggregation period. For day timeframe (1). For hour timeframe (1, 4, 12). For minute timeframe (1, 5, 15)."
+              },
+              {
+                "name": "before_timestamp",
+                "value": "",
+                "type": "query",
+                "description": "Return data before this UNIX timestamp"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of OHLCV data points to return (max 1000)"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Price currency (usd or token)"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Which token to use for price (base or quote). Only applicable when currency is token."
+              }
+            ]
+          },
+          "docs": "Get OHLCV (Open, High, Low, Close, Volume) candlestick chart data for a specific liquidity pool. Supports daily, hourly, and minutely timeframes with various aggregation periods."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

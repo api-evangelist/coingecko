@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Companies API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get public company crypto holdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/companies/public_treasury/:coin_id",
+            "params": [
+              {
+                "name": "coin_id",
+                "value": "",
+                "type": "path",
+                "description": "The coin ID (bitcoin or ethereum)"
+              }
+            ]
+          },
+          "docs": "Get the list of public companies that hold bitcoin or ethereum in their treasury, including the amount held, total value, and percentage of total supply."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

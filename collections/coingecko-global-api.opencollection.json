@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Global API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Global",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get global cryptocurrency data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/global"
+          },
+          "docs": "Get aggregated global cryptocurrency market data including total market cap, total volume, market cap percentage by coin, and number of active cryptocurrencies and markets."
+        },
+        {
+          "info": {
+            "name": "Get global DeFi market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/global/decentralized_finance_defi"
+          },
+          "docs": "Get aggregated global decentralized finance (DeFi) data including DeFi market cap, trading volume, DeFi dominance, and top DeFi coin information."
+        },
+        {
+          "info": {
+            "name": "Get global market cap chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/global/market_cap_chart",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              },
+              {
+                "name": "vs_currency",
+                "value": "",
+                "type": "query",
+                "description": "The target currency for market cap data"
+              }
+            ]
+          },
+          "docs": "Get historical global market capitalization and volume chart data. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1362 @@
+{
+  "item": [
+    {
+      "id": "1ecc5dfa-1fb4-4ce2-82ac-2bc4e6dee6d1",
+      "name": "NFTs",
+      "description": {
+        "content": "NFT collection data including floor prices and market information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24287cd4-aea9-49a0-9ed4-986b410d9306",
+          "name": "List supported NFT collections",
+          "request": {
+            "name": "List supported NFT collections",
+            "description": {
+              "content": "Get the list of all supported NFT collection IDs, contract addresses, and names. Use this to obtain NFT IDs for use in other endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order for results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page (1-250)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ae72317-2048-41dc-999d-6c71716c987a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"contract_address\": \"string\",\n    \"name\": \"string\",\n    \"asset_platform_id\": \"string\",\n    \"symbol\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"contract_address\": \"string\",\n    \"name\": \"string\",\n    \"asset_platform_id\": \"string\",\n    \"symbol\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9cd2e2df-ed52-45ba-9f22-be5680c5b944",
+          "name": "Get NFT collection data by ID",
+          "request": {
+            "name": "Get NFT collection data by ID",
+            "description": {
+              "content": "Get comprehensive data for a specific NFT collection including floor price, market cap, volume, and other collection metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The NFT collection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5037c14c-0d92-47da-8569-23d3571dc895",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"contract_address\": \"string\",\n  \"asset_platform_id\": \"string\",\n  \"name\": \"string\",\n  \"symbol\": \"string\",\n  \"image\": {\n    \"small\": \"http://whXqWjJRydKxBNSYGXqBycazeaWM.rzujjpHLkCw3GRl6pJhaVe9d943.ypSgqPwP2yjyWdS7aXVmvL5AjhzO\"\n  },\n  \"description\": \"string\",\n  \"native_currency\": \"string\",\n  \"native_currency_symbol\": \"string\",\n  \"floor_price\": {\n    \"native_currency\": 6121.004441813545,\n    \"usd\": 2636.894495806795\n  },\n  \"market_cap\": {\n    \"native_currency\": 7353.6166450551855,\n    \"usd\": 5115.139839046478\n  },\n  \"volume_24h\": {\n    \"native_currency\": 3100.8254453099216,\n    \"usd\": 1195.856136993876\n  },\n  \"floor_price_in_usd_24h_percentage_change\": 5234.2619434241915,\n  \"number_of_unique_addresses\": 8346,\n  \"number_of_unique_addresses_24h_percentage_change\": 1241.5531265773861,\n  \"total_supply\": 7374.35897311485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a37b122-aefb-4c3e-bc6d-0d20800363bd",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76bf5011-7fd9-4813-85f2-9a5b97bd2ee2",
+          "name": "Get NFT collection data by contract address",
+          "request": {
+            "name": "Get NFT collection data by contract address",
+            "description": {
+              "content": "Get comprehensive data for a specific NFT collection by querying the contract address on a specific asset platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":asset_platform_id",
+                "contract",
+                ":contract_address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_platform_id",
+                  "description": "(Required) The asset platform ID (e.g., ethereum)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_address",
+                  "description": "(Required) The NFT contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04fb6fda-4eb3-4ea2-959e-cc85bd65c3ca",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"contract_address\": \"string\",\n  \"asset_platform_id\": \"string\",\n  \"name\": \"string\",\n  \"symbol\": \"string\",\n  \"image\": {\n    \"small\": \"http://whXqWjJRydKxBNSYGXqBycazeaWM.rzujjpHLkCw3GRl6pJhaVe9d943.ypSgqPwP2yjyWdS7aXVmvL5AjhzO\"\n  },\n  \"description\": \"string\",\n  \"native_currency\": \"string\",\n  \"native_currency_symbol\": \"string\",\n  \"floor_price\": {\n    \"native_currency\": 6121.004441813545,\n    \"usd\": 2636.894495806795\n  },\n  \"market_cap\": {\n    \"native_currency\": 7353.6166450551855,\n    \"usd\": 5115.139839046478\n  },\n  \"volume_24h\": {\n    \"native_currency\": 3100.8254453099216,\n    \"usd\": 1195.856136993876\n  },\n  \"floor_price_in_usd_24h_percentage_change\": 5234.2619434241915,\n  \"number_of_unique_addresses\": 8346,\n  \"number_of_unique_addresses_24h_percentage_change\": 1241.5531265773861,\n  \"total_supply\": 7374.35897311485\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1025877-7208-4df9-a37a-6600cf9b4e7e",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b4668f3-63b3-4bd2-a930-b02f656ae3fa",
+          "name": "List NFTs with market data",
+          "request": {
+            "name": "List NFTs with market data",
+            "description": {
+              "content": "Get the list of all supported NFT collections with floor price, market cap, volume, and market-related data. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                "markets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order for results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page (1-250)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d2fa871-9088-4cbe-bfa5-cd4529893a8b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"contract_address\": \"string\",\n    \"asset_platform_id\": \"string\",\n    \"name\": \"string\",\n    \"image\": {\n      \"small\": \"http://FazXIwvpVHLDiIrAymaKwwISpMzZZIGUm.chqfZQeamtmBxV6outDZBgxlf9uwvEiP7Pzk7d3Ty,WC-2f9sQATyMjv8xq6IZU+OrM77\"\n    },\n    \"description\": \"string\",\n    \"native_currency\": \"string\",\n    \"floor_price\": {\n      \"native_currency\": 6533.4297027055345,\n      \"usd\": 573.5354774145029\n    },\n    \"market_cap\": {\n      \"native_currency\": 3660.3897532826322,\n      \"usd\": 2542.3523089835653\n    },\n    \"volume_24h\": {\n      \"native_currency\": 6194.8347523045495,\n      \"usd\": 3346.272083012868\n    },\n    \"floor_price_24h_percentage_change\": {\n      \"native_currency\": 255.17314258535094,\n      \"usd\": 3520.0463832726623\n    },\n    \"number_of_unique_addresses\": 6022,\n    \"total_supply\": 6591.59796516581\n  },\n  {\n    \"id\": \"string\",\n    \"contract_address\": \"string\",\n    \"asset_platform_id\": \"string\",\n    \"name\": \"string\",\n    \"image\": {\n      \"small\": \"https://orkvYjwWGuWaTgjALOxecUxjlHYsP.uqcsgWrzZ+H-cJ+NkA6n4OyLw0owLEKFu6pKNYmjk6+M42\"\n    },\n    \"description\": \"string\",\n    \"native_currency\": \"string\",\n    \"floor_price\": {\n      \"native_currency\": 3470.705721589653,\n      \"usd\": 5899.390741348897\n    },\n    \"market_cap\": {\n      \"native_currency\": 9180.764872353782,\n      \"usd\": 8635.201965524388\n    },\n    \"volume_24h\": {\n      \"native_currency\": 1410.0027218692767,\n      \"usd\": 7446.8864837392875\n    },\n    \"floor_price_24h_percentage_change\": {\n      \"native_currency\": 8911.1057151674,\n      \"usd\": 5300.599521092307\n    },\n    \"number_of_unique_addresses\": 1103,\n    \"total_supply\": 7980.220260890816\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8efdb41d-c542-468b-9ed9-cd1c8b3e90d3",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc3604b4-5600-43a3-b87e-57d52170c510",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5b6e781-23c5-4807-8681-63e746c4c54a",
+          "name": "Get NFT collection market chart",
+          "request": {
+            "name": "Get NFT collection market chart",
+            "description": {
+              "content": "Get historical market chart data for a specific NFT collection including floor price, market cap, and volume data. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":id",
+                "market_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The NFT collection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67dea180-5fad-471c-a512-d0dd427437cb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"floor_price_usd\": [\n    [\n      973.3473770650936,\n      9913.086222763628\n    ],\n    [\n      2079.8624602872096,\n      2856.5069163505286\n    ]\n  ],\n  \"floor_price_native\": [\n    [\n      4067.4131524821,\n      5016.579725571087\n    ],\n    [\n      3798.527877158722,\n      65.89298834259849\n    ]\n  ],\n  \"market_cap_usd\": [\n    [\n      4075.5936076341036,\n      3154.270994168511\n    ],\n    [\n      9627.794788010286,\n      2695.452600955689\n    ]\n  ],\n  \"h24_volume_usd\": [\n    [\n      3737.471838705103,\n      8668.224471005105\n    ],\n    [\n      9082.160184033237,\n      125.41437879519002\n    ]\n  ],\n  \"h24_volume_native\": [\n    [\n      524.0700034365342,\n      5880.683088788032\n    ],\n    [\n      7672.219356435878,\n      2480.4406042812197\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d1713bb-51a9-43f9-a633-fce85e1cdd05",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e3d46d8-e61e-4b38-9b0b-ce5fe4eb570f",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59d0113e-eb16-4d0c-9def-2cb329f3878d",
+          "name": "Get NFT market chart by contract address",
+          "request": {
+            "name": "Get NFT market chart by contract address",
+            "description": {
+              "content": "Get historical market chart data for a specific NFT collection by contract address. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":asset_platform_id",
+                "contract",
+                ":contract_address",
+                "market_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_platform_id",
+                  "description": "(Required) The asset platform ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_address",
+                  "description": "(Required) The NFT contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0c4a160-d0c8-4344-9cf6-f7c3ad8f127a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"floor_price_usd\": [\n    [\n      1266.691087010644,\n      4430.741480518958\n    ],\n    [\n      2036.6530204303635,\n      5277.814403978328\n    ]\n  ],\n  \"floor_price_native\": [\n    [\n      2712.641795186974,\n      1345.362952660839\n    ],\n    [\n      5248.905237033904,\n      596.5838833862614\n    ]\n  ],\n  \"market_cap_usd\": [\n    [\n      8715.836902393887,\n      8098.027178382969\n    ],\n    [\n      2774.746496242103,\n      2078.6566755371205\n    ]\n  ],\n  \"h24_volume_usd\": [\n    [\n      2920.4444357494217,\n      5576.867961985779\n    ],\n    [\n      3450.861930431344,\n      1949.7087657523105\n    ]\n  ],\n  \"h24_volume_native\": [\n    [\n      9673.646174117735,\n      3974.892035660871\n    ],\n    [\n      9468.936161898213,\n      8522.698321092106\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50c13528-a54e-4d17-a4ea-2a5d2068148c",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f3c49f4a-4e33-45aa-9e6a-e0e2dc2eb5c0",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":asset_platform_id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The NFT contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67a8bbef-37ee-4187-8a26-a429175e22a8",
+          "name": "Get NFT collection tickers",
+          "request": {
+            "name": "Get NFT collection tickers",
+            "description": {
+              "content": "Get the latest floor price and 24h volume tickers for a specific NFT collection across different marketplaces. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfts",
+                ":id",
+                "tickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The NFT collection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cca575f-6d38-4865-a255-c5ae3a2062dc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tickers\": [\n    {\n      \"floor_price_in_native_currency\": 6617.818277286335,\n      \"h24_volume_in_native_currency\": 8702.61054884122,\n      \"native_currency\": \"string\",\n      \"native_currency_symbol\": \"string\",\n      \"updated_at\": \"1972-11-19T23:06:39.019Z\",\n      \"nft_marketplace_id\": \"string\"\n    },\n    {\n      \"floor_price_in_native_currency\": 3461.351580139177,\n      \"h24_volume_in_native_currency\": 2393.409637559498,\n      \"native_currency\": \"string\",\n      \"native_currency_symbol\": \"string\",\n      \"updated_at\": \"1993-11-08T08:14:28.091Z\",\n      \"nft_marketplace_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55911c8c-b9b4-4458-9d05-9aff656f4714",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bb4eebdd-4148-41b8-850e-598b8f09f872",
+              "name": "NFT collection not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfts",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The NFT collection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4c8f1fb9-59c9-442c-9049-2306aeb535b7",
+    "name": "CoinGecko Crypto Market Data Asset Platforms NFTs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

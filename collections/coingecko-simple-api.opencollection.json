@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Simple API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Simple",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get coin price by IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/simple/price",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)"
+              },
+              {
+                "name": "vs_currencies",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of target currencies (e.g., usd,eur,btc)"
+              },
+              {
+                "name": "include_market_cap",
+                "value": "",
+                "type": "query",
+                "description": "Include market cap in the response"
+              },
+              {
+                "name": "include_24hr_vol",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour trading volume in the response"
+              },
+              {
+                "name": "include_24hr_change",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour price change percentage in the response"
+              },
+              {
+                "name": "include_last_updated_at",
+                "value": "",
+                "type": "query",
+                "description": "Include last updated timestamp in the response"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values (0-18)"
+              }
+            ]
+          },
+          "docs": "Query the prices of one or more coins by using their unique CoinGecko coin IDs. Optionally include market cap, 24h volume, 24h change, and last updated timestamp."
+        },
+        {
+          "info": {
+            "name": "Get token price by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/simple/token_price/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+              },
+              {
+                "name": "contract_addresses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of token contract addresses on the specified asset platform"
+              },
+              {
+                "name": "vs_currencies",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of target currencies (e.g., usd,eur,btc)"
+              },
+              {
+                "name": "include_market_cap",
+                "value": "",
+                "type": "query",
+                "description": "Include market cap in the response"
+              },
+              {
+                "name": "include_24hr_vol",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour trading volume in the response"
+              },
+              {
+                "name": "include_24hr_change",
+                "value": "",
+                "type": "query",
+                "description": "Include 24-hour price change percentage in the response"
+              },
+              {
+                "name": "include_last_updated_at",
+                "value": "",
+                "type": "query",
+                "description": "Include last updated timestamp in the response"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query",
+                "description": "Decimal precision for currency price values (0-18)"
+              }
+            ]
+          },
+          "docs": "Query the prices of one or more tokens by using their contract addresses on a specific asset platform. This endpoint is useful for looking up token prices when you have the contract address rather than the CoinGecko coin ID."
+        },
+        {
+          "info": {
+            "name": "Get supported vs currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
+          },
+          "docs": "Get the list of all supported vs currencies (fiat and crypto) that can be used in price queries."
+        },
+        {
+          "info": {
+            "name": "Get token prices by contract addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/simple/networks/:network/token_price/:addresses",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "addresses",
+                "value": "",
+                "type": "path",
+                "description": "Comma-separated list of token contract addresses (up to 30)"
+              }
+            ]
+          },
+          "docs": "Get the USD prices of multiple tokens on a specific network by their contract addresses. Returns the latest price data for each requested token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

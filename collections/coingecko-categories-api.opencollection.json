@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Categories API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all categories (ID map)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/categories/list"
+          },
+          "docs": "Get the complete list of all supported coin categories with their IDs and names. Use this to obtain category IDs for filtering in other endpoints."
+        },
+        {
+          "info": {
+            "name": "List categories with market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/coins/categories",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for categories"
+              }
+            ]
+          },
+          "docs": "Get the list of all coin categories with market data including market cap, volume, and top coins in each category."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

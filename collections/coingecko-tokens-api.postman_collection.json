@@ -1,0 +1,977 @@
+{
+  "item": [
+    {
+      "id": "74145513-5fe4-4baf-a544-ccaa10dc340a",
+      "name": "Tokens",
+      "description": {
+        "content": "Query token data by contract address including price, volume, top pools, and token information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fcb5fd3d-7a8d-496e-a11d-cfcad096f084",
+          "name": "Get token data by contract address",
+          "request": {
+            "name": "Get token data by contract address",
+            "description": {
+              "content": "Get detailed data for a specific token by its contract address on a given network. Includes price, volume, market cap, and other token metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "networks",
+                ":network",
+                "tokens",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Additional data to include (e.g., top_pools)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) The token contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a21426ea-ad39-4c91-89a1-6daabb45b4fc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"attributes\": {\n      \"address\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"decimals\": 9850,\n      \"coingecko_coin_id\": \"string\",\n      \"price_usd\": \"string\",\n      \"fdv_usd\": \"string\",\n      \"total_reserve_in_usd\": \"string\",\n      \"volume_usd\": {\n        \"h24\": \"string\"\n      },\n      \"market_cap_usd\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "500d654d-8a8e-4dd8-a409-eb6d8eb1a909",
+              "name": "Token not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8eaa4d07-16a2-4af4-bf21-f29310b02933",
+          "name": "Get multiple tokens by addresses",
+          "request": {
+            "name": "Get multiple tokens by addresses",
+            "description": {
+              "content": "Get price and market data for multiple tokens in a single request by providing a comma-separated list of token contract addresses on a specific network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "networks",
+                ":network",
+                "tokens",
+                "multi",
+                ":addresses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Additional data to include (e.g., top_pools)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "addresses",
+                  "description": "(Required) Comma-separated list of token contract addresses (up to 30)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b998cd8f-33d6-4b1c-98af-2ccdacef1920",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    "multi",
+                    ":addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "addresses",
+                      "description": "(Required) Comma-separated list of token contract addresses (up to 30)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"symbol\": \"string\",\n        \"decimals\": 3458,\n        \"coingecko_coin_id\": \"string\",\n        \"price_usd\": \"string\",\n        \"fdv_usd\": \"string\",\n        \"total_reserve_in_usd\": \"string\",\n        \"volume_usd\": {\n          \"h24\": \"string\"\n        },\n        \"market_cap_usd\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"symbol\": \"string\",\n        \"decimals\": 7735,\n        \"coingecko_coin_id\": \"string\",\n        \"price_usd\": \"string\",\n        \"fdv_usd\": \"string\",\n        \"total_reserve_in_usd\": \"string\",\n        \"volume_usd\": {\n          \"h24\": \"string\"\n        },\n        \"market_cap_usd\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b7cb701-df1f-4926-a04b-6d3b6be935bc",
+          "name": "Get top pools for a token",
+          "request": {
+            "name": "Get top pools for a token",
+            "description": {
+              "content": "Get the top liquidity pools that include a specific token on a given network, useful for finding trading venues for a token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "networks",
+                ":network",
+                "tokens",
+                ":address",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) The token contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0bd3e92-1930-4112-a427-59359ee104d4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":address",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"string\",\n        \"base_token_price_native_currency\": \"string\",\n        \"quote_token_price_usd\": \"string\",\n        \"quote_token_price_native_currency\": \"string\",\n        \"base_token_price_quote_token\": \"string\",\n        \"quote_token_price_base_token\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"pool_created_at\": \"1969-05-18T21:22:24.217Z\",\n        \"fdv_usd\": \"string\",\n        \"market_cap_usd\": \"string\",\n        \"price_change_percentage\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": 692,\n            \"sells\": 7141,\n            \"buyers\": 8981,\n            \"sellers\": 5011\n          },\n          \"m15\": {\n            \"buys\": 9583,\n            \"sells\": 3326,\n            \"buyers\": 9064,\n            \"sellers\": 6669\n          },\n          \"m30\": {\n            \"buys\": 8160,\n            \"sells\": 7643,\n            \"buyers\": 8911,\n            \"sellers\": 1058\n          },\n          \"h1\": {\n            \"buys\": 5142,\n            \"sells\": 770,\n            \"buyers\": 3300,\n            \"sellers\": 8214\n          },\n          \"h24\": {\n            \"buys\": 264,\n            \"sells\": 1559,\n            \"buyers\": 9369,\n            \"sellers\": 1176\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"reserve_in_usd\": \"string\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"string\",\n        \"base_token_price_native_currency\": \"string\",\n        \"quote_token_price_usd\": \"string\",\n        \"quote_token_price_native_currency\": \"string\",\n        \"base_token_price_quote_token\": \"string\",\n        \"quote_token_price_base_token\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"pool_created_at\": \"1964-07-15T15:47:37.514Z\",\n        \"fdv_usd\": \"string\",\n        \"market_cap_usd\": \"string\",\n        \"price_change_percentage\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": 6198,\n            \"sells\": 2235,\n            \"buyers\": 7954,\n            \"sellers\": 7439\n          },\n          \"m15\": {\n            \"buys\": 9430,\n            \"sells\": 7360,\n            \"buyers\": 8810,\n            \"sellers\": 8982\n          },\n          \"m30\": {\n            \"buys\": 5237,\n            \"sells\": 7913,\n            \"buyers\": 2126,\n            \"sellers\": 2081\n          },\n          \"h1\": {\n            \"buys\": 9866,\n            \"sells\": 4187,\n            \"buyers\": 5527,\n            \"sellers\": 4263\n          },\n          \"h24\": {\n            \"buys\": 9295,\n            \"sells\": 721,\n            \"buyers\": 8409,\n            \"sellers\": 5227\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"reserve_in_usd\": \"string\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80363bad-001c-48f7-bc38-c03468401feb",
+              "name": "Token not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":address",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba1ab022-e27d-4bea-bed4-9f994d34aa8b",
+          "name": "Get token info by contract address",
+          "request": {
+            "name": "Get token info by contract address",
+            "description": {
+              "content": "Get metadata and descriptive information for a specific token by its contract address on a given network. Includes name, symbol, description, image, and website links.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "networks",
+                ":network",
+                "tokens",
+                ":address",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) The token contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0c07adb-ba9a-4b28-98c5-f49f8a3b49a5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":address",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"attributes\": {\n      \"address\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"coingecko_coin_id\": \"string\",\n      \"image_url\": \"http://YHHCFxReIJxSrkRxDNbIuxjOqHT.aapTH3fKuxO3xfSgFO1mP9Pmy6TDXObJ9yQhoyZWHvilTVlmtqlih8Gvq+x1\",\n      \"description\": \"string\",\n      \"websites\": [\n        \"http://QdHPXwNvElyyZoailQjXmorUyy.oddOdqYpgKXl0TIEKykr7Pl5N\",\n        \"http://EkEfFFPHkAU.euQ14.sGij8i,lNheKxohQqX+5MjfMwYDJx--g3BBJmcb6Md\"\n      ],\n      \"gt_score\": 9988.353616490323,\n      \"discord_url\": \"http://wwQWSKVHyJB.azosxkej7R5hULBxRjLDBGFFpQvLd00A29KNfRyIuxJ0PgJkBlWY-aevK\",\n      \"telegram_handle\": \"string\",\n      \"twitter_handle\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1a25e8e-1570-4c93-a067-eb529c3f0987",
+              "name": "Token not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":address",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "092a8828-1eba-4263-9184-500396b2bda2",
+          "name": "Get pools for a specific token",
+          "request": {
+            "name": "Get pools for a specific token",
+            "description": {
+              "content": "Get all liquidity pools that contain a specific token on a given network. Results include pool metrics like volume, liquidity, and price data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "networks",
+                ":network",
+                "tokens",
+                ":token_address",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token_address",
+                  "description": "(Required) The token contract address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1387f3e-7899-4edd-b8cd-72f1bf03e488",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":token_address",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token_address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"string\",\n        \"base_token_price_native_currency\": \"string\",\n        \"quote_token_price_usd\": \"string\",\n        \"quote_token_price_native_currency\": \"string\",\n        \"base_token_price_quote_token\": \"string\",\n        \"quote_token_price_base_token\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"pool_created_at\": \"1969-05-18T21:22:24.217Z\",\n        \"fdv_usd\": \"string\",\n        \"market_cap_usd\": \"string\",\n        \"price_change_percentage\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": 692,\n            \"sells\": 7141,\n            \"buyers\": 8981,\n            \"sellers\": 5011\n          },\n          \"m15\": {\n            \"buys\": 9583,\n            \"sells\": 3326,\n            \"buyers\": 9064,\n            \"sellers\": 6669\n          },\n          \"m30\": {\n            \"buys\": 8160,\n            \"sells\": 7643,\n            \"buyers\": 8911,\n            \"sellers\": 1058\n          },\n          \"h1\": {\n            \"buys\": 5142,\n            \"sells\": 770,\n            \"buyers\": 3300,\n            \"sellers\": 8214\n          },\n          \"h24\": {\n            \"buys\": 264,\n            \"sells\": 1559,\n            \"buyers\": 9369,\n            \"sellers\": 1176\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"reserve_in_usd\": \"string\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"string\",\n        \"base_token_price_native_currency\": \"string\",\n        \"quote_token_price_usd\": \"string\",\n        \"quote_token_price_native_currency\": \"string\",\n        \"base_token_price_quote_token\": \"string\",\n        \"quote_token_price_base_token\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"pool_created_at\": \"1964-07-15T15:47:37.514Z\",\n        \"fdv_usd\": \"string\",\n        \"market_cap_usd\": \"string\",\n        \"price_change_percentage\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": 6198,\n            \"sells\": 2235,\n            \"buyers\": 7954,\n            \"sellers\": 7439\n          },\n          \"m15\": {\n            \"buys\": 9430,\n            \"sells\": 7360,\n            \"buyers\": 8810,\n            \"sellers\": 8982\n          },\n          \"m30\": {\n            \"buys\": 5237,\n            \"sells\": 7913,\n            \"buyers\": 2126,\n            \"sellers\": 2081\n          },\n          \"h1\": {\n            \"buys\": 9866,\n            \"sells\": 4187,\n            \"buyers\": 5527,\n            \"sellers\": 4263\n          },\n          \"h24\": {\n            \"buys\": 9295,\n            \"sells\": 721,\n            \"buyers\": 8409,\n            \"sellers\": 5227\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"reserve_in_usd\": \"string\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2beb2e0-9f17-4068-9a84-b0d65e9e6d51",
+              "name": "Token not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "tokens",
+                    ":token_address",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token_address",
+                      "description": "(Required) The token contract address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0d5916d6-ed25-4fbc-a968-bf47fa870d8d",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

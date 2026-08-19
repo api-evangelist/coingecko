@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Trending Pools API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trending Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get trending pools across all networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/trending_pools",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex, network)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query",
+                "description": "Trending duration filter"
+              }
+            ]
+          },
+          "docs": "Get the list of trending liquidity pools across all supported networks, ranked by web visits and onchain trading activity."
+        },
+        {
+          "info": {
+            "name": "Get trending pools on a network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/onchain/networks/:network/trending_pools",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Additional data to include (e.g., base_token, quote_token, dex)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "duration",
+                "value": "",
+                "type": "query",
+                "description": "Trending duration filter"
+              }
+            ]
+          },
+          "docs": "Get the list of trending liquidity pools on a specific blockchain network, ranked by web visits and onchain trading activity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

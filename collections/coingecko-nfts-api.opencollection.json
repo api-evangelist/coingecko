@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms NFTs API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NFTs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported NFT collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/list",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the list of all supported NFT collection IDs, contract addresses, and names. Use this to obtain NFT IDs for use in other endpoints."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection data by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The NFT collection ID"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific NFT collection including floor price, market cap, volume, and other collection metrics."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection data by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:asset_platform_id/contract/:contract_address",
+            "params": [
+              {
+                "name": "asset_platform_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum)"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The NFT contract address"
+              }
+            ]
+          },
+          "docs": "Get comprehensive data for a specific NFT collection by querying the contract address on a specific asset platform."
+        },
+        {
+          "info": {
+            "name": "List NFTs with market data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/markets",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-250)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Get the list of all supported NFT collections with floor price, market cap, volume, and market-related data. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection market chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:id/market_chart",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The NFT collection ID"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              }
+            ]
+          },
+          "docs": "Get historical market chart data for a specific NFT collection including floor price, market cap, and volume data. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get NFT market chart by contract address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:asset_platform_id/contract/:contract_address/market_chart",
+            "params": [
+              {
+                "name": "asset_platform_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID"
+              },
+              {
+                "name": "contract_address",
+                "value": "",
+                "type": "path",
+                "description": "The NFT contract address"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query",
+                "description": "Number of days of historical data"
+              }
+            ]
+          },
+          "docs": "Get historical market chart data for a specific NFT collection by contract address. This endpoint is exclusive to paid plan subscribers."
+        },
+        {
+          "info": {
+            "name": "Get NFT collection tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/nfts/:id/tickers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The NFT collection ID"
+              }
+            ]
+          },
+          "docs": "Get the latest floor price and 24h volume tickers for a specific NFT collection across different marketplaces. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3055 @@
+{
+  "item": [
+    {
+      "id": "b6a84765-e54d-4826-968f-a8d3b8647bd9",
+      "name": "Coins",
+      "description": {
+        "content": "Comprehensive coin data including current prices, market data, historical data, tickers, and OHLCV charts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ebfa6e37-58c9-4043-86b1-aab3d7af83c2",
+          "name": "List all supported coins",
+          "request": {
+            "name": "List all supported coins",
+            "description": {
+              "content": "Get the complete list of all supported coins with their IDs, symbols, and names. Use this endpoint to obtain coin IDs for use in other endpoints. This list is cached and updated periodically.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_platform",
+                  "value": "false",
+                  "description": "Include platform contract addresses in the response (e.g., Ethereum, Solana contract addresses)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16365698-f485-4793-a6d1-74dc2f02d97b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_platform",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"platforms\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"platforms\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ad57f3a-af9d-4e0f-9852-96768e3c2dab",
+          "name": "List coins with market data",
+          "request": {
+            "name": "List coins with market data",
+            "description": {
+              "content": "Get a paginated list of all supported coins with price, market cap, volume, and other market-related data. Results are ordered by market cap rank by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "markets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "<string>",
+                  "description": "(Required) The target currency of market data (e.g., usd, eur, btc)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Comma-separated list of coin IDs to filter results"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Filter by coin category"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "market_cap_desc",
+                  "description": "Sort order for results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page (1-250)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "sparkline",
+                  "value": "false",
+                  "description": "Include sparkline 7-day price data"
+                },
+                {
+                  "disabled": false,
+                  "key": "price_change_percentage",
+                  "value": "<string>",
+                  "description": "Comma-separated list of price change percentage timeframes (1h, 24h, 7d, 14d, 30d, 200d, 1y)"
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "en",
+                  "description": "Language locale for descriptions"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<string>",
+                  "description": "Decimal precision for currency price values"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29919ef4-f047-4d26-a117-bbfad516e053",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "market_cap_desc"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sparkline",
+                      "value": "false"
+                    },
+                    {
+                      "key": "price_change_percentage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"image\": \"http://KXdwPkneVoocEYrMdlsOEkKvByeLA.vtqLTux3oe+XvbvB.zYOJU.LLJWB0oICFjtLIyFd\",\n    \"current_price\": 8783.007885752411,\n    \"market_cap\": 6745.5449838208315,\n    \"market_cap_rank\": 8547,\n    \"fully_diluted_valuation\": 6975.105878614033,\n    \"total_volume\": 9096.529403765044,\n    \"high_24h\": 9983.094758226216,\n    \"low_24h\": 261.4189051562088,\n    \"price_change_24h\": 1342.8842250703387,\n    \"price_change_percentage_24h\": 7150.5596632088245,\n    \"market_cap_change_24h\": 5347.253323734402,\n    \"market_cap_change_percentage_24h\": 2958.314096885194,\n    \"circulating_supply\": 2078.9247957483403,\n    \"total_supply\": 9611.476622071244,\n    \"max_supply\": 851.1007585554875,\n    \"ath\": 6353.680412196539,\n    \"ath_change_percentage\": 4941.143056738273,\n    \"ath_date\": \"1983-02-02T09:08:17.153Z\",\n    \"atl\": 672.9877597394574,\n    \"atl_change_percentage\": 8905.01137606924,\n    \"atl_date\": \"1951-03-31T10:23:49.510Z\",\n    \"last_updated\": \"1982-12-13T09:10:32.306Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"image\": \"https://TuugLOYV.qyjzRmNyHX6BHdPs,NJcqr8LCpX\",\n    \"current_price\": 5640.8586445346255,\n    \"market_cap\": 8829.01770576815,\n    \"market_cap_rank\": 4741,\n    \"fully_diluted_valuation\": 6880.487656673452,\n    \"total_volume\": 6815.462191210358,\n    \"high_24h\": 900.9275421162299,\n    \"low_24h\": 3747.143551675348,\n    \"price_change_24h\": 2323.7435466133306,\n    \"price_change_percentage_24h\": 7747.708929825277,\n    \"market_cap_change_24h\": 1080.2605730781033,\n    \"market_cap_change_percentage_24h\": 1912.147848233181,\n    \"circulating_supply\": 2333.3335899436856,\n    \"total_supply\": 4106.992595625224,\n    \"max_supply\": 7393.15828943829,\n    \"ath\": 2403.714292890552,\n    \"ath_change_percentage\": 4009.0096716519374,\n    \"ath_date\": \"1956-03-30T22:02:33.964Z\",\n    \"atl\": 9705.26253555984,\n    \"atl_change_percentage\": 4583.700168080158,\n    \"atl_date\": \"1997-01-27T06:28:23.833Z\",\n    \"last_updated\": \"1948-02-08T21:53:03.611Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6eabf9da-6c4e-42ef-ac48-ce4ff5a1e9b6",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "market_cap_desc"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sparkline",
+                      "value": "false"
+                    },
+                    {
+                      "key": "price_change_percentage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4821bfea-74c8-4d27-90e2-478e1a8edaf4",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "market_cap_desc"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sparkline",
+                      "value": "false"
+                    },
+                    {
+                      "key": "price_change_percentage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb684d3d-2c74-4322-a685-9fc1b82bf0ed",
+          "name": "Get coin data by ID",
+          "request": {
+            "name": "Get coin data by ID",
+            "description": {
+              "content": "Get comprehensive data for a specific coin including current price, market data, community data, developer data, and more. This is the most detailed single-coin endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "localization",
+                  "value": "true",
+                  "description": "Include all localized language descriptions"
+                },
+                {
+                  "disabled": false,
+                  "key": "tickers",
+                  "value": "true",
+                  "description": "Include exchange tickers data"
+                },
+                {
+                  "disabled": false,
+                  "key": "market_data",
+                  "value": "true",
+                  "description": "Include market data"
+                },
+                {
+                  "disabled": false,
+                  "key": "community_data",
+                  "value": "true",
+                  "description": "Include community data"
+                },
+                {
+                  "disabled": false,
+                  "key": "developer_data",
+                  "value": "true",
+                  "description": "Include developer data"
+                },
+                {
+                  "disabled": false,
+                  "key": "sparkline",
+                  "value": "false",
+                  "description": "Include sparkline 7-day price data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1301dc9-6542-41ef-ae4d-90464c2fd3bc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "localization",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tickers",
+                      "value": "true"
+                    },
+                    {
+                      "key": "market_data",
+                      "value": "true"
+                    },
+                    {
+                      "key": "community_data",
+                      "value": "true"
+                    },
+                    {
+                      "key": "developer_data",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sparkline",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"symbol\": \"string\",\n  \"name\": \"string\",\n  \"asset_platform_id\": \"string\",\n  \"platforms\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"block_time_in_minutes\": 4900,\n  \"hashing_algorithm\": \"string\",\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"description\": {\n    \"key_0\": \"string\"\n  },\n  \"links\": {},\n  \"image\": {\n    \"thumb\": \"https://xkdbmHce.ejPCphBey4-K.zYVMoP-ScDi4bUqmRORFLpvhscYVg49yCAmxI2USPK\",\n    \"small\": \"http://hMqbXcUCyJP.ifEdSZvxAfU4C0V\",\n    \"large\": \"https://VGAUKMHxPaNQvjBM.gmQI9MLfBh4x.NG-qnwaYLD2047\"\n  },\n  \"genesis_date\": \"1966-09-03\",\n  \"market_cap_rank\": 8764,\n  \"market_data\": {\n    \"current_price\": {\n      \"key_0\": 7838.614307299566,\n      \"key_1\": 9114.446815921288\n    },\n    \"total_value_locked\": 3842.9038214137536,\n    \"market_cap\": {\n      \"key_0\": 5925.586934818394\n    },\n    \"total_volume\": {\n      \"key_0\": 4629.8314934757245,\n      \"key_1\": 8631.41172225515,\n      \"key_2\": 3467.934783463027\n    },\n    \"high_24h\": {\n      \"key_0\": 3543.636550886975\n    },\n    \"low_24h\": {\n      \"key_0\": 5091.51185140556,\n      \"key_1\": 4568.146939063015,\n      \"key_2\": 7255.28013121507\n    },\n    \"price_change_24h\": 3941.0618693063525,\n    \"price_change_percentage_24h\": 6478.591544509129,\n    \"market_cap_change_24h\": 559.7291318171427,\n    \"market_cap_change_percentage_24h\": 87.56253141266268,\n    \"circulating_supply\": 5251.099199080977,\n    \"total_supply\": 9330.367650698467,\n    \"max_supply\": 1669.5674444961073\n  },\n  \"last_updated\": \"2008-01-03T12:56:48.546Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d157da75-7041-4b7d-a550-89edda838668",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "localization",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tickers",
+                      "value": "true"
+                    },
+                    {
+                      "key": "market_data",
+                      "value": "true"
+                    },
+                    {
+                      "key": "community_data",
+                      "value": "true"
+                    },
+                    {
+                      "key": "developer_data",
+                      "value": "true"
+                    },
+                    {
+                      "key": "sparkline",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7423c6a7-3965-4c5c-ab93-b2d0cbb6b323",
+          "name": "Get coin tickers",
+          "request": {
+            "name": "Get coin tickers",
+            "description": {
+              "content": "Get trading pair tickers for a specific coin across all exchanges. Results include price, volume, spread, and trust score information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "tickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "exchange_ids",
+                  "value": "<string>",
+                  "description": "Filter tickers by exchange IDs (comma-separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_exchange_logo",
+                  "value": "false",
+                  "description": "Include exchange logo URL in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "trust_score_desc",
+                  "description": "Sort order for tickers"
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "false",
+                  "description": "Include order book depth (2% cost to move)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fe7a4e6-28a9-419f-89df-50249b897154",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_exchange_logo",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "order",
+                      "value": "trust_score_desc"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"tickers\": [\n    {\n      \"base\": \"string\",\n      \"target\": \"string\",\n      \"market\": {\n        \"name\": \"string\",\n        \"identifier\": \"string\",\n        \"has_trading_incentive\": true\n      },\n      \"last\": 552.8868030477197,\n      \"volume\": 8065.760587474954,\n      \"converted_last\": {\n        \"key_0\": 1069.7540755412006\n      },\n      \"converted_volume\": {\n        \"key_0\": 8564.250172644362\n      },\n      \"trust_score\": \"string\",\n      \"bid_ask_spread_percentage\": 1796.593593390291,\n      \"timestamp\": \"1997-07-11T06:21:16.102Z\",\n      \"last_traded_at\": \"2007-07-27T05:14:18.044Z\",\n      \"last_fetch_at\": \"2011-12-25T05:04:18.803Z\",\n      \"is_anomaly\": false,\n      \"is_stale\": false,\n      \"trade_url\": \"http://Wbb.bgc.yuyMTtFO29ePmKgnWdwvlT5ch5ZQneiGaU.voa\",\n      \"coin_id\": \"string\",\n      \"target_coin_id\": \"string\"\n    },\n    {\n      \"base\": \"string\",\n      \"target\": \"string\",\n      \"market\": {\n        \"name\": \"string\",\n        \"identifier\": \"string\",\n        \"has_trading_incentive\": true\n      },\n      \"last\": 1129.4604690044962,\n      \"volume\": 9265.411015684369,\n      \"converted_last\": {\n        \"key_0\": 5394.7886071780285,\n        \"key_1\": 5387.4541175938175\n      },\n      \"converted_volume\": {\n        \"key_0\": 7548.982198398563,\n        \"key_1\": 1400.7311464367867,\n        \"key_2\": 9265.305086541735,\n        \"key_3\": 8614.478750420098\n      },\n      \"trust_score\": \"string\",\n      \"bid_ask_spread_percentage\": 7267.528276282329,\n      \"timestamp\": \"1950-03-05T12:39:10.502Z\",\n      \"last_traded_at\": \"1998-07-27T05:49:15.899Z\",\n      \"last_fetch_at\": \"1966-09-25T16:25:27.294Z\",\n      \"is_anomaly\": true,\n      \"is_stale\": true,\n      \"trade_url\": \"http://yQXJZUInxfWoyDtKkqModpWCDaT.iwgwynf5P96.zney+CqdCGdU0mhfQ.MW4UoD6ydkOSt2rnEh5x-JtC,n6D54\",\n      \"coin_id\": \"string\",\n      \"target_coin_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a81e3ed-c52c-4bac-87b5-5358b386c24e",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "exchange_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_exchange_logo",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "order",
+                      "value": "trust_score_desc"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bafd9825-662c-4ee6-ac3b-48f1b6453a1c",
+          "name": "Get historical coin data",
+          "request": {
+            "name": "Get historical coin data",
+            "description": {
+              "content": "Get historical data for a specific coin at a given date. Includes price, market cap, 24h volume, and community and developer data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>",
+                  "description": "(Required) The date of data snapshot in dd-mm-yyyy format"
+                },
+                {
+                  "disabled": false,
+                  "key": "localization",
+                  "value": "true",
+                  "description": "Include all localized language descriptions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0a70e96-e955-42c7-96b3-40d2d1f81cd9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localization",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"symbol\": \"string\",\n  \"name\": \"string\",\n  \"asset_platform_id\": \"string\",\n  \"platforms\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"block_time_in_minutes\": 4900,\n  \"hashing_algorithm\": \"string\",\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"description\": {\n    \"key_0\": \"string\"\n  },\n  \"links\": {},\n  \"image\": {\n    \"thumb\": \"https://xkdbmHce.ejPCphBey4-K.zYVMoP-ScDi4bUqmRORFLpvhscYVg49yCAmxI2USPK\",\n    \"small\": \"http://hMqbXcUCyJP.ifEdSZvxAfU4C0V\",\n    \"large\": \"https://VGAUKMHxPaNQvjBM.gmQI9MLfBh4x.NG-qnwaYLD2047\"\n  },\n  \"genesis_date\": \"1966-09-03\",\n  \"market_cap_rank\": 8764,\n  \"market_data\": {\n    \"current_price\": {\n      \"key_0\": 7838.614307299566,\n      \"key_1\": 9114.446815921288\n    },\n    \"total_value_locked\": 3842.9038214137536,\n    \"market_cap\": {\n      \"key_0\": 5925.586934818394\n    },\n    \"total_volume\": {\n      \"key_0\": 4629.8314934757245,\n      \"key_1\": 8631.41172225515,\n      \"key_2\": 3467.934783463027\n    },\n    \"high_24h\": {\n      \"key_0\": 3543.636550886975\n    },\n    \"low_24h\": {\n      \"key_0\": 5091.51185140556,\n      \"key_1\": 4568.146939063015,\n      \"key_2\": 7255.28013121507\n    },\n    \"price_change_24h\": 3941.0618693063525,\n    \"price_change_percentage_24h\": 6478.591544509129,\n    \"market_cap_change_24h\": 559.7291318171427,\n    \"market_cap_change_percentage_24h\": 87.56253141266268,\n    \"circulating_supply\": 5251.099199080977,\n    \"total_supply\": 9330.367650698467,\n    \"max_supply\": 1669.5674444961073\n  },\n  \"last_updated\": \"2008-01-03T12:56:48.546Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94d19dfa-4459-4921-99bf-71a1d5da2936",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localization",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3000608-8b7e-4db7-af63-659021bfab63",
+          "name": "Get coin market chart data",
+          "request": {
+            "name": "Get coin market chart data",
+            "description": {
+              "content": "Get historical market data including price, market cap, and 24h volume for a specific coin over a time range. Data granularity is automatic based on the number of days requested.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "market_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "<string>",
+                  "description": "(Required) The target currency for market data"
+                },
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data (1, 7, 14, 30, 90, 180, 365, or max for all available data)"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Data interval (daily). Leave empty for automatic granularity."
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<string>",
+                  "description": "Decimal precision for currency price values"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50ccb2ca-8e2c-4b38-923d-ef6cf04874e4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prices\": [\n    [\n      1820.5752663288022,\n      3687.3756362255863\n    ],\n    [\n      6536.511495704247,\n      3410.805501042591\n    ]\n  ],\n  \"market_caps\": [\n    [\n      6591.3004636952355,\n      5141.432247097731\n    ],\n    [\n      7710.04637094767,\n      6710.634714390528\n    ]\n  ],\n  \"total_volumes\": [\n    [\n      652.5651631191009,\n      8370.475496700257\n    ],\n    [\n      1406.9451283380274,\n      2305.9831198383263\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39dd046-c39e-42fd-9d95-b49aa6f7cad7",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a87d0e0c-8797-4d5b-8384-748d71cb3380",
+          "name": "Get coin market chart data within date range",
+          "request": {
+            "name": "Get coin market chart data within date range",
+            "description": {
+              "content": "Get historical market data including price, market cap, and 24h volume for a specific coin within a custom date range specified by UNIX timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "market_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "<string>",
+                  "description": "(Required) The target currency for market data"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<string>",
+                  "description": "Decimal precision for currency price values"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c7d2a08-0b3a-49d8-a068-c5a1ed15783c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "market_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prices\": [\n    [\n      1820.5752663288022,\n      3687.3756362255863\n    ],\n    [\n      6536.511495704247,\n      3410.805501042591\n    ]\n  ],\n  \"market_caps\": [\n    [\n      6591.3004636952355,\n      5141.432247097731\n    ],\n    [\n      7710.04637094767,\n      6710.634714390528\n    ]\n  ],\n  \"total_volumes\": [\n    [\n      652.5651631191009,\n      8370.475496700257\n    ],\n    [\n      1406.9451283380274,\n      2305.9831198383263\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "852a2c8b-1d01-41eb-925a-09a461fc4cca",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "market_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb47fc42-6b75-4e5b-87da-7c4e07b94475",
+          "name": "Get coin OHLC chart data",
+          "request": {
+            "name": "Get coin OHLC chart data",
+            "description": {
+              "content": "Get OHLC (Open, High, Low, Close) candlestick data for a specific coin. Data granularity is automatic based on the number of days requested. 1-2 days returns 30-minute candles, 3-30 days returns 4-hour candles, and 31+ days returns daily candles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "ohlc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "<string>",
+                  "description": "(Required) The target currency for OHLC data"
+                },
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data (1, 7, 14, 30, 90, 180, 365)"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<string>",
+                  "description": "Decimal precision for currency price values"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0305787-34ef-44a5-b002-12ca75a36f2d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "ohlc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    8923.72970120984,\n    2844.1197191127644,\n    5819.173090918982,\n    2867.5906034096774,\n    5062.934042863467\n  ],\n  [\n    4597.469643279302,\n    6789.676634951513,\n    7657.973709273006,\n    9032.914270408332,\n    8750.856822201962\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac0bb3a8-47a2-4725-a82c-0eb334f33744",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "ohlc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID (e.g., bitcoin, ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abb0c71d-1cd8-4f77-987f-5a978307e504",
+          "name": "Get recently added coins",
+          "request": {
+            "name": "Get recently added coins",
+            "description": {
+              "content": "Get the list of the latest 200 coins that have been recently added to CoinGecko. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "list",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9bfe338-9a72-43f2-a278-7bda297551f4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"activated_at\": 6869\n  },\n  {\n    \"id\": \"string\",\n    \"symbol\": \"string\",\n    \"name\": \"string\",\n    \"activated_at\": 4298\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe3630b3-ddf0-437e-a93c-3e40f3dd2cfe",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40f41897-3a48-46d0-84b9-e83509925011",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "list",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d23a9ad7-a0b7-474a-be9a-f892694aeb9a",
+          "name": "Get top gainers and losers",
+          "request": {
+            "name": "Get top gainers and losers",
+            "description": {
+              "content": "Get the top 30 coins with the largest price gain and the top 30 coins with the largest price loss over a specified time duration. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "top_gainers_losers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "usd",
+                  "description": "(Required) The target currency for price data (e.g., usd)"
+                },
+                {
+                  "disabled": false,
+                  "key": "duration",
+                  "value": "24h",
+                  "description": "Time duration for price change calculation"
+                },
+                {
+                  "disabled": false,
+                  "key": "top_coins",
+                  "value": "<string>",
+                  "description": "Filter by top N coins by market cap (e.g., 300 to only consider the top 300 coins)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c0f9268-b969-48cb-85bc-a4860ee08425",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "top_gainers_losers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "24h"
+                    },
+                    {
+                      "key": "top_coins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"top_gainers\": [\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"http://QuRHUGRrQFaptDK.uggla2xZcT.yJPpoQdXoT3W3Hoides,lRLId4pbPlLtseQStY.H3F\",\n      \"market_cap_rank\": 5465,\n      \"usd\": 5828.052813004629,\n      \"usd_24h_vol\": 3290.3321792955608,\n      \"usd_24h_change\": 7813.640132398866\n    },\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"https://UsbFM.pwrqEXmoYABB6vQATJ8OYP4sWgKT.IVQRfqsG3mdFR5PY8H1my+TxmPY5wy6n3X,u8LU2X9Wud\",\n      \"market_cap_rank\": 597,\n      \"usd\": 5832.465257510543,\n      \"usd_24h_vol\": 4844.931974411563,\n      \"usd_24h_change\": 5502.371427172644\n    }\n  ],\n  \"top_losers\": [\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"http://CJHJQjIJTPRQlOjaMdxkXHwkLUBHTfi.uoauykyad7gkjEExjMaC65tP8lGkWI5GS6lf8aBA\",\n      \"market_cap_rank\": 4055,\n      \"usd\": 9258.00531767874,\n      \"usd_24h_vol\": 7484.923613418237,\n      \"usd_24h_change\": 9185.429563437254\n    },\n    {\n      \"id\": \"string\",\n      \"symbol\": \"string\",\n      \"name\": \"string\",\n      \"image\": \"https://GBsKqybVAIuzAR.ttxXFfXD,4znh35a1LHUnvX3jWtYmNSHLR3zz1h8V-gr,r8sU\",\n      \"market_cap_rank\": 1687,\n      \"usd\": 1389.6590066304993,\n      \"usd_24h_vol\": 5028.3637722136855,\n      \"usd_24h_change\": 6707.145590905265\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c8a6b4d-bd1b-47d7-82cc-9a46ac3e1f91",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "top_gainers_losers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "24h"
+                    },
+                    {
+                      "key": "top_coins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78c5c6be-771e-46bf-876c-f94f971766ea",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "top_gainers_losers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "duration",
+                      "value": "24h"
+                    },
+                    {
+                      "key": "top_coins",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fced6780-f3cd-41e1-b4f6-9856bf58292c",
+          "name": "Get coin circulating supply chart",
+          "request": {
+            "name": "Get coin circulating supply chart",
+            "description": {
+              "content": "Get historical circulating supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "circulating_supply_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Data interval (daily)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe6cb60a-5f64-49f9-8fd2-dc169c619beb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    7286.016199078462,\n    8167.6633378061915\n  ],\n  [\n    4178.549430948975,\n    7339.322280196513\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7752a1c2-c30d-4797-9c59-170994807777",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0862d710-27a7-47a2-ac58-ac3a9b576f88",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bdb972c-212f-4a88-b854-dc39a9079f43",
+          "name": "Get coin circulating supply chart within date range",
+          "request": {
+            "name": "Get coin circulating supply chart within date range",
+            "description": {
+              "content": "Get historical circulating supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "circulating_supply_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc9621ad-f94c-4a63-9441-72a8a5ef0851",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    7286.016199078462,\n    8167.6633378061915\n  ],\n  [\n    4178.549430948975,\n    7339.322280196513\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7fc3e2c-6e8a-4088-95f8-84883b0d66df",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "832b571d-b53c-422f-9880-4e4a481d4cdf",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "circulating_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1e8b777-71d4-4d46-9fae-8e5d7cd32fb1",
+          "name": "Get coin total supply chart",
+          "request": {
+            "name": "Get coin total supply chart",
+            "description": {
+              "content": "Get historical total supply chart data for a specific coin. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "total_supply_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Data interval (daily)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0d77906-d3cc-4567-8d02-1a3f61192c4e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    4680.048719729201,\n    4200.660008980097\n  ],\n  [\n    6962.848379317833,\n    9347.4646755894\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7d511b9-0ad0-46b5-b43a-808488c70b30",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c485a2ee-55f7-4a4f-85c6-c3bd2c953e86",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ec5aafd-9a2a-4c19-8293-1632aae8e255",
+          "name": "Get coin total supply chart within date range",
+          "request": {
+            "name": "Get coin total supply chart within date range",
+            "description": {
+              "content": "Get historical total supply chart data for a specific coin within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "total_supply_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The CoinGecko coin ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76de7229-6454-4b35-9096-0baeb56aa281",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    4680.048719729201,\n    4200.660008980097\n  ],\n  [\n    6962.848379317833,\n    9347.4646755894\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbf5b8a2-e683-4032-9087-42e82605edda",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bf3deaad-a1f7-408b-8587-fc7f4dd2aac9",
+              "name": "Coin not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "total_supply_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The CoinGecko coin ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0ff6e00e-15e0-4fc8-9817-e8ce163b885f",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Coins API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

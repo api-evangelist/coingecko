@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "b5a6a3ff-b553-4e22-b68e-b7f5bd495878",
+      "name": "Categories",
+      "description": {
+        "content": "List cryptocurrency categories and their market data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b09e9d75-09b3-43b4-93d3-f7a15be32f59",
+          "name": "List all categories (ID map)",
+          "request": {
+            "name": "List all categories (ID map)",
+            "description": {
+              "content": "Get the complete list of all supported coin categories with their IDs and names. Use this to obtain category IDs for filtering in other endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "categories",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d33b371b-e41e-478e-846d-a45c04e97633",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "categories",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"category_id\": \"string\",\n    \"name\": \"string\"\n  },\n  {\n    \"category_id\": \"string\",\n    \"name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e6d8c81-7f6b-4e8d-8c91-e5dc72a40509",
+          "name": "List categories with market data",
+          "request": {
+            "name": "List categories with market data",
+            "description": {
+              "content": "Get the list of all coin categories with market data including market cap, volume, and top coins in each category.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order for categories"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "415e6170-af93-4ebd-83bc-e574c3d6263c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"market_cap\": 9093.42681969526,\n    \"market_cap_change_24h\": 1006.9421949042478,\n    \"content\": \"string\",\n    \"top_3_coins\": [\n      \"http://ukRAOUqnENsqeHIemcaTMkiGrZsFSP.wtobC0oW,pitCyG9mP1AGOoVUdGvzoHt\",\n      \"https://vwDoDCWBNxztkMrTbTCzkiddPOgiEU.uedaFppI2w3XSmm100eeY+2-FJ+M00uHShxNjU2mb7qCr\"\n    ],\n    \"volume_24h\": 4086.7850868594946,\n    \"updated_at\": \"2021-11-07T21:21:57.065Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"market_cap\": 664.6815502356307,\n    \"market_cap_change_24h\": 8548.631105140928,\n    \"content\": \"string\",\n    \"top_3_coins\": [\n      \"http://erBGByaaSGwNioaNJ.mykdAaQp+O0DkflAfdIgcsjUixSooSLK5MaBHaS,EYTbIZyKcQiR+AoIEQupfUHG.YSpVnX\",\n      \"https://TiadyqIpxmUNOTgQygUDfmoYCmXhfUNSb.dalrBD5YqXHEX1iuwjfkZ4hAlwPdVOEXrrbgXIMYjaRDTBy3FrgZ20MMCBDvkaXqlSrEYeb6oAhPd2-iYYao-vilAy6AA+r\"\n    ],\n    \"volume_24h\": 9179.095771181122,\n    \"updated_at\": \"1958-02-23T09:23:11.171Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a17d6325-fe5c-4a4e-907c-e732a5873ac6",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Categories API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

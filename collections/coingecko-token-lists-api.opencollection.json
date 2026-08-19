@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CoinGecko Crypto Market Data Asset Platforms Token Lists API",
+    "version": "3.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-cg-demo-api-key",
+      "value": "{{x-cg-demo-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get token list by asset platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.coingecko.com/api/v3/token_lists/:asset_platform_id/all.json",
+            "params": [
+              {
+                "name": "asset_platform_id",
+                "value": "",
+                "type": "path",
+                "description": "The asset platform ID (e.g., ethereum)"
+              }
+            ]
+          },
+          "docs": "Get a standardized token list for a specific asset platform in the Uniswap token list format. Includes token name, symbol, decimals, and contract address. This endpoint is exclusive to paid plan subscribers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,263 @@
+{
+  "item": [
+    {
+      "id": "deab3bf7-988b-4abc-a5cc-5c5fb9907520",
+      "name": "Search",
+      "description": {
+        "content": "Search for coins, exchanges, and categories.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "531f8e79-1386-4e1b-9d94-12db6f9840b6",
+          "name": "Search for coins, exchanges, and categories",
+          "request": {
+            "name": "Search for coins, exchanges, and categories",
+            "description": {
+              "content": "Search for coins, exchanges, categories, and NFTs by keyword. Returns matching results across all entity types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "630df4d8-8808-4c30-a2f3-e1b854a1f2e3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"coins\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"api_symbol\": \"string\",\n      \"symbol\": \"string\",\n      \"market_cap_rank\": 5965,\n      \"thumb\": \"string\",\n      \"large\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"api_symbol\": \"string\",\n      \"symbol\": \"string\",\n      \"market_cap_rank\": 7259,\n      \"thumb\": \"string\",\n      \"large\": \"string\"\n    }\n  ],\n  \"exchanges\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"market_type\": \"string\",\n      \"thumb\": \"string\",\n      \"large\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"market_type\": \"string\",\n      \"thumb\": \"string\",\n      \"large\": \"string\"\n    }\n  ],\n  \"categories\": [\n    {\n      \"id\": 8174,\n      \"name\": \"string\"\n    },\n    {\n      \"id\": 2551,\n      \"name\": \"string\"\n    }\n  ],\n  \"nfts\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"thumb\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"thumb\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bf8421c-6e7a-4688-9b9f-c7d1ceb8417a",
+          "name": "Search for pools",
+          "request": {
+            "name": "Search for pools",
+            "description": {
+              "content": "Search for liquidity pools by keyword. Accepts token name, ticker symbol, token contract address, or specific pool contract address as search queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "search",
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Search query (token name, symbol, token address, or pool address)"
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "Filter results by network ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Additional data to include (e.g., base_token, quote_token, dex, network)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40ea3dbb-06ef-4925-84be-0488b4fe0352",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "search",
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "network",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"string\",\n        \"base_token_price_native_currency\": \"string\",\n        \"quote_token_price_usd\": \"string\",\n        \"quote_token_price_native_currency\": \"string\",\n        \"base_token_price_quote_token\": \"string\",\n        \"quote_token_price_base_token\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"pool_created_at\": \"1961-08-05T05:55:02.452Z\",\n        \"fdv_usd\": \"string\",\n        \"market_cap_usd\": \"string\",\n        \"price_change_percentage\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": 6974,\n            \"sells\": 5177,\n            \"buyers\": 493,\n            \"sellers\": 5499\n          },\n          \"m15\": {\n            \"buys\": 6767,\n            \"sells\": 5074,\n            \"buyers\": 1810,\n            \"sellers\": 8450\n          },\n          \"m30\": {\n            \"buys\": 4819,\n            \"sells\": 7754,\n            \"buyers\": 665,\n            \"sellers\": 4435\n          },\n          \"h1\": {\n            \"buys\": 6118,\n            \"sells\": 670,\n            \"buyers\": 3961,\n            \"sellers\": 4489\n          },\n          \"h24\": {\n            \"buys\": 8062,\n            \"sells\": 6886,\n            \"buyers\": 4018,\n            \"sellers\": 4356\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"reserve_in_usd\": \"string\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"attributes\": {\n        \"base_token_price_usd\": \"string\",\n        \"base_token_price_native_currency\": \"string\",\n        \"quote_token_price_usd\": \"string\",\n        \"quote_token_price_native_currency\": \"string\",\n        \"base_token_price_quote_token\": \"string\",\n        \"quote_token_price_base_token\": \"string\",\n        \"address\": \"string\",\n        \"name\": \"string\",\n        \"pool_created_at\": \"1947-05-24T18:11:08.942Z\",\n        \"fdv_usd\": \"string\",\n        \"market_cap_usd\": \"string\",\n        \"price_change_percentage\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"transactions\": {\n          \"m5\": {\n            \"buys\": 1092,\n            \"sells\": 6955,\n            \"buyers\": 827,\n            \"sellers\": 5500\n          },\n          \"m15\": {\n            \"buys\": 9474,\n            \"sells\": 7953,\n            \"buyers\": 7749,\n            \"sellers\": 3912\n          },\n          \"m30\": {\n            \"buys\": 8459,\n            \"sells\": 6316,\n            \"buyers\": 3812,\n            \"sellers\": 5601\n          },\n          \"h1\": {\n            \"buys\": 4704,\n            \"sells\": 7819,\n            \"buyers\": 2467,\n            \"sellers\": 9392\n          },\n          \"h24\": {\n            \"buys\": 6184,\n            \"sells\": 6609,\n            \"buyers\": 4947,\n            \"sellers\": 6268\n          }\n        },\n        \"volume_usd\": {\n          \"m5\": \"string\",\n          \"h1\": \"string\",\n          \"h6\": \"string\",\n          \"h24\": \"string\"\n        },\n        \"reserve_in_usd\": \"string\"\n      },\n      \"relationships\": {\n        \"base_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"quote_token\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"dex\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0682062a-6c07-47c8-8ade-725f9e7b5c1a",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

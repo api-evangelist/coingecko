@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "34c5f200-4ac6-4fc5-91e9-491ce96e80d5",
+      "name": "Asset Platforms",
+      "description": {
+        "content": "List all asset platforms (blockchains) supported by CoinGecko.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9164ff1b-9bb8-4617-82c8-4881191fe8fb",
+          "name": "List asset platforms",
+          "request": {
+            "name": "List asset platforms",
+            "description": {
+              "content": "Get the list of all asset platforms (blockchains) supported by CoinGecko. Each platform includes its chain identifier and native coin ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "asset_platforms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter by platform type (e.g., nft to get NFT-supported platforms)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9605488-d972-4ee0-a51f-5dd47327b940",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "asset_platforms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"chain_identifier\": 1329,\n    \"name\": \"string\",\n    \"shortname\": \"string\",\n    \"native_coin_id\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"chain_identifier\": 7755,\n    \"name\": \"string\",\n    \"shortname\": \"string\",\n    \"native_coin_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d5d39b68-3cc6-457e-b2b4-71a6529a4987",
+    "name": "CoinGecko Crypto Market Data Asset Platforms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

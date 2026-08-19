@@ -1,0 +1,675 @@
+{
+  "item": [
+    {
+      "id": "4d845deb-3794-4576-88e1-0e29d2bd069f",
+      "name": "Contract",
+      "description": {
+        "content": "Query coin data by contract address on a specific asset platform.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6b4bf687-781e-46da-8748-367bdea87bfa",
+          "name": "Get coin data by contract address",
+          "request": {
+            "name": "Get coin data by contract address",
+            "description": {
+              "content": "Get comprehensive coin data by querying a contract address on a specific asset platform. Returns the same data as the /coins/{id} endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "contract",
+                ":contract_address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_address",
+                  "description": "(Required) The token contract address on the asset platform"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a3ed390-be6d-458a-99e6-e8634380cd67",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "contract",
+                    ":contract_address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The token contract address on the asset platform"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"symbol\": \"string\",\n  \"name\": \"string\",\n  \"asset_platform_id\": \"string\",\n  \"platforms\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"block_time_in_minutes\": 4788,\n  \"hashing_algorithm\": \"string\",\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"description\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"links\": {},\n  \"image\": {\n    \"thumb\": \"http://AYgtYDEPcbjbGitFdramZtvWHzJSEoVXw.suWmFFluxnZumMUFDezgKRzV2y-KIw7S2GE3WFV4CTNlSHCTTWm\",\n    \"small\": \"http://sxATB.wpKfNXO+Ooqf7xXxchuo0yxopombPWRCOP4+,6sd7\",\n    \"large\": \"http://CHDsrBJ.awbog7nAL,R+NuXjdFXBlLmPXaxBkoUMHTdgGVd9GGYYdRsvgDo2NO2naO\"\n  },\n  \"genesis_date\": \"1951-01-06\",\n  \"market_cap_rank\": 6150,\n  \"market_data\": {\n    \"current_price\": {\n      \"key_0\": 6696.32692848798\n    },\n    \"total_value_locked\": 9227.397632021171,\n    \"market_cap\": {\n      \"key_0\": 1305.9305678809064\n    },\n    \"total_volume\": {\n      \"key_0\": 1542.692235258275\n    },\n    \"high_24h\": {\n      \"key_0\": 6561.919163954965\n    },\n    \"low_24h\": {\n      \"key_0\": 3636.9308551474664,\n      \"key_1\": 6367.108284102914,\n      \"key_2\": 1748.5725399190987,\n      \"key_3\": 6973.777905218406\n    },\n    \"price_change_24h\": 5597.228622776433,\n    \"price_change_percentage_24h\": 8859.27272754821,\n    \"market_cap_change_24h\": 562.2340784218038,\n    \"market_cap_change_percentage_24h\": 591.9269954187756,\n    \"circulating_supply\": 6660.695143093778,\n    \"total_supply\": 7922.888029342215,\n    \"max_supply\": 5333.33500851865\n  },\n  \"last_updated\": \"1958-05-04T03:50:21.757Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31de080e-b980-462c-b661-0bd228b70925",
+              "name": "Coin or contract not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "contract",
+                    ":contract_address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The token contract address on the asset platform"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c2cda7d-8acf-454d-9cc5-b4b220089306",
+          "name": "Get coin market chart data by contract address",
+          "request": {
+            "name": "Get coin market chart data by contract address",
+            "description": {
+              "content": "Get historical market data including price, market cap, and 24h volume by querying a contract address on a specific asset platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "contract",
+                ":contract_address",
+                "market_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "<string>",
+                  "description": "(Required) The target currency for market data"
+                },
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<string>",
+                  "description": "Decimal precision for currency price values"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_address",
+                  "description": "(Required) The token contract address on the asset platform"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8114c9a7-98be-4ef0-af07-48f9014d528d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The token contract address on the asset platform"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prices\": [\n    [\n      8959.120488132707,\n      5258.415180432242\n    ],\n    [\n      4720.305337901758,\n      4567.549992992554\n    ]\n  ],\n  \"market_caps\": [\n    [\n      7422.972040488062,\n      6828.666700553947\n    ],\n    [\n      7033.680467746492,\n      8771.388830853311\n    ]\n  ],\n  \"total_volumes\": [\n    [\n      6586.820799788382,\n      1760.1373220976413\n    ],\n    [\n      8361.161637128043,\n      2690.161637619761\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0124cc77-79cc-48ba-816e-07b8cab82912",
+              "name": "Coin or contract not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The token contract address on the asset platform"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "deb75c9c-241a-4696-a2cd-09c09d03fa09",
+          "name": "Get coin market chart range data by contract address",
+          "request": {
+            "name": "Get coin market chart range data by contract address",
+            "description": {
+              "content": "Get historical market data for a specific contract address within a custom date range specified by UNIX timestamps.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":id",
+                "contract",
+                ":contract_address",
+                "market_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "<string>",
+                  "description": "(Required) The target currency for market data"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<string>",
+                  "description": "Decimal precision for currency price values"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_address",
+                  "description": "(Required) The token contract address on the asset platform"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "062e4899-14ba-47cc-9294-549d835e6a80",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The token contract address on the asset platform"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prices\": [\n    [\n      8959.120488132707,\n      5258.415180432242\n    ],\n    [\n      4720.305337901758,\n      4567.549992992554\n    ]\n  ],\n  \"market_caps\": [\n    [\n      7422.972040488062,\n      6828.666700553947\n    ],\n    [\n      7033.680467746492,\n      8771.388830853311\n    ]\n  ],\n  \"total_volumes\": [\n    [\n      6586.820799788382,\n      1760.1373220976413\n    ],\n    [\n      8361.161637128043,\n      2690.161637619761\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9abe867-3863-40f3-8ae2-bf1263d889f7",
+              "name": "Coin or contract not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":id",
+                    "contract",
+                    ":contract_address",
+                    "market_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "vs_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum, polygon-pos, solana)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_address",
+                      "description": "(Required) The token contract address on the asset platform"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f0b862fb-7668-4af4-80cf-70edb5d96f89",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Contract API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

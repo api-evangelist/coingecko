@@ -1,0 +1,245 @@
+{
+  "item": [
+    {
+      "id": "fcaa7ab0-82ab-4235-b870-5bf21385611f",
+      "name": "Token Lists",
+      "description": {
+        "content": "Token list endpoints for paid plan subscribers providing standardized token lists by asset platform.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "283cef59-51ee-4e85-a3fe-127ab6ee435a",
+          "name": "Get token list by asset platform",
+          "request": {
+            "name": "Get token list by asset platform",
+            "description": {
+              "content": "Get a standardized token list for a specific asset platform in the Uniswap token list format. Includes token name, symbol, decimals, and contract address. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token_lists",
+                ":asset_platform_id",
+                "all.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset_platform_id",
+                  "description": "(Required) The asset platform ID (e.g., ethereum)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "683ce52b-bff2-4cd2-8923-c4ed5ceee2bb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token_lists",
+                    ":asset_platform_id",
+                    "all.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"logoURI\": \"http://ZeWNbJnxMgGJqBNcuYh.zwnJSz262KHgNCch-uzOXZT7kncH+wl5Pk-j+,,lW92qM0Ywz2C0Qiu2PiI6\",\n  \"keywords\": [\n    \"string\",\n    \"string\"\n  ],\n  \"timestamp\": \"1969-05-20T12:35:07.640Z\",\n  \"tokens\": [\n    {\n      \"chainId\": 7887,\n      \"address\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"decimals\": 9261,\n      \"logoURI\": \"https://PFc.agAC90Fko4AY2faE.7VH0\"\n    },\n    {\n      \"chainId\": 1418,\n      \"address\": \"string\",\n      \"name\": \"string\",\n      \"symbol\": \"string\",\n      \"decimals\": 2390,\n      \"logoURI\": \"http://LnzKztwABWQrbkQmg.vxusyP1r.t6eXxKfe9VZyjLOa6cuNgBdhXRuTR2cImfz\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d3e070d-9045-4b26-b89f-c0029b7a0837",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token_lists",
+                    ":asset_platform_id",
+                    "all.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b412b61-525d-4f9e-bd67-cd63e8b8b1ef",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token_lists",
+                    ":asset_platform_id",
+                    "all.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset_platform_id",
+                      "description": "(Required) The asset platform ID (e.g., ethereum)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47e99293-7e36-4284-a715-8c6a1eee3e1f",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Token Lists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

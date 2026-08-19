@@ -1,0 +1,485 @@
+{
+  "item": [
+    {
+      "id": "f1ff6dbd-3d78-4d43-b769-b546a90ac6d1",
+      "name": "Derivatives",
+      "description": {
+        "content": "Derivatives market data including tickers and exchange information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87d4bcda-7075-4097-8069-59676e0232a0",
+          "name": "List all derivative tickers",
+          "request": {
+            "name": "List all derivative tickers",
+            "description": {
+              "content": "Get the list of all derivative tickers across all exchanges including price, index, basis, spread, and open interest data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derivatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffe4e075-e007-4e07-bdef-6c447922ff52",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derivatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"market\": \"string\",\n    \"symbol\": \"string\",\n    \"index_id\": \"string\",\n    \"price\": \"string\",\n    \"price_percentage_change_24h\": 5400.033022427065,\n    \"contract_type\": \"string\",\n    \"index\": 8751.609709959668,\n    \"basis\": 8797.224902527574,\n    \"spread\": 3874.254242765629,\n    \"funding_rate\": 1159.4086906723023,\n    \"open_interest\": 370.6336843501745,\n    \"volume_24h\": 3238.687163078845,\n    \"last_traded_at\": \"1966-07-28T14:54:42.427Z\",\n    \"expired_at\": \"1998-09-09T23:35:56.557Z\"\n  },\n  {\n    \"market\": \"string\",\n    \"symbol\": \"string\",\n    \"index_id\": \"string\",\n    \"price\": \"string\",\n    \"price_percentage_change_24h\": 2166.561981094076,\n    \"contract_type\": \"string\",\n    \"index\": 1562.0298226613804,\n    \"basis\": 2331.236886596687,\n    \"spread\": 3122.474331440744,\n    \"funding_rate\": 3068.3680803918587,\n    \"open_interest\": 4240.553363094,\n    \"volume_24h\": 3817.6964677322712,\n    \"last_traded_at\": \"1960-09-13T07:30:01.837Z\",\n    \"expired_at\": \"1969-01-08T03:05:59.198Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f69c299-2918-4550-808a-fb8299c1c0f5",
+          "name": "List derivative exchanges",
+          "request": {
+            "name": "List derivative exchanges",
+            "description": {
+              "content": "Get the list of all derivative exchanges with data including open interest, trade volume, and number of perpetual and futures pairs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derivatives",
+                "exchanges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order for results"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "890ec370-2e00-43e3-a621-2a1a153584c3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derivatives",
+                    "exchanges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"id\": \"string\",\n    \"open_interest_btc\": 3178.127721778926,\n    \"trade_volume_24h_btc\": \"string\",\n    \"number_of_perpetual_pairs\": 7258,\n    \"number_of_futures_pairs\": 7477,\n    \"image\": \"https://CEUDLEgSpDFe.ohknQ478Y.42fegU7JxuvJIiuMTP4hf6\",\n    \"year_established\": 8007,\n    \"country\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"http://gAQCzUWtNqWPzIfSPD.cfZDNc23HAyCrqXvx34aiEebj6qpx8H.pFuvy9vd1OYALe+mbesR+QGJrTszh\"\n  },\n  {\n    \"name\": \"string\",\n    \"id\": \"string\",\n    \"open_interest_btc\": 3350.1911166569453,\n    \"trade_volume_24h_btc\": \"string\",\n    \"number_of_perpetual_pairs\": 9326,\n    \"number_of_futures_pairs\": 863,\n    \"image\": \"https://QVthKkEnOgiV.qoxbxchXUz,tMUxhsXw5iSPH\",\n    \"year_established\": 5908,\n    \"country\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"http://DlUhkuCXzMszy.vngeqt6bEz8fgDmZqg.Jb-xGBersuzfGNw6\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ac52374-8f88-46bc-abfb-14060a41ac9e",
+          "name": "Get derivative exchange data by ID",
+          "request": {
+            "name": "Get derivative exchange data by ID",
+            "description": {
+              "content": "Get detailed data for a specific derivative exchange including tickers, open interest, and trade volume.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derivatives",
+                "exchanges",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_tickers",
+                  "value": "<string>",
+                  "description": "Include derivative tickers data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The derivative exchange ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68ecb86d-5341-411b-b244-2a8be1064795",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derivatives",
+                    "exchanges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_tickers",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The derivative exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"id\": \"string\",\n  \"open_interest_btc\": 9930.20894733319,\n  \"trade_volume_24h_btc\": \"string\",\n  \"number_of_perpetual_pairs\": 279,\n  \"number_of_futures_pairs\": 474,\n  \"image\": \"http://fUBEgLaSWrAKBCHkZDvnJDuBEoTe.ucigBrFbqN4D\",\n  \"year_established\": 1189,\n  \"country\": \"string\",\n  \"description\": \"string\",\n  \"url\": \"https://ZplrOGbewXIMeISrgLuCucN.kyxnZBrQadaNKMLaCrYT.pA68R38Dap.PF7n\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb7aea5-a09e-46c1-a690-12b4f9cd6dbc",
+              "name": "Derivative exchange not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derivatives",
+                    "exchanges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_tickers",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The derivative exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b177c32-b2d5-423d-a7ca-8d89b8df2e13",
+          "name": "List derivative exchanges (ID map)",
+          "request": {
+            "name": "List derivative exchanges (ID map)",
+            "description": {
+              "content": "Get the complete list of all supported derivative exchange IDs and names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derivatives",
+                "exchanges",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92f20c8c-e9f1-4fc2-a121-47f4062676da",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derivatives",
+                    "exchanges",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67f5a3fb-dafc-44c2-aed1-73bfad2cc418",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Derivatives API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

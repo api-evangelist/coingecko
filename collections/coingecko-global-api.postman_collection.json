@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "68fd98eb-dc93-408c-91c2-829e0ad68c7c",
+      "name": "Global",
+      "description": {
+        "content": "Global cryptocurrency and DeFi market data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "95d9954c-930b-47a2-8cd6-b58de2778c43",
+          "name": "Get global cryptocurrency data",
+          "request": {
+            "name": "Get global cryptocurrency data",
+            "description": {
+              "content": "Get aggregated global cryptocurrency market data including total market cap, total volume, market cap percentage by coin, and number of active cryptocurrencies and markets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4d1f9ad-4cbb-4d4b-afb6-c01bb116b1b1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"active_cryptocurrencies\": 9176,\n    \"upcoming_icos\": 4369,\n    \"ongoing_icos\": 1755,\n    \"ended_icos\": 987,\n    \"markets\": 9059,\n    \"total_market_cap\": {\n      \"key_0\": 1737.8418068034484,\n      \"key_1\": 5903.4375116459005\n    },\n    \"total_volume\": {\n      \"key_0\": 4800.531246092632\n    },\n    \"market_cap_percentage\": {\n      \"key_0\": 4040.1432274751983,\n      \"key_1\": 4984.014606346341,\n      \"key_2\": 3071.066175509597\n    },\n    \"market_cap_change_percentage_24h_usd\": 2041.1526061600816,\n    \"updated_at\": 5203\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b1f49fa-2735-44d2-b44f-e381d89e7be8",
+          "name": "Get global DeFi market data",
+          "request": {
+            "name": "Get global DeFi market data",
+            "description": {
+              "content": "Get aggregated global decentralized finance (DeFi) data including DeFi market cap, trading volume, DeFi dominance, and top DeFi coin information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global",
+                "decentralized_finance_defi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "229c4be9-92a3-4a9b-919d-634cb8c9283e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "decentralized_finance_defi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"defi_market_cap\": \"string\",\n    \"eth_market_cap\": \"string\",\n    \"defi_to_eth_ratio\": \"string\",\n    \"trading_volume_24h\": \"string\",\n    \"defi_dominance\": \"string\",\n    \"top_coin_name\": \"string\",\n    \"top_coin_defi_dominance\": 1049.241730719026\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50a35c34-a50c-47f2-9f01-40e38d11059a",
+          "name": "Get global market cap chart",
+          "request": {
+            "name": "Get global market cap chart",
+            "description": {
+              "content": "Get historical global market capitalization and volume chart data. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "global",
+                "market_cap_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<string>",
+                  "description": "(Required) Number of days of historical data"
+                },
+                {
+                  "disabled": false,
+                  "key": "vs_currency",
+                  "value": "usd",
+                  "description": "The target currency for market cap data"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98f5afc0-c23a-4392-a427-d6b3326c3e47",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"market_cap_chart\": {\n    \"market_cap\": [\n      [\n        6398.167778686476,\n        271.11870438134235\n      ],\n      [\n        4870.005921790068,\n        2833.9379689077005\n      ]\n    ],\n    \"volume\": [\n      [\n        5006.1999142677005,\n        6047.322694722168\n      ],\n      [\n        9181.260737837834,\n        511.0092128284993\n      ]\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9ba7479-1fae-409a-8286-e46f7e94f5be",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d8824e55-e743-402d-8a92-b743d5e33f4a",
+              "name": "Forbidden - endpoint not available on current plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global",
+                    "market_cap_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vs_currency",
+                      "value": "usd"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3d113467-b5f9-47ea-bc24-c443b78fa835",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Global API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

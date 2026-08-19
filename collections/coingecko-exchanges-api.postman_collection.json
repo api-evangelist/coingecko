@@ -1,0 +1,997 @@
+{
+  "item": [
+    {
+      "id": "4239e6b5-4a00-4dc3-8ebf-7e11bcbbad4c",
+      "name": "Exchanges",
+      "description": {
+        "content": "Exchange data including volumes, tickers, and status updates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f44e336-05bf-4a60-a7f4-71d813e6a539",
+          "name": "List all exchanges",
+          "request": {
+            "name": "List all exchanges",
+            "description": {
+              "content": "Get a paginated list of all supported exchanges with volume, trust score, and other exchange-related data. Results are ordered by trading volume by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page (1-250)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27d19770-c13e-466e-9814-977404638499",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"year_established\": 5785,\n    \"country\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"https://eypgdikyynmIWyjzRZpiAFAwC.llltwDTxJ,nwOPijxzI77WqC7a5PLE,wW0NF\",\n    \"image\": \"http://JjZC.xtQwpoCBLFWeab80\",\n    \"has_trading_incentive\": false,\n    \"trust_score\": 8547,\n    \"trust_score_rank\": 989,\n    \"trade_volume_24h_btc\": 2120.0126930920837,\n    \"trade_volume_24h_btc_normalized\": 6960.949634074866\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"year_established\": 3890,\n    \"country\": \"string\",\n    \"description\": \"string\",\n    \"url\": \"https://ozOcZHhFkYQItWsGx.smcF3EInOx\",\n    \"image\": \"https://I.zkenTxFHYAyEsdplrSk8YTHBNzu3bQBIB,5gF2TwUk,OfU2DOj3qhGdRhm9D\",\n    \"has_trading_incentive\": true,\n    \"trust_score\": 1945,\n    \"trust_score_rank\": 8176,\n    \"trade_volume_24h_btc\": 1375.4717461455434,\n    \"trade_volume_24h_btc_normalized\": 9785.51275666369\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca96da8d-c304-48b7-954e-3f8eb39c09c3",
+          "name": "List all supported exchanges (ID map)",
+          "request": {
+            "name": "List all supported exchanges (ID map)",
+            "description": {
+              "content": "Get the complete list of all supported exchange IDs and names. Use this to obtain exchange IDs for use in other endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65183853-9a3e-4cbf-9b4c-b540259c0720",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc92c4e5-d358-4572-9d15-b5f3f0c943bc",
+          "name": "Get exchange data by ID",
+          "request": {
+            "name": "Get exchange data by ID",
+            "description": {
+              "content": "Get comprehensive data for a specific exchange including volume, trust score, year established, country, and social links.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "003c3e38-cd80-43f6-9082-b5b5953e7028",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"year_established\": 195,\n  \"country\": \"string\",\n  \"description\": \"string\",\n  \"url\": \"https://ZqFSRKfejZVzykJCvpAcFlxOezIc.yqsek4tpuvCwm0afc-jTZqpvmI9KCdUa+8zTjzfVHkkxrawySrNJl\",\n  \"image\": \"http://fIilIeofdycFYgZhCHEBbmQmTDfQssnS.iaiqi2DAPI7zDwgar5Sx7jZ\",\n  \"facebook_url\": \"http://SwM.wfloQQrtpmGG+H+1wMXU39V9YaUdpoeZwbVXO5jULH-\",\n  \"reddit_url\": \"https://iObWxnnyfQGSOWTWYrkgQZisRptiKL.yaaslmOYVzhhTvwZ.V6Tz7t1uu8PBoZWmVLKJyj0qZ1dCKYIqmGHynIubspzAu71Ixw\",\n  \"telegram_url\": \"https://AowATtMxbclejmnqNgsK.bjgxRns66,cuTujZE50zPMY5A6fKxUy\",\n  \"slack_url\": \"http://LceJBleXnWqNbWQyBGDeP.ydOOPchtuuOF0si6piqcT,U76s7YJ\",\n  \"other_url_1\": \"https://jB.jbwjfTOPUg,vlmbrt80V57xi,\",\n  \"other_url_2\": \"http://LoNlUM.naCpQ9-NHNukZmlLMyyzvXYpen+lhXz9Bj9pQ9m3iQPgG7iUFUqhToPFnO2iNZsqq1LVCAvC8LzBnXlwGq+7.SBFg.\",\n  \"twitter_handle\": \"string\",\n  \"has_trading_incentive\": false,\n  \"centralized\": false,\n  \"public_notice\": \"string\",\n  \"alert_notice\": \"string\",\n  \"trust_score\": 6637,\n  \"trust_score_rank\": 5615,\n  \"trade_volume_24h_btc\": 3891.9972125043323,\n  \"trade_volume_24h_btc_normalized\": 6177.42783008519,\n  \"tickers\": [\n    {\n      \"base\": \"string\",\n      \"target\": \"string\",\n      \"market\": {\n        \"name\": \"string\",\n        \"identifier\": \"string\",\n        \"has_trading_incentive\": false\n      },\n      \"last\": 4383.015372284474,\n      \"volume\": 6219.743059474276,\n      \"converted_last\": {\n        \"key_0\": 871.0593213130113,\n        \"key_1\": 5393.016077452078\n      },\n      \"converted_volume\": {\n        \"key_0\": 8763.398885957226,\n        \"key_1\": 4313.450972959656,\n        \"key_2\": 3687.852045567904\n      },\n      \"trust_score\": \"string\",\n      \"bid_ask_spread_percentage\": 7857.541997287345,\n      \"timestamp\": \"1950-03-14T05:54:04.940Z\",\n      \"last_traded_at\": \"1982-03-26T23:03:37.703Z\",\n      \"last_fetch_at\": \"1964-09-02T00:32:15.216Z\",\n      \"is_anomaly\": true,\n      \"is_stale\": true,\n      \"trade_url\": \"http://vWEpV.boS3L-tJse2smQR3gKQ4g0hulTDTfZqKD0JQq\",\n      \"coin_id\": \"string\",\n      \"target_coin_id\": \"string\"\n    },\n    {\n      \"base\": \"string\",\n      \"target\": \"string\",\n      \"market\": {\n        \"name\": \"string\",\n        \"identifier\": \"string\",\n        \"has_trading_incentive\": false\n      },\n      \"last\": 8639.051354223084,\n      \"volume\": 9121.313071724517,\n      \"converted_last\": {\n        \"key_0\": 6016.79132767661,\n        \"key_1\": 7287.510439704098\n      },\n      \"converted_volume\": {\n        \"key_0\": 1797.8050021325764\n      },\n      \"trust_score\": \"string\",\n      \"bid_ask_spread_percentage\": 6505.977089189915,\n      \"timestamp\": \"2010-02-03T22:16:22.924Z\",\n      \"last_traded_at\": \"1972-06-17T10:08:45.261Z\",\n      \"last_fetch_at\": \"2023-09-12T01:22:36.179Z\",\n      \"is_anomaly\": false,\n      \"is_stale\": false,\n      \"trade_url\": \"http://wqcQQLSQasrvGRtyLVDzeEjM.hnUZyvtkYS-RslYTuBSWL.AGm4MlgPOR.iyCIhjTxSctgvOIthfw1rLSa,ExpR\",\n      \"coin_id\": \"string\",\n      \"target_coin_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98664b4a-fe75-4a3c-827c-78e63a67155a",
+              "name": "Exchange not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6cae6a9-960c-4a68-860a-fbaa4360c36e",
+          "name": "Get exchange tickers",
+          "request": {
+            "name": "Get exchange tickers",
+            "description": {
+              "content": "Get paginated trading pair tickers for a specific exchange. Results include price, volume, spread, and trust score data for each trading pair.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges",
+                ":id",
+                "tickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "coin_ids",
+                  "value": "<string>",
+                  "description": "Filter tickers by coin IDs (comma-separated)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_exchange_logo",
+                  "value": "false",
+                  "description": "Include exchange logo URL in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "depth",
+                  "value": "false",
+                  "description": "Include order book depth (2% cost to move)"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "trust_score_desc",
+                  "description": "Sort order for tickers"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec54a8eb-361c-4d61-8b7d-dbb5f0885588",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "coin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_exchange_logo",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "false"
+                    },
+                    {
+                      "key": "order",
+                      "value": "trust_score_desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"tickers\": [\n    {\n      \"base\": \"string\",\n      \"target\": \"string\",\n      \"market\": {\n        \"name\": \"string\",\n        \"identifier\": \"string\",\n        \"has_trading_incentive\": false\n      },\n      \"last\": 2439.749280569964,\n      \"volume\": 8312.894065862367,\n      \"converted_last\": {\n        \"key_0\": 9652.447642026304\n      },\n      \"converted_volume\": {\n        \"key_0\": 5134.414747723045\n      },\n      \"trust_score\": \"string\",\n      \"bid_ask_spread_percentage\": 8834.654728570402,\n      \"timestamp\": \"2019-10-29T13:41:45.511Z\",\n      \"last_traded_at\": \"2017-04-20T09:16:11.443Z\",\n      \"last_fetch_at\": \"1968-06-01T14:15:13.852Z\",\n      \"is_anomaly\": false,\n      \"is_stale\": true,\n      \"trade_url\": \"http://unxSaRBOWNerkwUbqjlJSQWQtvPdzz.urqsJr8wnyXIbL-XTWFLTbFsWmFO0+lsuRKbkNHv\",\n      \"coin_id\": \"string\",\n      \"target_coin_id\": \"string\"\n    },\n    {\n      \"base\": \"string\",\n      \"target\": \"string\",\n      \"market\": {\n        \"name\": \"string\",\n        \"identifier\": \"string\",\n        \"has_trading_incentive\": false\n      },\n      \"last\": 6257.4693077592665,\n      \"volume\": 9478.891378291406,\n      \"converted_last\": {\n        \"key_0\": 4350.155619840664,\n        \"key_1\": 8532.970028223517,\n        \"key_2\": 5061.879386969691\n      },\n      \"converted_volume\": {\n        \"key_0\": 7656.403281963827\n      },\n      \"trust_score\": \"string\",\n      \"bid_ask_spread_percentage\": 3975.155035409308,\n      \"timestamp\": \"2024-12-13T12:59:32.050Z\",\n      \"last_traded_at\": \"1963-10-04T23:24:26.243Z\",\n      \"last_fetch_at\": \"1960-12-21T18:51:09.407Z\",\n      \"is_anomaly\": true,\n      \"is_stale\": false,\n      \"trade_url\": \"https://bsPUTffAGmOAu.obtoo4t,Bwt+ZHERkwDWIjOud,c0eI2MmnsI07vc.JXTw6kQSfeh\",\n      \"coin_id\": \"string\",\n      \"target_coin_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31b651c9-19a1-4259-bb7a-9f388791d429",
+              "name": "Exchange not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "coin_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_exchange_logo",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "depth",
+                      "value": "false"
+                    },
+                    {
+                      "key": "order",
+                      "value": "trust_score_desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90e5fe97-0414-42f9-b968-0e8ba48e75ab",
+          "name": "Get exchange volume chart data",
+          "request": {
+            "name": "Get exchange volume chart data",
+            "description": {
+              "content": "Get historical volume chart data for a specific exchange over a specified number of days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges",
+                ":id",
+                "volume_chart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<integer>",
+                  "description": "(Required) Number of days of historical data (1, 7, 14, 30, 90, 180, 365)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "244ce50b-231c-45a0-aebb-536c66f9050b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4188aaf-5811-4fae-88a3-3ae9af7cea1b",
+              "name": "Exchange not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID (e.g., binance, coinbase-exchange)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c31985b-b1ef-4824-8d2e-a24b39d11e13",
+          "name": "Get exchange volume chart within date range",
+          "request": {
+            "name": "Get exchange volume chart within date range",
+            "description": {
+              "content": "Get historical volume chart data for a specific exchange within a custom date range specified by UNIX timestamps. This endpoint is exclusive to paid plan subscribers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exchanges",
+                ":id",
+                "volume_chart",
+                "range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "(Required) Start date as UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "(Required) End date as UNIX timestamp"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The exchange ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0ec73c9-36ee-4d88-a354-14b69528b8ae",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    \"string\",\n    \"string\"\n  ],\n  [\n    \"string\",\n    \"string\"\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5dec286-015b-4efb-88d0-19f7db23fe9c",
+              "name": "Unauthorized - invalid or missing Pro API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f01980d-06fb-4291-a94e-a16dc2532722",
+              "name": "Exchange not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exchanges",
+                    ":id",
+                    "volume_chart",
+                    "range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The exchange ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4f72ac60-a11b-49dd-a478-372b540237e5",
+    "name": "CoinGecko Crypto Market Data Asset Platforms Exchanges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}

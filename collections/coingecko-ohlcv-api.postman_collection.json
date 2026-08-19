@@ -1,0 +1,323 @@
+{
+  "item": [
+    {
+      "id": "52c68c97-5f15-47b8-81ce-c6368d878b91",
+      "name": "OHLCV",
+      "description": {
+        "content": "Open, High, Low, Close, Volume candlestick chart data for liquidity pools.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd5ffa61-ec58-47e5-9ec0-7079c4bdba1a",
+          "name": "Get pool OHLCV chart data",
+          "request": {
+            "name": "Get pool OHLCV chart data",
+            "description": {
+              "content": "Get OHLCV (Open, High, Low, Close, Volume) candlestick chart data for a specific liquidity pool. Supports daily, hourly, and minutely timeframes with various aggregation periods.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "onchain",
+                "networks",
+                ":network",
+                "pools",
+                ":pool_address",
+                "ohlcv",
+                ":timeframe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "aggregate",
+                  "value": "<integer>",
+                  "description": "Aggregation period. For day timeframe (1). For hour timeframe (1, 4, 12). For minute timeframe (1, 5, 15)."
+                },
+                {
+                  "disabled": false,
+                  "key": "before_timestamp",
+                  "value": "<integer>",
+                  "description": "Return data before this UNIX timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of OHLCV data points to return (max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "usd",
+                  "description": "Price currency (usd or token)"
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "Which token to use for price (base or quote). Only applicable when currency is token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "network",
+                  "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pool_address",
+                  "description": "(Required) The pool contract address"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timeframe",
+                  "description": "(Required) OHLCV timeframe granularity"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6288cd69-2fae-44a0-9ea2-4c62a11550da",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "pools",
+                    ":pool_address",
+                    "ohlcv",
+                    ":timeframe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aggregate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pool_address",
+                      "description": "(Required) The pool contract address"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timeframe",
+                      "description": "(Required) OHLCV timeframe granularity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"attributes\": {\n      \"ohlcv_list\": [\n        [\n          6871.11878307909,\n          214.3794538133248,\n          3286.5875122448697,\n          5114.662748330845,\n          3149.421225128214,\n          5554.102999731115\n        ],\n        [\n          9721.604140231739,\n          5958.638936768584,\n          9777.435515506764,\n          9442.904484312863,\n          3260.02885672524,\n          7847.859111404303\n        ]\n      ]\n    }\n  },\n  \"meta\": {\n    \"base\": {\n      \"address\": \"string\",\n      \"coingecko_coin_id\": \"string\"\n    },\n    \"quote\": {\n      \"address\": \"string\",\n      \"coingecko_coin_id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff77f98a-b40e-42c8-a675-0d8ee7d07796",
+              "name": "Pool not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "onchain",
+                    "networks",
+                    ":network",
+                    "pools",
+                    ":pool_address",
+                    "ohlcv",
+                    ":timeframe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "aggregate",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "usd"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "network",
+                      "description": "(Required) The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pool_address",
+                      "description": "(Required) The pool contract address"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timeframe",
+                      "description": "(Required) OHLCV timeframe granularity"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-cg-demo-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.coingecko.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-cg-demo-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "44e43615-0354-47a0-9b2c-4ba0983c320a",
+    "name": "CoinGecko Crypto Market Data Asset Platforms OHLCV API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.\n\nContact Support:\n Name: CoinGecko Support",
+      "type": "text/plain"
+    }
+  }
+}
