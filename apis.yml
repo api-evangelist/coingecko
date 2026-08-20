@@ -11,6 +11,19 @@ tags:
   - Exchanges
   - Liquidity Pools
   - Market Data
+  - NFT
+  - On-Chain Data
+  - Prices
+tags_raw:
+  - Aggregator
+  - Blockchain
+  - Cryptocurrency
+  - Decentralized Exchanges
+  - DeFi
+  - DEX
+  - Exchanges
+  - Liquidity Pools
+  - Market Data
   - NFTs
   - Onchain Data
   - Prices
@@ -314,6 +327,8 @@ apis:
   humanURL: https://docs.coingecko.com
   baseURL: https://api.coingecko.com/api/v3
   tags:
+  - NFT
+  tags_raw:
   - NFTs
   properties:
   - type: OpenAPI
