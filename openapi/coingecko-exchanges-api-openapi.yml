@@ -1,18 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Asset Platforms Exchanges API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  title: Coingecko Exchanges API
   version: 3.0.1
   contact:
     name: CoinGecko Support
     url: https://support.coingecko.com
   termsOfService: https://www.coingecko.com/en/terms
+  description: 'Operations tagged Exchanges across 2 of this provider''s published API definitions: coingecko-crypto-market-data-api-openapi.yml, coingecko-pro-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.coingecko.com/api/v3
   description: CoinGecko Demo API Server
-security:
-- demoApiKeyHeader: []
-- demoApiKeyQuery: []
+- url: https://pro-api.coingecko.com/api/v3
+  description: CoinGecko Pro API Server
 tags:
 - name: Exchanges
   description: Exchange data including volumes, tickers, and status updates.
@@ -48,6 +47,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Exchange'
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /exchanges/list:
     get:
       operationId: getExchangesList
@@ -71,6 +76,12 @@ paths:
                     name:
                       type: string
                       description: Exchange display name
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /exchanges/{id}:
     get:
       operationId: getExchangeById
@@ -89,6 +100,12 @@ paths:
                 $ref: '#/components/schemas/ExchangeData'
         '404':
           description: Exchange not found
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /exchanges/{id}/tickers:
     get:
       operationId: getExchangeTickers
@@ -149,6 +166,12 @@ paths:
                       $ref: '#/components/schemas/Ticker'
         '404':
           description: Exchange not found
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /exchanges/{id}/volume_chart:
     get:
       operationId: getExchangeVolumeChart
@@ -180,6 +203,12 @@ paths:
                   maxItems: 2
         '404':
           description: Exchange not found
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /exchanges/{id}/volume_chart/range:
     get:
       operationId: getExchangeVolumeChartRange
@@ -224,8 +253,55 @@ paths:
           description: Unauthorized - invalid or missing Pro API key
         '404':
           description: Exchange not found
+      security:
+      - proApiKeyHeader: []
+      - proApiKeyQuery: []
+    servers:
+    - url: https://pro-api.coingecko.com/api/v3
+      description: CoinGecko Pro API Server
 components:
   schemas:
+    Exchange:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Exchange identifier
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
     Ticker:
       type: object
       properties:
@@ -297,47 +373,6 @@ components:
         target_coin_id:
           type: string
           description: CoinGecko coin ID of target currency
-    Exchange:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Exchange identifier
-        name:
-          type: string
-          description: Exchange display name
-        year_established:
-          type: integer
-          description: Year the exchange was established
-        country:
-          type: string
-          description: Country where the exchange is based
-        description:
-          type: string
-          description: Exchange description
-        url:
-          type: string
-          format: uri
-          description: Exchange website URL
-        image:
-          type: string
-          format: uri
-          description: Exchange logo URL
-        has_trading_incentive:
-          type: boolean
-          description: Whether the exchange has trading incentives
-        trust_score:
-          type: integer
-          description: Trust score (1-10)
-        trust_score_rank:
-          type: integer
-          description: Trust score ranking position
-        trade_volume_24h_btc:
-          type: number
-          description: 24-hour trading volume in BTC
-        trade_volume_24h_btc_normalized:
-          type: number
-          description: Normalized 24-hour trading volume in BTC
     ExchangeData:
       type: object
       properties:
@@ -435,6 +470,16 @@ components:
       in: query
       name: x_cg_demo_api_key
       description: CoinGecko Demo API key passed via query string parameter.
-externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+    proApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: CoinGecko Pro API key passed via request header. Obtain a paid key from the CoinGecko developer dashboard.
+    proApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: CoinGecko Pro API key passed via query string parameter.
+x-refined-from:
+- coingecko-crypto-market-data-api-openapi.yml
+- coingecko-pro-api-openapi.yml

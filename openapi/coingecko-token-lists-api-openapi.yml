@@ -1,18 +1,18 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Asset Platforms Token Lists API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  title: CoinGecko Pro Token Lists API
+  description: The CoinGecko Pro API provides the same comprehensive cryptocurrency market data as the standard Demo API but with enhanced performance, higher rate limits of up to 1,000 calls per minute, and faster data updates with prices cached every 30 seconds. It includes exclusive endpoints for advanced analytics, detailed market data, and historical granularity that are not available on the free Demo plan. The Pro API is designed for commercial use cases and comes with dedicated support SLA and access to over 2 million token data points. This spec covers the exclusive endpoints available only to paid plan subscribers.
   version: 3.0.1
   contact:
     name: CoinGecko Support
     url: https://support.coingecko.com
   termsOfService: https://www.coingecko.com/en/terms
 servers:
-- url: https://api.coingecko.com/api/v3
-  description: CoinGecko Demo API Server
+- url: https://pro-api.coingecko.com/api/v3
+  description: CoinGecko Pro API Server
 security:
-- demoApiKeyHeader: []
-- demoApiKeyQuery: []
+- proApiKeyHeader: []
+- proApiKeyQuery: []
 tags:
 - name: Token Lists
   description: Token list endpoints for paid plan subscribers providing standardized token lists by asset platform.
@@ -84,16 +84,16 @@ paths:
           description: Forbidden - endpoint not available on current plan
 components:
   securitySchemes:
-    demoApiKeyHeader:
+    proApiKeyHeader:
       type: apiKey
       in: header
-      name: x-cg-demo-api-key
-      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
-    demoApiKeyQuery:
+      name: x-cg-pro-api-key
+      description: CoinGecko Pro API key passed via request header. Obtain a paid key from the CoinGecko developer dashboard.
+    proApiKeyQuery:
       type: apiKey
       in: query
-      name: x_cg_demo_api_key
-      description: CoinGecko Demo API key passed via query string parameter.
+      name: x_cg_pro_api_key
+      description: CoinGecko Pro API key passed via query string parameter.
 externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+  description: CoinGecko Pro API Documentation
+  url: https://docs.coingecko.com/reference/introduction

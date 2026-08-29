@@ -1,16 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Asset Platforms Trending Pools API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  title: CoinGecko Onchain DEX Trending Pools API
+  description: The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access to real-time decentralized exchange data across over 250 blockchain networks, 1,800 DEXes, and 30 million tokens. It offers more than 20 endpoints for querying liquidity pools, token data by contract address, OHLCV chart data, trending pools, and pool search functionality. This API enables developers to build applications that track onchain trading activity, monitor DeFi liquidity, and analyze decentralized market data without needing to interact directly with individual blockchain networks.
   version: 3.0.1
   contact:
     name: CoinGecko Support
     url: https://support.coingecko.com
   termsOfService: https://www.coingecko.com/en/terms
 servers:
+- url: https://pro-api.coingecko.com/api/v3
+  description: CoinGecko Pro API Server (paid plans)
 - url: https://api.coingecko.com/api/v3
-  description: CoinGecko Demo API Server
+  description: CoinGecko Demo API Server (free tier, limited endpoints)
 security:
+- proApiKeyHeader: []
+- proApiKeyQuery: []
 - demoApiKeyHeader: []
 - demoApiKeyQuery: []
 tags:
@@ -103,30 +107,7 @@ paths:
         '404':
           description: Network not found
 components:
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
   schemas:
-    TransactionCount:
-      type: object
-      properties:
-        buys:
-          type: integer
-          description: Number of buy transactions
-        sells:
-          type: integer
-          description: Number of sell transactions
-        buyers:
-          type: integer
-          description: Number of unique buyers
-        sellers:
-          type: integer
-          description: Number of unique sellers
     Pool:
       type: object
       properties:
@@ -252,17 +233,50 @@ components:
                       type: string
                     type:
                       type: string
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   securitySchemes:
+    proApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: CoinGecko Pro API key passed via request header.
+    proApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: CoinGecko Pro API key passed via query string parameter.
     demoApiKeyHeader:
       type: apiKey
       in: header
       name: x-cg-demo-api-key
-      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
+      description: CoinGecko Demo API key for free tier access to limited onchain endpoints.
     demoApiKeyQuery:
       type: apiKey
       in: query
       name: x_cg_demo_api_key
       description: CoinGecko Demo API key passed via query string parameter.
 externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+  description: CoinGecko Onchain DEX API Documentation
+  url: https://docs.coingecko.com/reference/endpoint-overview

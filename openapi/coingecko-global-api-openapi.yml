@@ -1,18 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Asset Platforms Global API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  title: Coingecko Global API
   version: 3.0.1
   contact:
     name: CoinGecko Support
     url: https://support.coingecko.com
   termsOfService: https://www.coingecko.com/en/terms
+  description: 'Operations tagged Global across 2 of this provider''s published API definitions: coingecko-crypto-market-data-api-openapi.yml, coingecko-pro-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.coingecko.com/api/v3
   description: CoinGecko Demo API Server
-security:
-- demoApiKeyHeader: []
-- demoApiKeyQuery: []
+- url: https://pro-api.coingecko.com/api/v3
+  description: CoinGecko Pro API Server
 tags:
 - name: Global
   description: Global cryptocurrency and DeFi market data.
@@ -34,6 +33,12 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/GlobalData'
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /global/decentralized_finance_defi:
     get:
       operationId: getGlobalDeFi
@@ -51,6 +56,12 @@ paths:
                 properties:
                   data:
                     $ref: '#/components/schemas/GlobalDeFiData'
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /global/market_cap_chart:
     get:
       operationId: getGlobalMarketCapChart
@@ -100,32 +111,14 @@ paths:
           description: Unauthorized - invalid or missing Pro API key
         '403':
           description: Forbidden - endpoint not available on current plan
+      security:
+      - proApiKeyHeader: []
+      - proApiKeyQuery: []
+    servers:
+    - url: https://pro-api.coingecko.com/api/v3
+      description: CoinGecko Pro API Server
 components:
   schemas:
-    GlobalDeFiData:
-      type: object
-      properties:
-        defi_market_cap:
-          type: string
-          description: Total DeFi market cap in USD
-        eth_market_cap:
-          type: string
-          description: Ethereum market cap in USD
-        defi_to_eth_ratio:
-          type: string
-          description: DeFi market cap as ratio of ETH market cap
-        trading_volume_24h:
-          type: string
-          description: 24-hour DeFi trading volume in USD
-        defi_dominance:
-          type: string
-          description: DeFi dominance percentage
-        top_coin_name:
-          type: string
-          description: Top DeFi coin by market cap
-        top_coin_defi_dominance:
-          type: number
-          description: Top DeFi coin market cap dominance
     GlobalData:
       type: object
       properties:
@@ -165,6 +158,30 @@ components:
         updated_at:
           type: integer
           description: Last update timestamp (UNIX)
+    GlobalDeFiData:
+      type: object
+      properties:
+        defi_market_cap:
+          type: string
+          description: Total DeFi market cap in USD
+        eth_market_cap:
+          type: string
+          description: Ethereum market cap in USD
+        defi_to_eth_ratio:
+          type: string
+          description: DeFi market cap as ratio of ETH market cap
+        trading_volume_24h:
+          type: string
+          description: 24-hour DeFi trading volume in USD
+        defi_dominance:
+          type: string
+          description: DeFi dominance percentage
+        top_coin_name:
+          type: string
+          description: Top DeFi coin by market cap
+        top_coin_defi_dominance:
+          type: number
+          description: Top DeFi coin market cap dominance
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey
@@ -176,6 +193,16 @@ components:
       in: query
       name: x_cg_demo_api_key
       description: CoinGecko Demo API key passed via query string parameter.
-externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+    proApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: CoinGecko Pro API key passed via request header. Obtain a paid key from the CoinGecko developer dashboard.
+    proApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: CoinGecko Pro API key passed via query string parameter.
+x-refined-from:
+- coingecko-crypto-market-data-api-openapi.yml
+- coingecko-pro-api-openapi.yml

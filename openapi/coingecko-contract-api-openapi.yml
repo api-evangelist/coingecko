@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Asset Platforms Contract API
+  title: CoinGecko Crypto Market Data Contract API
   description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
   version: 3.0.1
   contact:
@@ -115,7 +115,87 @@ paths:
         '404':
           description: Coin or contract not found
 components:
+  parameters:
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      schema:
+        type: string
+    contractAddress:
+      name: contract_address
+      in: path
+      required: true
+      description: The token contract address on the asset platform
+      schema:
+        type: string
   schemas:
+    CoinData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier if token
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+        block_time_in_minutes:
+          type: integer
+          description: Average block time in minutes
+        hashing_algorithm:
+          type: string
+          description: Mining or hashing algorithm
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories the coin belongs to
+        description:
+          type: object
+          description: Localized descriptions
+          additionalProperties:
+            type: string
+        links:
+          type: object
+          description: Related links (homepage, blockchain sites, forums, etc.)
+        image:
+          type: object
+          description: Coin logo images at various sizes
+          properties:
+            thumb:
+              type: string
+              format: uri
+            small:
+              type: string
+              format: uri
+            large:
+              type: string
+              format: uri
+        genesis_date:
+          type: string
+          format: date
+          description: Date the coin was created
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        market_data:
+          $ref: '#/components/schemas/MarketData'
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
     MarketChart:
       type: object
       properties:
@@ -198,86 +278,6 @@ components:
         max_supply:
           type: number
           description: Maximum supply
-    CoinData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: CoinGecko coin identifier
-        symbol:
-          type: string
-          description: Coin ticker symbol
-        name:
-          type: string
-          description: Coin display name
-        asset_platform_id:
-          type: string
-          description: Asset platform identifier if token
-        platforms:
-          type: object
-          description: Contract addresses on various platforms
-          additionalProperties:
-            type: string
-        block_time_in_minutes:
-          type: integer
-          description: Average block time in minutes
-        hashing_algorithm:
-          type: string
-          description: Mining or hashing algorithm
-        categories:
-          type: array
-          items:
-            type: string
-          description: Categories the coin belongs to
-        description:
-          type: object
-          description: Localized descriptions
-          additionalProperties:
-            type: string
-        links:
-          type: object
-          description: Related links (homepage, blockchain sites, forums, etc.)
-        image:
-          type: object
-          description: Coin logo images at various sizes
-          properties:
-            thumb:
-              type: string
-              format: uri
-            small:
-              type: string
-              format: uri
-            large:
-              type: string
-              format: uri
-        genesis_date:
-          type: string
-          format: date
-          description: Date the coin was created
-        market_cap_rank:
-          type: integer
-          description: Market cap ranking position
-        market_data:
-          $ref: '#/components/schemas/MarketData'
-        last_updated:
-          type: string
-          format: date-time
-          description: Timestamp of last data update
-  parameters:
-    contractAddress:
-      name: contract_address
-      in: path
-      required: true
-      description: The token contract address on the asset platform
-      schema:
-        type: string
-    assetPlatformId:
-      name: id
-      in: path
-      required: true
-      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
-      schema:
-        type: string
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey

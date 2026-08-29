@@ -1,18 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Asset Platforms Simple API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
+  title: Coingecko Simple API
   version: 3.0.1
   contact:
     name: CoinGecko Support
     url: https://support.coingecko.com
   termsOfService: https://www.coingecko.com/en/terms
+  description: 'Operations tagged Simple across 2 of this provider''s published API definitions: coingecko-crypto-market-data-api-openapi.yml, coingecko-onchain-dex-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.coingecko.com/api/v3
   description: CoinGecko Demo API Server
-security:
-- demoApiKeyHeader: []
-- demoApiKeyQuery: []
+- url: https://pro-api.coingecko.com/api/v3
+  description: CoinGecko Pro API Server (paid plans)
 tags:
 - name: Simple
   description: Simple price and token price lookups without the overhead of full coin data responses.
@@ -94,6 +93,12 @@ paths:
           description: Unauthorized - invalid or missing API key
         '429':
           description: Rate limit exceeded
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /simple/token_price/{id}:
     get:
       operationId: getSimpleTokenPrice
@@ -154,6 +159,12 @@ paths:
           description: Bad request - invalid parameters
         '401':
           description: Unauthorized - invalid or missing API key
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /simple/supported_vs_currencies:
     get:
       operationId: getSimpleSupportedVsCurrencies
@@ -171,6 +182,12 @@ paths:
                 items:
                   type: string
                   description: Currency identifier (e.g., usd, btc, eth)
+      security:
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server
   /onchain/simple/networks/{network}/token_price/{addresses}:
     get:
       operationId: getOnchainSimpleTokenPrice
@@ -213,20 +230,30 @@ paths:
           description: Bad request - invalid parameters
         '401':
           description: Unauthorized - invalid or missing API key
+      security:
+      - proApiKeyHeader: []
+      - proApiKeyQuery: []
+      - demoApiKeyHeader: []
+      - demoApiKeyQuery: []
+    servers:
+    - url: https://pro-api.coingecko.com/api/v3
+      description: CoinGecko Pro API Server (paid plans)
+    - url: https://api.coingecko.com/api/v3
+      description: CoinGecko Demo API Server (free tier, limited endpoints)
 components:
   parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
     coinIds:
       name: ids
       in: query
       required: true
       description: Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)
+      schema:
+        type: string
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
       schema:
         type: string
     vsCurrencies:
@@ -236,11 +263,11 @@ components:
       description: Comma-separated list of target currencies (e.g., usd,eur,btc)
       schema:
         type: string
-    assetPlatformId:
-      name: id
+    networkId:
+      name: network
       in: path
       required: true
-      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
       schema:
         type: string
   securitySchemes:
@@ -254,6 +281,16 @@ components:
       in: query
       name: x_cg_demo_api_key
       description: CoinGecko Demo API key passed via query string parameter.
-externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+    proApiKeyHeader:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: CoinGecko Pro API key passed via request header.
+    proApiKeyQuery:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: CoinGecko Pro API key passed via query string parameter.
+x-refined-from:
+- coingecko-crypto-market-data-api-openapi.yml
+- coingecko-onchain-dex-api-openapi.yml
