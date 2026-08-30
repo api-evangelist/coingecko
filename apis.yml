@@ -11,8 +11,8 @@ tags:
   - Exchanges
   - Liquidity Pools
   - Market Data
-  - NFT
-  - On-Chain Data
+  - NFTs
+  - Onchain Data
   - Prices
 tags_raw:
   - Aggregator
@@ -339,7 +339,7 @@ apis:
   humanURL: https://docs.coingecko.com
   baseURL: https://api.coingecko.com/api/v3
   tags:
-  - NFT
+  - NFTs
   tags_raw:
   - NFTs
   properties:
