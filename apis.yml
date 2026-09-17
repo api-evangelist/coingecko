@@ -334,32 +334,6 @@ apis:
     url: https://docs.coingecko.com/reference/endpoint-overview
   - type: Landing Page
     url: https://www.coingecko.com/en/api/dex
-- aid: coingecko:coingecko-nfts-api
-  name: CoinGecko NFTs API
-  description: NFT collection data including floor prices and market information.
-  humanURL: https://docs.coingecko.com
-  baseURL: https://api.coingecko.com/api/v3
-  tags:
-  - NFT
-  tags_raw:
-  - NFTs
-  properties:
-  - type: OpenAPI
-    url: openapi/coingecko-nfts-api-openapi.yml
-  - type: Documentation
-    url: https://docs.coingecko.com
-  - type: Pricing
-    url: https://www.coingecko.com/en/api/pricing
-  - type: Landing Page
-    url: https://www.coingecko.com/en/api
-  - type: Documentation
-    url: https://docs.coingecko.com/reference/introduction
-  - type: AsyncAPI
-    url: asyncapi/coingecko-asyncapi.yml
-  - type: Documentation
-    url: https://docs.coingecko.com/reference/endpoint-overview
-  - type: Landing Page
-    url: https://www.coingecko.com/en/api/dex
 - aid: coingecko:coingecko-ohlcv-api
   name: CoinGecko OHLCV API
   description: Open, High, Low, Close, Volume candlestick chart data for liquidity pools.
@@ -590,6 +564,30 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/coingecko-trending-pools-api-openapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com
+  - type: Pricing
+    url: https://www.coingecko.com/en/api/pricing
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/introduction
+  - type: AsyncAPI
+    url: asyncapi/coingecko-asyncapi.yml
+  - type: Documentation
+    url: https://docs.coingecko.com/reference/endpoint-overview
+  - type: Landing Page
+    url: https://www.coingecko.com/en/api/dex
+- aid: coingecko:coingecko-nfts-api
+  name: CoinGecko NF Ts API
+  description: NFT collection data including floor prices and market information.
+  humanURL: https://docs.coingecko.com
+  baseURL: https://api.coingecko.com/api/v3
+  tags:
+  - NFTs
+  properties:
+  - type: OpenAPI
+    url: openapi/coingecko-nfts-api-openapi.yml
   - type: Documentation
     url: https://docs.coingecko.com
   - type: Pricing
