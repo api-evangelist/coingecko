@@ -2,13 +2,14 @@ aid: coingecko
 url: https://raw.githubusercontent.com/api-evangelist/coingecko/refs/heads/main/apis.yml
 name: CoinGecko
 tags:
+  - Exchange
+  - CoinGecko
   - Aggregator
   - Blockchain
   - Cryptocurrency
   - Decentralized Exchanges
   - DeFi
   - DEX
-  - Exchange
   - Liquidity Pools
   - Market Data
   - NFT
