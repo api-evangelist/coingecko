@@ -158,6 +158,21 @@ paths:
       description: CoinGecko Demo API Server (free tier, limited endpoints)
 components:
   schemas:
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
     Pool:
       type: object
       properties:
@@ -283,21 +298,6 @@ components:
                       type: string
                     type:
                       type: string
-    TransactionCount:
-      type: object
-      properties:
-        buys:
-          type: integer
-          description: Number of buy transactions
-        sells:
-          type: integer
-          description: Number of sell transactions
-        buyers:
-          type: integer
-          description: Number of unique buyers
-        sellers:
-          type: integer
-          description: Number of unique sellers
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey

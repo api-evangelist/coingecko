@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: CoinGecko Pro Token Lists API
-  description: The CoinGecko Pro API provides the same comprehensive cryptocurrency market data as the standard Demo API but with enhanced performance, higher rate limits of up to 1,000 calls per minute, and faster data updates with prices cached every 30 seconds. It includes exclusive endpoints for advanced analytics, detailed market data, and historical granularity that are not available on the free Demo plan. The Pro API is designed for commercial use cases and comes with dedicated support SLA and access to over 2 million token data points. This spec covers the exclusive endpoints available only to paid plan subscribers.
+  description: The CoinGecko Pro API provides the same comprehensive cryptocurrency market data as the standard Demo API but with enhanced performance, higher rate limits of up to 1,000 calls per minute, and faster data updates with prices cached every 30 seconds.
   version: 3.0.1
   contact:
     name: CoinGecko Support

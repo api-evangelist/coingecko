@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: CoinGecko Onchain DEX DE Xes API
-  description: The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access to real-time decentralized exchange data across over 250 blockchain networks, 1,800 DEXes, and 30 million tokens. It offers more than 20 endpoints for querying liquidity pools, token data by contract address, OHLCV chart data, trending pools, and pool search functionality. This API enables developers to build applications that track onchain trading activity, monitor DeFi liquidity, and analyze decentralized market data without needing to interact directly with individual blockchain networks.
+  description: The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access to real-time decentralized exchange data across over 250 blockchain networks, 1,800 DEXes, and 30 million tokens.
   version: 3.0.1
   contact:
     name: CoinGecko Support
@@ -51,14 +51,6 @@ paths:
         '404':
           description: Network not found
 components:
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
   schemas:
     DEX:
       type: object
@@ -75,6 +67,14 @@ components:
             name:
               type: string
               description: DEX display name
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   securitySchemes:
     proApiKeyHeader:
       type: apiKey

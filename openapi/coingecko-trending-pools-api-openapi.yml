@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: CoinGecko Onchain DEX Trending Pools API
-  description: The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access to real-time decentralized exchange data across over 250 blockchain networks, 1,800 DEXes, and 30 million tokens. It offers more than 20 endpoints for querying liquidity pools, token data by contract address, OHLCV chart data, trending pools, and pool search functionality. This API enables developers to build applications that track onchain trading activity, monitor DeFi liquidity, and analyze decentralized market data without needing to interact directly with individual blockchain networks.
+  description: The CoinGecko Onchain DEX API, powered by GeckoTerminal, provides access to real-time decentralized exchange data across over 250 blockchain networks, 1,800 DEXes, and 30 million tokens.
   version: 3.0.1
   contact:
     name: CoinGecko Support
@@ -107,7 +107,30 @@ paths:
         '404':
           description: Network not found
 components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   schemas:
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
     Pool:
       type: object
       properties:
@@ -233,29 +256,6 @@ components:
                       type: string
                     type:
                       type: string
-    TransactionCount:
-      type: object
-      properties:
-        buys:
-          type: integer
-          description: Number of buy transactions
-        sells:
-          type: integer
-          description: Number of sell transactions
-        buyers:
-          type: integer
-          description: Number of unique buyers
-        sellers:
-          type: integer
-          description: Number of unique sellers
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
   securitySchemes:
     proApiKeyHeader:
       type: apiKey

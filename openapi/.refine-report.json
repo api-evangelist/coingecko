@@ -29,7 +29,9 @@
     "coingecko-trending-pools-api-openapi.yml",
     "coingecko-token-lists-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -42,7 +44,9 @@
     "tag 'Global' spans 2 source specs (coingecko-crypto-market-data-api-openapi.yml, coingecko-pro-api-openapi.yml): per-path servers applied",
     "tag 'NFTs' spans 2 source specs (coingecko-crypto-market-data-api-openapi.yml, coingecko-pro-api-openapi.yml): per-path servers applied",
     "tag 'Search' spans 2 source specs (coingecko-crypto-market-data-api-openapi.yml, coingecko-onchain-dex-api-openapi.yml): per-path servers applied",
-    "tag 'Simple' spans 2 source specs (coingecko-crypto-market-data-api-openapi.yml, coingecko-onchain-dex-api-openapi.yml): per-path servers applied"
+    "tag 'Simple' spans 2 source specs (coingecko-crypto-market-data-api-openapi.yml, coingecko-onchain-dex-api-openapi.yml): per-path servers applied",
+    "superseded outputs removed: coingecko-nf-ts-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 22 total)"
   ],
   "skipped": [
     "coingecko-asset-platforms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -56,7 +60,7 @@
     "coingecko-exchanges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "coingecko-global-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "coingecko-networks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "coingecko-nfts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "coingecko-nf-ts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "coingecko-ohlcv-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "coingecko-ping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "coingecko-pools-api-openapi.yml: previously refined output, superseded by openapi/_original/",
