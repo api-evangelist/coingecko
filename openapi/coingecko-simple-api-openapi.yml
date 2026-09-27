@@ -242,13 +242,6 @@ paths:
       description: CoinGecko Demo API Server (free tier, limited endpoints)
 components:
   parameters:
-    vsCurrencies:
-      name: vs_currencies
-      in: query
-      required: true
-      description: Comma-separated list of target currencies (e.g., usd,eur,btc)
-      schema:
-        type: string
     assetPlatformId:
       name: id
       in: path
@@ -261,6 +254,13 @@ components:
       in: query
       required: true
       description: Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)
+      schema:
+        type: string
+    vsCurrencies:
+      name: vs_currencies
+      in: query
+      required: true
+      description: Comma-separated list of target currencies (e.g., usd,eur,btc)
       schema:
         type: string
     networkId:

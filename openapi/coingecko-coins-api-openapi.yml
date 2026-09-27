@@ -755,176 +755,6 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
-    MarketData:
-      type: object
-      properties:
-        current_price:
-          type: object
-          description: Current price in various currencies
-          additionalProperties:
-            type: number
-        total_value_locked:
-          type: number
-          description: Total value locked (for DeFi tokens)
-        market_cap:
-          type: object
-          description: Market cap in various currencies
-          additionalProperties:
-            type: number
-        total_volume:
-          type: object
-          description: 24h volume in various currencies
-          additionalProperties:
-            type: number
-        high_24h:
-          type: object
-          description: 24-hour high in various currencies
-          additionalProperties:
-            type: number
-        low_24h:
-          type: object
-          description: 24-hour low in various currencies
-          additionalProperties:
-            type: number
-        price_change_24h:
-          type: number
-          description: 24-hour price change
-        price_change_percentage_24h:
-          type: number
-          description: 24-hour price change percentage
-        market_cap_change_24h:
-          type: number
-          description: 24-hour market cap change
-        market_cap_change_percentage_24h:
-          type: number
-          description: 24-hour market cap change percentage
-        circulating_supply:
-          type: number
-          description: Current circulating supply
-        total_supply:
-          type: number
-          description: Total supply
-        max_supply:
-          type: number
-          description: Maximum supply
-    Ticker:
-      type: object
-      properties:
-        base:
-          type: string
-          description: Base currency ticker
-        target:
-          type: string
-          description: Target currency ticker
-        market:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Exchange name
-            identifier:
-              type: string
-              description: Exchange identifier
-            has_trading_incentive:
-              type: boolean
-              description: Whether the exchange has trading incentives
-        last:
-          type: number
-          description: Last traded price
-        volume:
-          type: number
-          description: Trading volume
-        converted_last:
-          type: object
-          description: Last price converted to BTC, ETH, and USD
-          additionalProperties:
-            type: number
-        converted_volume:
-          type: object
-          description: Volume converted to BTC, ETH, and USD
-          additionalProperties:
-            type: number
-        trust_score:
-          type: string
-          description: Trust score color (green, yellow, red)
-        bid_ask_spread_percentage:
-          type: number
-          description: Bid-ask spread percentage
-        timestamp:
-          type: string
-          format: date-time
-          description: Ticker data timestamp
-        last_traded_at:
-          type: string
-          format: date-time
-          description: Last trade timestamp
-        last_fetch_at:
-          type: string
-          format: date-time
-          description: Last data fetch timestamp
-        is_anomaly:
-          type: boolean
-          description: Whether the ticker is flagged as anomalous
-        is_stale:
-          type: boolean
-          description: Whether the ticker data is stale
-        trade_url:
-          type: string
-          format: uri
-          description: URL to trade this pair
-        coin_id:
-          type: string
-          description: CoinGecko coin ID of base currency
-        target_coin_id:
-          type: string
-          description: CoinGecko coin ID of target currency
-    MarketChart:
-      type: object
-      properties:
-        prices:
-          type: array
-          description: Price data points as [timestamp, price] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        market_caps:
-          type: array
-          description: Market cap data points as [timestamp, market_cap] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        total_volumes:
-          type: array
-          description: Volume data points as [timestamp, volume] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-    CoinListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: CoinGecko coin identifier
-        symbol:
-          type: string
-          description: Coin ticker symbol
-        name:
-          type: string
-          description: Coin display name
-        platforms:
-          type: object
-          description: Contract addresses on various platforms
-          additionalProperties:
-            type: string
     CoinMarket:
       type: object
       properties:
@@ -1072,6 +902,176 @@ components:
           type: string
           format: date-time
           description: Timestamp of last data update
+    Ticker:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency ticker
+        target:
+          type: string
+          description: Target currency ticker
+        market:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Exchange name
+            identifier:
+              type: string
+              description: Exchange identifier
+            has_trading_incentive:
+              type: boolean
+              description: Whether the exchange has trading incentives
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        converted_last:
+          type: object
+          description: Last price converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        converted_volume:
+          type: object
+          description: Volume converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        trust_score:
+          type: string
+          description: Trust score color (green, yellow, red)
+        bid_ask_spread_percentage:
+          type: number
+          description: Bid-ask spread percentage
+        timestamp:
+          type: string
+          format: date-time
+          description: Ticker data timestamp
+        last_traded_at:
+          type: string
+          format: date-time
+          description: Last trade timestamp
+        last_fetch_at:
+          type: string
+          format: date-time
+          description: Last data fetch timestamp
+        is_anomaly:
+          type: boolean
+          description: Whether the ticker is flagged as anomalous
+        is_stale:
+          type: boolean
+          description: Whether the ticker data is stale
+        trade_url:
+          type: string
+          format: uri
+          description: URL to trade this pair
+        coin_id:
+          type: string
+          description: CoinGecko coin ID of base currency
+        target_coin_id:
+          type: string
+          description: CoinGecko coin ID of target currency
+    MarketChart:
+      type: object
+      properties:
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+    CoinListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+    MarketData:
+      type: object
+      properties:
+        current_price:
+          type: object
+          description: Current price in various currencies
+          additionalProperties:
+            type: number
+        total_value_locked:
+          type: number
+          description: Total value locked (for DeFi tokens)
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: 24h volume in various currencies
+          additionalProperties:
+            type: number
+        high_24h:
+          type: object
+          description: 24-hour high in various currencies
+          additionalProperties:
+            type: number
+        low_24h:
+          type: object
+          description: 24-hour low in various currencies
+          additionalProperties:
+            type: number
+        price_change_24h:
+          type: number
+          description: 24-hour price change
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply
     GainerLoser:
       type: object
       properties:

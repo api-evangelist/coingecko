@@ -1,6 +1,9 @@
 aid: coingecko
 url: https://raw.githubusercontent.com/api-evangelist/coingecko/refs/heads/main/apis.yml
 name: CoinGecko
+x-docs-platform: mintlify
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-24
 tags:
   - Exchange
   - CoinGecko
@@ -15,6 +18,7 @@ tags:
   - NFT
   - On-Chain Data
   - Prices
+  - Real-Time
 tags_raw:
   - Exchanges
   - CoinGecko
@@ -30,6 +34,7 @@ tags_raw:
   - NFTs
   - Onchain Data
   - Prices
+  - Real-Time
 type: Index
 kind: company
 deliveryModel:

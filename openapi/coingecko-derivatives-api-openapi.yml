@@ -130,6 +130,44 @@ paths:
                       description: Derivative exchange display name
 components:
   schemas:
+    DerivativeExchange:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Exchange display name
+        id:
+          type: string
+          description: Exchange identifier
+        open_interest_btc:
+          type: number
+          description: Total open interest in BTC
+        trade_volume_24h_btc:
+          type: string
+          description: 24-hour trading volume in BTC
+        number_of_perpetual_pairs:
+          type: integer
+          description: Number of perpetual trading pairs
+        number_of_futures_pairs:
+          type: integer
+          description: Number of futures trading pairs
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
     DerivativeTicker:
       type: object
       properties:
@@ -177,44 +215,6 @@ components:
           type: string
           format: date-time
           description: Contract expiration date (null for perpetual)
-    DerivativeExchange:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Exchange display name
-        id:
-          type: string
-          description: Exchange identifier
-        open_interest_btc:
-          type: number
-          description: Total open interest in BTC
-        trade_volume_24h_btc:
-          type: string
-          description: 24-hour trading volume in BTC
-        number_of_perpetual_pairs:
-          type: integer
-          description: Number of perpetual trading pairs
-        number_of_futures_pairs:
-          type: integer
-          description: Number of futures trading pairs
-        image:
-          type: string
-          format: uri
-          description: Exchange logo URL
-        year_established:
-          type: integer
-          description: Year the exchange was established
-        country:
-          type: string
-          description: Country where the exchange is based
-        description:
-          type: string
-          description: Exchange description
-        url:
-          type: string
-          format: uri
-          description: Exchange website URL
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey

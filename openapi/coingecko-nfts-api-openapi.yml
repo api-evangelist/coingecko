@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Coingecko NF Ts API
+  title: Coingecko NFTs API
   version: 3.0.1
   contact:
     name: CoinGecko Support
@@ -443,24 +443,6 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
-    NFTListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: NFT collection identifier
-        contract_address:
-          type: string
-          description: NFT contract address
-        name:
-          type: string
-          description: NFT collection name
-        asset_platform_id:
-          type: string
-          description: Asset platform identifier
-        symbol:
-          type: string
-          description: NFT collection symbol
     NFTData:
       type: object
       properties:
@@ -531,6 +513,24 @@ components:
         total_supply:
           type: number
           description: Total supply of NFTs in the collection
+    NFTListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: NFT collection identifier
+        contract_address:
+          type: string
+          description: NFT contract address
+        name:
+          type: string
+          description: NFT collection name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier
+        symbol:
+          type: string
+          description: NFT collection symbol
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey

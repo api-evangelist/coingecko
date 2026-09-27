@@ -261,47 +261,6 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
-    Exchange:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Exchange identifier
-        name:
-          type: string
-          description: Exchange display name
-        year_established:
-          type: integer
-          description: Year the exchange was established
-        country:
-          type: string
-          description: Country where the exchange is based
-        description:
-          type: string
-          description: Exchange description
-        url:
-          type: string
-          format: uri
-          description: Exchange website URL
-        image:
-          type: string
-          format: uri
-          description: Exchange logo URL
-        has_trading_incentive:
-          type: boolean
-          description: Whether the exchange has trading incentives
-        trust_score:
-          type: integer
-          description: Trust score (1-10)
-        trust_score_rank:
-          type: integer
-          description: Trust score ranking position
-        trade_volume_24h_btc:
-          type: number
-          description: 24-hour trading volume in BTC
-        trade_volume_24h_btc_normalized:
-          type: number
-          description: Normalized 24-hour trading volume in BTC
     Ticker:
       type: object
       properties:
@@ -373,6 +332,47 @@ components:
         target_coin_id:
           type: string
           description: CoinGecko coin ID of target currency
+    Exchange:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Exchange identifier
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
     ExchangeData:
       type: object
       properties:
