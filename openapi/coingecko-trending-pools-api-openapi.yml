@@ -107,22 +107,15 @@ paths:
         '404':
           description: Network not found
 components:
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   schemas:
-    TransactionCount:
-      type: object
-      properties:
-        buys:
-          type: integer
-          description: Number of buy transactions
-        sells:
-          type: integer
-          description: Number of sell transactions
-        buyers:
-          type: integer
-          description: Number of unique buyers
-        sellers:
-          type: integer
-          description: Number of unique sellers
     Pool:
       type: object
       properties:
@@ -248,14 +241,21 @@ components:
                       type: string
                     type:
                       type: string
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
   securitySchemes:
     proApiKeyHeader:
       type: apiKey

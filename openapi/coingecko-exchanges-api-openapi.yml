@@ -261,77 +261,6 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
-    Ticker:
-      type: object
-      properties:
-        base:
-          type: string
-          description: Base currency ticker
-        target:
-          type: string
-          description: Target currency ticker
-        market:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Exchange name
-            identifier:
-              type: string
-              description: Exchange identifier
-            has_trading_incentive:
-              type: boolean
-              description: Whether the exchange has trading incentives
-        last:
-          type: number
-          description: Last traded price
-        volume:
-          type: number
-          description: Trading volume
-        converted_last:
-          type: object
-          description: Last price converted to BTC, ETH, and USD
-          additionalProperties:
-            type: number
-        converted_volume:
-          type: object
-          description: Volume converted to BTC, ETH, and USD
-          additionalProperties:
-            type: number
-        trust_score:
-          type: string
-          description: Trust score color (green, yellow, red)
-        bid_ask_spread_percentage:
-          type: number
-          description: Bid-ask spread percentage
-        timestamp:
-          type: string
-          format: date-time
-          description: Ticker data timestamp
-        last_traded_at:
-          type: string
-          format: date-time
-          description: Last trade timestamp
-        last_fetch_at:
-          type: string
-          format: date-time
-          description: Last data fetch timestamp
-        is_anomaly:
-          type: boolean
-          description: Whether the ticker is flagged as anomalous
-        is_stale:
-          type: boolean
-          description: Whether the ticker data is stale
-        trade_url:
-          type: string
-          format: uri
-          description: URL to trade this pair
-        coin_id:
-          type: string
-          description: CoinGecko coin ID of base currency
-        target_coin_id:
-          type: string
-          description: CoinGecko coin ID of target currency
     Exchange:
       type: object
       properties:
@@ -451,6 +380,77 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Ticker'
+    Ticker:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency ticker
+        target:
+          type: string
+          description: Target currency ticker
+        market:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Exchange name
+            identifier:
+              type: string
+              description: Exchange identifier
+            has_trading_incentive:
+              type: boolean
+              description: Whether the exchange has trading incentives
+        last:
+          type: number
+          description: Last traded price
+        volume:
+          type: number
+          description: Trading volume
+        converted_last:
+          type: object
+          description: Last price converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        converted_volume:
+          type: object
+          description: Volume converted to BTC, ETH, and USD
+          additionalProperties:
+            type: number
+        trust_score:
+          type: string
+          description: Trust score color (green, yellow, red)
+        bid_ask_spread_percentage:
+          type: number
+          description: Bid-ask spread percentage
+        timestamp:
+          type: string
+          format: date-time
+          description: Ticker data timestamp
+        last_traded_at:
+          type: string
+          format: date-time
+          description: Last trade timestamp
+        last_fetch_at:
+          type: string
+          format: date-time
+          description: Last data fetch timestamp
+        is_anomaly:
+          type: boolean
+          description: Whether the ticker is flagged as anomalous
+        is_stale:
+          type: boolean
+          description: Whether the ticker data is stale
+        trade_url:
+          type: string
+          format: uri
+          description: URL to trade this pair
+        coin_id:
+          type: string
+          description: CoinGecko coin ID of base currency
+        target_coin_id:
+          type: string
+          description: CoinGecko coin ID of target currency
   parameters:
     exchangeId:
       name: id

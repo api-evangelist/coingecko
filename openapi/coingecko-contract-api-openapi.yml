@@ -264,18 +264,18 @@ components:
           type: number
           description: Maximum supply
   parameters:
-    assetPlatformId:
-      name: id
-      in: path
-      required: true
-      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
-      schema:
-        type: string
     contractAddress:
       name: contract_address
       in: path
       required: true
       description: The token contract address on the asset platform
+      schema:
+        type: string
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
       schema:
         type: string
   securitySchemes:

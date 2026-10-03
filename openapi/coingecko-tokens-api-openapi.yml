@@ -202,21 +202,51 @@ paths:
           description: Token not found
 components:
   schemas:
-    TransactionCount:
+    Token:
       type: object
       properties:
-        buys:
-          type: integer
-          description: Number of buy transactions
-        sells:
-          type: integer
-          description: Number of sell transactions
-        buyers:
-          type: integer
-          description: Number of unique buyers
-        sellers:
-          type: integer
-          description: Number of unique sellers
+        id:
+          type: string
+          description: Token identifier (network_address format)
+        type:
+          type: string
+          description: Resource type (token)
+        attributes:
+          type: object
+          properties:
+            address:
+              type: string
+              description: Token contract address
+            name:
+              type: string
+              description: Token name
+            symbol:
+              type: string
+              description: Token ticker symbol
+            decimals:
+              type: integer
+              description: Token decimal places
+            coingecko_coin_id:
+              type: string
+              description: Corresponding CoinGecko coin ID
+            price_usd:
+              type: string
+              description: Current price in USD
+            fdv_usd:
+              type: string
+              description: Fully diluted valuation in USD
+            total_reserve_in_usd:
+              type: string
+              description: Total reserve across all pools in USD
+            volume_usd:
+              type: object
+              description: Volume in USD over various timeframes
+              properties:
+                h24:
+                  type: string
+            market_cap_usd:
+              type: string
+              description: Market cap in USD
     TokenInfo:
       type: object
       properties:
@@ -267,51 +297,6 @@ components:
             twitter_handle:
               type: string
               description: Twitter/X handle
-    Token:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Token identifier (network_address format)
-        type:
-          type: string
-          description: Resource type (token)
-        attributes:
-          type: object
-          properties:
-            address:
-              type: string
-              description: Token contract address
-            name:
-              type: string
-              description: Token name
-            symbol:
-              type: string
-              description: Token ticker symbol
-            decimals:
-              type: integer
-              description: Token decimal places
-            coingecko_coin_id:
-              type: string
-              description: Corresponding CoinGecko coin ID
-            price_usd:
-              type: string
-              description: Current price in USD
-            fdv_usd:
-              type: string
-              description: Fully diluted valuation in USD
-            total_reserve_in_usd:
-              type: string
-              description: Total reserve across all pools in USD
-            volume_usd:
-              type: object
-              description: Volume in USD over various timeframes
-              properties:
-                h24:
-                  type: string
-            market_cap_usd:
-              type: string
-              description: Market cap in USD
     Pool:
       type: object
       properties:
@@ -437,6 +422,21 @@ components:
                       type: string
                     type:
                       type: string
+    TransactionCount:
+      type: object
+      properties:
+        buys:
+          type: integer
+          description: Number of buy transactions
+        sells:
+          type: integer
+          description: Number of sell transactions
+        buyers:
+          type: integer
+          description: Number of unique buyers
+        sellers:
+          type: integer
+          description: Number of unique sellers
   parameters:
     networkId:
       name: network

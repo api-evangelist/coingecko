@@ -755,6 +755,71 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
+    CoinData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        asset_platform_id:
+          type: string
+          description: Asset platform identifier if token
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
+        block_time_in_minutes:
+          type: integer
+          description: Average block time in minutes
+        hashing_algorithm:
+          type: string
+          description: Mining or hashing algorithm
+        categories:
+          type: array
+          items:
+            type: string
+          description: Categories the coin belongs to
+        description:
+          type: object
+          description: Localized descriptions
+          additionalProperties:
+            type: string
+        links:
+          type: object
+          description: Related links (homepage, blockchain sites, forums, etc.)
+        image:
+          type: object
+          description: Coin logo images at various sizes
+          properties:
+            thumb:
+              type: string
+              format: uri
+            small:
+              type: string
+              format: uri
+            large:
+              type: string
+              format: uri
+        genesis_date:
+          type: string
+          format: date
+          description: Date the coin was created
+        market_cap_rank:
+          type: integer
+          description: Market cap ranking position
+        market_data:
+          $ref: '#/components/schemas/MarketData'
+        last_updated:
+          type: string
+          format: date-time
+          description: Timestamp of last data update
     CoinMarket:
       type: object
       properties:
@@ -837,7 +902,89 @@ components:
           type: string
           format: date-time
           description: Timestamp of last data update
-    CoinData:
+    MarketChart:
+      type: object
+      properties:
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+    MarketData:
+      type: object
+      properties:
+        current_price:
+          type: object
+          description: Current price in various currencies
+          additionalProperties:
+            type: number
+        total_value_locked:
+          type: number
+          description: Total value locked (for DeFi tokens)
+        market_cap:
+          type: object
+          description: Market cap in various currencies
+          additionalProperties:
+            type: number
+        total_volume:
+          type: object
+          description: 24h volume in various currencies
+          additionalProperties:
+            type: number
+        high_24h:
+          type: object
+          description: 24-hour high in various currencies
+          additionalProperties:
+            type: number
+        low_24h:
+          type: object
+          description: 24-hour low in various currencies
+          additionalProperties:
+            type: number
+        price_change_24h:
+          type: number
+          description: 24-hour price change
+        price_change_percentage_24h:
+          type: number
+          description: 24-hour price change percentage
+        market_cap_change_24h:
+          type: number
+          description: 24-hour market cap change
+        market_cap_change_percentage_24h:
+          type: number
+          description: 24-hour market cap change percentage
+        circulating_supply:
+          type: number
+          description: Current circulating supply
+        total_supply:
+          type: number
+          description: Total supply
+        max_supply:
+          type: number
+          description: Maximum supply
+    CoinListItem:
       type: object
       properties:
         id:
@@ -849,59 +996,11 @@ components:
         name:
           type: string
           description: Coin display name
-        asset_platform_id:
-          type: string
-          description: Asset platform identifier if token
         platforms:
           type: object
           description: Contract addresses on various platforms
           additionalProperties:
             type: string
-        block_time_in_minutes:
-          type: integer
-          description: Average block time in minutes
-        hashing_algorithm:
-          type: string
-          description: Mining or hashing algorithm
-        categories:
-          type: array
-          items:
-            type: string
-          description: Categories the coin belongs to
-        description:
-          type: object
-          description: Localized descriptions
-          additionalProperties:
-            type: string
-        links:
-          type: object
-          description: Related links (homepage, blockchain sites, forums, etc.)
-        image:
-          type: object
-          description: Coin logo images at various sizes
-          properties:
-            thumb:
-              type: string
-              format: uri
-            small:
-              type: string
-              format: uri
-            large:
-              type: string
-              format: uri
-        genesis_date:
-          type: string
-          format: date
-          description: Date the coin was created
-        market_cap_rank:
-          type: integer
-          description: Market cap ranking position
-        market_data:
-          $ref: '#/components/schemas/MarketData'
-        last_updated:
-          type: string
-          format: date-time
-          description: Timestamp of last data update
     Ticker:
       type: object
       properties:
@@ -973,105 +1072,6 @@ components:
         target_coin_id:
           type: string
           description: CoinGecko coin ID of target currency
-    MarketChart:
-      type: object
-      properties:
-        prices:
-          type: array
-          description: Price data points as [timestamp, price] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        market_caps:
-          type: array
-          description: Market cap data points as [timestamp, market_cap] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        total_volumes:
-          type: array
-          description: Volume data points as [timestamp, volume] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-    CoinListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: CoinGecko coin identifier
-        symbol:
-          type: string
-          description: Coin ticker symbol
-        name:
-          type: string
-          description: Coin display name
-        platforms:
-          type: object
-          description: Contract addresses on various platforms
-          additionalProperties:
-            type: string
-    MarketData:
-      type: object
-      properties:
-        current_price:
-          type: object
-          description: Current price in various currencies
-          additionalProperties:
-            type: number
-        total_value_locked:
-          type: number
-          description: Total value locked (for DeFi tokens)
-        market_cap:
-          type: object
-          description: Market cap in various currencies
-          additionalProperties:
-            type: number
-        total_volume:
-          type: object
-          description: 24h volume in various currencies
-          additionalProperties:
-            type: number
-        high_24h:
-          type: object
-          description: 24-hour high in various currencies
-          additionalProperties:
-            type: number
-        low_24h:
-          type: object
-          description: 24-hour low in various currencies
-          additionalProperties:
-            type: number
-        price_change_24h:
-          type: number
-          description: 24-hour price change
-        price_change_percentage_24h:
-          type: number
-          description: 24-hour price change percentage
-        market_cap_change_24h:
-          type: number
-          description: 24-hour market cap change
-        market_cap_change_percentage_24h:
-          type: number
-          description: 24-hour market cap change percentage
-        circulating_supply:
-          type: number
-          description: Current circulating supply
-        total_supply:
-          type: number
-          description: Total supply
-        max_supply:
-          type: number
-          description: Maximum supply
     GainerLoser:
       type: object
       properties:

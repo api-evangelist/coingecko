@@ -242,11 +242,11 @@ paths:
       description: CoinGecko Demo API Server (free tier, limited endpoints)
 components:
   parameters:
-    assetPlatformId:
-      name: id
-      in: path
+    vsCurrencies:
+      name: vs_currencies
+      in: query
       required: true
-      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      description: Comma-separated list of target currencies (e.g., usd,eur,btc)
       schema:
         type: string
     coinIds:
@@ -256,11 +256,11 @@ components:
       description: Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)
       schema:
         type: string
-    vsCurrencies:
-      name: vs_currencies
-      in: query
+    assetPlatformId:
+      name: id
+      in: path
       required: true
-      description: Comma-separated list of target currencies (e.g., usd,eur,btc)
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
       schema:
         type: string
     networkId:
