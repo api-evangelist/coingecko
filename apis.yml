@@ -5,7 +5,6 @@ x-docs-platform: mintlify
 x-docs-platform-confidence: medium
 x-docs-platform-checked: 2026-09-24
 tags:
-  - Exchange
   - CoinGecko
   - Aggregator
   - Blockchain
@@ -20,7 +19,6 @@ tags:
   - Prices
   - Real-Time
 tags_raw:
-  - Exchanges
   - CoinGecko
   - Aggregator
   - Blockchain
@@ -28,7 +26,6 @@ tags_raw:
   - Decentralized Exchanges
   - DeFi
   - DEX
-  - Exchanges
   - Liquidity Pools
   - Market Data
   - NFTs
@@ -663,3 +660,5 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-tags-removed:
+- Exchange
