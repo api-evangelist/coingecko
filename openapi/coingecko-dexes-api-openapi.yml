@@ -51,14 +51,6 @@ paths:
         '404':
           description: Network not found
 components:
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
   schemas:
     DEX:
       type: object
@@ -75,6 +67,14 @@ components:
             name:
               type: string
               description: DEX display name
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   securitySchemes:
     proApiKeyHeader:
       type: apiKey

@@ -62,14 +62,6 @@ paths:
         '404':
           description: Pool not found
 components:
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
   schemas:
     Trade:
       type: object
@@ -129,6 +121,14 @@ components:
             to_token_address:
               type: string
               description: Contract address of the to token
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   securitySchemes:
     proApiKeyHeader:
       type: apiKey

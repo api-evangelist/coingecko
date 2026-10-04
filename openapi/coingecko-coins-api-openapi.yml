@@ -820,6 +820,23 @@ components:
           type: string
           format: date-time
           description: Timestamp of last data update
+    CoinListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: CoinGecko coin identifier
+        symbol:
+          type: string
+          description: Coin ticker symbol
+        name:
+          type: string
+          description: Coin display name
+        platforms:
+          type: object
+          description: Contract addresses on various platforms
+          additionalProperties:
+            type: string
     CoinMarket:
       type: object
       properties:
@@ -902,36 +919,6 @@ components:
           type: string
           format: date-time
           description: Timestamp of last data update
-    MarketChart:
-      type: object
-      properties:
-        prices:
-          type: array
-          description: Price data points as [timestamp, price] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        market_caps:
-          type: array
-          description: Market cap data points as [timestamp, market_cap] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        total_volumes:
-          type: array
-          description: Volume data points as [timestamp, volume] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
     MarketData:
       type: object
       properties:
@@ -984,23 +971,36 @@ components:
         max_supply:
           type: number
           description: Maximum supply
-    CoinListItem:
+    MarketChart:
       type: object
       properties:
-        id:
-          type: string
-          description: CoinGecko coin identifier
-        symbol:
-          type: string
-          description: Coin ticker symbol
-        name:
-          type: string
-          description: Coin display name
-        platforms:
-          type: object
-          description: Contract addresses on various platforms
-          additionalProperties:
-            type: string
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
     Ticker:
       type: object
       properties:

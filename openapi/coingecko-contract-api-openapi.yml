@@ -115,6 +115,21 @@ paths:
         '404':
           description: Coin or contract not found
 components:
+  parameters:
+    assetPlatformId:
+      name: id
+      in: path
+      required: true
+      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
+      schema:
+        type: string
+    contractAddress:
+      name: contract_address
+      in: path
+      required: true
+      description: The token contract address on the asset platform
+      schema:
+        type: string
   schemas:
     CoinData:
       type: object
@@ -181,36 +196,6 @@ components:
           type: string
           format: date-time
           description: Timestamp of last data update
-    MarketChart:
-      type: object
-      properties:
-        prices:
-          type: array
-          description: Price data points as [timestamp, price] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        market_caps:
-          type: array
-          description: Market cap data points as [timestamp, market_cap] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
-        total_volumes:
-          type: array
-          description: Volume data points as [timestamp, volume] arrays
-          items:
-            type: array
-            items:
-              type: number
-            minItems: 2
-            maxItems: 2
     MarketData:
       type: object
       properties:
@@ -263,21 +248,36 @@ components:
         max_supply:
           type: number
           description: Maximum supply
-  parameters:
-    contractAddress:
-      name: contract_address
-      in: path
-      required: true
-      description: The token contract address on the asset platform
-      schema:
-        type: string
-    assetPlatformId:
-      name: id
-      in: path
-      required: true
-      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
-      schema:
-        type: string
+    MarketChart:
+      type: object
+      properties:
+        prices:
+          type: array
+          description: Price data points as [timestamp, price] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        market_caps:
+          type: array
+          description: Market cap data points as [timestamp, market_cap] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
+        total_volumes:
+          type: array
+          description: Volume data points as [timestamp, volume] arrays
+          items:
+            type: array
+            items:
+              type: number
+            minItems: 2
+            maxItems: 2
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey

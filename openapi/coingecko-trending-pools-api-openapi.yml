@@ -107,14 +107,6 @@ paths:
         '404':
           description: Network not found
 components:
-  parameters:
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
-        type: string
   schemas:
     Pool:
       type: object
@@ -256,6 +248,14 @@ components:
         sellers:
           type: integer
           description: Number of unique sellers
+  parameters:
+    networkId:
+      name: network
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
+      schema:
+        type: string
   securitySchemes:
     proApiKeyHeader:
       type: apiKey
