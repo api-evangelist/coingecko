@@ -614,6 +614,12 @@ apis:
   - type: Landing Page
     url: https://www.coingecko.com/en/api/dex
 common:
+  - type: Plans
+    url: plans/coingecko-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/coingecko-rate-limits.yml
+  - type: FinOps
+    url: finops/coingecko-finops.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/coingecko/overview
   - type: AgenticAccess
