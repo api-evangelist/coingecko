@@ -124,6 +124,17 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: coingecko-bitvavo
+  label: Bitvavo
+  partner: bitvavo
+  partner_name: Bitvavo
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/bitvavo
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: coingecko-bybit
   label: Bybit
   partner: bybit
@@ -146,6 +157,17 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: coingecko-whitebit
+  label: WhiteBIT
+  partner: whitebit
+  partner_name: WhiteBIT
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/whitebit
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: coingecko-luno
   label: Luno
   partner: luno
@@ -164,6 +186,17 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/upbit
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-bingx
+  label: BingX
+  partner: bingx
+  partner_name: BingX
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/bingx
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -322,6 +355,28 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: coingecko-coincheck
+  label: Coincheck
+  partner: coincheck
+  partner_name: Coincheck
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/coincheck
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-bitflyer
+  label: bitFlyer
+  partner: bitflyer
+  partner_name: bitFlyer
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/bitflyer
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: coingecko-deribit-spot
   label: Deribit Spot
   partner: deribit
@@ -388,6 +443,17 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: coingecko-btc-markets
+  label: BTC Markets
+  partner: btcmarkets
+  partner_name: BTC Markets
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/btcmarkets
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: coingecko-figure-markets
   label: Figure Markets
   partner: figure-markets
@@ -428,6 +494,17 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/mudrex
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-woo-x
+  label: WOO X
+  partner: woox
+  partner_name: WOO X
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/wootrade
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -509,17 +586,6 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: coingecko-maverick-protocol-v2-ethereum
-  label: Maverick Protocol V2 (Ethereum)
-  partner: maverick-protocol
-  partner_name: Maverick Protocol V2 (Ethereum)
-  type: coverage
-  channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
-  source: edge
-  relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
 - slug: coingecko-sushiswap-v3-robinhood
   label: Sushiswap V3 (Robinhood)
   partner: sushiswap
@@ -538,6 +604,17 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/lighter-spot
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-maverick-protocol-v2-ethereum
+  label: Maverick Protocol V2 (Ethereum)
+  partner: maverick-protocol
+  partner_name: Maverick Protocol V2 (Ethereum)
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
   source: edge
   relationship: connector-coverage
   status: not-a-workflow

@@ -142,6 +142,19 @@ edges:
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
+- partner_name: Bitvavo
+  partner: bitvavo
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/bitvavo
+  matched_by: domain:bitvavo.com
+  coingecko_id: bitvavo
+  trust_score: 9
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
 - partner_name: Bybit
   partner: bybit
   partner_match: domain
@@ -168,6 +181,19 @@ edges:
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
+- partner_name: WhiteBIT
+  partner: whitebit
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/whitebit
+  matched_by: domain:whitebit.com
+  coingecko_id: whitebit
+  trust_score: 9
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
 - partner_name: Luno
   partner: luno
   partner_match: domain
@@ -191,6 +217,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/upbit
   matched_by: domain:upbit.com
   coingecko_id: upbit
+  trust_score: 8
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: BingX
+  partner: bingx
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/bingx
+  matched_by: domain:bingx.com
+  coingecko_id: bingx
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -376,6 +415,32 @@ edges:
   trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
+- partner_name: Coincheck
+  partner: coincheck
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/coincheck
+  matched_by: domain:coincheck.com
+  coingecko_id: coincheck
+  trust_score: 7
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: bitFlyer
+  partner: bitflyer
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/bitflyer
+  matched_by: domain:bitflyer.com
+  coingecko_id: bitflyer
+  trust_score: 6
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
 - partner_name: Deribit Spot
   partner: deribit
   partner_match: domain
@@ -454,6 +519,19 @@ edges:
   trust_score: 5
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
+- partner_name: BTC Markets
+  partner: btcmarkets
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/btcmarkets
+  matched_by: domain:btcmarkets.net
+  coingecko_id: btcmarkets
+  trust_score: 4
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
 - partner_name: Figure Markets
   partner: figure-markets
   partner_match: domain
@@ -503,6 +581,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/mudrex
   matched_by: domain:mudrex.com
   coingecko_id: mudrex
+  trust_score: 3
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: WOO X
+  partner: woox
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/wootrade
+  matched_by: domain:woox.io
+  coingecko_id: wootrade
   trust_score: 3
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -597,19 +688,6 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Maverick Protocol V2 (Ethereum)
-  partner: maverick-protocol
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
-  matched_by: domain:mav.xyz
-  coingecko_id: maverick-protocol-v2-ethereum
-  trust_score: 2
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
 - partner_name: Sushiswap V3 (Robinhood)
   partner: sushiswap
   partner_match: domain
@@ -633,6 +711,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/lighter-spot
   matched_by: domain:lighter.xyz
   coingecko_id: lighter-spot
+  trust_score: 2
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Maverick Protocol V2 (Ethereum)
+  partner: maverick-protocol
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
+  matched_by: domain:mav.xyz
+  coingecko_id: maverick-protocol-v2-ethereum
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
