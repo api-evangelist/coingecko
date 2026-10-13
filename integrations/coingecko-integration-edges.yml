@@ -1,17 +1,4 @@
 edges:
-- partner_name: Coinbase Exchange
-  partner: coinbase
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/gdax
-  matched_by: domain+verified:coinbase.com
-  coingecko_id: gdax
-  trust_score: 10
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
 - partner_name: Kraken
   partner: kraken
   partner_match: domain
@@ -22,6 +9,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/kraken
   matched_by: domain:kraken.com
   coingecko_id: kraken
+  trust_score: 10
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Coinbase Exchange
+  partner: coinbase
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/gdax
+  matched_by: domain+verified:coinbase.com
+  coingecko_id: gdax
   trust_score: 10
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -103,19 +103,6 @@ edges:
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Crypto.com Exchange
-  partner: crypto-com
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/crypto_com
-  matched_by: domain:crypto.com
-  coingecko_id: crypto_com
-  trust_score: 9
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
 - partner_name: Gemini
   partner: gemini-trust
   partner_match: domain
@@ -126,19 +113,6 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/gemini
   matched_by: domain:gemini.com
   coingecko_id: gemini
-  trust_score: 9
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
-- partner_name: LBank
-  partner: lbank
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/lbank
-  matched_by: domain:lbank.com
-  coingecko_id: lbank
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -155,16 +129,16 @@ edges:
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Bybit
-  partner: bybit
+- partner_name: Crypto.com Exchange
+  partner: crypto-com
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/bybit_spot
-  matched_by: domain+verified:bybit.com
-  coingecko_id: bybit_spot
+  evidence: https://api.coingecko.com/api/v3/exchanges/crypto_com
+  matched_by: domain:crypto.com
+  coingecko_id: crypto_com
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -181,43 +155,30 @@ edges:
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: WhiteBIT
-  partner: whitebit
+- partner_name: Bullish
+  partner: bullish
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/whitebit
-  matched_by: domain:whitebit.com
-  coingecko_id: whitebit
+  evidence: https://api.coingecko.com/api/v3/exchanges/bullish_com
+  matched_by: domain:bullish.com
+  coingecko_id: bullish_com
   trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Luno
-  partner: luno
+- partner_name: Bybit
+  partner: bybit
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/luno
-  matched_by: domain:luno.com
-  coingecko_id: luno
-  trust_score: 8
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
-- partner_name: Upbit
-  partner: upbit
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/upbit
-  matched_by: domain:upbit.com
-  coingecko_id: upbit
-  trust_score: 8
+  evidence: https://api.coingecko.com/api/v3/exchanges/bybit_spot
+  matched_by: domain+verified:bybit.com
+  coingecko_id: bybit_spot
+  trust_score: 9
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
 - partner_name: BingX
@@ -233,29 +194,42 @@ edges:
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Bullish
-  partner: bullish
+- partner_name: LBank
+  partner: lbank
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/bullish_com
-  matched_by: domain:bullish.com
-  coingecko_id: bullish_com
+  evidence: https://api.coingecko.com/api/v3/exchanges/lbank
+  matched_by: domain:lbank.com
+  coingecko_id: lbank
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Binance US
-  partner: binance.us
+- partner_name: Luno
+  partner: luno
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/binance_us
-  matched_by: domain:binance.us
-  coingecko_id: binance_us
+  evidence: https://api.coingecko.com/api/v3/exchanges/luno
+  matched_by: domain:luno.com
+  coingecko_id: luno
+  trust_score: 8
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: WhiteBIT
+  partner: whitebit
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/whitebit
+  matched_by: domain:whitebit.com
+  coingecko_id: whitebit
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -269,6 +243,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/bitso
   matched_by: domain:bitso.com
   coingecko_id: bitso
+  trust_score: 8
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Binance US
+  partner: binance.us
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/binance_us
+  matched_by: domain:binance.us
+  coingecko_id: binance_us
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -298,16 +285,29 @@ edges:
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Bithumb
-  partner: bithumb
+- partner_name: Upbit
+  partner: upbit
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/bithumb
-  matched_by: domain:bithumb.com
-  coingecko_id: bithumb
+  evidence: https://api.coingecko.com/api/v3/exchanges/upbit
+  matched_by: domain:upbit.com
+  coingecko_id: upbit
+  trust_score: 8
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: DigiFinex
+  partner: digifinex
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/digifinex
+  matched_by: domain:digifinex.com
+  coingecko_id: digifinex
   trust_score: 8
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -321,6 +321,45 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/valr
   matched_by: domain:valr.com
   coingecko_id: valr
+  trust_score: 8
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: BTSE
+  partner: btse
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/btse
+  matched_by: domain:btse.com
+  coingecko_id: btse
+  trust_score: 8
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Phemex
+  partner: phemex
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/phemex
+  matched_by: domain:phemex.com
+  coingecko_id: phemex
+  trust_score: 7
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Bitrue
+  partner: bitrue
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/bitrue
+  matched_by: domain:bitrue.com
+  coingecko_id: bitrue
   trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -337,29 +376,16 @@ edges:
   trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: HTX
-  partner: htx
+- partner_name: Bithumb
+  partner: bithumb
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/huobi
-  matched_by: domain+verified:huobi.com
-  coingecko_id: huobi
-  trust_score: 7
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
-- partner_name: 'Backpack Exchange '
-  partner: backpack
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/backpack_exchange
-  matched_by: domain:backpack.exchange
-  coingecko_id: backpack_exchange
+  evidence: https://api.coingecko.com/api/v3/exchanges/bithumb
+  matched_by: domain:bithumb.com
+  coingecko_id: bithumb
   trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -376,55 +402,16 @@ edges:
   trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Phemex
-  partner: phemex
+- partner_name: 'Backpack Exchange '
+  partner: backpack
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/phemex
-  matched_by: domain:phemex.com
-  coingecko_id: phemex
-  trust_score: 7
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
-- partner_name: BtcTurk | Kripto
-  partner: btcturk
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/btcturk
-  matched_by: domain:btcturk.com
-  coingecko_id: btcturk
-  trust_score: 7
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
-- partner_name: One Trading
-  partner: one-trading
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/bitpanda
-  matched_by: domain:onetrading.com
-  coingecko_id: bitpanda
-  trust_score: 7
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
-- partner_name: Coincheck
-  partner: coincheck
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/coincheck
-  matched_by: domain:coincheck.com
-  coingecko_id: coincheck
+  evidence: https://api.coingecko.com/api/v3/exchanges/backpack_exchange
+  matched_by: domain:backpack.exchange
+  coingecko_id: backpack_exchange
   trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -438,19 +425,97 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/bitflyer
   matched_by: domain:bitflyer.com
   coingecko_id: bitflyer
-  trust_score: 6
+  trust_score: 7
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Deribit Spot
-  partner: deribit
+- partner_name: XT.COM
+  partner: xt-com
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/deribit_spot
-  matched_by: domain:deribit.com
-  coingecko_id: deribit_spot
+  evidence: https://api.coingecko.com/api/v3/exchanges/xt
+  matched_by: domain:xt.com
+  coingecko_id: xt
+  trust_score: 7
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: HTX
+  partner: htx
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/huobi
+  matched_by: domain+verified:huobi.com
+  coingecko_id: huobi
+  trust_score: 7
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: CEX.IO
+  partner: cex-io
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/cex
+  matched_by: domain:cex.io
+  coingecko_id: cex
+  trust_score: 7
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Independent Reserve
+  partner: independent-reserve
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/independent_reserve
+  matched_by: domain:independentreserve.com
+  coingecko_id: independent_reserve
+  trust_score: 7
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: BloFin
+  partner: blofin
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/blofin_spot
+  matched_by: domain:blofin.com
+  coingecko_id: blofin_spot
+  trust_score: 6
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: One Trading
+  partner: one-trading
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/bitpanda
+  matched_by: domain:onetrading.com
+  coingecko_id: bitpanda
+  trust_score: 6
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: BtcTurk | Kripto
+  partner: btcturk
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/btcturk
+  matched_by: domain:btcturk.com
+  coingecko_id: btcturk
   trust_score: 6
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -467,16 +532,29 @@ edges:
   trust_score: 6
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Blockchain.com
-  partner: blockchain.com
+- partner_name: Coincheck
+  partner: coincheck
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/blockchain_com
-  matched_by: domain:blockchain.com
-  coingecko_id: blockchain_com
+  evidence: https://api.coingecko.com/api/v3/exchanges/coincheck
+  matched_by: domain:coincheck.com
+  coingecko_id: coincheck
+  trust_score: 5
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Deribit Spot
+  partner: deribit
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/deribit_spot
+  matched_by: domain:deribit.com
+  coingecko_id: deribit_spot
   trust_score: 5
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -493,6 +571,19 @@ edges:
   trust_score: 5
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
+- partner_name: Blockchain.com
+  partner: blockchain.com
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/blockchain_com
+  matched_by: domain:blockchain.com
+  coingecko_id: blockchain_com
+  trust_score: 5
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
 - partner_name: WazirX
   partner: wazirx
   partner_match: domain
@@ -506,16 +597,16 @@ edges:
   trust_score: 5
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Mercado Bitcoin
-  partner: mercadobitcoin
+- partner_name: Coinone
+  partner: coinone
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/mercado_bitcoin
-  matched_by: domain:mercadobitcoin.com.br
-  coingecko_id: mercado_bitcoin
+  evidence: https://api.coingecko.com/api/v3/exchanges/coinone
+  matched_by: domain:coinone.co.kr
+  coingecko_id: coinone
   trust_score: 5
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -532,16 +623,55 @@ edges:
   trust_score: 4
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Figure Markets
-  partner: figure-markets
+- partner_name: Mercado Bitcoin
+  partner: mercadobitcoin
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/figure_markets
-  matched_by: domain:figuremarkets.com
-  coingecko_id: figure_markets
+  evidence: https://api.coingecko.com/api/v3/exchanges/mercado_bitcoin
+  matched_by: domain:mercadobitcoin.com.br
+  coingecko_id: mercado_bitcoin
+  trust_score: 4
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Delta Exchange
+  partner: delta-exchange
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/delta_spot
+  matched_by: domain:delta.exchange
+  coingecko_id: delta_spot
+  trust_score: 4
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: LATOKEN
+  partner: latoken
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/latoken
+  matched_by: domain:latoken.com
+  coingecko_id: latoken
+  trust_score: 4
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: HitBTC
+  partner: hitbtc
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/hitbtc
+  matched_by: domain:hitbtc.com
+  coingecko_id: hitbtc
   trust_score: 4
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -571,6 +701,19 @@ edges:
   trust_score: 3
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
+- partner_name: Figure Markets
+  partner: figure-markets
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/figure_markets
+  matched_by: domain:figuremarkets.com
+  coingecko_id: figure_markets
+  trust_score: 3
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
 - partner_name: Mudrex
   partner: mudrex
   partner_match: domain
@@ -581,6 +724,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/mudrex
   matched_by: domain:mudrex.com
   coingecko_id: mudrex
+  trust_score: 3
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: ZebPay
+  partner: zebpay
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/zebpay
+  matched_by: domain:zebpay.com
+  coingecko_id: zebpay
   trust_score: 3
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -597,19 +753,6 @@ edges:
   trust_score: 3
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Uniswap V3 (Robinhood)
-  partner: uniswap
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/uniswap-v3-robinhood
-  matched_by: domain:uniswap.org
-  coingecko_id: uniswap-v3-robinhood
-  trust_score: 2
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-13'
 - partner_name: PancakeSwap V3 (BSC)
   partner: pancakeswap
   partner_match: domain
@@ -620,6 +763,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/pancakeswap-v3-bsc
   matched_by: domain:pancakeswap.finance
   coingecko_id: pancakeswap-v3-bsc
+  trust_score: 2
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: Uniswap V4 (Ethereum)
+  partner: uniswap
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/uniswap-v4-ethereum
+  matched_by: domain:uniswap.org
+  coingecko_id: uniswap-v4-ethereum
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -753,16 +909,16 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: Fraxswap (Fraxtal)
-  partner: frax
+- partner_name: MetaDAO (Futarchy AMM)
+  partner: metadao
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/fraxswap-fraxtal
-  matched_by: domain:frax.finance
-  coingecko_id: fraxswap-fraxtal
+  evidence: https://api.coingecko.com/api/v3/exchanges/metadao-futarchy-amm
+  matched_by: domain:metadao.fi
+  coingecko_id: metadao-futarchy-amm
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -779,16 +935,16 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: MetaDAO (Futarchy AMM)
-  partner: metadao
+- partner_name: Fraxswap (Fraxtal)
+  partner: frax
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/metadao-futarchy-amm
-  matched_by: domain:metadao.fi
-  coingecko_id: metadao-futarchy-amm
+  evidence: https://api.coingecko.com/api/v3/exchanges/fraxswap-fraxtal
+  matched_by: domain:frax.finance
+  coingecko_id: fraxswap-fraxtal
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
@@ -818,16 +974,29 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
-- partner_name: KyberSwap Classic (Avalanche)
+- partner_name: Paradex (Spot)
+  partner: paradex
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/paradex-spot
+  matched_by: domain:paradex.trade
+  coingecko_id: paradex-spot
+  trust_score: 2
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-13'
+- partner_name: KyberSwap Classic (Ethereum)
   partner: kyberswap
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/kyberswap_classic_avalanche
+  evidence: https://api.coingecko.com/api/v3/exchanges/kyberswap_classic_ethereum
   matched_by: domain:kyberswap.com
-  coingecko_id: kyberswap_classic_avalanche
+  coingecko_id: kyberswap_classic_ethereum
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-13'
