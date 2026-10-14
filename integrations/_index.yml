@@ -58,6 +58,17 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: coingecko-gate
+  label: Gate
+  partner: gate-io
+  partner_name: Gate
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/gate
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: coingecko-bitstamp-by-robinhood
   label: Bitstamp by Robinhood
   partner: bitstamp
@@ -76,28 +87,6 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/bitget
-  source: edge
-  relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
-- slug: coingecko-gate
-  label: Gate
-  partner: gate-io
-  partner_name: Gate
-  type: coverage
-  channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/gate
-  source: edge
-  relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
-- slug: coingecko-gemini
-  label: Gemini
-  partner: gemini-trust
-  partner_name: Gemini
-  type: coverage
-  channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/gemini
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -153,6 +142,17 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/bybit_spot
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-gemini
+  label: Gemini
+  partner: gemini-trust
+  partner_name: Gemini
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/gemini
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -641,17 +641,6 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: coingecko-pancakeswap-v3-bsc
-  label: PancakeSwap V3 (BSC)
-  partner: pancakeswap
-  partner_name: PancakeSwap V3 (BSC)
-  type: coverage
-  channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/pancakeswap-v3-bsc
-  source: edge
-  relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
 - slug: coingecko-uniswap-v4-ethereum
   label: Uniswap V4 (Ethereum)
   partner: uniswap
@@ -659,6 +648,17 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/uniswap-v4-ethereum
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-pancakeswap-v3-bsc
+  label: PancakeSwap V3 (BSC)
+  partner: pancakeswap
+  partner_name: PancakeSwap V3 (BSC)
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/pancakeswap-v3-bsc
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -740,17 +740,6 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: coingecko-maverick-protocol-v2-ethereum
-  label: Maverick Protocol V2 (Ethereum)
-  partner: maverick-protocol
-  partner_name: Maverick Protocol V2 (Ethereum)
-  type: coverage
-  channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
-  source: edge
-  relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
 - slug: coingecko-chainflip
   label: Chainflip
   partner: chainflip
@@ -758,6 +747,17 @@
   type: coverage
   channel: provider-built
   evidence: https://api.coingecko.com/api/v3/exchanges/chainflip
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-maverick-protocol-v2-ethereum
+  label: Maverick Protocol V2 (Ethereum)
+  partner: maverick-protocol
+  partner_name: Maverick Protocol V2 (Ethereum)
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -784,24 +784,13 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: coingecko-balancer-v2
-  label: Balancer V2
+- slug: coingecko-balancer-v3-arbitrum
+  label: Balancer V3 (Arbitrum)
   partner: balancer
-  partner_name: Balancer V2
+  partner_name: Balancer V3 (Arbitrum)
   type: coverage
   channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/balancer
-  source: edge
-  relationship: connector-coverage
-  status: not-a-workflow
-  arazzo: null
-- slug: coingecko-fraxswap-fraxtal
-  label: Fraxswap (Fraxtal)
-  partner: frax
-  partner_name: Fraxswap (Fraxtal)
-  type: coverage
-  channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/fraxswap-fraxtal
+  evidence: https://api.coingecko.com/api/v3/exchanges/balancer-v3-arbitrum
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -817,13 +806,13 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: coingecko-thruster-v3
-  label: Thruster V3
-  partner: thruster
-  partner_name: Thruster V3
+- slug: coingecko-fraxswap-fraxtal
+  label: Fraxswap (Fraxtal)
+  partner: frax
+  partner_name: Fraxswap (Fraxtal)
   type: coverage
   channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/thruster-v3
+  evidence: https://api.coingecko.com/api/v3/exchanges/fraxswap-fraxtal
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
@@ -839,13 +828,24 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
-- slug: coingecko-kyberswap-classic-ethereum
-  label: KyberSwap Classic (Ethereum)
-  partner: kyberswap
-  partner_name: KyberSwap Classic (Ethereum)
+- slug: coingecko-thruster-v3
+  label: Thruster V3
+  partner: thruster
+  partner_name: Thruster V3
   type: coverage
   channel: provider-built
-  evidence: https://api.coingecko.com/api/v3/exchanges/kyberswap_classic_ethereum
+  evidence: https://api.coingecko.com/api/v3/exchanges/thruster-v3
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
+  arazzo: null
+- slug: coingecko-kyberswap-classic-avalanche
+  label: KyberSwap Classic (Avalanche)
+  partner: kyberswap
+  partner_name: KyberSwap Classic (Avalanche)
+  type: coverage
+  channel: provider-built
+  evidence: https://api.coingecko.com/api/v3/exchanges/kyberswap_classic_avalanche
   source: edge
   relationship: connector-coverage
   status: not-a-workflow
