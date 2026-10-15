@@ -895,7 +895,7 @@
     app_slug: coingecko
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: coingecko-n8n
   label: n8n
@@ -920,7 +920,7 @@
     node_path: CoinGecko
     trigger: false
     builder: n8n (built-in node)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: coingecko-pipedream
   label: Pipedream
@@ -946,5 +946,5 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
