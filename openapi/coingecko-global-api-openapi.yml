@@ -119,6 +119,30 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
+    GlobalDeFiData:
+      type: object
+      properties:
+        defi_market_cap:
+          type: string
+          description: Total DeFi market cap in USD
+        eth_market_cap:
+          type: string
+          description: Ethereum market cap in USD
+        defi_to_eth_ratio:
+          type: string
+          description: DeFi market cap as ratio of ETH market cap
+        trading_volume_24h:
+          type: string
+          description: 24-hour DeFi trading volume in USD
+        defi_dominance:
+          type: string
+          description: DeFi dominance percentage
+        top_coin_name:
+          type: string
+          description: Top DeFi coin by market cap
+        top_coin_defi_dominance:
+          type: number
+          description: Top DeFi coin market cap dominance
     GlobalData:
       type: object
       properties:
@@ -158,30 +182,6 @@ components:
         updated_at:
           type: integer
           description: Last update timestamp (UNIX)
-    GlobalDeFiData:
-      type: object
-      properties:
-        defi_market_cap:
-          type: string
-          description: Total DeFi market cap in USD
-        eth_market_cap:
-          type: string
-          description: Ethereum market cap in USD
-        defi_to_eth_ratio:
-          type: string
-          description: DeFi market cap as ratio of ETH market cap
-        trading_volume_24h:
-          type: string
-          description: 24-hour DeFi trading volume in USD
-        defi_dominance:
-          type: string
-          description: DeFi dominance percentage
-        top_coin_name:
-          type: string
-          description: Top DeFi coin by market cap
-        top_coin_defi_dominance:
-          type: number
-          description: Top DeFi coin market cap dominance
   securitySchemes:
     demoApiKeyHeader:
       type: apiKey

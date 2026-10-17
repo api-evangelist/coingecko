@@ -261,84 +261,6 @@ paths:
       description: CoinGecko Pro API Server
 components:
   schemas:
-    ExchangeData:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Exchange display name
-        year_established:
-          type: integer
-          description: Year the exchange was established
-        country:
-          type: string
-          description: Country where the exchange is based
-        description:
-          type: string
-          description: Exchange description
-        url:
-          type: string
-          format: uri
-          description: Exchange website URL
-        image:
-          type: string
-          format: uri
-          description: Exchange logo URL
-        facebook_url:
-          type: string
-          format: uri
-          description: Exchange Facebook URL
-        reddit_url:
-          type: string
-          format: uri
-          description: Exchange Reddit URL
-        telegram_url:
-          type: string
-          format: uri
-          description: Exchange Telegram URL
-        slack_url:
-          type: string
-          format: uri
-          description: Exchange Slack URL
-        other_url_1:
-          type: string
-          format: uri
-          description: Other URL 1
-        other_url_2:
-          type: string
-          format: uri
-          description: Other URL 2
-        twitter_handle:
-          type: string
-          description: Exchange Twitter handle
-        has_trading_incentive:
-          type: boolean
-          description: Whether the exchange has trading incentives
-        centralized:
-          type: boolean
-          description: Whether the exchange is centralized
-        public_notice:
-          type: string
-          description: Public notices from the exchange
-        alert_notice:
-          type: string
-          description: Alert notices from the exchange
-        trust_score:
-          type: integer
-          description: Trust score (1-10)
-        trust_score_rank:
-          type: integer
-          description: Trust score ranking position
-        trade_volume_24h_btc:
-          type: number
-          description: 24-hour trading volume in BTC
-        trade_volume_24h_btc_normalized:
-          type: number
-          description: Normalized 24-hour trading volume in BTC
-        tickers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ticker'
     Exchange:
       type: object
       properties:
@@ -451,6 +373,84 @@ components:
         target_coin_id:
           type: string
           description: CoinGecko coin ID of target currency
+    ExchangeData:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Exchange display name
+        year_established:
+          type: integer
+          description: Year the exchange was established
+        country:
+          type: string
+          description: Country where the exchange is based
+        description:
+          type: string
+          description: Exchange description
+        url:
+          type: string
+          format: uri
+          description: Exchange website URL
+        image:
+          type: string
+          format: uri
+          description: Exchange logo URL
+        facebook_url:
+          type: string
+          format: uri
+          description: Exchange Facebook URL
+        reddit_url:
+          type: string
+          format: uri
+          description: Exchange Reddit URL
+        telegram_url:
+          type: string
+          format: uri
+          description: Exchange Telegram URL
+        slack_url:
+          type: string
+          format: uri
+          description: Exchange Slack URL
+        other_url_1:
+          type: string
+          format: uri
+          description: Other URL 1
+        other_url_2:
+          type: string
+          format: uri
+          description: Other URL 2
+        twitter_handle:
+          type: string
+          description: Exchange Twitter handle
+        has_trading_incentive:
+          type: boolean
+          description: Whether the exchange has trading incentives
+        centralized:
+          type: boolean
+          description: Whether the exchange is centralized
+        public_notice:
+          type: string
+          description: Public notices from the exchange
+        alert_notice:
+          type: string
+          description: Alert notices from the exchange
+        trust_score:
+          type: integer
+          description: Trust score (1-10)
+        trust_score_rank:
+          type: integer
+          description: Trust score ranking position
+        trade_volume_24h_btc:
+          type: number
+          description: 24-hour trading volume in BTC
+        trade_volume_24h_btc_normalized:
+          type: number
+          description: Normalized 24-hour trading volume in BTC
+        tickers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticker'
   parameters:
     exchangeId:
       name: id
