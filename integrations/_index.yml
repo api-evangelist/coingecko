@@ -976,7 +976,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: coingecko-meltano
   label: Meltano
@@ -1008,7 +1008,7 @@
     - bronze
     - silver
     builder: 'community (Meltano Hub variant maintainers: airbyte, sicarul)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
 - slug: coingecko-google-workspace-own
   label: Google Workspace (own)
