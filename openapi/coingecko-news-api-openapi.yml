@@ -1,0 +1,175 @@
+openapi: 3.2.0
+info:
+  title: CoinGecko Pro News API
+  version: 3.0.0
+servers:
+- url: https://pro-api.coingecko.com/api/v3
+security:
+- headerAuth: []
+- queryAuth: []
+tags:
+- name: News
+paths:
+  /news:
+    get:
+      summary: Crypto News
+      description: To query the latest crypto news and guides on CoinGecko
+      operationId: news
+      x-mint:
+        href: /reference/news
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: "Page through results. \nDefault value: 1 \nValid values: 1...20"
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: "Total results per page. \nDefault value: 10 \nValid values: 1...20"
+        schema:
+          type: integer
+      - name: coin_id
+        in: query
+        required: false
+        description: "Filter news by coin ID. \n*refers to [`/coins/list`](/reference/coins-list)."
+        schema:
+          type: string
+      - name: language
+        in: query
+        required: false
+        description: "Filter news by language. \nDefault: `en`"
+        schema:
+          type: string
+          enum:
+          - en
+          - ru
+          - de
+          - pl
+          - es
+          - vi
+          - fr
+          - pt
+          - ar
+          - bg
+          - cs
+          - da
+          - el
+          - fi
+          - he
+          - hi
+          - hr
+          - hu
+          - id
+          - it
+          - ja
+          - ko
+          - lt
+          - nl
+          - 'no'
+          - ro
+          - sk
+          - sl
+          - sv
+          - th
+          - tr
+          - uk
+          - zh
+          - zh-tw
+      - name: type
+        in: query
+        required: false
+        description: "Filter news by type. \nDefault: `all` \nNote: `guides` filter is only applicable if `coin_id` is specified and valid."
+        schema:
+          type: string
+          enum:
+          - all
+          - news
+          - guides
+      responses:
+        '200':
+          description: List of latest crypto news
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+              example:
+              - title: European Union debates limits on Big Tech access to cloud tenders
+                url: https://cryptobriefing.com/eu-big-tech-cloud-tender-limits/
+                image: https://assets.coingecko.com/articles/images/107301317/large/open-uri20260527-7-l3llje.?1779877857
+                author: Editorial Team
+                posted_at: '2026-05-27T10:27:57Z'
+                type: news
+                source_name: Crypto Briefing
+                related_coin_ids:
+                - could
+                - union-2
+              - title: Implied Volatility and IV Crush in Bitcoin Options Explained
+                url: https://www.coingecko.com/learn/implied-volatility-iv-crush-bitcoin-options
+                image: https://coin-images.coingecko.com/posts/images/102135679/large/Implied_Volatility_Options.png?1779696471
+                author: Hans Be
+                posted_at: '2026-05-25T13:08:37Z'
+                type: guide
+                source_name: CoinGecko
+                related_coin_ids:
+                - bitcoin
+                - ethereum
+      tags:
+      - News
+components:
+  schemas:
+    News:
+      type: array
+      items:
+        type: object
+        required:
+        - title
+        - url
+        - image
+        - author
+        - posted_at
+        - type
+        - source_name
+        - related_coin_ids
+        properties:
+          title:
+            type: string
+            description: News article title
+          url:
+            type: string
+            description: News article URL
+          image:
+            type: string
+            description: News article image URL
+          author:
+            type: string
+            description: News article author
+          posted_at:
+            type: string
+            description: News article published timestamp in ISO 8601 format
+          type:
+            type: string
+            description: News article type
+            enum:
+            - news
+            - guide
+          source_name:
+            type: string
+            description: News article source name
+          related_coin_ids:
+            type: array
+            description: Related coin IDs
+            items:
+              type: string
+  securitySchemes:
+    headerAuth:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

@@ -1,0 +1,1199 @@
+openapi: 3.2.0
+info:
+  title: CoinGecko Pro Rwas API
+  version: 3.0.0
+servers:
+- url: https://pro-api.coingecko.com/api/v3
+security:
+- headerAuth: []
+- queryAuth: []
+tags:
+- name: Rwas
+paths:
+  /rwas/list:
+    get:
+      summary: RWA List
+      description: To query all the supported tokenized real world assets (RWAs) on CoinGecko with RWA ID, name and symbol
+      operationId: rwas-list
+      x-mint:
+        href: /reference/rwas-list
+      parameters:
+      - name: asset_type
+        in: query
+        required: false
+        description: Filter by RWA asset type.
+        schema:
+          type: string
+          enum:
+          - stock
+          - commodity
+          - etf
+      responses:
+        '200':
+          description: List of RWAs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasList'
+              example:
+              - id: gold
+                symbol: XAU
+                name: Gold
+                asset_type: commodity
+              - id: ibm
+                symbol: IBM
+                name: IBM
+                asset_type: stock
+      tags:
+      - Rwas
+  /rwas/markets:
+    get:
+      summary: RWA List with Market Data
+      description: To query all the supported RWAs with price, market cap, volume and market related data
+      operationId: rwas-markets
+      x-mint:
+        href: /reference/rwas-markets
+      parameters:
+      - name: asset_type
+        in: query
+        required: false
+        description: Filter by RWA asset type.
+        schema:
+          type: string
+          enum:
+          - stock
+          - commodity
+          - etf
+      - name: ids
+        in: query
+        required: false
+        description: "RWAs' IDs, comma-separated if querying more than 1 RWA. \n*refers to [`/rwas/list`](/reference/rwas-list)"
+        schema:
+          type: string
+          default: gold
+      - name: names
+        in: query
+        required: false
+        description: RWAs' names, comma-separated if querying more than 1 RWA.
+        schema:
+          type: string
+          default: Gold
+      - name: symbols
+        in: query
+        required: false
+        description: RWAs' symbols, comma-separated if querying more than 1 RWA.
+        schema:
+          type: string
+          default: xau
+      - name: issuer
+        in: query
+        required: false
+        description: "Filter based on RWAs' issuer. \n*refers to [`/rwas/issuers/list`](/reference/rwas-issuers-list)"
+        schema:
+          type: string
+      - name: order
+        in: query
+        required: false
+        description: "Sort result by field. \nDefault: market_cap_desc"
+        schema:
+          type: string
+          enum:
+          - market_cap_asc
+          - market_cap_desc
+          - volume_asc
+          - volume_desc
+          - id_asc
+          - id_desc
+      - name: per_page
+        in: query
+        required: false
+        description: "Total results per page. \nDefault: 100 \nValid values: 1...250"
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: "Page through results. \nDefault: 1"
+        schema:
+          type: integer
+      - name: sparkline
+        in: query
+        required: false
+        description: "Include sparkline 7-day data. \nDefault: false"
+        schema:
+          type: boolean
+      - name: price_change_percentage
+        in: query
+        required: false
+        description: "Include price change percentage timeframe, comma-separated if querying more than 1 timeframe. \nValid values: `1h`, `24h`, `7d`, `14d`, `30d`, `200d`, `1y`"
+        schema:
+          type: string
+      - name: precision
+        in: query
+        required: false
+        description: Decimal places for currency price value
+        schema:
+          type: string
+          enum:
+          - full
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '17'
+          - '18'
+      responses:
+        '200':
+          description: List of RWAs with market data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasMarkets'
+              example:
+              - id: gold
+                symbol: xau
+                name: Gold
+                asset_type: commodity
+                image: https://coin-images.coingecko.com/coins/images/10481/large/logo.png?1774627372
+                tokenized_market_data:
+                  current_price: 4572.12
+                  market_cap: 5472900361
+                  total_volume: 351992224
+                  high_24h: 4606.42
+                  low_24h: 4562.05
+                  price_change_24h: -29.774769179191026
+                  price_change_percentage_24h: -0.64701
+                  market_cap_change_24h: -26139969.102690697
+                  market_cap_change_percentage_24h: -0.47536
+                  last_updated: '2026-08-28T05:30:10Z'
+                  sparkline_in_7d:
+                    price:
+                    - 4521.62
+                    - 4532.59
+                    - 4542.46
+                  price_change_percentage_1h_in_currency: -0.01708
+                  price_change_percentage_24h_in_currency: -0.64701
+                  price_change_percentage_7d_in_currency: 1.13883
+                  price_change_percentage_14d_in_currency: 5.94825
+                  price_change_percentage_30d_in_currency: 13.84206
+                  price_change_percentage_200d_in_currency: -9.11489
+                  price_change_percentage_1y_in_currency: 34.69983
+      tags:
+      - Rwas
+  /rwas/{id}:
+    get:
+      summary: RWA Data by ID
+      description: To query all the metadata, market data and tokens of a RWA based on a particular RWA ID
+      operationId: rwas-id
+      x-mint:
+        href: /reference/rwas-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "RWA ID. \n*refers to [`/rwas/list`](/reference/rwas-list)"
+        schema:
+          type: string
+          default: gold
+      - name: sparkline
+        in: query
+        required: false
+        description: "Include sparkline 7-day data. \nDefault: false"
+        schema:
+          type: boolean
+      - name: tokens
+        in: query
+        required: false
+        description: "Include tokens data. \nDefault: false"
+        schema:
+          type: boolean
+      - name: tokenized_market_data
+        in: query
+        required: false
+        description: "Include tokenized market data. \nDefault: false"
+        schema:
+          type: boolean
+      - name: perps_market_data
+        in: query
+        required: false
+        description: "Include perpetuals market data. \nDefault: false"
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: RWA data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasID'
+              example:
+                id: gold
+                symbol: xau
+                name: Gold
+                asset_type: commodity
+                image:
+                  thumb: https://coin-images.coingecko.com/coins/images/10481/thumb/logo.png?1774627372
+                  small: https://coin-images.coingecko.com/coins/images/10481/small/logo.png?1774627372
+                  large: https://coin-images.coingecko.com/coins/images/10481/large/logo.png?1774627372
+                web_slug: gold
+                tokens:
+                - id: tether-gold
+                  symbol: xaut
+                  name: Tether Gold
+                  platforms:
+                    ethereum: '0x68749665ff8d2d112fa859aa293f07a622782f38'
+                  issuer_details:
+                    id: tether-ecosystem
+                    name: Tether
+                  perps_market_data:
+                    volume_24h: 1954758829.5191464
+                    open_interest_24h: 1336589057.9573011
+                - id: pax-gold
+                  symbol: paxg
+                  name: PAX Gold
+                  platforms:
+                    ethereum: '0x45804880de22913dafe09f4980848ece6ecbaf78'
+                  issuer_details:
+                    id: paxos-ecosystem
+                    name: Paxos Global
+                  perps_market_data:
+                    volume_24h: 444834538.1260172
+                    open_interest_24h: 563850051.3234763
+                tokenized_market_data:
+                  current_price: 4325.388412841455
+                  market_cap: 5226930984.54683
+                  total_volume: 370143676.04940695
+                  high_24h: 4337.636910965984
+                  low_24h: 4265.225091868207
+                  price_change_24h: 31.508789145972514
+                  price_change_percentage_24h: 0.73381
+                  market_cap_change_24h: 42665678.302101135
+                  market_cap_change_percentage_24h: 0.82298
+                  last_updated: '2026-09-16T06:49:00Z'
+                  sparkline_in_7d:
+                    price:
+                    - 4398.794934375798
+                    - 4399.814826523387
+                    - 4407.595134436859
+                  price_change_percentage_1h_in_currency: -0.07102
+                  price_change_percentage_24h_in_currency: 0.73381
+                  price_change_percentage_7d_in_currency: -1.65248
+                  price_change_percentage_14d_in_currency: 0.03663
+                  price_change_percentage_30d_in_currency: -1.19872
+                  price_change_percentage_200d_in_currency: -17.96545
+                  price_change_percentage_1y_in_currency: 11.51039
+                perps_market_data:
+                  volume_24h: 7416589039.8701
+                  open_interest_24h: 4536346045.728076
+                last_updated: '2026-09-16T06:49:00Z'
+      tags:
+      - Rwas
+  /rwas/{id}/tickers:
+    get:
+      summary: RWA Tickers by ID
+      description: To query the RWA tokens tickers on both centralized exchange (CEX) and decentralized exchange (DEX) based on a particular RWA ID
+      operationId: rwas-id-tickers
+      x-mint:
+        href: /reference/rwas-id-tickers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "RWA ID. \n*refers to [`/rwas/list`](/reference/rwas-list)"
+        schema:
+          type: string
+          default: gold
+      - name: issuer_ids
+        in: query
+        required: false
+        description: "Issuer ID. \n*refers to [`/rwas/issuers/list`](/reference/rwas-issuers-list)"
+        schema:
+          type: string
+      - name: exchange_ids
+        in: query
+        required: false
+        description: "Exchange ID. \n*refers to [`/exchanges/list`](/reference/exchanges-list)"
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: Page through results
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: "Sort the order of responses. \nDefault: last_traded_at_desc"
+        schema:
+          type: string
+          enum:
+          - last_traded_at_desc
+          - last_traded_at_asc
+          - volume_desc
+          - volume_asc
+      - name: depth
+        in: query
+        required: false
+        description: "Include 2% orderbook depth, i.e. `cost_to_move_up_usd` and `cost_to_move_down_usd`. \nDefault: false"
+        schema:
+          type: boolean
+      - name: dex_pair_format
+        in: query
+        required: false
+        description: "Set to `symbol` to display DEX pair base and target as symbols. \nDefault: `contract_address`"
+        schema:
+          type: string
+          enum:
+          - contract_address
+          - symbol
+      responses:
+        '200':
+          description: List of RWA tickers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasIdTickers'
+              example:
+                name: Gold
+                tickers:
+                - base: XAUT
+                  target: USD
+                  market:
+                    name: Crypto.com Exchange
+                    identifier: crypto_com
+                    has_trading_incentive: false
+                    logo: https://coin-images.coingecko.com/markets/images/589/small/h2oMjPp6_400x400.jpg?1706864542
+                  last: 4567.32
+                  volume: 153.448
+                  cost_to_move_up_usd: 542225.427472
+                  cost_to_move_down_usd: 521806.08197900007
+                  converted_last:
+                    btc: 0.05734964
+                    eth: 1.833638
+                    usd: 4567.14
+                  converted_volume:
+                    btc: 8.800188
+                    eth: 281.368
+                    usd: 700818
+                  bid_ask_spread_percentage: 0.013356
+                  timestamp: '2026-08-28T05:38:53+00:00'
+                  last_traded_at: '2026-08-28T05:38:53+00:00'
+                  last_fetch_at: '2026-08-28T05:38:40+00:00'
+                  is_anomaly: false
+                  is_stale: false
+                  trade_url: https://crypto.com/exchange/trade/spot/XAUT_USD
+                  token_info_url: null
+                  coin_id: tether-gold
+                  coin_mcap_usd: 2798942188.930659
+                - base: 0X68749665FF8D2D112FA859AA293F07A622782F38
+                  target: 0XDAC17F958D2EE523A2206206994597C13D831EC7
+                  market:
+                    name: Uniswap V3 (Ethereum)
+                    identifier: uniswap_v3
+                    has_trading_incentive: false
+                    logo: https://coin-images.coingecko.com/markets/images/665/small/uniswap-v3.png?1706864608
+                  last: 4567.7045219483
+                  volume: 255.232446
+                  cost_to_move_up_usd: 49972.871057876204
+                  cost_to_move_down_usd: 49822.71951147504
+                  converted_last:
+                    btc: 0.05726298
+                    eth: 1.83394
+                    usd: 4567.89
+                  converted_volume:
+                    btc: 14.615369
+                    eth: 468.081
+                    usd: 1165873
+                  bid_ask_spread_percentage: 0.602829
+                  timestamp: '2026-08-28T05:38:51+00:00'
+                  last_traded_at: '2026-08-28T05:38:51+00:00'
+                  last_fetch_at: '2026-08-28T05:38:40+00:00'
+                  is_anomaly: false
+                  is_stale: false
+                  trade_url: null
+                  token_info_url: null
+                  coin_id: tether-gold
+                  target_coin_id: tether
+                  coin_mcap_usd: 2798942188.930659
+      tags:
+      - Rwas
+  /rwas/{id}/market_chart:
+    get:
+      summary: RWA Historical Chart Data by ID
+      description: To get the historical chart data of a RWA including time in UNIX, price, market cap and 24hrs volume based on a particular RWA ID
+      operationId: rwas-id-market-chart
+      x-mint:
+        href: /reference/rwas-id-market-chart
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "RWA ID. \n*refers to [`/rwas/list`](/reference/rwas-list)"
+        schema:
+          type: string
+          default: gold
+      - name: days
+        in: query
+        required: false
+        description: "Data up to number of days ago. \nYou may use any integer or `max` for number of days. \nDefault: 1"
+        schema:
+          type: string
+          default: '1'
+      - name: interval
+        in: query
+        required: false
+        description: Data interval, leave empty for auto granularity.
+        schema:
+          type: string
+          enum:
+          - 5m
+          - hourly
+          - daily
+      - name: precision
+        in: query
+        required: false
+        description: Decimal place for currency price value.
+        schema:
+          type: string
+          enum:
+          - full
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '17'
+          - '18'
+      responses:
+        '200':
+          description: RWA historical chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasIdMarketChart'
+              example:
+                tokenized_prices:
+                - - 1787806800000
+                  - 4598.15430842741
+                - - 1787810400000
+                  - 4596.851313611241
+                tokenized_market_caps:
+                - - 1787806800000
+                  - 5494949679.305308
+                - - 1787810400000
+                  - 5493537218.333296
+                tokenized_total_volumes:
+                - - 1787806800000
+                  - 391917834.00407696
+                - - 1787810400000
+                  - 393713332.429804
+      tags:
+      - Rwas
+  /rwas/issuers/list:
+    get:
+      summary: RWA Issuers List
+      description: To query all the supported RWA issuers on CoinGecko
+      operationId: rwas-issuers-list
+      x-mint:
+        href: /reference/rwas-issuers-list
+      responses:
+        '200':
+          description: List of RWA issuers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasIssuersList'
+              example:
+              - id: coinbase-ecosystem
+                name: Coinbase
+              - id: xstocks-ecosystem
+                name: xStocks
+      tags:
+      - Rwas
+  /rwas/issuers/{id}:
+    get:
+      summary: RWA Issuer Data by ID
+      description: To query the market data (market cap, volume, etc.) and tokens of an issuer based on a particular issuer ID
+      operationId: rwas-issuers-id
+      x-mint:
+        href: /reference/rwas-issuers-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "Issuer ID. \n*refers to [`/rwas/issuers/list`](/reference/rwas-issuers-list)"
+        schema:
+          type: string
+          default: xstocks-ecosystem
+      responses:
+        '200':
+          description: RWA issuer data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RwasIssuersID'
+              example:
+                id: xstocks-ecosystem
+                name: xStocks
+                market_cap: 752085126.6637836
+                market_cap_change_24h: -79476493.49518394
+                volume_24h: 240421573.38793087
+                image:
+                  thumb: https://coin-images.coingecko.com/categories/images/20712/thumb/xstock_400x400.jpg?1777808932
+                  small: https://coin-images.coingecko.com/categories/images/20712/small/xstock_400x400.jpg?1777808932
+                  large: https://coin-images.coingecko.com/categories/images/20712/large/xstock_400x400.jpg?1777808932
+                tokens:
+                - id: alphabet-xstock
+                  symbol: googlx
+                  name: Alphabet xStock
+                  platforms:
+                    arbitrum-one: '0xe92f673ca36c5e2efd2de7628f815f84807e803f'
+                    ethereum: '0xe92f673ca36c5e2efd2de7628f815f84807e803f'
+                    binance-smart-chain: '0xe92f673ca36c5e2efd2de7628f815f84807e803f'
+                    solana: XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN
+                    the-open-network: EQALwJzXnxFjckNsurCi9O2kVg_0b1KdtjOSfvOedlY37iZc
+                    mantle: '0xe92f673ca36c5e2efd2de7628f815f84807e803f'
+                - id: amazon-xstock
+                  symbol: amznx
+                  name: Amazon xStock
+                  platforms:
+                    arbitrum-one: '0x3557ba345b01efa20a1bddc61f573bfd87195081'
+                    binance-smart-chain: '0x3557ba345b01efa20a1bddc61f573bfd87195081'
+                    mantle: '0x3557ba345b01efa20a1bddc61f573bfd87195081'
+                    ethereum: '0x3557ba345b01efa20a1bddc61f573bfd87195081'
+                    solana: Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg
+                    the-open-network: EQCtD2-7qxHhQoNhxri2JSzH-dlmWqKYCDtlEZqRi3-56gd9
+                updated_at: '2026-09-10T03:00:00Z'
+      tags:
+      - Rwas
+components:
+  schemas:
+    RwasIdMarketChart:
+      type: object
+      required:
+      - tokenized_prices
+      - tokenized_market_caps
+      - tokenized_total_volumes
+      properties:
+        tokenized_prices:
+          type: array
+          description: Tokenized price data points as [timestamp, price] pairs
+          items:
+            type: array
+            items:
+              type: number
+        tokenized_market_caps:
+          type: array
+          description: Tokenized market cap data points as [timestamp, market_cap] pairs
+          items:
+            type: array
+            items:
+              type: number
+        tokenized_total_volumes:
+          type: array
+          description: Tokenized total volume data points as [timestamp, volume] pairs
+          items:
+            type: array
+            items:
+              type: number
+    RwasMarkets:
+      type: array
+      items:
+        type: object
+        required:
+        - id
+        - symbol
+        - name
+        - asset_type
+        - image
+        - tokenized_market_data
+        properties:
+          id:
+            type: string
+            description: RWA ID
+          symbol:
+            type: string
+            description: RWA symbol
+          name:
+            type: string
+            description: RWA name
+          asset_type:
+            type: string
+            enum:
+            - stock
+            - commodity
+            - etf
+            description: RWA asset type
+          image:
+            type: string
+            description: Large image URL of the token with the largest market cap
+          tokenized_market_data:
+            type: object
+            description: Aggregated tokenized market data
+            properties:
+              current_price:
+                type:
+                - number
+                - 'null'
+                description: Current price in target currency
+              market_cap:
+                type:
+                - number
+                - 'null'
+                description: Market cap in target currency
+              total_volume:
+                type:
+                - number
+                - 'null'
+                description: Total trading volume in target currency
+              high_24h:
+                type:
+                - number
+                - 'null'
+                description: 24-hour price high in target currency
+              low_24h:
+                type:
+                - number
+                - 'null'
+                description: 24-hour price low in target currency
+              price_change_24h:
+                type:
+                - number
+                - 'null'
+                description: 24-hour price change in target currency
+              price_change_percentage_24h:
+                type:
+                - number
+                - 'null'
+                description: 24-hour price change percentage
+              market_cap_change_24h:
+                type:
+                - number
+                - 'null'
+                description: 24-hour market cap change in target currency
+              market_cap_change_percentage_24h:
+                type:
+                - number
+                - 'null'
+                description: 24-hour market cap change percentage
+              last_updated:
+                type: string
+                format: date-time
+                description: Last updated timestamp
+              sparkline_in_7d:
+                type: object
+                description: Sparkline price data for the last 7 days
+                properties:
+                  price:
+                    type: array
+                    description: Array of price values
+                    items:
+                      type: number
+              price_change_percentage_1h_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 1-hour price change percentage in target currency
+              price_change_percentage_24h_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 24-hour price change percentage in target currency
+              price_change_percentage_7d_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 7-day price change percentage in target currency
+              price_change_percentage_14d_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 14-day price change percentage in target currency
+              price_change_percentage_30d_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 30-day price change percentage in target currency
+              price_change_percentage_200d_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 200-day price change percentage in target currency
+              price_change_percentage_1y_in_currency:
+                type:
+                - number
+                - 'null'
+                description: 1-year price change percentage in target currency
+    RwasIdTickers:
+      type: object
+      required:
+      - name
+      - tickers
+      properties:
+        name:
+          type: string
+          description: RWA name
+        tickers:
+          type: array
+          description: List of tickers
+          items:
+            type: object
+            required:
+            - base
+            - target
+            - market
+            - last
+            - volume
+            - converted_last
+            - converted_volume
+            - bid_ask_spread_percentage
+            - timestamp
+            - last_traded_at
+            - last_fetch_at
+            - is_anomaly
+            - is_stale
+            - trade_url
+            - token_info_url
+            - coin_id
+            - coin_mcap_usd
+            properties:
+              base:
+                type: string
+                description: Ticker base currency
+              target:
+                type: string
+                description: Ticker target currency
+              market:
+                type: object
+                description: Exchange information
+                properties:
+                  name:
+                    type: string
+                    description: Exchange name
+                  identifier:
+                    type: string
+                    description: Exchange identifier
+                  has_trading_incentive:
+                    type: boolean
+                    description: Exchange trading incentive
+                  logo:
+                    type: string
+                    description: Exchange logo URL
+              last:
+                type: number
+                description: Last price
+              volume:
+                type: number
+                description: Trading volume
+              cost_to_move_up_usd:
+                type: number
+                description: Cost to move price up by 2% in USD
+              cost_to_move_down_usd:
+                type: number
+                description: Cost to move price down by 2% in USD
+              converted_last:
+                type: object
+                description: Converted last price
+                properties:
+                  btc:
+                    type: number
+                  eth:
+                    type: number
+                  usd:
+                    type: number
+              converted_volume:
+                type: object
+                description: Converted trading volume
+                properties:
+                  btc:
+                    type: number
+                  eth:
+                    type: number
+                  usd:
+                    type: number
+              bid_ask_spread_percentage:
+                type: number
+                description: Bid-ask spread percentage
+              timestamp:
+                type: string
+                description: Ticker timestamp
+              last_traded_at:
+                type: string
+                description: Last traded timestamp
+              last_fetch_at:
+                type: string
+                description: Last fetch timestamp
+              is_anomaly:
+                type: boolean
+                description: Whether ticker is anomalous
+              is_stale:
+                type: boolean
+                description: Whether ticker is stale
+              trade_url:
+                type:
+                - string
+                - 'null'
+                description: Trade URL
+              token_info_url:
+                type:
+                - string
+                - 'null'
+                description: Token info URL
+              coin_id:
+                type: string
+                description: Base currency coin ID
+              target_coin_id:
+                type:
+                - string
+                - 'null'
+                description: Target currency coin ID
+              coin_mcap_usd:
+                type: number
+                description: Coin market cap in USD
+    RwasID:
+      type: object
+      required:
+      - id
+      - symbol
+      - name
+      - asset_type
+      - image
+      - web_slug
+      - last_updated
+      properties:
+        id:
+          type: string
+          description: RWA ID
+        symbol:
+          type: string
+          description: RWA symbol
+        name:
+          type: string
+          description: RWA name
+        asset_type:
+          type: string
+          enum:
+          - stock
+          - commodity
+          - etf
+          description: RWA asset type
+        image:
+          type: object
+          description: Image URLs of the token with the largest market cap
+          properties:
+            thumb:
+              type: string
+              description: Thumbnail image URL
+            small:
+              type: string
+              description: Small image URL
+            large:
+              type: string
+              description: Large image URL
+        web_slug:
+          type: string
+          description: RWA web slug
+        tokens:
+          type: array
+          description: Tokens tracking this RWA
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Token ID
+              symbol:
+                type: string
+                description: Token symbol
+              name:
+                type: string
+                description: Token name
+              platforms:
+                type: object
+                description: Token asset platform and contract address
+                additionalProperties:
+                  type: string
+              issuer_details:
+                type: object
+                description: Token issuer details
+                properties:
+                  id:
+                    type: string
+                    description: Issuer ID
+                  name:
+                    type: string
+                    description: Issuer name
+              perps_market_data:
+                type: object
+                description: Perpetuals market data of the token
+                properties:
+                  volume_24h:
+                    type:
+                    - number
+                    - 'null'
+                    description: 24-hour perpetuals trading volume in target currency
+                  open_interest_24h:
+                    type:
+                    - number
+                    - 'null'
+                    description: 24-hour perpetuals open interest in target currency
+        tokenized_market_data:
+          type: object
+          description: Aggregated tokenized market data
+          properties:
+            current_price:
+              type:
+              - number
+              - 'null'
+              description: Current price in target currency
+            market_cap:
+              type:
+              - number
+              - 'null'
+              description: Market cap in target currency
+            total_volume:
+              type:
+              - number
+              - 'null'
+              description: Total trading volume in target currency
+            high_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour price high in target currency
+            low_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour price low in target currency
+            price_change_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour price change in target currency
+            price_change_percentage_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour price change percentage
+            market_cap_change_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour market cap change in target currency
+            market_cap_change_percentage_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour market cap change percentage
+            last_updated:
+              type: string
+              format: date-time
+              description: Last updated timestamp
+            sparkline_in_7d:
+              type: object
+              description: Sparkline price data for the last 7 days
+              properties:
+                price:
+                  type: array
+                  description: Array of price values
+                  items:
+                    type: number
+            price_change_percentage_1h_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 1-hour price change percentage in target currency
+            price_change_percentage_24h_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 24-hour price change percentage in target currency
+            price_change_percentage_7d_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 7-day price change percentage in target currency
+            price_change_percentage_14d_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 14-day price change percentage in target currency
+            price_change_percentage_30d_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 30-day price change percentage in target currency
+            price_change_percentage_200d_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 200-day price change percentage in target currency
+            price_change_percentage_1y_in_currency:
+              type:
+              - number
+              - 'null'
+              description: 1-year price change percentage in target currency
+        perps_market_data:
+          type: object
+          description: Aggregated perpetuals market data
+          properties:
+            volume_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour perpetuals trading volume in target currency
+            open_interest_24h:
+              type:
+              - number
+              - 'null'
+              description: 24-hour perpetuals open interest in target currency
+        last_updated:
+          type: string
+          format: date-time
+          description: Last updated timestamp
+    RwasIssuersID:
+      type: object
+      required:
+      - id
+      - name
+      - market_cap
+      - market_cap_change_24h
+      - volume_24h
+      - updated_at
+      properties:
+        id:
+          type: string
+          description: Issuer ID
+        name:
+          type: string
+          description: Issuer name
+        market_cap:
+          type:
+          - number
+          - 'null'
+          description: Issuer market cap in USD
+        market_cap_change_24h:
+          type:
+          - number
+          - 'null'
+          description: 24-hour issuer market cap change in USD
+        volume_24h:
+          type:
+          - number
+          - 'null'
+          description: 24-hour issuer trading volume in USD
+        image:
+          type: object
+          description: Issuer image URLs
+          properties:
+            thumb:
+              type: string
+              description: Thumbnail image URL
+            small:
+              type: string
+              description: Small image URL
+            large:
+              type: string
+              description: Large image URL
+        tokens:
+          type: array
+          description: Tokens issued by this issuer
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Token ID
+              symbol:
+                type: string
+                description: Token symbol
+              name:
+                type: string
+                description: Token name
+              platforms:
+                type: object
+                description: Token asset platform and contract address
+                additionalProperties:
+                  type: string
+        updated_at:
+          type: string
+          format: date-time
+          description: Issuer last updated timestamp
+    RwasList:
+      type: array
+      items:
+        type: object
+        required:
+        - id
+        - symbol
+        - name
+        - asset_type
+        properties:
+          id:
+            type: string
+            description: RWA ID
+          symbol:
+            type: string
+            description: RWA symbol
+          name:
+            type: string
+            description: RWA name
+          asset_type:
+            type: string
+            enum:
+            - stock
+            - commodity
+            - etf
+            description: RWA asset type
+    RwasIssuersList:
+      type: array
+      items:
+        type: object
+        required:
+        - id
+        - name
+        properties:
+          id:
+            type: string
+            description: Issuer ID
+          name:
+            type: string
+            description: Issuer name
+  securitySchemes:
+    headerAuth:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

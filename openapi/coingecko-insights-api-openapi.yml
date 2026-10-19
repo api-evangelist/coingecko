@@ -1,0 +1,107 @@
+openapi: 3.2.0
+info:
+  title: CoinGecko Pro Insights API
+  version: 3.0.0
+servers:
+- url: https://pro-api.coingecko.com/api/v3
+security:
+- headerAuth: []
+- queryAuth: []
+tags:
+- name: Insights
+paths:
+  /insights:
+    get:
+      summary: Coin Insights
+      description: To query the latest coin insights on CoinGecko
+      operationId: insights
+      x-mint:
+        href: /reference/insights
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: "Page through results. \nDefault value: 1 \nValid values: 1...20"
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: "Total results per page. \nDefault value: 10 \nValid values: 1...20"
+        schema:
+          type: integer
+      - name: coin_id
+        in: query
+        required: false
+        description: "Filter insights by coin ID. \n*refers to [`/coins/list`](/reference/coins-list)."
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        description: Starting date in ISO date string (`YYYY-MM-DD`).
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: false
+        description: Ending date in ISO date string (`YYYY-MM-DD`).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of latest coin insights
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Insights'
+              example:
+              - title: Solana Experiences Surge in Memecoin Launches and Impersonation Scams
+                description: Solana's network is seeing a rise in memecoin launches and rapid pumps. However, this speculative activity is accompanied by impersonation scams, posing risks to the ecosystem.
+                related_coin_ids:
+                - wrapped-solana
+                posted_at: '2026-06-15T03:56:19.514666Z'
+              - title: Solana Sees Rising Tokenized Asset Volumes and Institutional RWA Products
+                description: Blockworks data indicates growing tokenized-asset volumes on Solana across various categories. Institutional products, like OnRe's dollar/reinsurance-backed offering, are emerging, increasing RWA activity.
+                related_coin_ids:
+                - wrapped-solana
+                posted_at: '2026-06-15T03:56:19.486886Z'
+      tags:
+      - Insights
+components:
+  schemas:
+    Insights:
+      type: array
+      items:
+        type: object
+        required:
+        - title
+        - description
+        - related_coin_ids
+        - posted_at
+        properties:
+          title:
+            type: string
+            description: Insight title
+          description:
+            type: string
+            description: Insight description
+          related_coin_ids:
+            type: array
+            items:
+              type: string
+            description: Related coin IDs
+          posted_at:
+            type: string
+            description: Insight posted timestamp in ISO 8601 format
+  securitySchemes:
+    headerAuth:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

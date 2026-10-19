@@ -1,49 +1,72 @@
 openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Derivatives API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
-  version: 3.0.1
-  contact:
-    name: CoinGecko Support
-    url: https://support.coingecko.com
-  termsOfService: https://www.coingecko.com/en/terms
+  title: CoinGecko Pro Derivatives API
+  version: 3.0.0
 servers:
-- url: https://api.coingecko.com/api/v3
-  description: CoinGecko Demo API Server
+- url: https://pro-api.coingecko.com/api/v3
 security:
-- demoApiKeyHeader: []
-- demoApiKeyQuery: []
+- headerAuth: []
+- queryAuth: []
 tags:
 - name: Derivatives
-  description: Derivatives market data including tickers and exchange information.
 paths:
   /derivatives:
     get:
-      operationId: getDerivatives
-      summary: List all derivative tickers
-      description: Get the list of all derivative tickers across all exchanges including price, index, basis, spread, and open interest data.
-      tags:
-      - Derivatives
+      summary: Derivatives Tickers List
+      description: To query all the tickers from derivatives exchanges on CoinGecko
+      operationId: derivatives-tickers
+      x-mint:
+        href: /reference/derivatives-tickers
       responses:
         '200':
-          description: Success
+          description: List of derivative tickers
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DerivativeTicker'
-  /derivatives/exchanges:
-    get:
-      operationId: getDerivativesExchanges
-      summary: List derivative exchanges
-      description: Get the list of all derivative exchanges with data including open interest, trade volume, and number of perpetual and futures pairs.
+                $ref: '#/components/schemas/DerivativesTickers'
+              example:
+              - market: Binance (Futures)
+                symbol: BTCUSDT
+                index_id: BTC
+                price: '77034.8'
+                price_percentage_change_24h: -1.1733397846861013
+                contract_type: perpetual
+                index: 76691.4276087
+                basis: -0.138769748300737
+                spread: 0.01
+                funding_rate: 0.004308
+                open_interest: 7497508223.83
+                volume_24h: 9623150393.3656
+                last_traded_at: 1779807819
+                expired_at: null
+              - market: Binance (Futures)
+                symbol: ETHUSDT
+                index_id: ETH
+                price: '2113.92'
+                price_percentage_change_24h: -1.213464572845443
+                contract_type: perpetual
+                index: 2099.55744186
+                basis: -0.19217332857957786
+                spread: 0.01
+                funding_rate: 0.005327
+                open_interest: 4563725156.36
+                volume_24h: 7655835901.46112
+                last_traded_at: 1779807818
+                expired_at: null
       tags:
       - Derivatives
+  /derivatives/exchanges:
+    get:
+      summary: Derivatives Exchanges List with Data
+      description: To query all the derivatives exchanges with related data (ID, name, open interest, ...) on CoinGecko
+      operationId: derivatives-exchanges
+      x-mint:
+        href: /reference/derivatives-exchanges
       parameters:
       - name: order
         in: query
-        description: Sort order for results
+        required: false
+        description: "Sort order of responses. \nDefault: `open_interest_btc_desc`"
         schema:
           type: string
           enum:
@@ -55,42 +78,67 @@ paths:
           - trade_volume_24h_btc_desc
       - name: per_page
         in: query
-        description: Number of results per page
+        required: false
+        description: Total results per page.
         schema:
           type: integer
-          default: 100
       - name: page
         in: query
-        description: Page number for pagination
+        required: false
+        description: "Page through results. \nDefault value: 1"
         schema:
           type: integer
-          default: 1
       responses:
         '200':
-          description: Success
+          description: List of derivative exchanges with data
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DerivativeExchange'
-  /derivatives/exchanges/{id}:
-    get:
-      operationId: getDerivativeExchangeById
-      summary: Get derivative exchange data by ID
-      description: Get detailed data for a specific derivative exchange including tickers, open interest, and trade volume.
+                $ref: '#/components/schemas/DerivativesExchanges'
+              example:
+              - name: Binance (Futures)
+                id: binance_futures
+                open_interest_btc: 332790.5
+                trade_volume_24h_btc: '588597.24'
+                number_of_perpetual_pairs: 592
+                number_of_futures_pairs: 72
+                image: https://coin-images.coingecko.com/markets/images/466/small/binance_futures.jpg?1706864452
+                year_established: 2019
+                country: Cayman Islands
+                description: ''
+                url: https://www.binance.com/
+              - name: Bybit (Futures)
+                id: bybit
+                open_interest_btc: 148377.99
+                trade_volume_24h_btc: '162793.82'
+                number_of_perpetual_pairs: 673
+                number_of_futures_pairs: 68
+                image: https://coin-images.coingecko.com/markets/images/460/small/photo_2021-08-12_18-27-50.jpg?1706864447
+                year_established: 2018
+                country: Seychelles
+                description: Bybit is the world's second-largest cryptocurrency exchange by trading volume, serving a global community of over 60 million users.
+                url: https://www.bybit.com
       tags:
       - Derivatives
+  /derivatives/exchanges/{id}:
+    get:
+      summary: Derivatives Exchange Data by ID
+      description: To query the derivatives exchange's related data (name, open interest, trade volume, ...) based on the exchange's ID
+      operationId: derivatives-exchanges-id
+      x-mint:
+        href: /reference/derivatives-exchanges-id
       parameters:
       - name: id
         in: path
         required: true
-        description: The derivative exchange ID
+        description: "Derivative exchange ID. \n*refers to [`/derivatives/exchanges/list`](/reference/derivatives-exchanges-list)."
         schema:
           type: string
+          default: binance_futures
       - name: include_tickers
         in: query
-        description: Include derivative tickers data
+        required: false
+        description: "Include tickers data. \nDefault: tickers data is not included."
         schema:
           type: string
           enum:
@@ -98,134 +146,387 @@ paths:
           - unexpired
       responses:
         '200':
-          description: Success
+          description: Derivative exchange data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DerivativeExchange'
-        '404':
-          description: Derivative exchange not found
-  /derivatives/exchanges/list:
-    get:
-      operationId: getDerivativeExchangesList
-      summary: List derivative exchanges (ID map)
-      description: Get the complete list of all supported derivative exchange IDs and names.
+                $ref: '#/components/schemas/DerivativesExchangesID'
+              example:
+                name: Binance (Futures)
+                open_interest_btc: 331945.73
+                trade_volume_24h_btc: '587332.45'
+                number_of_perpetual_pairs: 592
+                number_of_futures_pairs: 72
+                image: https://coin-images.coingecko.com/markets/images/466/small/binance_futures.jpg?1706864452
+                year_established: 2019
+                country: Cayman Islands
+                description: ''
+                url: https://www.binance.com/
+                tickers:
+                - symbol: 0GUSDT
+                  base: 0G
+                  target: USDT
+                  coin_id: zero-gravity
+                  target_coin_id: tether
+                  trade_url: https://www.binance.com/en/futures/0GUSDT
+                  contract_type: perpetual
+                  last: 0.473
+                  h24_percentage_change: -1.149
+                  index: 0.47388788
+                  index_basis_percentage: -0.066
+                  bid_ask_spread: 0.0004225649693639931
+                  funding_rate: 0.005
+                  open_interest_usd: 7505441.41551142
+                  h24_volume: 6822128.0
+                  converted_volume:
+                    btc: '42.0799463192663717990920674226785386061670893822933102624'
+                    eth: '1536.67707296907453613610493674728740267430011541374571065838147892993088'
+                    usd: '3222911.4917378246159226528'
+                  converted_last:
+                    btc: '0.0000061681554962419895667586517612508206539318947668958'
+                    eth: '0.00022524893595797008442763092934452232539088978034621245902427827196'
+                    usd: '0.4724202612055687926'
+                  last_traded: 1779809107
+                  expired_at: null
+                - symbol: 1000000BOBUSDT
+                  base: 1000000BOB
+                  target: USDT
+                  coin_id: build-on-bnb
+                  target_coin_id: tether
+                  trade_url: https://www.binance.com/en/futures/1000000BOBUSDT
+                  contract_type: perpetual
+                  last: 0.015
+                  h24_percentage_change: -3.331
+                  index: 0.01540057
+                  index_basis_percentage: 0.134
+                  bid_ask_spread: 0.001298701298701358
+                  funding_rate: 0.005
+                  open_interest_usd: 916291.34908113
+                  h24_volume: 44830706.0
+                  converted_volume:
+                    btc: '8.975935927077560026865126277039614163512381271518795395788'
+                    eth: '327.26598326618858627284207444108921232850344104115627132937452733698970504'
+                    usd: '688649.790093212658495595932'
+                  converted_last:
+                    btc: '0.000000200218482552506757909748873395828612726116364786198'
+                    eth: '0.00000730004080832875097422829063724959433671429223178319501212794925284'
+                    usd: '0.015361118562201823422'
+                  last_traded: 1779808948
+                  expired_at: null
       tags:
       - Derivatives
+  /derivatives/exchanges/list:
+    get:
+      summary: Derivatives Exchanges List
+      description: To query all the supported derivatives exchanges with ID and name on CoinGecko
+      operationId: derivatives-exchanges-list
+      x-mint:
+        href: /reference/derivatives-exchanges-list
       responses:
         '200':
-          description: Success
+          description: List of derivative exchange identifiers and names
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: Derivative exchange identifier
-                    name:
-                      type: string
-                      description: Derivative exchange display name
+                $ref: '#/components/schemas/DerivativesExchangesList'
+              example:
+              - id: binance_futures
+                name: Binance (Futures)
+              - id: bybit
+                name: Bybit (Futures)
+      tags:
+      - Derivatives
 components:
   schemas:
-    DerivativeExchange:
+    DerivativesExchanges:
+      type: array
+      items:
+        type: object
+        required:
+        - name
+        - id
+        - open_interest_btc
+        - trade_volume_24h_btc
+        - number_of_perpetual_pairs
+        - number_of_futures_pairs
+        - image
+        - year_established
+        - country
+        - description
+        - url
+        properties:
+          name:
+            type: string
+            description: Derivatives exchange name
+          id:
+            type: string
+            description: Derivatives exchange ID
+          open_interest_btc:
+            type: number
+            description: Derivatives exchange open interest in BTC
+          trade_volume_24h_btc:
+            type: string
+            description: Derivatives exchange trade volume in BTC in 24 hours
+          number_of_perpetual_pairs:
+            type: integer
+            description: Number of perpetual pairs in the derivatives exchange
+          number_of_futures_pairs:
+            type: integer
+            description: Number of futures pairs in the derivatives exchange
+          image:
+            type: string
+            description: Derivatives exchange image URL
+          year_established:
+            type:
+            - integer
+            - 'null'
+            description: Derivatives exchange established year
+          country:
+            type:
+            - string
+            - 'null'
+            description: Derivatives exchange incorporated country
+          description:
+            type: string
+            description: Derivatives exchange description
+          url:
+            type: string
+            description: Derivatives exchange website URL
+    DerivativesExchangesList:
+      type: array
+      items:
+        type: object
+        required:
+        - id
+        - name
+        properties:
+          id:
+            type: string
+            description: Derivatives exchange ID
+          name:
+            type: string
+            description: Derivatives exchange name
+    DerivativesExchangesID:
       type: object
+      required:
+      - name
+      - open_interest_btc
+      - trade_volume_24h_btc
+      - number_of_perpetual_pairs
+      - number_of_futures_pairs
+      - image
+      - year_established
+      - country
+      - description
+      - url
       properties:
         name:
           type: string
-          description: Exchange display name
-        id:
-          type: string
-          description: Exchange identifier
+          description: Derivatives exchange name
         open_interest_btc:
-          type: number
-          description: Total open interest in BTC
+          type:
+          - number
+          - 'null'
+          description: Derivatives exchange open interest in BTC
         trade_volume_24h_btc:
           type: string
-          description: 24-hour trading volume in BTC
+          description: Derivatives exchange trade volume in BTC in 24 hours
         number_of_perpetual_pairs:
           type: integer
-          description: Number of perpetual trading pairs
+          description: Number of perpetual pairs in the derivatives exchange
         number_of_futures_pairs:
           type: integer
-          description: Number of futures trading pairs
+          description: Number of futures pairs in the derivatives exchange
         image:
           type: string
-          format: uri
-          description: Exchange logo URL
+          description: Derivatives exchange image URL
         year_established:
-          type: integer
-          description: Year the exchange was established
+          type:
+          - integer
+          - 'null'
+          description: Derivatives exchange established year
         country:
-          type: string
-          description: Country where the exchange is based
+          type:
+          - string
+          - 'null'
+          description: Derivatives exchange incorporated country
         description:
           type: string
-          description: Exchange description
+          description: Derivatives exchange description
         url:
           type: string
-          format: uri
-          description: Exchange website URL
-    DerivativeTicker:
-      type: object
-      properties:
-        market:
-          type: string
-          description: Derivative exchange name
-        symbol:
-          type: string
-          description: Trading pair symbol
-        index_id:
-          type: string
-          description: Index identifier
-        price:
-          type: string
-          description: Current price
-        price_percentage_change_24h:
-          type: number
-          description: 24-hour price change percentage
-        contract_type:
-          type: string
-          description: Contract type (perpetual or dated)
-        index:
-          type: number
-          description: Index price
-        basis:
-          type: number
-          description: Basis (difference between futures and spot price)
-        spread:
-          type: number
-          description: Bid-ask spread percentage
-        funding_rate:
-          type: number
-          description: Funding rate for perpetual contracts
-        open_interest:
-          type: number
-          description: Open interest in USD
-        volume_24h:
-          type: number
-          description: 24-hour trading volume
-        last_traded_at:
-          type: string
-          format: date-time
-          description: Last trade timestamp
-        expired_at:
-          type: string
-          format: date-time
-          description: Contract expiration date (null for perpetual)
+          description: Derivatives exchange website URL
+        tickers:
+          type: array
+          description: Derivative tickers data, available when include_tickers is specified
+          items:
+            type: object
+            required:
+            - symbol
+            - base
+            - target
+            - coin_id
+            - target_coin_id
+            - trade_url
+            - contract_type
+            - last
+            - h24_percentage_change
+            - index
+            - index_basis_percentage
+            - bid_ask_spread
+            - funding_rate
+            - open_interest_usd
+            - h24_volume
+            - converted_volume
+            - converted_last
+            - last_traded
+            - expired_at
+            properties:
+              symbol:
+                type: string
+                description: Derivative ticker symbol
+              base:
+                type: string
+                description: Derivative base asset
+              target:
+                type: string
+                description: Derivative target asset
+              coin_id:
+                type: string
+                description: Derivative base asset coin ID
+              target_coin_id:
+                type: string
+                description: Derivative target asset coin ID
+              trade_url:
+                type: string
+                description: Derivative trade URL
+              contract_type:
+                type: string
+                description: Derivative contract type
+              last:
+                type: number
+                description: Derivative last price
+              h24_percentage_change:
+                type: number
+                description: Derivative price percentage change in 24 hours
+              index:
+                type: number
+                description: Derivative underlying asset price
+              index_basis_percentage:
+                type: number
+                description: Difference of derivative price and index price in percentage
+              bid_ask_spread:
+                type: number
+                description: Derivative bid-ask spread
+              funding_rate:
+                type: number
+                description: Derivative funding rate
+              open_interest_usd:
+                type: number
+                description: Derivative open interest in USD
+              h24_volume:
+                type: number
+                description: Derivative volume in 24 hours
+              converted_volume:
+                type: object
+                description: Derivative converted volume
+                properties:
+                  btc:
+                    type: string
+                  eth:
+                    type: string
+                  usd:
+                    type: string
+              converted_last:
+                type: object
+                description: Derivative converted last price
+                properties:
+                  btc:
+                    type: string
+                  eth:
+                    type: string
+                  usd:
+                    type: string
+              last_traded:
+                type: number
+                description: Derivative last traded time in UNIX timestamp
+              expired_at:
+                type:
+                - number
+                - 'null'
+                description: Derivative expiry time in UNIX timestamp
+    DerivativesTickers:
+      type: array
+      items:
+        type: object
+        required:
+        - market
+        - symbol
+        - index_id
+        - price
+        - price_percentage_change_24h
+        - contract_type
+        - index
+        - basis
+        - spread
+        - funding_rate
+        - open_interest
+        - volume_24h
+        - last_traded_at
+        - expired_at
+        properties:
+          market:
+            type: string
+            description: Derivative market name
+          symbol:
+            type: string
+            description: Derivative ticker symbol
+          index_id:
+            type: string
+            description: Derivative underlying asset
+          price:
+            type: string
+            description: Derivative ticker price
+          price_percentage_change_24h:
+            type: number
+            description: Derivative ticker price percentage change in 24 hours
+          contract_type:
+            type: string
+            description: Derivative contract type
+          index:
+            type: number
+            description: Derivative underlying asset price
+          basis:
+            type: number
+            description: Difference of derivative price and index price
+          spread:
+            type: number
+            description: Derivative bid-ask spread
+          funding_rate:
+            type: number
+            description: Derivative funding rate
+          open_interest:
+            type: number
+            description: Derivative open interest
+          volume_24h:
+            type: number
+            description: Derivative trading volume in 24 hours
+          last_traded_at:
+            type: number
+            description: Derivative last traded time in UNIX timestamp
+          expired_at:
+            type:
+            - number
+            - 'null'
+            description: Derivative expiry time in UNIX timestamp
   securitySchemes:
-    demoApiKeyHeader:
+    headerAuth:
       type: apiKey
       in: header
-      name: x-cg-demo-api-key
-      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
-    demoApiKeyQuery:
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
       type: apiKey
       in: query
-      name: x_cg_demo_api_key
-      description: CoinGecko Demo API key passed via query string parameter.
-externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

@@ -1,61 +1,92 @@
 openapi: 3.2.0
 info:
-  title: Coingecko Simple API
-  version: 3.0.1
-  contact:
-    name: CoinGecko Support
-    url: https://support.coingecko.com
-  termsOfService: https://www.coingecko.com/en/terms
-  description: 'Operations tagged Simple across 2 of this provider''s published API definitions: coingecko-crypto-market-data-api-openapi.yml, coingecko-onchain-dex-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: CoinGecko Pro Simple API
+  version: 3.0.0
 servers:
-- url: https://api.coingecko.com/api/v3
-  description: CoinGecko Demo API Server
 - url: https://pro-api.coingecko.com/api/v3
-  description: CoinGecko Pro API Server (paid plans)
+security:
+- headerAuth: []
+- queryAuth: []
 tags:
 - name: Simple
-  description: Simple price and token price lookups without the overhead of full coin data responses.
 paths:
   /simple/price:
     get:
-      operationId: getSimplePrice
-      summary: Get coin price by IDs
-      description: Query the prices of one or more coins by using their unique CoinGecko coin IDs. Optionally include market cap, 24h volume, 24h change, and last updated timestamp.
-      tags:
-      - Simple
+      summary: Coin Price by IDs, Symbols, or Names
+      description: To query the prices of one or more coins by using their unique Coin API IDs, symbols, or names
+      operationId: simple-price
+      x-mint:
+        href: /reference/simple-price
       parameters:
-      - $ref: '#/components/parameters/coinIds'
-      - $ref: '#/components/parameters/vsCurrencies'
-      - name: include_market_cap
+      - name: vs_currencies
         in: query
-        description: Include market cap in the response
+        required: true
+        description: "Target currency of coins, comma-separated if querying more than 1 currency. \n*refers to [`/simple/supported_vs_currencies`](/reference/simple-supported-currencies)"
         schema:
-          type: boolean
-          default: false
-      - name: include_24hr_vol
+          type: string
+          default: usd
+      - name: ids
         in: query
-        description: Include 24-hour trading volume in the response
+        required: false
+        description: "Coins' IDs, comma-separated if querying more than 1 coin. \n*refers to [`/coins/list`](/reference/coins-list)"
         schema:
-          type: boolean
-          default: false
-      - name: include_24hr_change
+          type: string
+          default: bitcoin
+      - name: names
         in: query
-        description: Include 24-hour price change percentage in the response
+        required: false
+        description: Coins' names, comma-separated if querying more than 1 coin.
         schema:
-          type: boolean
-          default: false
-      - name: include_last_updated_at
+          type: string
+          default: Bitcoin
+      - name: symbols
         in: query
-        description: Include last updated timestamp in the response
+        required: false
+        description: Coins' symbols, comma-separated if querying more than 1 coin.
         schema:
-          type: boolean
-          default: false
-      - name: precision
+          type: string
+          default: btc
+      - name: include_tokens
         in: query
-        description: Decimal precision for currency price values (0-18)
+        required: false
+        description: "For `symbols` lookups, specify `all` to include all matching tokens. \nDefault `top` returns top-ranked tokens by market cap or volume."
         schema:
           type: string
           enum:
+          - top
+          - all
+      - name: include_market_cap
+        in: query
+        required: false
+        description: "Include market capitalization. \nDefault: false"
+        schema:
+          type: boolean
+      - name: include_24hr_vol
+        in: query
+        required: false
+        description: "Include 24-hour trading volume. \nDefault: false"
+        schema:
+          type: boolean
+      - name: include_24hr_change
+        in: query
+        required: false
+        description: "Include 24-hour change percentage. \nDefault: false"
+        schema:
+          type: boolean
+      - name: include_last_updated_at
+        in: query
+        required: false
+        description: "Include last updated price time as a UNIX timestamp. \nDefault: false"
+        schema:
+          type: boolean
+      - name: precision
+        in: query
+        required: false
+        description: Decimal places for currency price value
+        schema:
+          type: string
+          enum:
+          - full
           - '0'
           - '1'
           - '2'
@@ -75,222 +106,232 @@ paths:
           - '16'
           - '17'
           - '18'
-          - full
       responses:
         '200':
-          description: Success
+          description: Coin prices
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
-                  additionalProperties:
-                    type: number
-        '400':
-          description: Bad request - invalid parameters
-        '401':
-          description: Unauthorized - invalid or missing API key
-        '429':
-          description: Rate limit exceeded
-      security:
-      - demoApiKeyHeader: []
-      - demoApiKeyQuery: []
-    servers:
-    - url: https://api.coingecko.com/api/v3
-      description: CoinGecko Demo API Server
-  /simple/token_price/{id}:
-    get:
-      operationId: getSimpleTokenPrice
-      summary: Get token price by contract address
-      description: Query the prices of one or more tokens by using their contract addresses on a specific asset platform. This endpoint is useful for looking up token prices when you have the contract address rather than the CoinGecko coin ID.
+                $ref: '#/components/schemas/SimplePrice'
+              example:
+                bitcoin:
+                  usd: 76975
+                  usd_market_cap: 1542226908349.8406
+                  usd_24h_vol: 29096603418.89408
+                  usd_24h_change: -1.4093297098441402
+                  last_updated_at: 1779092258
       tags:
       - Simple
+  /simple/supported_vs_currencies:
+    get:
+      summary: Currencies List
+      description: To query all the supported currencies on CoinGecko
+      operationId: simple-supported-currencies
+      x-mint:
+        href: /reference/simple-supported-currencies
+      responses:
+        '200':
+          description: List of supported currencies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedCurrencies'
+              example:
+              - btc
+              - eth
+              - ltc
+              - bch
+              - bnb
+              - eos
+              - xrp
+              - xlm
+              - link
+              - dot
+              - yfi
+              - sol
+              - usd
+              - aed
+              - ars
+              - aud
+              - bdt
+              - bhd
+              - bmd
+              - brl
+              - cad
+              - chf
+              - clp
+              - cny
+              - czk
+              - dkk
+              - eur
+              - gbp
+              - gel
+              - hkd
+              - huf
+              - idr
+              - ils
+              - inr
+              - jpy
+              - krw
+              - kwd
+              - lkr
+              - mmk
+              - mxn
+              - myr
+              - ngn
+              - nok
+              - nzd
+              - php
+              - pkr
+              - pln
+              - rub
+              - sar
+              - sek
+              - sgd
+              - thb
+              - try
+              - twd
+              - uah
+              - vef
+              - vnd
+              - zar
+              - xdr
+              - xag
+              - xau
+              - bits
+              - sats
+      tags:
+      - Simple
+  /simple/token_price/{id}:
+    get:
+      summary: Coin Price by Token Addresses
+      description: To query one or more token prices by using their token contract addresses
+      operationId: simple-token-price
+      x-mint:
+        href: /reference/simple-token-price
       parameters:
-      - $ref: '#/components/parameters/assetPlatformId'
+      - name: id
+        in: path
+        required: true
+        description: "Asset platform's ID. \n*refers to [`/asset_platforms`](/reference/asset-platforms-list)"
+        schema:
+          type: string
+          default: ethereum
       - name: contract_addresses
         in: query
         required: true
-        description: Comma-separated list of token contract addresses on the specified asset platform
+        description: Token contract addresses, comma-separated if querying more than 1 token
         schema:
           type: string
-      - $ref: '#/components/parameters/vsCurrencies'
+          default: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
+      - name: vs_currencies
+        in: query
+        required: true
+        description: "Target currency of coins, comma-separated if querying more than 1 currency. \n*refers to [`/simple/supported_vs_currencies`](/reference/simple-supported-currencies)"
+        schema:
+          type: string
+          default: usd
       - name: include_market_cap
         in: query
-        description: Include market cap in the response
+        required: false
+        description: "Include market capitalization. \nDefault: false"
         schema:
           type: boolean
-          default: false
       - name: include_24hr_vol
         in: query
-        description: Include 24-hour trading volume in the response
+        required: false
+        description: "Include 24-hour trading volume. \nDefault: false"
         schema:
           type: boolean
-          default: false
       - name: include_24hr_change
         in: query
-        description: Include 24-hour price change percentage in the response
+        required: false
+        description: "Include 24-hour change percentage. \nDefault: false"
         schema:
           type: boolean
-          default: false
       - name: include_last_updated_at
         in: query
-        description: Include last updated timestamp in the response
+        required: false
+        description: "Include last updated price time as a UNIX timestamp. \nDefault: false"
         schema:
           type: boolean
-          default: false
       - name: precision
         in: query
-        description: Decimal precision for currency price values (0-18)
+        required: false
+        description: Decimal places for currency price value
         schema:
           type: string
+          enum:
+          - full
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - '11'
+          - '12'
+          - '13'
+          - '14'
+          - '15'
+          - '16'
+          - '17'
+          - '18'
       responses:
         '200':
-          description: Success
+          description: Token prices
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: object
-                  additionalProperties:
-                    type: number
-        '400':
-          description: Bad request - invalid parameters
-        '401':
-          description: Unauthorized - invalid or missing API key
-      security:
-      - demoApiKeyHeader: []
-      - demoApiKeyQuery: []
-    servers:
-    - url: https://api.coingecko.com/api/v3
-      description: CoinGecko Demo API Server
-  /simple/supported_vs_currencies:
-    get:
-      operationId: getSimpleSupportedVsCurrencies
-      summary: Get supported vs currencies
-      description: Get the list of all supported vs currencies (fiat and crypto) that can be used in price queries.
+                $ref: '#/components/schemas/SimplePrice'
+              example:
+                '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599':
+                  usd: 76721
+                  usd_market_cap: 9008047197.715635
+                  usd_24h_vol: 181232010.10689816
+                  usd_24h_change: -1.6069562341774564
+                  last_updated_at: 1779094527
       tags:
       - Simple
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-                  description: Currency identifier (e.g., usd, btc, eth)
-      security:
-      - demoApiKeyHeader: []
-      - demoApiKeyQuery: []
-    servers:
-    - url: https://api.coingecko.com/api/v3
-      description: CoinGecko Demo API Server
-  /onchain/simple/networks/{network}/token_price/{addresses}:
-    get:
-      operationId: getOnchainSimpleTokenPrice
-      summary: Get token prices by contract addresses
-      description: Get the USD prices of multiple tokens on a specific network by their contract addresses. Returns the latest price data for each requested token.
-      tags:
-      - Simple
-      parameters:
-      - $ref: '#/components/parameters/networkId'
-      - name: addresses
-        in: path
-        required: true
-        description: Comma-separated list of token contract addresses (up to 30)
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      type:
-                        type: string
-                      attributes:
-                        type: object
-                        properties:
-                          token_prices:
-                            type: object
-                            additionalProperties:
-                              type: string
-                              description: USD price as string
-        '400':
-          description: Bad request - invalid parameters
-        '401':
-          description: Unauthorized - invalid or missing API key
-      security:
-      - proApiKeyHeader: []
-      - proApiKeyQuery: []
-      - demoApiKeyHeader: []
-      - demoApiKeyQuery: []
-    servers:
-    - url: https://pro-api.coingecko.com/api/v3
-      description: CoinGecko Pro API Server (paid plans)
-    - url: https://api.coingecko.com/api/v3
-      description: CoinGecko Demo API Server (free tier, limited endpoints)
 components:
-  parameters:
-    coinIds:
-      name: ids
-      in: query
-      required: true
-      description: Comma-separated list of CoinGecko coin IDs (e.g., bitcoin,ethereum)
-      schema:
-        type: string
-    vsCurrencies:
-      name: vs_currencies
-      in: query
-      required: true
-      description: Comma-separated list of target currencies (e.g., usd,eur,btc)
-      schema:
-        type: string
-    assetPlatformId:
-      name: id
-      in: path
-      required: true
-      description: The asset platform ID (e.g., ethereum, polygon-pos, solana)
-      schema:
-        type: string
-    networkId:
-      name: network
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g., eth, bsc, polygon_pos, solana, arbitrum, avalanche, base)
-      schema:
+  schemas:
+    SimplePrice:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          usd:
+            type: number
+            description: Price in the target currency
+          usd_market_cap:
+            type: number
+            description: Market capitalization in the target currency
+          usd_24h_vol:
+            type: number
+            description: 24-hour trading volume in the target currency
+          usd_24h_change:
+            type: number
+            description: 24-hour price change percentage in the target currency
+          last_updated_at:
+            type: number
+            description: Last updated timestamp in UNIX seconds
+    SupportedCurrencies:
+      type: array
+      items:
         type: string
   securitySchemes:
-    demoApiKeyHeader:
-      type: apiKey
-      in: header
-      name: x-cg-demo-api-key
-      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
-    demoApiKeyQuery:
-      type: apiKey
-      in: query
-      name: x_cg_demo_api_key
-      description: CoinGecko Demo API key passed via query string parameter.
-    proApiKeyHeader:
+    headerAuth:
       type: apiKey
       in: header
       name: x-cg-pro-api-key
-      description: CoinGecko Pro API key passed via request header.
-    proApiKeyQuery:
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
       type: apiKey
       in: query
       name: x_cg_pro_api_key
-      description: CoinGecko Pro API key passed via query string parameter.
-x-refined-from:
-- coingecko-crypto-market-data-api-openapi.yml
-- coingecko-onchain-dex-api-openapi.yml
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

@@ -1,0 +1,86 @@
+openapi: 3.2.0
+info:
+  title: CoinGecko Pro Key API
+  version: 3.0.0
+servers:
+- url: https://pro-api.coingecko.com/api/v3
+security:
+- headerAuth: []
+- queryAuth: []
+tags:
+- name: Key
+paths:
+  /key:
+    get:
+      summary: API Usage
+      description: To monitor your account's API usage, including rate limits, monthly total credits, remaining credits, and more
+      operationId: api-usage
+      x-mint:
+        href: /reference/api-usage
+      responses:
+        '200':
+          description: API usage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiUsage'
+              example:
+                plan: Other
+                rate_limit_request_per_minute: 1000
+                monthly_call_credit: 1000000
+                current_total_monthly_calls: 32
+                current_remaining_monthly_calls: 999968
+                api_key_rate_limit_request_per_minute: 1000
+                api_key_monthly_call_credit: 1000000
+                api_key_current_total_monthly_calls: 8
+      tags:
+      - Key
+components:
+  schemas:
+    ApiUsage:
+      type: object
+      required:
+      - plan
+      - rate_limit_request_per_minute
+      - monthly_call_credit
+      - current_total_monthly_calls
+      - current_remaining_monthly_calls
+      - api_key_rate_limit_request_per_minute
+      - api_key_monthly_call_credit
+      - api_key_current_total_monthly_calls
+      properties:
+        plan:
+          type: string
+          description: Current subscription plan
+        rate_limit_request_per_minute:
+          type: integer
+          description: Rate limit per minute for the plan
+        monthly_call_credit:
+          type: integer
+          description: Total monthly API call credits for the plan
+        current_total_monthly_calls:
+          type: integer
+          description: Total API calls made this month
+        current_remaining_monthly_calls:
+          type: integer
+          description: Remaining API call credits this month
+        api_key_rate_limit_request_per_minute:
+          type: integer
+          description: Rate limit per minute configured for this API key
+        api_key_monthly_call_credit:
+          type: integer
+          description: Monthly call credit limit configured for this API key
+        api_key_current_total_monthly_calls:
+          type: integer
+          description: Total API calls made this month by this API key
+  securitySchemes:
+    headerAuth:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

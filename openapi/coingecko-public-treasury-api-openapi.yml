@@ -1,0 +1,633 @@
+openapi: 3.2.0
+info:
+  title: CoinGecko Pro Public Treasury API
+  version: 3.0.0
+servers:
+- url: https://pro-api.coingecko.com/api/v3
+security:
+- headerAuth: []
+- queryAuth: []
+tags:
+- name: Public Treasury
+paths:
+  /{entity}/public_treasury/{coin_id}:
+    get:
+      summary: Crypto Treasury Holdings by Coin ID
+      description: To query public companies' and governments' cryptocurrency holdings by coin ID
+      operationId: companies-public-treasury
+      x-mint:
+        href: /reference/companies-public-treasury
+      parameters:
+      - name: entity
+        in: path
+        required: true
+        description: Public company or government entity.
+        schema:
+          type: string
+          default: companies
+          enum:
+          - companies
+          - governments
+      - name: coin_id
+        in: path
+        required: true
+        description: "Coin ID. \ne.g. `bitcoin`, `ethereum`, `solana`, `binancecoin`"
+        schema:
+          type: string
+          default: bitcoin
+      - name: per_page
+        in: query
+        required: false
+        description: "Total results per page. \nDefault value: 250 \nValid values: 1...250"
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: "Page through results. \nDefault value: 1"
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: "Sort order for results. \nDefault: `total_holdings_usd_desc`"
+        schema:
+          type: string
+          enum:
+          - total_holdings_usd_desc
+          - total_holdings_usd_asc
+      responses:
+        '200':
+          description: Public companies or governments crypto treasury holdings data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicTreasury'
+              example:
+                total_holdings: 1272129.0267804659
+                total_value_usd: 97225044888.65527
+                market_cap_dominance: 6.06
+                companies:
+                - name: Strategy
+                  symbol: MSTR.US
+                  country: US
+                  total_holdings: 843738.0
+                  total_entry_value_usd: 63870055699.0
+                  total_current_value_usd: 64484706340.107254
+                  percentage_of_total_supply: 4.018
+                - name: XXI
+                  symbol: XXI.US
+                  country: US
+                  total_holdings: 43514.0
+                  total_entry_value_usd: 0.0
+                  total_current_value_usd: 3325662126.967645
+                  percentage_of_total_supply: 0.207
+      tags:
+      - Public Treasury
+  /public_treasury/{entity_id}:
+    get:
+      summary: Crypto Treasury Holdings by Entity ID
+      description: To query public companies' and governments' cryptocurrency holdings by entity ID
+      operationId: public-treasury-entity
+      x-mint:
+        href: /reference/public-treasury-entity
+      parameters:
+      - name: entity_id
+        in: path
+        required: true
+        description: "Public company or government entity ID. \n*refers to [`/entities/list`](/reference/entities-list)."
+        schema:
+          type: string
+          default: strategy
+      - name: holding_amount_change
+        in: query
+        required: false
+        description: "Include holding amount change for specified timeframes, comma-separated if querying more than 1 timeframe. \nValid values: `7d`, `14d`, `30d`, `90d`, `1y`, `ytd`"
+        schema:
+          type: string
+      - name: holding_change_percentage
+        in: query
+        required: false
+        description: "Include holding change percentage for specified timeframes, comma-separated if querying more than 1 timeframe. \nValid values: `7d`, `14d`, `30d`, `90d`, `1y`, `ytd`"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Public company or government crypto treasury holdings data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicTreasuryEntity'
+              example:
+                name: Strategy
+                id: strategy
+                type: company
+                symbol: MSTR.US
+                country: US
+                website_url: https://www.strategy.com/
+                twitter_screen_name: Strategy
+                total_treasury_value_usd: 64383151578.86817
+                unrealized_pnl: 513095879.8681717
+                m_nav: 1.03
+                total_asset_value_per_share_usd: 179.74079167746558
+                holdings:
+                - coin_id: bitcoin
+                  amount: 843738.0
+                  percentage_of_total_supply: 4.018
+                  amount_per_share: 0.002355494137353434
+                  entity_value_usd_percentage: 100.0
+                  current_value_usd: 64383151578.86817
+                  total_entry_value_usd: 63870055699.0
+                  average_entry_value_usd: 75698.9203982753
+                  unrealized_pnl: 513095879.8681717
+                  holding_amount_change:
+                    7d: 0.0
+                    14d: 24869.0
+                    30d: 28677.0
+                    90d: 126016.0
+                    1y: 263488.0
+                    ytd: 171238.0
+                  holding_change_percentage:
+                    7d: 0.0
+                    14d: 3.037
+                    30d: 3.518
+                    90d: 17.558
+                    1y: 45.409
+                    ytd: 25.463
+      tags:
+      - Public Treasury
+  /public_treasury/{entity_id}/{coin_id}/holding_chart:
+    get:
+      summary: Crypto Treasury Holdings Historical Chart Data by ID
+      description: To query historical cryptocurrency holdings chart of public companies and governments by entity ID and coin ID
+      operationId: public-treasury-entity-chart
+      x-mint:
+        href: /reference/public-treasury-entity-chart
+      parameters:
+      - name: entity_id
+        in: path
+        required: true
+        description: "Public company or government entity ID. \n*refers to [`/entities/list`](/reference/entities-list)."
+        schema:
+          type: string
+          default: strategy
+      - name: coin_id
+        in: path
+        required: true
+        description: "Coin ID. \ne.g. `bitcoin`, `ethereum`, `solana`, `binancecoin`"
+        schema:
+          type: string
+          default: bitcoin
+      - name: days
+        in: query
+        required: true
+        description: "Data up to number of days ago. \nValid values: `7`, `14`, `30`, `90`, `180`, `365`, `730`, `max`"
+        schema:
+          type: string
+          default: '365'
+      - name: include_empty_intervals
+        in: query
+        required: false
+        description: "Include empty intervals with no transaction data. \nDefault: `false`"
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Crypto treasury holdings historical chart data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicTreasuryEntityChart'
+              example:
+                holdings:
+                - - 1748736000000
+                  - 580955.0
+                - - 1749340800000
+                  - 582000.0
+                holding_value_in_usd:
+                - - 1748736000000
+                  - 60818730878.617355
+                - - 1749340800000
+                  - 61506606585.45032
+      tags:
+      - Public Treasury
+  /public_treasury/{entity_id}/transaction_history:
+    get:
+      summary: Crypto Treasury Transaction History by Entity ID
+      description: To query public companies' and governments' cryptocurrency transaction history by entity ID
+      operationId: public-treasury-transaction-history
+      x-mint:
+        href: /reference/public-treasury-transaction-history
+      parameters:
+      - name: entity_id
+        in: path
+        required: true
+        description: "Public company or government entity ID. \n*refers to [`/entities/list`](/reference/entities-list)."
+        schema:
+          type: string
+          default: strategy
+      - name: per_page
+        in: query
+        required: false
+        description: "Total results per page. \nDefault value: 100 \nValid values: 1...250"
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: "Page through results. \nDefault value: 1"
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: "Sort order of transactions. \nDefault: `date_desc`"
+        schema:
+          type: string
+          enum:
+          - date_desc
+          - date_asc
+          - holding_net_change_desc
+          - holding_net_change_asc
+          - transaction_value_usd_desc
+          - transaction_value_usd_asc
+          - average_cost_desc
+          - average_cost_asc
+      - name: coin_ids
+        in: query
+        required: false
+        description: "Filter transactions by coin IDs, comma-separated if querying more than 1 coin. \n*refers to [`/coins/list`](/reference/coins-list)."
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Crypto treasury transaction history data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicTreasuryTransactionHistory'
+              example:
+                transactions:
+                - date: 1779062400000
+                  source_url: https://assets.contentstack.io/v3/assets/bltf8d808d9b8cebd37/bltc0d0f9d2d325a368/6a0a710811de4f7e170ba045/form-8-k_05-18-2026.pdf
+                  coin_id: bitcoin
+                  type: buy
+                  holding_net_change: 24869.0
+                  transaction_value_usd: 2014015965.0
+                  holding_balance: 843738.0
+                  average_entry_value_usd: 80985.0
+                - date: 1778457600000
+                  source_url: https://assets.contentstack.io/v3/assets/bltf8d808d9b8cebd37/blt7653ead16575975e/6a01462c750c63f12be32cf8/form-8-k_05-11-2026.pdf
+                  coin_id: bitcoin
+                  type: buy
+                  holding_net_change: 535.0
+                  transaction_value_usd: 42981900.0
+                  holding_balance: 818869.0
+                  average_entry_value_usd: 80340.0
+      tags:
+      - Public Treasury
+components:
+  schemas:
+    PublicTreasuryTransactionHistory:
+      type: object
+      required:
+      - transactions
+      properties:
+        transactions:
+          type: array
+          items:
+            type: object
+            required:
+            - date
+            - source_url
+            - coin_id
+            - type
+            - holding_net_change
+            - transaction_value_usd
+            - holding_balance
+            - average_entry_value_usd
+            properties:
+              date:
+                type: number
+                description: Transaction date in UNIX timestamp
+              source_url:
+                type: string
+                description: Source document URL
+              coin_id:
+                type: string
+                description: Coin ID
+              type:
+                type: string
+                description: Transaction type
+                enum:
+                - buy
+                - sell
+              holding_net_change:
+                type: number
+                description: Net change in holdings after the transaction
+              transaction_value_usd:
+                type: number
+                description: Transaction value in USD
+              holding_balance:
+                type: number
+                description: Total holding balance after the transaction
+              average_entry_value_usd:
+                type: number
+                description: Average entry value in USD after the transaction
+    PublicTreasury:
+      oneOf:
+      - title: CompanyTreasury
+        type: object
+        required:
+        - total_holdings
+        - total_value_usd
+        - market_cap_dominance
+        - companies
+        properties:
+          total_holdings:
+            type: number
+            description: Total crypto holdings
+          total_value_usd:
+            type: number
+            description: Total crypto holdings value in USD
+          market_cap_dominance:
+            type: number
+            description: Market cap dominance percentage
+          companies:
+            type: array
+            description: List of companies holding crypto
+            items:
+              type: object
+              required:
+              - name
+              - symbol
+              - country
+              - total_holdings
+              - total_entry_value_usd
+              - total_current_value_usd
+              - percentage_of_total_supply
+              properties:
+                name:
+                  type: string
+                  description: Company name
+                symbol:
+                  type:
+                  - string
+                  - 'null'
+                  description: Company ticker symbol
+                country:
+                  type: string
+                  description: Country code
+                total_holdings:
+                  type: number
+                  description: Total crypto holdings
+                total_entry_value_usd:
+                  type: number
+                  description: Total entry value in USD
+                total_current_value_usd:
+                  type: number
+                  description: Total current value of crypto holdings in USD
+                percentage_of_total_supply:
+                  type: number
+                  description: Percentage of total crypto supply
+      - title: GovernmentTreasury
+        type: object
+        required:
+        - total_holdings
+        - total_value_usd
+        - market_cap_dominance
+        - governments
+        properties:
+          total_holdings:
+            type: number
+            description: Total crypto holdings
+          total_value_usd:
+            type: number
+            description: Total crypto holdings value in USD
+          market_cap_dominance:
+            type: number
+            description: Market cap dominance percentage
+          governments:
+            type: array
+            description: List of governments holding crypto
+            items:
+              type: object
+              required:
+              - name
+              - symbol
+              - country
+              - total_holdings
+              - total_entry_value_usd
+              - total_current_value_usd
+              - percentage_of_total_supply
+              properties:
+                name:
+                  type: string
+                  description: Government name
+                symbol:
+                  type:
+                  - string
+                  - 'null'
+                  description: Government ticker symbol
+                country:
+                  type: string
+                  description: Country code
+                total_holdings:
+                  type: number
+                  description: Total crypto holdings
+                total_entry_value_usd:
+                  type: number
+                  description: Total entry value in USD
+                total_current_value_usd:
+                  type: number
+                  description: Total current value of crypto holdings in USD
+                percentage_of_total_supply:
+                  type: number
+                  description: Percentage of total crypto supply
+    PublicTreasuryEntityChart:
+      type: object
+      required:
+      - holdings
+      - holding_value_in_usd
+      properties:
+        holdings:
+          type: array
+          description: Historical holdings data as [timestamp, amount] pairs
+          items:
+            type: array
+            items:
+              type: number
+        holding_value_in_usd:
+          type: array
+          description: Historical holdings value in USD as [timestamp, value_usd] pairs
+          items:
+            type: array
+            items:
+              type: number
+    PublicTreasuryEntity:
+      type: object
+      required:
+      - name
+      - id
+      - type
+      - symbol
+      - country
+      - website_url
+      - twitter_screen_name
+      - total_treasury_value_usd
+      - unrealized_pnl
+      - m_nav
+      - total_asset_value_per_share_usd
+      - holdings
+      properties:
+        name:
+          type: string
+          description: Entity name
+        id:
+          type: string
+          description: Entity ID
+        type:
+          type: string
+          description: 'Entity type: company or government'
+        symbol:
+          type:
+          - string
+          - 'null'
+          description: Stock market ticker symbol
+        country:
+          type: string
+          description: Country code
+        website_url:
+          type: string
+          description: Official website URL
+        twitter_screen_name:
+          type: string
+          description: Official Twitter handle
+        total_treasury_value_usd:
+          type: number
+          description: Total current value of all holdings in USD
+        unrealized_pnl:
+          type: number
+          description: Unrealized profit and loss (current value minus total entry value)
+        m_nav:
+          type: number
+          description: Market to net asset value ratio
+        total_asset_value_per_share_usd:
+          type: number
+          description: Total asset value per share in USD
+        holdings:
+          type: array
+          description: List of cryptocurrency assets held by the entity
+          items:
+            type: object
+            required:
+            - coin_id
+            - amount
+            - percentage_of_total_supply
+            - amount_per_share
+            - entity_value_usd_percentage
+            - current_value_usd
+            - total_entry_value_usd
+            - average_entry_value_usd
+            - unrealized_pnl
+            properties:
+              coin_id:
+                type: string
+                description: Coin ID
+              amount:
+                type: number
+                description: Amount of cryptocurrency held
+              percentage_of_total_supply:
+                type: number
+                description: Percentage of total crypto supply
+              amount_per_share:
+                type: number
+                description: Amount of cryptocurrency per share
+              entity_value_usd_percentage:
+                type: number
+                description: Percentage of entity's total treasury value
+              current_value_usd:
+                type: number
+                description: Current value of holdings in USD
+              total_entry_value_usd:
+                type: number
+                description: Total entry cost in USD
+              average_entry_value_usd:
+                type: number
+                description: Average entry cost per unit in USD
+              unrealized_pnl:
+                type: number
+                description: Unrealized profit and loss for this holding
+              holding_amount_change:
+                type: object
+                description: Holding amount changes over different timeframes
+                properties:
+                  7d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_7d
+                  14d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_14d
+                  30d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_30d
+                  90d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_90d
+                  1y:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_1y
+                  ytd:
+                    type: number
+              holding_change_percentage:
+                type: object
+                description: Holding change percentages over different timeframes
+                properties:
+                  7d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_7d
+                  14d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_14d
+                  30d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_30d
+                  90d:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_90d
+                  1y:
+                    type: number
+                    x-stainless-naming:
+                      python:
+                        property_name: period_1y
+                  ytd:
+                    type: number
+  securitySchemes:
+    headerAuth:
+      type: apiKey
+      in: header
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
+      type: apiKey
+      in: query
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

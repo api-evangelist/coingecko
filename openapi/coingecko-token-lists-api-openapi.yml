@@ -1,99 +1,141 @@
 openapi: 3.2.0
 info:
   title: CoinGecko Pro Token Lists API
-  description: The CoinGecko Pro API provides the same comprehensive cryptocurrency market data as the standard Demo API but with enhanced performance, higher rate limits of up to 1,000 calls per minute, and faster data updates with prices cached every 30 seconds.
-  version: 3.0.1
-  contact:
-    name: CoinGecko Support
-    url: https://support.coingecko.com
-  termsOfService: https://www.coingecko.com/en/terms
+  version: 3.0.0
 servers:
 - url: https://pro-api.coingecko.com/api/v3
-  description: CoinGecko Pro API Server
 security:
-- proApiKeyHeader: []
-- proApiKeyQuery: []
+- headerAuth: []
+- queryAuth: []
 tags:
 - name: Token Lists
-  description: Token list endpoints for paid plan subscribers providing standardized token lists by asset platform.
 paths:
   /token_lists/{asset_platform_id}/all.json:
     get:
-      operationId: getTokenList
-      summary: Get token list by asset platform
-      description: Get a standardized token list for a specific asset platform in the Uniswap token list format. Includes token name, symbol, decimals, and contract address. This endpoint is exclusive to paid plan subscribers.
-      tags:
-      - Token Lists
+      summary: Token Lists by Asset Platform ID
+      description: To get full list of tokens of a blockchain network (asset platform) that is supported by Ethereum token list standard
+      operationId: token-lists
+      x-mint:
+        href: /reference/token-lists
       parameters:
       - name: asset_platform_id
         in: path
         required: true
-        description: The asset platform ID (e.g., ethereum)
+        description: "Asset platform ID. \n*refers to [`/asset_platforms`](/reference/asset-platforms-list)."
         schema:
           type: string
+          default: ethereum
       responses:
         '200':
-          description: Success
+          description: Token list by asset platform
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: Token list name
-                  logoURI:
-                    type: string
-                    format: uri
-                    description: Token list logo
-                  keywords:
-                    type: array
-                    items:
-                      type: string
-                  timestamp:
-                    type: string
-                    format: date-time
-                    description: Token list generation timestamp
-                  tokens:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        chainId:
-                          type: integer
-                          description: Chain ID
-                        address:
-                          type: string
-                          description: Token contract address
-                        name:
-                          type: string
-                          description: Token name
-                        symbol:
-                          type: string
-                          description: Token symbol
-                        decimals:
-                          type: integer
-                          description: Token decimal places
-                        logoURI:
-                          type: string
-                          format: uri
-                          description: Token logo URL
-        '401':
-          description: Unauthorized - invalid or missing Pro API key
-        '403':
-          description: Forbidden - endpoint not available on current plan
+                $ref: '#/components/schemas/TokenLists'
+              example:
+                name: CoinGecko
+                logoURI: https://static.coingecko.com/gecko-new.svg
+                keywords:
+                - defi
+                timestamp: '2026-05-26T04:03:03.404+00:00'
+                tokens:
+                - chainId: 1
+                  address: '0x77c6e4a580c0dce4e5c7a17d0bc077188a83a059'
+                  name: Swerve.fi USD
+                  symbol: SWUSD
+                  decimals: 18
+                  logoURI: https://assets.coingecko.com/coins/images/12918/thumb/swerve.png?1696512706
+                - chainId: 1
+                  address: '0xf8e57ac2730d3088d98b79209739b0d5ba085a03'
+                  name: Optopia AI
+                  symbol: OPAI
+                  decimals: 18
+                  logoURI: https://assets.coingecko.com/coins/images/39332/thumb/OPAI.jpg?1721777150
+                version:
+                  major: 1491
+                  minor: 3
+                  patch: 0
+      tags:
+      - Token Lists
 components:
+  schemas:
+    TokenLists:
+      type: object
+      required:
+      - name
+      - logoURI
+      - keywords
+      - timestamp
+      - tokens
+      - version
+      properties:
+        name:
+          type: string
+          description: Token list name
+        logoURI:
+          type: string
+          description: Token list logo URL
+        keywords:
+          type: array
+          description: Token list keywords
+          items:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
+          description: Token list generation timestamp
+        tokens:
+          type: array
+          description: List of tokens
+          items:
+            type: object
+            required:
+            - chainId
+            - address
+            - name
+            - symbol
+            - decimals
+            - logoURI
+            properties:
+              chainId:
+                type: number
+                description: Chainlist's chain ID
+              address:
+                type: string
+                description: Token contract address
+              name:
+                type: string
+                description: Token name
+              symbol:
+                type: string
+                description: Token symbol
+              decimals:
+                type: number
+                description: Token decimals
+              logoURI:
+                type: string
+                description: Token image URL
+        version:
+          type: object
+          description: Token list version
+          properties:
+            major:
+              type: number
+              description: Major version
+            minor:
+              type: number
+              description: Minor version
+            patch:
+              type: number
+              description: Patch version
   securitySchemes:
-    proApiKeyHeader:
+    headerAuth:
       type: apiKey
       in: header
       name: x-cg-pro-api-key
-      description: CoinGecko Pro API key passed via request header. Obtain a paid key from the CoinGecko developer dashboard.
-    proApiKeyQuery:
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
       type: apiKey
       in: query
       name: x_cg_pro_api_key
-      description: CoinGecko Pro API key passed via query string parameter.
-externalDocs:
-  description: CoinGecko Pro API Documentation
-  url: https://docs.coingecko.com/reference/introduction
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

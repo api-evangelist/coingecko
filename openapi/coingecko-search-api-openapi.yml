@@ -1,324 +1,515 @@
 openapi: 3.2.0
 info:
-  title: Coingecko Search API
-  version: 3.0.1
-  contact:
-    name: CoinGecko Support
-    url: https://support.coingecko.com
-  termsOfService: https://www.coingecko.com/en/terms
-  description: 'Operations tagged Search across 2 of this provider''s published API definitions: coingecko-crypto-market-data-api-openapi.yml, coingecko-onchain-dex-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: CoinGecko Pro Search API
+  version: 3.0.0
 servers:
-- url: https://api.coingecko.com/api/v3
-  description: CoinGecko Demo API Server
 - url: https://pro-api.coingecko.com/api/v3
-  description: CoinGecko Pro API Server (paid plans)
+security:
+- headerAuth: []
+- queryAuth: []
 tags:
 - name: Search
-  description: Search for coins, exchanges, and categories.
 paths:
   /search:
     get:
-      operationId: search
-      summary: Search for coins, exchanges, and categories
-      description: Search for coins, exchanges, categories, and NFTs by keyword. Returns matching results across all entity types.
-      tags:
-      - Search
+      summary: Search Queries
+      description: To search for coins, categories and markets listed on CoinGecko
+      operationId: search-data
+      x-mint:
+        href: /reference/search-data
       parameters:
       - name: query
         in: query
         required: true
-        description: Search query string
+        description: Search query
         schema:
           type: string
       responses:
         '200':
-          description: Success
+          description: Search results
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coins:
-                    type: array
-                    description: Matching coins
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
-                        api_symbol:
-                          type: string
-                        symbol:
-                          type: string
-                        market_cap_rank:
-                          type: integer
-                        thumb:
-                          type: string
-                        large:
-                          type: string
-                  exchanges:
-                    type: array
-                    description: Matching exchanges
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
-                        market_type:
-                          type: string
-                        thumb:
-                          type: string
-                        large:
-                          type: string
-                  categories:
-                    type: array
-                    description: Matching categories
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                  nfts:
-                    type: array
-                    description: Matching NFT collections
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        name:
-                          type: string
-                        symbol:
-                          type: string
-                        thumb:
-                          type: string
-      security:
-      - demoApiKeyHeader: []
-      - demoApiKeyQuery: []
-    servers:
-    - url: https://api.coingecko.com/api/v3
-      description: CoinGecko Demo API Server
-  /onchain/search/pools:
+                $ref: '#/components/schemas/Search'
+              example:
+                coins:
+                - id: ethereum
+                  name: Ethereum
+                  api_symbol: ethereum
+                  symbol: ETH
+                  market_cap_rank: 2
+                  thumb: https://coin-images.coingecko.com/coins/images/279/thumb/ethereum.png
+                  large: https://coin-images.coingecko.com/coins/images/279/large/ethereum.png
+                exchanges:
+                - id: uniswap_v3
+                  name: Uniswap V3 (Ethereum)
+                  market_type: spot
+                  thumb: https://coin-images.coingecko.com/markets/images/665/thumb/uniswap-v3.png
+                  large: https://coin-images.coingecko.com/markets/images/665/large/uniswap-v3.png
+                icos: []
+                categories:
+                - id: ethereum-pos-iou
+                  name: Ethereum PoS IOU
+                nfts:
+                - id: ens-ethereum-name-service
+                  name: 'ENS: Ethereum Name Service'
+                  symbol: ENS
+                  thumb: https://coin-images.coingecko.com/nft_contracts/images/373/thumb/ens-ethereum-name-service.png
+      tags:
+      - Search
+  /search/trending:
     get:
-      operationId: searchOnchainPools
-      summary: Search for pools
-      description: Search for liquidity pools by keyword. Accepts token name, ticker symbol, token contract address, or specific pool contract address as search queries.
-      tags:
-      - Search
+      summary: Trending Search List
+      description: To query trending search coins, NFTs and categories on CoinGecko in the last 24 hours
+      operationId: trending-search
+      x-mint:
+        href: /reference/trending-search
       parameters:
-      - name: query
+      - name: show_max
         in: query
-        required: true
-        description: Search query (token name, symbol, token address, or pool address)
+        required: false
+        description: "Show max number of results available for the given type. \nAvailable values: `coins`, `nfts`, `categories` \ne.g. `coins` or `coins,nfts,categories`"
         schema:
           type: string
-      - name: network
-        in: query
-        description: Filter results by network ID
-        schema:
-          type: string
-      - name: include
-        in: query
-        description: Additional data to include (e.g., base_token, quote_token, dex, network)
-        schema:
-          type: string
-      - name: page
-        in: query
-        description: Page number for pagination
-        schema:
-          type: integer
-          default: 1
       responses:
         '200':
-          description: Success
+          description: Trending search coins, NFTs and categories
           content:
             application/json:
               schema:
-                type: object
-                properties:
+                $ref: '#/components/schemas/TrendingSearch'
+              example:
+                coins:
+                - item:
+                    id: bonk
+                    coin_id: 28600
+                    name: Bonk
+                    symbol: BONK
+                    market_cap_rank: 103
+                    thumb: https://coin-images.coingecko.com/coins/images/28600/standard/bonk.jpg?1696527587
+                    small: https://coin-images.coingecko.com/coins/images/28600/small/bonk.jpg?1696527587
+                    large: https://coin-images.coingecko.com/coins/images/28600/large/bonk.jpg?1696527587
+                    slug: bonk
+                    price_btc: 7.821066970851871e-11
+                    score: 0
+                    data:
+                      price: 5.938674704566297e-06
+                      price_btc: '0.00000000007821066970851871'
+                      price_change_percentage_24h:
+                        usd: -3.2712597351582655
+                        btc: -1.2567575303632434
+                      market_cap: $521,967,819
+                      market_cap_btc: '6883.418982779206'
+                      total_volume: $31,701,707
+                      total_volume_btc: '417.50253280497'
+                      sparkline: https://www.coingecko.com/coins/28600/sparkline.svg
+                      content: null
+                nfts:
+                - id: beeple-everydays-the-2020-collection
+                  name: 'BEEPLE: EVERYDAYS - THE 2020 COLLECTION'
+                  symbol: BEEPLE2
+                  thumb: https://coin-images.coingecko.com/nft_contracts/images/1327/standard/beeple-everydays-the-2020-collection.jpg?1707287783
+                  nft_contract_id: 1327
+                  native_currency_symbol: eth
+                  floor_price_in_native_currency: 6.98
+                  floor_price_24h_percentage_change: 8.231790820932737
                   data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Pool'
-      security:
-      - proApiKeyHeader: []
-      - proApiKeyQuery: []
-      - demoApiKeyHeader: []
-      - demoApiKeyQuery: []
-    servers:
-    - url: https://pro-api.coingecko.com/api/v3
-      description: CoinGecko Pro API Server (paid plans)
-    - url: https://api.coingecko.com/api/v3
-      description: CoinGecko Demo API Server (free tier, limited endpoints)
+                    floor_price: 6.98 ETH
+                    floor_price_in_usd_24h_percentage_change: '8.231790820932737'
+                    h24_volume: 6.10 ETH
+                    h24_average_sale_price: 6.10 ETH
+                    sparkline: https://www.coingecko.com/nft/1327/sparkline.svg
+                    content: null
+                categories:
+                - id: 102120809
+                  name: Base Native
+                  top_3_coins_images:
+                  - https://assets.coingecko.com/coins/images/40008/small/USR_LOGO.png?1725222638
+                  - https://assets.coingecko.com/coins/images/13187/small/7739.png?1696512969
+                  - https://assets.coingecko.com/coins/images/70556/small/elizaOS_token_logo_high_quality.png?1763494093
+                  market_cap_1h_change: 0.1591461077485745
+                  slug: base-native
+                  coins_count: '573'
+                  data:
+                    market_cap: 117316549202.14426
+                    market_cap_btc: 1545658.5276991604
+                    total_volume: 16971131961.734743
+                    total_volume_btc: 223596.5430262045
+                    market_cap_change_percentage_24h:
+                      usd: 0.14714515711689605
+                      btc: 1.5918443786835867
+                    sparkline: https://www.coingecko.com/categories/102120809/sparkline.svg
+      tags:
+      - Search
 components:
   schemas:
-    Pool:
+    Search:
       type: object
+      required:
+      - coins
+      - exchanges
+      - icos
+      - categories
+      - nfts
       properties:
-        id:
-          type: string
-          description: Pool identifier (network_address format)
-        type:
-          type: string
-          description: Resource type (pool)
-        attributes:
-          type: object
-          properties:
-            base_token_price_usd:
-              type: string
-              description: Base token price in USD
-            base_token_price_native_currency:
-              type: string
-              description: Base token price in network native currency
-            quote_token_price_usd:
-              type: string
-              description: Quote token price in USD
-            quote_token_price_native_currency:
-              type: string
-              description: Quote token price in network native currency
-            base_token_price_quote_token:
-              type: string
-              description: Base token price in quote token
-            quote_token_price_base_token:
-              type: string
-              description: Quote token price in base token
-            address:
-              type: string
-              description: Pool contract address
-            name:
-              type: string
-              description: Pool name (e.g., TOKEN_A / TOKEN_B)
-            pool_created_at:
-              type: string
-              format: date-time
-              description: Pool creation timestamp
-            fdv_usd:
-              type: string
-              description: Fully diluted valuation in USD
-            market_cap_usd:
-              type: string
-              description: Market cap in USD
-            price_change_percentage:
-              type: object
-              description: Price change percentages over various timeframes
-              properties:
-                m5:
-                  type: string
-                  description: 5-minute price change percentage
-                h1:
-                  type: string
-                  description: 1-hour price change percentage
-                h6:
-                  type: string
-                  description: 6-hour price change percentage
-                h24:
-                  type: string
-                  description: 24-hour price change percentage
-            transactions:
-              type: object
-              description: Transaction counts over various timeframes
-              properties:
-                m5:
-                  $ref: '#/components/schemas/TransactionCount'
-                m15:
-                  $ref: '#/components/schemas/TransactionCount'
-                m30:
-                  $ref: '#/components/schemas/TransactionCount'
-                h1:
-                  $ref: '#/components/schemas/TransactionCount'
-                h24:
-                  $ref: '#/components/schemas/TransactionCount'
-            volume_usd:
-              type: object
-              description: Volume in USD over various timeframes
-              properties:
-                m5:
-                  type: string
-                h1:
-                  type: string
-                h6:
-                  type: string
-                h24:
-                  type: string
-            reserve_in_usd:
-              type: string
-              description: Total liquidity reserve in USD
-        relationships:
-          type: object
-          description: Related resources (base_token, quote_token, dex, network)
-          properties:
-            base_token:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    type:
-                      type: string
-            quote_token:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    type:
-                      type: string
-            dex:
-              type: object
-              properties:
-                data:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    type:
-                      type: string
-    TransactionCount:
+        coins:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - api_symbol
+            - symbol
+            - market_cap_rank
+            - thumb
+            - large
+            properties:
+              id:
+                type: string
+                description: Coin ID
+              name:
+                type: string
+                description: Coin name
+              api_symbol:
+                type: string
+                description: Coin API symbol
+              symbol:
+                type: string
+                description: Coin symbol
+              market_cap_rank:
+                type:
+                - integer
+                - 'null'
+                description: Coin market cap rank
+              thumb:
+                type: string
+                description: Coin thumb image URL
+              large:
+                type: string
+                description: Coin large image URL
+        exchanges:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - market_type
+            - thumb
+            - large
+            properties:
+              id:
+                type: string
+                description: Exchange ID
+              name:
+                type: string
+                description: Exchange name
+              market_type:
+                type: string
+                description: Exchange market type
+              thumb:
+                type: string
+                description: Exchange thumb image URL
+              large:
+                type: string
+                description: Exchange large image URL
+        icos:
+          type: array
+          items:
+            type: object
+            x-stainless-empty-object: true
+        categories:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            properties:
+              id:
+                type: string
+                description: Category ID
+              name:
+                type: string
+                description: Category name
+        nfts:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - symbol
+            - thumb
+            properties:
+              id:
+                type: string
+                description: NFT collection ID
+              name:
+                type: string
+                description: NFT collection name
+              symbol:
+                type: string
+                description: NFT collection symbol
+              thumb:
+                type: string
+                description: NFT collection thumb image URL
+    TrendingSearch:
       type: object
+      required:
+      - coins
+      - nfts
+      - categories
       properties:
-        buys:
-          type: integer
-          description: Number of buy transactions
-        sells:
-          type: integer
-          description: Number of sell transactions
-        buyers:
-          type: integer
-          description: Number of unique buyers
-        sellers:
-          type: integer
-          description: Number of unique sellers
+        coins:
+          type: array
+          items:
+            type: object
+            required:
+            - item
+            properties:
+              item:
+                type: object
+                required:
+                - id
+                - coin_id
+                - name
+                - symbol
+                - market_cap_rank
+                - thumb
+                - small
+                - large
+                - slug
+                - price_btc
+                - score
+                - data
+                properties:
+                  id:
+                    type: string
+                    description: Coin ID
+                  coin_id:
+                    type: integer
+                    description: Coin internal ID
+                  name:
+                    type: string
+                    description: Coin name
+                  symbol:
+                    type: string
+                    description: Coin symbol
+                  market_cap_rank:
+                    type: integer
+                    description: Coin market cap rank
+                  thumb:
+                    type: string
+                    description: Coin thumb image URL
+                  small:
+                    type: string
+                    description: Coin small image URL
+                  large:
+                    type: string
+                    description: Coin large image URL
+                  slug:
+                    type: string
+                    description: Coin web slug
+                  price_btc:
+                    type: number
+                    description: Coin price in BTC
+                  score:
+                    type: integer
+                    description: Coin trending rank (0-based)
+                  data:
+                    type: object
+                    required:
+                    - price
+                    - price_btc
+                    - price_change_percentage_24h
+                    - market_cap
+                    - market_cap_btc
+                    - total_volume
+                    - total_volume_btc
+                    - sparkline
+                    - content
+                    properties:
+                      price:
+                        type: number
+                        description: Coin price in USD
+                      price_btc:
+                        type: string
+                        description: Coin price in BTC
+                      price_change_percentage_24h:
+                        type: object
+                        description: Coin price change percentage in 24 hours by currency
+                        additionalProperties:
+                          type: number
+                      market_cap:
+                        type: string
+                        description: Coin market cap in USD
+                      market_cap_btc:
+                        type: string
+                        description: Coin market cap in BTC
+                      total_volume:
+                        type: string
+                        description: Coin total volume in USD
+                      total_volume_btc:
+                        type: string
+                        description: Coin total volume in BTC
+                      sparkline:
+                        type: string
+                        description: Coin sparkline image URL
+                      content:
+                        type:
+                        - object
+                        - 'null'
+                        properties:
+                          title:
+                            type: string
+                          description:
+                            type: string
+        nfts:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - symbol
+            - thumb
+            - nft_contract_id
+            - native_currency_symbol
+            - floor_price_in_native_currency
+            - floor_price_24h_percentage_change
+            - data
+            properties:
+              id:
+                type: string
+                description: NFT collection ID
+              name:
+                type: string
+                description: NFT collection name
+              symbol:
+                type: string
+                description: NFT collection symbol
+              thumb:
+                type: string
+                description: NFT collection thumb image URL
+              nft_contract_id:
+                type: integer
+                description: NFT contract internal ID
+              native_currency_symbol:
+                type: string
+                description: NFT collection native currency symbol
+              floor_price_in_native_currency:
+                type: number
+                description: NFT collection floor price in native currency
+              floor_price_24h_percentage_change:
+                type: number
+                description: NFT collection floor price 24 hours percentage change
+              data:
+                type: object
+                required:
+                - floor_price
+                - floor_price_in_usd_24h_percentage_change
+                - h24_volume
+                - h24_average_sale_price
+                - sparkline
+                - content
+                properties:
+                  floor_price:
+                    type: string
+                    description: NFT collection floor price
+                  floor_price_in_usd_24h_percentage_change:
+                    type: string
+                    description: NFT collection floor price in USD 24 hours percentage change
+                  h24_volume:
+                    type: string
+                    description: NFT collection volume in 24 hours
+                  h24_average_sale_price:
+                    type: string
+                    description: NFT collection 24 hours average sale price
+                  sparkline:
+                    type: string
+                    description: NFT collection sparkline image URL
+                  content:
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      title:
+                        type: string
+                      description:
+                        type: string
+        categories:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - name
+            - top_3_coins_images
+            - market_cap_1h_change
+            - slug
+            - coins_count
+            - data
+            properties:
+              id:
+                type: integer
+                description: Category ID
+              name:
+                type: string
+                description: Category name
+              top_3_coins_images:
+                type: array
+                description: Top 3 coins image URLs in the category
+                items:
+                  type: string
+              market_cap_1h_change:
+                type: number
+                description: Category market cap 1 hour change
+              slug:
+                type: string
+                description: Category web slug
+              coins_count:
+                type: string
+                description: Number of coins in the category
+              data:
+                type: object
+                required:
+                - market_cap
+                - market_cap_btc
+                - total_volume
+                - total_volume_btc
+                - market_cap_change_percentage_24h
+                - sparkline
+                properties:
+                  market_cap:
+                    type: number
+                    description: Category market cap
+                  market_cap_btc:
+                    type: number
+                    description: Category market cap in BTC
+                  total_volume:
+                    type: number
+                    description: Category total volume
+                  total_volume_btc:
+                    type: number
+                    description: Category total volume in BTC
+                  market_cap_change_percentage_24h:
+                    type: object
+                    description: Category market cap change percentage in 24 hours by currency
+                    additionalProperties:
+                      type: number
+                  sparkline:
+                    type: string
+                    description: Category sparkline image URL
   securitySchemes:
-    demoApiKeyHeader:
-      type: apiKey
-      in: header
-      name: x-cg-demo-api-key
-      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
-    demoApiKeyQuery:
-      type: apiKey
-      in: query
-      name: x_cg_demo_api_key
-      description: CoinGecko Demo API key passed via query string parameter.
-    proApiKeyHeader:
+    headerAuth:
       type: apiKey
       in: header
       name: x-cg-pro-api-key
-      description: CoinGecko Pro API key passed via request header.
-    proApiKeyQuery:
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
       type: apiKey
       in: query
       name: x_cg_pro_api_key
-      description: CoinGecko Pro API key passed via query string parameter.
-x-refined-from:
-- coingecko-crypto-market-data-api-openapi.yml
-- coingecko-onchain-dex-api-openapi.yml
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

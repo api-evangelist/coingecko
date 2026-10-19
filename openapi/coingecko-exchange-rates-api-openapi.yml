@@ -1,73 +1,451 @@
 openapi: 3.2.0
 info:
-  title: CoinGecko Crypto Market Data Exchange Rates API
-  description: The CoinGecko Crypto Market Data API provides comprehensive and reliable cryptocurrency price and market data through RESTful JSON endpoints. It offers over 70 endpoints covering real-time and historical prices, trading volumes, market capitalization, OHLCV data, exchange information, NFT metrics, derivatives data, and public treasury holdings for over 18,000 coins. The Demo API plan provides free access with 30 calls per minute to a subset of 30 publicly accessible endpoints.
-  version: 3.0.1
-  contact:
-    name: CoinGecko Support
-    url: https://support.coingecko.com
-  termsOfService: https://www.coingecko.com/en/terms
+  title: CoinGecko Pro Exchange Rates API
+  version: 3.0.0
 servers:
-- url: https://api.coingecko.com/api/v3
-  description: CoinGecko Demo API Server
+- url: https://pro-api.coingecko.com/api/v3
 security:
-- demoApiKeyHeader: []
-- demoApiKeyQuery: []
+- headerAuth: []
+- queryAuth: []
 tags:
 - name: Exchange Rates
-  description: BTC exchange rates against other currencies.
 paths:
   /exchange_rates:
     get:
-      operationId: getExchangeRates
-      summary: Get BTC exchange rates
-      description: Get the current exchange rates for BTC against all supported currencies. Includes fiat currencies, cryptocurrencies, and precious metals.
-      tags:
-      - Exchange Rates
+      summary: BTC-to-Currency Exchange Rates
+      description: To query BTC exchange rates with other currencies
+      operationId: exchange-rates
+      x-mint:
+        href: /reference/exchange-rates
       responses:
         '200':
-          description: Success
+          description: BTC exchange rates with other currencies
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  rates:
-                    type: object
-                    additionalProperties:
-                      $ref: '#/components/schemas/ExchangeRate'
+                $ref: '#/components/schemas/ExchangeRates'
+              example:
+                rates:
+                  btc:
+                    name: Bitcoin
+                    unit: BTC
+                    value: 1.0
+                    type: crypto
+                  eth:
+                    name: Ether
+                    unit: ETH
+                    value: 36.856
+                    type: crypto
+                  ltc:
+                    name: Litecoin
+                    unit: LTC
+                    value: 1467.048
+                    type: crypto
+                  bch:
+                    name: Bitcoin Cash
+                    unit: BCH
+                    value: 220.614
+                    type: crypto
+                  bnb:
+                    name: Binance Coin
+                    unit: BNB
+                    value: 115.992
+                    type: crypto
+                  eos:
+                    name: EOS
+                    unit: EOS
+                    value: 966946.841
+                    type: crypto
+                  xrp:
+                    name: XRP
+                    unit: XRP
+                    value: 57106.503
+                    type: crypto
+                  xlm:
+                    name: Lumens
+                    unit: XLM
+                    value: 516007.211
+                    type: crypto
+                  link:
+                    name: Chainlink
+                    unit: LINK
+                    value: 8071.362
+                    type: crypto
+                  dot:
+                    name: Polkadot
+                    unit: DOT
+                    value: 60793.71
+                    type: crypto
+                  yfi:
+                    name: Yearn.finance
+                    unit: YFI
+                    value: 31.064
+                    type: crypto
+                  sol:
+                    name: Solana
+                    unit: SOL
+                    value: 910.892
+                    type: crypto
+                  usd:
+                    name: US Dollar
+                    unit: $
+                    value: 75817.765
+                    type: fiat
+                  aed:
+                    name: United Arab Emirates Dirham
+                    unit: DH
+                    value: 278488.131
+                    type: fiat
+                  ars:
+                    name: Argentine Peso
+                    unit: $
+                    value: 106789785.77
+                    type: fiat
+                  aud:
+                    name: Australian Dollar
+                    unit: A$
+                    value: 105840.918
+                    type: fiat
+                  bdt:
+                    name: Bangladeshi Taka
+                    unit: ৳
+                    value: 9307822.089
+                    type: fiat
+                  bhd:
+                    name: Bahraini Dinar
+                    unit: BD
+                    value: 28600.735
+                    type: fiat
+                  bmd:
+                    name: Bermudian Dollar
+                    unit: $
+                    value: 75817.765
+                    type: fiat
+                  brl:
+                    name: Brazil Real
+                    unit: R$
+                    value: 382288.415
+                    type: fiat
+                  cad:
+                    name: Canadian Dollar
+                    unit: CA$
+                    value: 104717.981
+                    type: fiat
+                  chf:
+                    name: Swiss Franc
+                    unit: Fr.
+                    value: 59575.401
+                    type: fiat
+                  clp:
+                    name: Chilean Peso
+                    unit: CLP$
+                    value: 67941058.208
+                    type: fiat
+                  cny:
+                    name: Chinese Yuan
+                    unit: ¥
+                    value: 515083.156
+                    type: fiat
+                  czk:
+                    name: Czech Koruna
+                    unit: Kč
+                    value: 1582693.892
+                    type: fiat
+                  dkk:
+                    name: Danish Krone
+                    unit: kr.
+                    value: 487401.483
+                    type: fiat
+                  eur:
+                    name: Euro
+                    unit: €
+                    value: 65223.37
+                    type: fiat
+                  gbp:
+                    name: British Pound Sterling
+                    unit: £
+                    value: 56399.471
+                    type: fiat
+                  gel:
+                    name: Georgian Lari
+                    unit: ₾
+                    value: 201993.691
+                    type: fiat
+                  hkd:
+                    name: Hong Kong Dollar
+                    unit: HK$
+                    value: 594140.994
+                    type: fiat
+                  huf:
+                    name: Hungarian Forint
+                    unit: Ft
+                    value: 23216805.355
+                    type: fiat
+                  idr:
+                    name: Indonesian Rupiah
+                    unit: Rp
+                    value: 1350406835.492
+                    type: fiat
+                  ils:
+                    name: Israeli New Shekel
+                    unit: ₪
+                    value: 215451.345
+                    type: fiat
+                  inr:
+                    name: Indian Rupee
+                    unit: ₹
+                    value: 7255573.761
+                    type: fiat
+                  jpy:
+                    name: Japanese Yen
+                    unit: ¥
+                    value: 12079021.102
+                    type: fiat
+                  krw:
+                    name: South Korean Won
+                    unit: ₩
+                    value: 114295300.075
+                    type: fiat
+                  kwd:
+                    name: Kuwaiti Dinar
+                    unit: KD
+                    value: 23466.584
+                    type: fiat
+                  lkr:
+                    name: Sri Lankan Rupee
+                    unit: Rs
+                    value: 24658404.204
+                    type: fiat
+                  mmk:
+                    name: Burmese Kyat
+                    unit: K
+                    value: 159202903.032
+                    type: fiat
+                  mxn:
+                    name: Mexican Peso
+                    unit: MX$
+                    value: 1312974.009
+                    type: fiat
+                  myr:
+                    name: Malaysian Ringgit
+                    unit: RM
+                    value: 300716.004
+                    type: fiat
+                  ngn:
+                    name: Nigerian Naira
+                    unit: ₦
+                    value: 104085661.749
+                    type: fiat
+                  nok:
+                    name: Norwegian Krone
+                    unit: kr
+                    value: 703191.355
+                    type: fiat
+                  nzd:
+                    name: New Zealand Dollar
+                    unit: NZ$
+                    value: 129943.993
+                    type: fiat
+                  php:
+                    name: Philippine Peso
+                    unit: ₱
+                    value: 4669881.64
+                    type: fiat
+                  pkr:
+                    name: Pakistani Rupee
+                    unit: ₨
+                    value: 21107508.631
+                    type: fiat
+                  pln:
+                    name: Polish Zloty
+                    unit: zł
+                    value: 276389.874
+                    type: fiat
+                  rub:
+                    name: Russian Ruble
+                    unit: ₽
+                    value: 5459045.262
+                    type: fiat
+                  sar:
+                    name: Saudi Riyal
+                    unit: SR
+                    value: 283561.022
+                    type: fiat
+                  sek:
+                    name: Swedish Krona
+                    unit: kr
+                    value: 706593.222
+                    type: fiat
+                  sgd:
+                    name: Singapore Dollar
+                    unit: S$
+                    value: 96873.041
+                    type: fiat
+                  thb:
+                    name: Thai Baht
+                    unit: ฿
+                    value: 2477440.273
+                    type: fiat
+                  try:
+                    name: Turkish Lira
+                    unit: ₺
+                    value: 3480331.296
+                    type: fiat
+                  twd:
+                    name: New Taiwan Dollar
+                    unit: NT$
+                    value: 2384248.866
+                    type: fiat
+                  uah:
+                    name: Ukrainian hryvnia
+                    unit: ₴
+                    value: 3356872.299
+                    type: fiat
+                  vef:
+                    name: Venezuelan bolívar fuerte
+                    unit: Bs.F
+                    value: 7591.632
+                    type: fiat
+                  vnd:
+                    name: Vietnamese đồng
+                    unit: ₫
+                    value: 1997306794.202
+                    type: fiat
+                  zar:
+                    name: South African Rand
+                    unit: R
+                    value: 1242588.207
+                    type: fiat
+                  xdr:
+                    name: IMF Special Drawing Rights
+                    unit: XDR
+                    value: 53137.563
+                    type: fiat
+                  xag:
+                    name: Silver - Troy Ounce
+                    unit: XAG
+                    value: 995.118
+                    type: commodity
+                  xau:
+                    name: Gold - Troy Ounce
+                    unit: XAU
+                    value: 16.843
+                    type: commodity
+                  bits:
+                    name: Bits
+                    unit: μBTC
+                    value: 1000000.0
+                    type: crypto
+                  sats:
+                    name: Satoshi
+                    unit: sats
+                    value: 100000000.0
+                    type: crypto
+                  cop:
+                    name: Colombian Peso
+                    unit: $
+                    value: 279126134.558
+                    type: fiat
+                  kes:
+                    name: Kenyan Shilling
+                    unit: KSh
+                    value: 9815367.857
+                    type: fiat
+                  ron:
+                    name: Romanian Leu
+                    unit: lei
+                    value: 341733.412
+                    type: fiat
+                  dop:
+                    name: Dominican Peso
+                    unit: RD$
+                    value: 4460079.423
+                    type: fiat
+                  crc:
+                    name: Costa Rican Colón
+                    unit: ₡
+                    value: 34279241.577
+                    type: fiat
+                  hnl:
+                    name: Honduran Lempira
+                    unit: L
+                    value: 2016966.507
+                    type: fiat
+                  zmw:
+                    name: Zambian Kwacha
+                    unit: ZK
+                    value: 1419566.341
+                    type: fiat
+                  svc:
+                    name: Salvadoran Colón
+                    unit: ₡
+                    value: 663313.856
+                    type: fiat
+                  bam:
+                    name: Bosnia and Herzegovina Convertible Mark
+                    unit: KM
+                    value: 127362.018
+                    type: fiat
+                  pen:
+                    name: Peruvian Sol
+                    unit: S/
+                    value: 258167.906
+                    type: fiat
+                  gtq:
+                    name: Guatemalan Quetzal
+                    unit: Q
+                    value: 578018.87
+                    type: fiat
+                  lbp:
+                    name: Lebanese Pound
+                    unit: ل.ل
+                    value: 6790586630.179
+                    type: fiat
+                  amd:
+                    name: Armenian Dram
+                    unit: ֏
+                    value: 27881224.901
+                    type: fiat
+      tags:
+      - Exchange Rates
 components:
   schemas:
-    ExchangeRate:
+    ExchangeRates:
       type: object
+      required:
+      - rates
       properties:
-        name:
-          type: string
-          description: Currency name
-        unit:
-          type: string
-          description: Currency unit symbol
-        value:
-          type: number
-          description: Exchange rate value relative to BTC
-        type:
-          type: string
-          description: Currency type (fiat, crypto, commodity)
-          enum:
-          - fiat
-          - crypto
-          - commodity
+        rates:
+          type: object
+          description: Exchange rates keyed by currency code
+          additionalProperties:
+            type: object
+            required:
+            - name
+            - unit
+            - value
+            - type
+            properties:
+              name:
+                type: string
+                description: Currency name
+              unit:
+                type: string
+                description: Currency unit symbol
+              value:
+                type: number
+                description: Exchange rate value relative to BTC
+              type:
+                type: string
+                description: 'Currency type: crypto, fiat, or commodity'
   securitySchemes:
-    demoApiKeyHeader:
+    headerAuth:
       type: apiKey
       in: header
-      name: x-cg-demo-api-key
-      description: CoinGecko Demo API key passed via request header. Obtain a free key from the CoinGecko developer dashboard.
-    demoApiKeyQuery:
+      name: x-cg-pro-api-key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+    queryAuth:
       type: apiKey
       in: query
-      name: x_cg_demo_api_key
-      description: CoinGecko Demo API key passed via query string parameter.
-externalDocs:
-  description: CoinGecko API Documentation
-  url: https://docs.coingecko.com
+      name: x_cg_pro_api_key
+      description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)

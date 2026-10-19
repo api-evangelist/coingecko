@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.coingecko.com/openapi-specs/pro-api.json",
+ "final": "https://docs.coingecko.com/openapi-specs/pro-api.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 908689,
+ "sha256": "0b8b4c00948c472b123dc9d2d2211444c11b63327301cc33b7d5f4ee8160ddb2",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}
