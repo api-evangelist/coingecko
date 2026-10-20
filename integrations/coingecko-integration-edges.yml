@@ -1,4 +1,83 @@
 edges:
+- partner_name: Google Workspace (own)
+  partner: google-workspace
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://workspace.google.com/marketplace/app/coingecko_for_sheets_live_crypto_prices/429190203358
+  mirror_of: google-workspace/integrations/google-workspace-integration-edges.yml
+  apps:
+  - 'CoinGecko for Sheets: Live Crypto Prices'
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Google Workspace app
+- partner_name: Airbyte
+  partner: airbyte
+  partner_match: aggregator
+  type: marketplace
+  marketplace: airbyte-registry
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://docs.airbyte.com/integrations/sources/coingecko-coins
+  category: null
+  contract_reference:
+    register: Airbyte connector registry (connectors.airbyte.com cloud_registry.json + oss_registry.json)
+    spec_file: null
+    role: elt-connector:airbyte-community
+    registered_name: CoinGecko Coins
+    matched_domain: coingecko.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connectors:
+    - airbyte/source-coingecko-coins
+    support_level:
+    - community
+    release_stage:
+    - alpha
+    in_cloud: true
+    builder: unknown (community connector; contributor not in the record)
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
+- partner_name: Meltano
+  partner: meltano
+  partner_match: aggregator
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://hub.meltano.com/extractors/tap-coingecko--airbyte
+  category: null
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Coingecko
+    matched_domain: coingecko.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-coingecko--airbyte
+    - tap-coingecko--sicarul
+    maintenance_status:
+    - active
+    - beta
+    quality:
+    - bronze
+    - silver
+    builder: 'community (Meltano Hub variant maintainers: airbyte, sicarul)'
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
 - partner_name: Kraken
   partner: kraken
   partner_match: domain
@@ -753,19 +832,6 @@ edges:
   trust_score: 3
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
-- partner_name: Uniswap V4 (Ethereum)
-  partner: uniswap
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/uniswap-v4-ethereum
-  matched_by: domain:uniswap.org
-  coingecko_id: uniswap-v4-ethereum
-  trust_score: 2
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-14'
 - partner_name: PancakeSwap V3 (BSC)
   partner: pancakeswap
   partner_match: domain
@@ -776,6 +842,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/pancakeswap-v3-bsc
   matched_by: domain:pancakeswap.finance
   coingecko_id: pancakeswap-v3-bsc
+  trust_score: 2
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-14'
+- partner_name: Uniswap V4 (Ethereum)
+  partner: uniswap
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/uniswap-v4-ethereum
+  matched_by: domain:uniswap.org
+  coingecko_id: uniswap-v4-ethereum
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
@@ -870,19 +949,6 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
-- partner_name: Chainflip
-  partner: chainflip
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/chainflip
-  matched_by: domain:chainflip.io
-  coingecko_id: chainflip
-  trust_score: 2
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-14'
 - partner_name: Maverick Protocol V2 (Ethereum)
   partner: maverick-protocol
   partner_match: domain
@@ -893,6 +959,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/maverick-protocol-v2-ethereum
   matched_by: domain:mav.xyz
   coingecko_id: maverick-protocol-v2-ethereum
+  trust_score: 2
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-14'
+- partner_name: Chainflip
+  partner: chainflip
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/chainflip
+  matched_by: domain:chainflip.io
+  coingecko_id: chainflip
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
@@ -909,19 +988,6 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
-- partner_name: MetaDAO (Futarchy AMM)
-  partner: metadao
-  partner_match: domain
-  channel: provider-built
-  direction: provider-built
-  type: coverage
-  relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/metadao-futarchy-amm
-  matched_by: domain:metadao.fi
-  coingecko_id: metadao-futarchy-amm
-  trust_score: 2
-  detected_by: sweep-crypto.py
-  first_seen: '2026-10-14'
 - partner_name: Balancer V3 (Arbitrum)
   partner: balancer
   partner_match: domain
@@ -932,6 +998,19 @@ edges:
   evidence: https://api.coingecko.com/api/v3/exchanges/balancer-v3-arbitrum
   matched_by: domain:balancer.fi
   coingecko_id: balancer-v3-arbitrum
+  trust_score: 2
+  detected_by: sweep-crypto.py
+  first_seen: '2026-10-14'
+- partner_name: MetaDAO (Futarchy AMM)
+  partner: metadao
+  partner_match: domain
+  channel: provider-built
+  direction: provider-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://api.coingecko.com/api/v3/exchanges/metadao-futarchy-amm
+  matched_by: domain:metadao.fi
+  coingecko_id: metadao-futarchy-amm
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
@@ -987,19 +1066,19 @@ edges:
   trust_score: 2
   detected_by: sweep-crypto.py
   first_seen: '2026-10-14'
-- partner_name: KyberSwap Classic (Avalanche)
+- partner_name: KyberSwap Classic (Ethereum)
   partner: kyberswap
   partner_match: domain
   channel: provider-built
   direction: provider-built
   type: coverage
   relationship: connector-coverage
-  evidence: https://api.coingecko.com/api/v3/exchanges/kyberswap_classic_avalanche
+  evidence: https://api.coingecko.com/api/v3/exchanges/kyberswap_classic_ethereum
   matched_by: domain:kyberswap.com
-  coingecko_id: kyberswap_classic_avalanche
+  coingecko_id: kyberswap_classic_ethereum
   trust_score: 2
   detected_by: sweep-crypto.py
-  first_seen: '2026-10-14'
+  first_seen: '2026-10-19'
 - partner_name: Acala Swap
   partner: acala
   partner_match: domain
@@ -1059,7 +1138,7 @@ edges:
   channel: open-source-node
   relationship: ipaas-bridge
   direction: third-party
-  evidence: https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/CoinGecko
+  evidence: https://github.com/n8n-io/n8n/tree/f73dc337f8dc61a4fd44aebe41c55faafe4f53a4/packages/nodes-base/nodes/CoinGecko
   category: null
   contract_reference:
     register: n8n built-in nodes (n8n-io/n8n packages/nodes-base)
@@ -1084,7 +1163,7 @@ edges:
   channel: open-source-node
   relationship: ipaas-bridge
   direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/coingecko
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/coingecko
   category: null
   contract_reference:
     register: Pipedream components (PipedreamHQ/pipedream components/)
@@ -1102,85 +1181,6 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-- partner_name: Airbyte
-  partner: airbyte
-  partner_match: aggregator
-  type: marketplace
-  marketplace: airbyte-registry
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://docs.airbyte.com/integrations/sources/coingecko-coins
-  category: null
-  contract_reference:
-    register: Airbyte connector registry (connectors.airbyte.com cloud_registry.json + oss_registry.json)
-    spec_file: null
-    role: elt-connector:airbyte-community
-    registered_name: CoinGecko Coins
-    matched_domain: coingecko.com
-    matched_by: domain
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    connectors:
-    - airbyte/source-coingecko-coins
-    support_level:
-    - community
-    release_stage:
-    - alpha
-    in_cloud: true
-    builder: unknown (community connector; contributor not in the record)
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
-- partner_name: Meltano
-  partner: meltano
-  partner_match: aggregator
-  type: marketplace
-  marketplace: meltano-hub
-  channel: elt-connector
-  relationship: ipaas-bridge
-  direction: third-party
-  evidence: https://hub.meltano.com/extractors/tap-coingecko--airbyte
-  category: null
-  contract_reference:
-    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
-    spec_file: null
-    role: elt-connector:meltano-hub
-    registered_name: Coingecko
-    matched_domain: coingecko.com
-    matched_by: domain
-    detected_by: sweep-data-integration.py
-    detected: '2026-10-18'
-    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
-    plugins:
-    - tap-coingecko--airbyte
-    - tap-coingecko--sicarul
-    maintenance_status:
-    - active
-    - beta
-    quality:
-    - bronze
-    - silver
-    builder: 'community (Meltano Hub variant maintainers: airbyte, sicarul)'
-  detected_by: sweep-data-integration.py
-  first_seen: '2026-10-18'
-- partner_name: Google Workspace (own)
-  partner: google-workspace
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://workspace.google.com/marketplace/app/coingecko_for_sheets_live_crypto_prices/429190203358
-  mirror_of: google-workspace/integrations/google-workspace-integration-edges.yml
-  apps:
-  - 'CoinGecko for Sheets: Live Crypto Prices'
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Google Workspace app
 generated: '2026-10-13'
 method: searched
 checked:
@@ -1189,8 +1189,10 @@ checked:
 - https://connectors.airbyte.com/files/registries/v0/cloud_registry.json
 - https://connectors.airbyte.com/files/registries/v0/oss_registry.json
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
 - https://github.com/meltano/hub
 - https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/
+- https://github.com/n8n-io/n8n/tree/f73dc337f8dc61a4fd44aebe41c55faafe4f53a4/packages/nodes-base/nodes/
 - https://zapier.com/api/v4/apps/
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
