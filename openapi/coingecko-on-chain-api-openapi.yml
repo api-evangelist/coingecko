@@ -8695,3 +8695,9 @@ components:
       in: query
       name: x_cg_pro_api_key
       description: Learn how to [set up your API key](https://docs.coingecko.com/docs/setting-up-your-api-key)
+x-provenance:
+  method: harvested
+  publisher: CoinGecko
+  source: https://docs.coingecko.com/openapi-specs/pro-api.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

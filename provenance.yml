@@ -19,11 +19,11 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-asset-platforms-api
   collections/coingecko-categories-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-categories-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-categories-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-categories-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-coins-api.opencollection.json:
     method: derived
     evidence: openapi/coingecko-coins-api
@@ -31,17 +31,17 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-coins-api
   collections/coingecko-companies-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-companies-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-companies-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-companies-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-contract-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-contract-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-contract-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-contract-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-crypto-market-data-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -55,11 +55,11 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-derivatives-api
   collections/coingecko-dexes-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-dexes-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-dexes-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-dexes-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-exchange-rates-api.opencollection.json:
     method: derived
     evidence: openapi/coingecko-exchange-rates-api
@@ -79,11 +79,11 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-global-api
   collections/coingecko-networks-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-networks-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-networks-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-networks-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-nfts-api.opencollection.json:
     method: derived
     evidence: openapi/coingecko-nfts-api
@@ -91,11 +91,11 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-nfts-api
   collections/coingecko-ohlcv-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-ohlcv-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-ohlcv-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-ohlcv-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-onchain-dex-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -109,11 +109,11 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-ping-api
   collections/coingecko-pools-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-pools-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-pools-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-pools-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-pro-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -139,33 +139,39 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-token-lists-api
   collections/coingecko-tokens-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-tokens-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-tokens-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-tokens-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-trades-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-trades-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-trades-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-trades-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-trending-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-trending-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-trending-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-trending-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-trending-pools-api.opencollection.json:
-    method: derived
-    evidence: openapi/coingecko-trending-pools-api
+    method: unknown
+    evidence: no authorship recorded
   collections/coingecko-trending-pools-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-trending-pools-api
+    method: unknown
+    evidence: no authorship recorded
   finops/coingecko-finops.yml:
     method: generated
     evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
+    method: unknown
+    evidence: no authorship recorded
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/coingecko-integration-edges.yml:
     method: unknown
     evidence: no authorship recorded
   json-ld/coingecko-context.jsonld:
@@ -177,127 +183,7 @@ artifacts:
   json-schema/coingecko-pool-schema.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -381,10 +267,28 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   llms/coingecko-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
   mcp/coingecko-coingecko-typescript-api-mcp.yml:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/coingecko-mcp-tools.json:
     method: unknown
     evidence: no authorship recorded
   mcp/coingecko-mcp.yml:
@@ -393,37 +297,20 @@ artifacts:
   mcp/coingecko-server-mcp.yml:
     method: unknown
     evidence: no authorship recorded
-  openapi/_original/coingecko-crypto-market-data-api-openapi.yml:
+  openapi/_original/coingecko-openapi.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/coingecko-onchain-dex-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/coingecko-pro-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: byte-identical to https://docs.coingecko.com/openapi-specs/pro-api.json (sha256 0b8b4c00948c,
+      fetched 2026-10-19)
   openapi/coingecko-asset-platforms-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-categories-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/coingecko-coins-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-companies-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-contract-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/coingecko-derivatives-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-dexes-api-openapi.yml:
+  openapi/coingecko-entities-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/coingecko-exchange-rates-api-openapi.yml:
@@ -435,19 +322,28 @@ artifacts:
   openapi/coingecko-global-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-networks-api-openapi.yml:
+  openapi/coingecko-insights-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/coingecko-key-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/coingecko-news-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/coingecko-nfts-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-ohlcv-api-openapi.yml:
+  openapi/coingecko-on-chain-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/coingecko-ping-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-pools-api-openapi.yml:
+  openapi/coingecko-public-treasury-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/coingecko-rwas-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/coingecko-search-api-openapi.yml:
@@ -459,18 +355,6 @@ artifacts:
   openapi/coingecko-token-lists-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-tokens-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-trades-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-trending-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/coingecko-trending-pools-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/coingecko-plans-pricing.yml:
     method: generated
     evidence: declared in the artifact
@@ -478,23 +362,23 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-asset-platforms-api
   postman/coingecko-categories-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-categories-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-coins-api.postman_collection.json:
     method: derived
     evidence: openapi/coingecko-coins-api
   postman/coingecko-companies-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-companies-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-contract-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-contract-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-derivatives-api.postman_collection.json:
     method: derived
     evidence: openapi/coingecko-derivatives-api
   postman/coingecko-dexes-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-dexes-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-exchange-rates-api.postman_collection.json:
     method: derived
     evidence: openapi/coingecko-exchange-rates-api
@@ -505,20 +389,20 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-global-api
   postman/coingecko-networks-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-networks-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-nfts-api.postman_collection.json:
     method: derived
     evidence: openapi/coingecko-nfts-api
   postman/coingecko-ohlcv-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-ohlcv-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-ping-api.postman_collection.json:
     method: derived
     evidence: openapi/coingecko-ping-api
   postman/coingecko-pools-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-pools-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-search-api.postman_collection.json:
     method: derived
     evidence: openapi/coingecko-search-api
@@ -529,17 +413,17 @@ artifacts:
     method: derived
     evidence: openapi/coingecko-token-lists-api
   postman/coingecko-tokens-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-tokens-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-trades-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-trades-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-trending-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-trending-api
+    method: unknown
+    evidence: no authorship recorded
   postman/coingecko-trending-pools-api.postman_collection.json:
-    method: derived
-    evidence: openapi/coingecko-trending-pools-api
+    method: unknown
+    evidence: no authorship recorded
   rate-limits/coingecko-rate-limits.yml:
     method: generated
     evidence: declared in the artifact
